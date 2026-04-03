@@ -11,6 +11,7 @@ from telegram_service import telegram_service
 BASE_DIR = Path(__file__).parent.absolute()
 FIXTURES_FILE = BASE_DIR / "data" / "fixtures_season.json"
 PYTHON_EXEC = "/usr/bin/python3"  # Standard on Vultr Ubuntu
+<<<<<<< HEAD
 STATE_FILE = BASE_DIR / "data" / "scheduler_state.json"
 
 def load_scheduler_state():
@@ -39,6 +40,10 @@ def get_dynamic_schedule():
                         schedule[r] = jt
             except: pass
     return schedule
+=======
+
+def get_today_fixture():
+>>>>>>> 85f74059cc4211783be2a1b259a9ef24c87ae229
     """Checks if today is a race day based on the season fixtures."""
     if not FIXTURES_FILE.exists():
         print(f"[ERROR] Fixtures file not found: {FIXTURES_FILE}")
@@ -87,6 +92,7 @@ async def run_predict(venue):
     else:
         await telegram_service.send_message(f"⚠️ *Vultr VM*: Prediction failed!\n{process.stderr[:100]}")
 
+<<<<<<< HEAD
 async def run_live_war_room(venue):
     """
     Main polling loop for Race Day.
@@ -132,6 +138,8 @@ async def run_live_war_room(venue):
         print(f"[{now.strftime('%H:%M:%S')}] Polling market for anomalies...")
         await asyncio.sleep(60)
 
+=======
+>>>>>>> 85f74059cc4211783be2a1b259a9ef24c87ae229
 async def main():
     mode = sys.argv[1] if len(sys.argv) > 1 else None
     
@@ -155,6 +163,7 @@ async def main():
             await run_predict(fxt['venue'])
         else:
             print("Skipping predictions: Not a local race day.")
+<<<<<<< HEAD
             
     elif mode == "--live":
         fxt = get_today_fixture()
@@ -162,6 +171,8 @@ async def main():
             await run_live_war_room(fxt['venue'])
         else:
             print("Skipping Live War Room: Not a local race day.")
+=======
+>>>>>>> 85f74059cc4211783be2a1b259a9ef24c87ae229
 
 if __name__ == "__main__":
     asyncio.run(main())
