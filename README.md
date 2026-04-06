@@ -45,7 +45,7 @@ Every night at 23:15 HKT, the engine automatically ingests official results to s
 ## ??? Resilience & Reliability
 
 ### ?? Soft Data Watchdog
-Monitors HKJC hourly for scratchings or jockey changes, triggering immediate re-calculation.
+Monitors HKJC daily for scratchings or jockey changes, triggering immediate re-calculation.
 
 ### ?? Lunar Heartbeat
 A 30-minute self-healing watchdog that terminates hanging processes and restores connectivity automatically.
@@ -56,7 +56,7 @@ A 30-minute self-healing watchdog that terminates hanging processes and restores
 
 | Time | Task | Objective |
 | :--- | :--- | :--- |
-| **Hourly** | `soft_data_watchdog` | Scan for scratchings and changes. |
+| **Daily** | `soft_data_watchdog` | Scan for scratchings and changes. |
 | **08:00 / 20:00** | `lunar_heartbeat` | Full system audit and self-healing. |
 | **12:15** | `predict_today` | Generate high-conviction "War Room" Briefs. |
 | **23:15** | `learn_today` | Ingest results and update the matrix. |
