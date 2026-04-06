@@ -61,18 +61,12 @@ def test_racecard_availability(date_str, venue):
     # If not exists, try to fetch it
     print(f"  File not found, attempting to fetch...")
     date_fmt = date_str.replace("-", "/")
-    # Determine python executable based on OS
-    if sys.platform == 'win32':
-        py = str(PROJECT_ROOT / ".venv" / "Scripts" / "python.exe")
-    else:
-        # Check for linux venv or system python
-        venv_py = PROJECT_ROOT / ".venv" / "bin" / "python"
-        py = str(venv_py) if venv_py.exists() else "python3"
+    py = sys.executable
         
     script = str(PROJECT_ROOT / "services" / "racecard_ingest.py")
     
     cmd = [py, script, "--date", date_fmt, "--venue", venue, "--race", "1"]
-    result = subprocess.run(cmd, capture_output=True, text=True, timeout=30, cwd=str(PROJECT_ROOT))
+    result = subprocess.run(cmd, capture_output=True, text=True, timeout=120, cwd=str(PROJECT_ROOT))
     
     if result.returncode == 0:
         # Check if file was created
@@ -83,7 +77,7 @@ def test_racecard_availability(date_str, venue):
             print(f"  [FAIL] No racecard file created")
             return False
     else:
-        print(f"  [ERROR] {result.stderr[:100]}")
+        print(f"  [ERROR] {result.stderr}")
         return False
 
 def fetch_all_races(date_str, venue, max_races=11):
@@ -92,12 +86,7 @@ def fetch_all_races(date_str, venue, max_races=11):
     
     date_fmt = date_str.replace("-", "/")
     # Determine python executable based on OS
-    if sys.platform == 'win32':
-        py = str(PROJECT_ROOT / ".venv" / "Scripts" / "python.exe")
-    else:
-        # Check for linux venv or system python
-        venv_py = PROJECT_ROOT / ".venv" / "bin" / "python"
-        py = str(venv_py) if venv_py.exists() else "python3"
+    py = sys.executable
         
     script = str(PROJECT_ROOT / "services" / "racecard_ingest.py")
     
@@ -114,7 +103,7 @@ def fetch_all_races(date_str, venue, max_races=11):
         else:
             print(f"  Race {r}...", end=" ")
             cmd = [py, script, "--date", date_fmt, "--venue", venue, "--race", str(r)]
-            result = subprocess.run(cmd, capture_output=True, text=True, timeout=30, cwd=str(PROJECT_ROOT))
+            result = subprocess.run(cmd, capture_output=True, text=True, timeout=120, cwd=str(PROJECT_ROOT))
             
             if result.returncode == 0:
                 if racecard_file.exists():
@@ -123,7 +112,7 @@ def fetch_all_races(date_str, venue, max_races=11):
                 else:
                     print("[FAIL] (no file)")
             else:
-                print("[FAIL]")
+                print(f"[FAIL] {result.stderr}")
     
     total_count = existing_count + success_count
     print(f"  Total races available: {total_count}/{max_races} ({existing_count} existing, {success_count} newly fetched)")

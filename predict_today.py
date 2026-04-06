@@ -27,8 +27,23 @@ if str(BASE_DIR) not in sys.path:
 
 from consensus_agent import consensus_agent
 MODEL_DIR     = BASE_DIR / "models"
-DATA_DIR      = BASE_DIR.parent / "data"
+DATA_DIR      = BASE_DIR / "data"
 MATRIX_FILE   = BASE_DIR / "final_feature_matrix.parquet"
+
+def load_latest_odds(date_comp, race_num):
+    odds_dir = DATA_DIR / "odds"
+    if not odds_dir.exists():
+        return {}
+    odds_files = list(odds_dir.glob(f"snapshot_{date_comp}_R{race_num}_*.json"))
+    if not odds_files:
+        return {}
+    latest_file = max(odds_files, key=lambda p: p.stat().st_mtime)
+    try:
+        with open(latest_file, 'r', encoding='utf-8') as f:
+            data = json.load(f)
+            return data.get("win_odds", {})
+    except Exception:
+        return {}
 
 # ─── Load Ensemble Models ───────────────────────────────────────────────────
 print("\nLoading models...")
@@ -80,6 +95,8 @@ def predict_race(date_str, venue, race_num):
     field_size = len(rc.get("horses", []))
     rows = []
     
+    morning_odds = load_latest_odds(date_comp, race_num)
+    
     for h in rc.get("horses", []):
         horse_id = h.get("horse_id") or ""
         jockey   = h.get("jockey", "").strip()
@@ -94,7 +111,8 @@ def predict_race(date_str, venue, race_num):
         last_6_raw = h.get("last_6_runs", [])
         last_6 = [int(r) for r in last_6_raw if str(r).isdigit()]
 
-        win_odds = float(h.get("win_odds", 10.0)) # Default/Early odds
+        win_odds_val = morning_odds.get(str(horse_no), h.get("win_odds", 10.0))
+        win_odds = float(win_odds_val) if win_odds_val else 10.0
 
         row = {
             "horse_no":           horse_no,
@@ -145,17 +163,23 @@ def predict_race(date_str, venue, race_num):
     X = df_race[ALL_FEATURES]
 
     # Predict
+    def norm(s):
+        mn, mx = s.min(), s.max()
+        return (s - mn) / (mx - mn + 1e-9)
+
     lgb_scores = lgb_model.predict(X)
     xgb_scores = xgb_model.predict(xgb.DMatrix(X, enable_categorical=True))
     cat_scores = cat_model.predict(X)
     
-    df_race["ensemble_score"] = (lgb_scores + xgb_scores + cat_scores) / 3.0
+    df_race["ensemble_score"] = (norm(lgb_scores) + norm(xgb_scores) + norm(cat_scores)) / 3.0
     df_race["rank"] = df_race["ensemble_score"].rank(ascending=False, method="first").astype(int)
     
-    # ── Final Probability Calibration ──
-    # Rank 1 -> 32.9% win probability
-    RANK_PROBS = {1: 0.329, 2: 0.18, 3: 0.12, 4: 0.08, 5: 0.05}
-    df_race["pred_prob"] = df_race["rank"].map(RANK_PROBS).fillna(0.02)
+    # ── Final Probability Calibration (Softmax) ──
+    TEMPERATURE = 0.35
+    scores = df_race["ensemble_score"].values
+    exp_scores = np.exp((scores - np.max(scores)) / TEMPERATURE)
+    df_race["pred_prob"] = exp_scores / exp_scores.sum()
+    
     df_race["fair_odds"] = 1.0 / df_race["pred_prob"]
     df_race["ev"] = df_race["pred_prob"] * df_race["win_odds"]
     df_race["value_mult"] = df_race["win_odds"] / df_race["fair_odds"]

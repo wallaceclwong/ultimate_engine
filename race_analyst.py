@@ -13,7 +13,7 @@ if Path("/opt/hkjc").exists():
     BASE_DIR     = Path("/root/ultimate_engine")
     PROJECT_ROOT = Path("/opt/hkjc")
 else:
-    PROJECT_ROOT = Path(r"c:\Users\ASUS\hkjc")
+    PROJECT_ROOT = Path(__file__).parent.absolute()
     BASE_DIR     = PROJECT_ROOT / "ultimate_engine"
 
 INCIDENTS_FILE= BASE_DIR / 'incidents_data.parquet'

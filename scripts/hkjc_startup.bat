@@ -12,7 +12,7 @@ echo ============================================
 timeout /t 30 /nobreak > nul
 
 :: Run the orchestrator
-cd /d c:\Users\ASUS\hkjc
-c:\Users\ASUS\hkjc\.venv\Scripts\python.exe scripts\pc_startup.py
+cd /d c:\Users\ASUS\ultimate_engine
+c:\Users\ASUS\ultimate_engine\.venv\Scripts\python.exe scripts\pc_startup.py
 
 pause

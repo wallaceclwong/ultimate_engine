@@ -27,7 +27,7 @@ asyncio.run(run())
 """
     process = await asyncio.create_subprocess_exec(
         "python", "-c", script,
-        cwd=r"c:\Users\ASUS\hkjc"
+        cwd=r"c:\Users\ASUS\ultimate_engine"
     )
     return process
 

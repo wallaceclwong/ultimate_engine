@@ -3,12 +3,8 @@ import json
 import asyncio
 import re
 from pathlib import Path
-<<<<<<< HEAD
 from tenacity import retry, stop_after_attempt, wait_exponential, retry_if_exception_type
 from openai import AsyncOpenAI, APIError, APITimeoutError
-=======
-from openai import AsyncOpenAI
->>>>>>> 85f74059cc4211783be2a1b259a9ef24c87ae229
 from dotenv import load_dotenv
 
 # ─── Config ──────────────────────────────────────────────────────────────────
@@ -39,7 +35,6 @@ class ConsensusAgent:
             except:
                 self.pedigree_cache = {}
 
-<<<<<<< HEAD
     @retry(
         stop=stop_after_attempt(3), 
         wait=wait_exponential(multiplier=1, min=4, max=10),
@@ -49,13 +44,9 @@ class ConsensusAgent:
         """
         Runs a Multi-Agent 'War Room' Audit on the provided tip.
         Supports optional live market_context for late-money detection.
-=======
-    async def get_consensus(self, race_data, tip_horse_no):
-        """
-        Runs a Multi-Agent 'War Room' Audit on the provided tip.
->>>>>>> 85f74059cc4211783be2a1b259a9ef24c87ae229
         """
         # Find the horse being tipped
+        # Tip horse number could be int or string, ensure comparison works
         df_target = race_data[race_data["horse_no"].astype(str) == str(tip_horse_no)]
         if df_target.empty: return "VETO", "Horse not found in race data."
         
@@ -65,7 +56,7 @@ class ConsensusAgent:
         # 1. Gather Pedigree Context
         pedigree = self.pedigree_cache.get(horse_id, {"sire": "Unknown", "dam": "Unknown"})
         
-        # 2. Gather Field Context (Top 5 + Context)
+        # 2. Gather Field Context (Top 14 + Context)
         field_context = []
         for _, h in race_data.iterrows():
             field_context.append({
@@ -78,7 +69,6 @@ class ConsensusAgent:
                 "value_mult": round(h.get("value_mult", 1.0), 2)
             })
 
-<<<<<<< HEAD
         # 3. Market Momentum Context
         market_str = "No live market data provided."
         if market_context:
@@ -87,9 +77,6 @@ class ConsensusAgent:
             market_str = f"LATE MONEY TREND: {trend.upper()} ({movement:+.1%})."
 
         # 4. The 'War Room' Multi-Agent Prompt
-=======
-        # 3. The 'War Room' Multi-Agent Prompt
->>>>>>> 85f74059cc4211783be2a1b259a9ef24c87ae229
         prompt = f"""
 Act as the 'LUNAR LEAP' STRATEGIC ADVISORY for HKJC.
 Audit the following High-Value Trade using a MULTI-AGENT simulation.
@@ -101,35 +88,24 @@ Audit the following High-Value Trade using a MULTI-AGENT simulation.
 - Stats: Odds {target['win_odds']:.1f} (Fair: {target.get('fair_odds', 'N/A')}), Mult: {target.get('value_mult', 'N/A')}x
 - Logistics: Draw {target['draw']}, Race {target.get('race', 'N/A')} at {target.get('venue', 'N/A')}
 
-<<<<<<< HEAD
 ### MARKET MOMENTUM (Live T-15 Sniff)
 {market_str}
 
-=======
->>>>>>> 85f74059cc4211783be2a1b259a9ef24c87ae229
 ### FIELD CONTEXT
 {json.dumps(field_context[:14], indent=2)}
 
 ### WAR ROOM ROLES:
 1. **AGENT TACTICIAN**: Analyze the 'Pace' and 'Draw'. Can this horse stay clear or will it be trapped?
-<<<<<<< HEAD
-2. **AGENT GENETICIST**: Analyze the Sire/Dam. Is this horse bred for {target['track_type']} conditions today?
+2. **AGENT GENETICIST**: Analyze the Sire/Dam. Is this horse bred for {target.get('distance', 'N/A')}m on {target.get('track_type', 'N/A')} conditions today?
 3. **AGENT MARKET-ANALYST**: Analyze the LATE MONEY TREND. Is this 'Smart Money' (informed) or 'Market Noise' (emotional)?
 4. **AGENT VALUE-ORACLE**: Compare Public Odds vs Fair Odds. Is the profit margin worth the risk?
-=======
-2. **AGENT GENETICIST**: Analyze the Sire/Dam. Is this horse bred for {target['distance']}m on {target['track_type']}?
-3. **AGENT VALUE-ORACLE**: Compare Public Odds ({target['win_odds']}) vs Fair Odds ({target.get('fair_odds', 'N/A')}). Is the profit margin worth the risk?
->>>>>>> 85f74059cc4211783be2a1b259a9ef24c87ae229
 
 ### OUTPUT FORMAT:
 Respond with a JSON block followed by a brief 'Expert Note'.
 {{
   "verdict": "CONFIRMED" | "CAUTION" | "VETO",
   "conviction_grade": "S" | "A" | "B",
-<<<<<<< HEAD
   "market_signal": "Brief analysis of the odds movement validity",
-=======
->>>>>>> 85f74059cc4211783be2a1b259a9ef24c87ae229
   "tactical_scenario": "2-sentence prediction of the race jump",
   "reasoning_path": "3-sentence chain of thought",
   "expert_note": "A final 1-sentence tactical summary for the user"
@@ -153,11 +129,7 @@ Respond with a JSON block followed by a brief 'Expert Note'.
                 result = json.loads(json_match.group(0))
                 return result.get("verdict", "CAUTION"), (
                     f"Grade [{result.get('conviction_grade', '?')}] — "
-<<<<<<< HEAD
                     f"SIGNAL: {result.get('market_signal')} — "
-=======
-                    f"Scenario: {result.get('tactical_scenario')} — "
->>>>>>> 85f74059cc4211783be2a1b259a9ef24c87ae229
                     f"REASON: {result.get('reasoning_path')} — "
                     f"NOTE: {result.get('expert_note')}"
                 )

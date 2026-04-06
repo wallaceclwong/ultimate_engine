@@ -99,15 +99,12 @@ class RacecardIngest:
             if class_match:
                 race_class = class_match.group(1)
 
-<<<<<<< HEAD
             # Parse Jump Time (e.g., '1:00 PM' or '13:00')
             jump_time = "13:00"
             time_match = re.search(r'(\d{1,2}:\d{2}\s?(?:AM|PM)?)', content_text)
             if time_match:
                 jump_time = time_match.group(1)
 
-=======
->>>>>>> 85f74059cc4211783be2a1b259a9ef24c87ae229
             # --- Ultra-Resilient Global Row Scan ---
             horses_data = await page.evaluate(r'''() => {
                 const allRows = Array.from(document.querySelectorAll('tr'));
@@ -190,10 +187,7 @@ class RacecardIngest:
                 track_type=track_type,
                 course=course,
                 race_class=race_class,
-<<<<<<< HEAD
                 jump_time=jump_time,
-=======
->>>>>>> 85f74059cc4211783be2a1b259a9ef24c87ae229
                 horses=horses
             )
             
