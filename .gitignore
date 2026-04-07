@@ -1,8 +1,25 @@
+# Environments & Cache
 .env
 .venv/
 __pycache__/
 *.pyc
+.idea/
+.vscode/
+
+# Data & Logs
 *.log
 *.parquet
-*.json
+data/browser_session_ingest/
+data/odds/
+data/results/
+tmp/
 catboost_info/
+
+# Configuration & Secrets
+# Protect the service account key and other secrets
+config/*.json
+
+# Allow specific essential static data
+!data/fixtures_2026.json
+!data/fixtures_season.json
+!data/HKJC_Fixtures_2026.json

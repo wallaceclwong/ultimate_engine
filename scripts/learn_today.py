@@ -9,9 +9,9 @@ from datetime import datetime
 sys.path.append(str(Path(__file__).parent.parent))
 
 # Constants
-PROCESSED_DIR = Path('/root/data/processed')
-RESULTS_DIR = DATA_DIR = Path('/root/data/results')
-MATRIX_FILE = Path('/root/ultimate_engine/training_data_hybrid.parquet')
+PROCESSED_DIR = Path('data/processed')
+RESULTS_DIR = Path('data/results')
+MATRIX_FILE = Path('training_data_hybrid.parquet')
 
 def update_learning(date_str, venue):
     print(f'--- Starting Learning Logic: {date_str} ({venue}) ---')

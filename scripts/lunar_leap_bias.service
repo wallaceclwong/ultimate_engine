@@ -1,0 +1,17 @@
+[Unit]
+Description=Lunar Leap Bias Optimization Scheduler
+After=network.target
+
+[Service]
+Type=simple
+User=ubuntu
+WorkingDirectory=/opt/ultimate_engine
+Environment=PATH=/opt/ultimate_engine/.venv/bin
+ExecStart=/opt/ultimate_engine/.venv/bin/python /opt/ultimate_engine/scripts/start_bias_scheduler.py
+Restart=always
+RestartSec=10
+StandardOutput=journal
+StandardError=journal
+
+[Install]
+WantedBy=multi-user.target

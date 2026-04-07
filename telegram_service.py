@@ -20,10 +20,13 @@ class TelegramService:
             print("[WARN] Telegram credentials missing. Skipping notification.")
             return
 
+        # Add isolation prefix
+        prefixed_text = f"🛡️ *[LUNAR LEAP v3]*\n{text}"
+
         url = f"{self.base_url}/sendMessage"
         payload = {
             "chat_id": self.chat_id,
-            "text": text,
+            "text": prefixed_text,
             "parse_mode": "Markdown"
         }
 

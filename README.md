@@ -8,7 +8,13 @@ The **Ultimate Engine** is an industrial-grade, fully autonomous predictive powe
 
 ---
 
-## ??? System Architecture
+> [!IMPORTANT]
+> **STRICT PROJECT ISOLATION: ULTIMATE ENGINE ONLY**  
+> This environment is dedicated solely to the **Ultimate Engine v3 (Lunar Leap)**. It is technically and operationally decoupled from the legacy "hkjc" or "hkjc-v2" projects. No shared Firestore access, credentials, or cross-project contamination is permitted.
+
+---
+
+## 🏗️ System Architecture
 
 The engine operates on a closed-loop, self-improving cycle:
 

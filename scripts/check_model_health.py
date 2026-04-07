@@ -19,13 +19,13 @@ from google.oauth2 import service_account
 
 from config.settings import Config
 
-LOG_FILE = "/var/log/hkjc_model_health.log"
+LOG_FILE = "/var/log/ultimate_engine_health.log"
 ENDPOINT = Config.TUNED_MODEL_ENDPOINT
 MODEL_ID = os.getenv("TUNED_MODEL_ID", "")  # Full model resource name for redeploy
 PROJECT = Config.MODEL_PROJECT_ID
 LOCATION = Config.GCP_LOCATION
 FALLBACK = Config.GEMINI_MODEL_FALLBACK
-ENV_FILE = os.getenv("ENV_FILE", "/opt/hkjc/.env")
+ENV_FILE = os.getenv("ENV_FILE", "/opt/ultimate_engine/.env")
 
 
 def log(msg):
@@ -111,7 +111,7 @@ def set_fallback():
                     f.write(f"GEMINI_MODEL={FALLBACK}\n")
 
             log(f"Fallback activated: GEMINI_MODEL={FALLBACK}")
-            os.system("systemctl restart hkjc.service 2>/dev/null")
+            os.system("systemctl restart ultimate_engine.service 2>/dev/null")
         else:
             log(f"ENV_FILE not found: {ENV_FILE}")
     except Exception as e:

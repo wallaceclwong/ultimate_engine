@@ -3,6 +3,7 @@ import sys
 import time
 from pathlib import Path
 from loguru import logger
+from concurrent.futures import TimeoutError
 
 # Add project root
 root_dir = str(Path(__file__).resolve().parent.parent)
@@ -48,8 +49,8 @@ def callback(message: pubsub_v1.subscriber.message.Message) -> None:
 
 def listen_for_jobs():
     project_id = Config.PROJECT_ID
-    # Using the exact name created by the Google Cloud GUI
-    subscription_id = "hkjc-trigger-topic-sub"
+    # Subscription name for the Ultimate Engine project (configure in GCP Console or via env)
+    subscription_id = os.getenv("PUBSUB_SUBSCRIPTION_ID", "ultimate-engine-trigger-sub")
     
     subscriber = pubsub_v1.SubscriberClient()
     subscription_path = subscriber.subscription_path(project_id, subscription_id)
@@ -68,7 +69,13 @@ def listen_for_jobs():
     with subscriber:
         try:
             # Block the main thread forever while the background thread listens
-            streaming_pull_future.result()
+            while True:
+                # We check the future's result with a timeout or just sleep
+                # result() with no timeout blocks, but if it returns, we want to restart it
+                try:
+                    streaming_pull_future.result(timeout=60)
+                except TimeoutError:
+                    continue 
         except KeyboardInterrupt:
             streaming_pull_future.cancel()
             logger.info("Shutting down Cloud Orchestrator gracefully.")

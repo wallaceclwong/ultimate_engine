@@ -16,7 +16,7 @@ async def main():
     print(f'--- Starting Batch Results Ingestion: {date_str} ({venue}) ---')
     ingest = ResultsIngest()
     
-    results_dir = Path('/root/data/results')
+    results_dir = Path('data/results')
     results_dir.mkdir(parents=True, exist_ok=True)
     
     success_count = 0

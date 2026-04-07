@@ -16,10 +16,10 @@ def provision_pubsub():
     publisher = pubsub_v1.PublisherClient()
     subscriber = pubsub_v1.SubscriberClient()
     
-    topic_id = "hkjc-trigger-topic"
+    topic_id = "ultimate-engine-trigger-topic"
     topic_path = publisher.topic_path(project_id, topic_id)
     
-    sub_id = "hkjc-local-listener-sub"
+    sub_id = "ultimate-engine-trigger-sub"
     sub_path = subscriber.subscription_path(project_id, sub_id)
     
     # 1. Create Topic
@@ -51,7 +51,7 @@ def provision_scheduler(topic_path):
     # Sunday Job (Every Sunday at 12:00 PM HKT)
     # HKT is Asia/Hong_Kong which is UTC+8
     job_sunday = {
-        "name": f"{parent}/jobs/hkjc-sunday-sweep",
+        "name": f"{parent}/jobs/ultimate-engine-sunday-sweep",
         "pubsub_target": {
             "topic_name": topic_path,
             "data": b"RACE_DAY_START",
@@ -62,7 +62,7 @@ def provision_scheduler(topic_path):
 
     # Wednesday Job (Every Wednesday at 18:00 HKT)
     job_wednesday = {
-        "name": f"{parent}/jobs/hkjc-wednesday-sweep",
+        "name": f"{parent}/jobs/ultimate-engine-wednesday-sweep",
         "pubsub_target": {
             "topic_name": topic_path,
             "data": b"RACE_DAY_START",
@@ -83,7 +83,7 @@ def provision_scheduler(topic_path):
             print("You may need to manually create the Scheduler Job in the GCP Console targeting the Pub/Sub topic if the location is restricted.")
 
 if __name__ == "__main__":
-    print("Provisioning HKJC Cloud Infrastructure...")
+    print("Provisioning Ultimate Engine Cloud Infrastructure...")
     topic_path = provision_pubsub()
     provision_scheduler(topic_path)
     print("Done provisioning Pub/Sub limits.")

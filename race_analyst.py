@@ -9,9 +9,9 @@ import time
 
 # --- Paths ---
 # Auto-detect VM vs Local
-if Path("/opt/hkjc").exists():
+if Path("/opt/ultimate_engine").exists():
     BASE_DIR     = Path("/root/ultimate_engine")
-    PROJECT_ROOT = Path("/opt/hkjc")
+    PROJECT_ROOT = Path("/opt/ultimate_engine")
 else:
     PROJECT_ROOT = Path(__file__).parent.absolute()
     BASE_DIR     = PROJECT_ROOT / "ultimate_engine"

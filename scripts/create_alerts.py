@@ -13,7 +13,7 @@ sys.path.insert(0, root_dir)
 from config.settings import Config
 
 def get_credentials():
-    creds_path = os.path.join(root_dir, "service-account-key.json")
+    creds_path = os.path.join(root_dir, "config", "ultimate-engine-sa-key.json")
     if os.path.exists(creds_path):
         logger.info(f"📂 Using service account key: {creds_path}")
         return service_account.Credentials.from_service_account_file(creds_path)
@@ -32,7 +32,7 @@ def create_notification_channel(project_id, email_address):
             return channel.name
 
     channel = monitoring_v3.NotificationChannel(
-        display_name="HKJC Alpha Alerts",
+        display_name="Ultimate Engine Alerts",
         type_="email",
         labels={"email_address": email_address},
     )
@@ -50,11 +50,11 @@ def create_alert_policy(project_id, channel_name):
     client = monitoring_v3.AlertPolicyServiceClient(credentials=creds)
     project_name = f"projects/{project_id}"
     
-    service_name = "hkjc-predictor"
+    service_name = "ultimate-engine"
     
     # Policy 1: High 5xx Errors
     policy_5xx = monitoring_v3.AlertPolicy(
-        display_name="HKJC-V2: API 5xx Failures",
+        display_name="Ultimate Engine: API 5xx Failures",
         notification_channels=[channel_name],
         combiner=monitoring_v3.AlertPolicy.ConditionCombinerType.OR,
         conditions=[
@@ -78,7 +78,7 @@ def create_alert_policy(project_id, channel_name):
 
     # Policy 2: Scraper Timeout (Log-based)
     policy_scraper = monitoring_v3.AlertPolicy(
-        display_name="HKJC-V2: Scraper Timeout Detection",
+        display_name="Ultimate Engine: Scraper Timeout Detection",
         notification_channels=[channel_name],
         combiner=monitoring_v3.AlertPolicy.ConditionCombinerType.OR,
         conditions=[
@@ -109,7 +109,7 @@ if __name__ == "__main__":
     project_id = Config.PROJECT_ID
     email = "wallaceclwong@gmail.com"
     
-    logger.info(f"🚀 Provisioning Alerts for {project_id}...")
+    print("Provisioning Alerts for Ultimate Engine...")  # legacy HKJC reference removed
     channel_id = create_notification_channel(project_id, email)
     create_alert_policy(project_id, channel_id)
     logger.info("🎉 Infrastructure Provisioning Complete!")

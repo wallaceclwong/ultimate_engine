@@ -17,7 +17,7 @@ from pathlib import Path
 
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
 VM_HOST = "root@100.109.76.69"  # Vultr VM via Tailscale
-VM_PATH = "/opt/hkjc"
+VM_PATH = "/opt/ultimate_engine"
 
 def load_fixtures(date_str):
     year = datetime.strptime(date_str, "%Y-%m-%d").year

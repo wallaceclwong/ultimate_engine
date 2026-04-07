@@ -6,7 +6,7 @@ load_dotenv()
 
 class Config:
     BASE_DIR = Path(__file__).resolve().parent.parent
-    PROJECT_ID = os.getenv("GCP_PROJECT_ID", "hkjc-v2")
+    PROJECT_ID = os.getenv("GCP_PROJECT_ID")
     REGION = os.getenv("GCP_REGION", "asia-east1")
     FIRESTORE_DATABASE = os.getenv("FIRESTORE_DATABASE", "(default)")
     GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
@@ -20,7 +20,7 @@ class Config:
     SHADOW_MODEL = os.getenv("SHADOW_MODEL", "gemini-2.5-pro")  # A/B test: shadow model runs in parallel
     USE_VERTEX_AI = os.getenv("USE_VERTEX_AI", "True").lower() == "true"
     GCP_LOCATION = "us-central1"       # Models are confirmed available here
-    GCS_BUCKET_NAME = os.getenv("GCS_BUCKET_NAME", "hkjc-v2-vault-316780")
+    GCS_BUCKET_NAME = os.getenv("GCS_BUCKET_NAME")
     
     # --- Betting Account (User must fill these in .env) ---
     HKJC_ACCOUNT = os.getenv("HKJC_ACCOUNT", "YOUR_ACCOUNT_ID")

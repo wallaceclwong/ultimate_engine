@@ -25,9 +25,9 @@ from google import genai
 from google.genai import types
 from config.settings import Config
 
-PROJECT = Config.PROJECT_ID  # hkjc-v2
+PROJECT = Config.PROJECT_ID  # ultimate-engine-2026
 LOCATION = Config.GCP_LOCATION  # us-central1
-TUNING_JOB = "projects/316780770240/locations/us-central1/tuningJobs/2182648898894430208"
+TUNING_JOB = os.environ.get("TUNING_JOB_RESOURCE", "")  # set via env if needed
 ENV_FILES = [
     str(Path(__file__).resolve().parent.parent / ".env"),  # local
 ]
@@ -63,7 +63,7 @@ def deploy_endpoint(client, model_name):
     
     print("Creating endpoint...")
     endpoint = aiplatform.Endpoint.create(
-        display_name="hkjc-tuned-endpoint-v2",
+        display_name="ultimate-engine-tuned-endpoint-v3",
         project=PROJECT,
         location=LOCATION,
     )
@@ -72,7 +72,7 @@ def deploy_endpoint(client, model_name):
     model = aiplatform.Model(model_name)
     endpoint.deploy(
         model=model,
-        deployed_model_display_name="hkjc_flash_v2_consolidated",
+        deployed_model_display_name="ultimate_engine_flash_v3",
         traffic_percentage=100,
     )
     print(f"Deployed! Endpoint: {endpoint.resource_name}")
@@ -151,8 +151,8 @@ def main():
         print(f"  Model:    {model_id}")
         print(f"  Endpoint: {endpoint}")
         print(f"\nNext steps:")
-        print(f"  1. Update VM .env at /opt/hkjc/.env with the same TUNED_MODEL_ENDPOINT and TUNED_MODEL_ID")
-        print(f"  2. Restart VM service: systemctl restart hkjc.service")
+        print(f"  1. Update VM .env at /opt/ultimate_engine/.env with the same TUNED_MODEL_ENDPOINT and TUNED_MODEL_ID")
+        print(f"  2. Restart VM service: systemctl restart ultimate_engine.service")
         print(f"  3. Delete old endpoint in project-6172aadc-bdc0-43ee-8ac")
         print(f"  4. Shut down project-6172aadc-bdc0-43ee-8ac and hkjc-training")
         print(f"  5. Revoke wclamzncn: gcloud auth revoke wclamzncn@gmail.com")

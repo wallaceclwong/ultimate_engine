@@ -20,7 +20,7 @@ from pathlib import Path
 
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
 VM_HOST = "root@100.109.76.69"
-VM_PATH = "/opt/hkjc"
+VM_PATH = "/opt/ultimate_engine"
 LOG_FILE = PROJECT_ROOT / "logs" / "startup.log"
 
 
