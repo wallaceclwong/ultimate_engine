@@ -157,6 +157,9 @@ async def run_live_war_room(venue):
     Checks the 'T-15 minute' window for each race and runs DeepSeek-R1 audits.
     """
     from services.live_audit_service import live_audit_service
+    from services.odds_ingest import OddsIngest
+    
+    ingest = OddsIngest(headless=True)
     
     print(f"[{datetime.now()}] --- STARTING LIVE WAR ROOM (Venue: {venue}) ---")
     await telegram_service.send_message(f"📡 *Lunar War Room*: Active for {venue}.\nWaiting for Smart Money signatures...")
@@ -180,6 +183,16 @@ async def run_live_war_room(venue):
                 now_dt = datetime.strptime(hkt_now, "%H:%M")
                 diff_min = (j_dt - now_dt).total_seconds() / 60
                 
+                # 0. LIVE ODDS INGESTION (Every 3 mins if within T-25)
+                # We use a state check to prevent hammering the browser
+                if 0 <= diff_min <= 25:
+                    last_scrape = state.get(f"last_scrape_R{r_no}", 0)
+                    if (now.timestamp() - last_scrape) > 180: # 3 minutes
+                        print(f"[INGEST] Refreshing live odds for R{r_no}...")
+                        await ingest.capture_snapshot(today_iso, int(r_no), venue)
+                        state[f"last_scrape_R{r_no}"] = now.timestamp()
+                        save_scheduler_state(state)
+
                 # TRIGGER: Window between T-16 and T-14 minutes
                 if 14 <= diff_min <= 16:
                     print(f"[EVENT] Audit Window Triggered for R{r_no} (Jump: {j_time})...")
@@ -202,7 +215,7 @@ async def run_live_war_room(venue):
                                     audit_results.append(res)
                             
                             if not audit_results:
-                                await telegram_service.send_message(f"ℹ️ *Lunar Heartbeat*: Race {r_no} audited. No high-conviction Smart Money detected (Threshold: 10%).")
+                                await telegram_service.send_message(f"ℹ️ *Lunar Heartbeat*: Race {r_no} audited. No high-conviction Smart Money detected (Relief Threshold: 7%).")
                         else:
                             print(f"[WARN] No feature file found for R{r_no}: {feat_file}")
                     except Exception as e:

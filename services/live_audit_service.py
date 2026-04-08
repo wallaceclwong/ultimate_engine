@@ -30,9 +30,10 @@ class LiveAuditService:
             
         movement = state.movements[horse_no]
         
-        # 2. Check if movement qualifies for a 'War Room' audit (>10% shortening)
-        if movement.movement_pct > -0.10:
-            logger.info(f"Movement ({movement.movement_pct:+.1%}) below threshold for audit.")
+        # 2. Check if movement qualifies for a 'War Room' audit (>7% shortening)
+        # RELIEF ADJUSTMENT: Lowered from 10% to 7% to increase frequency
+        if movement.movement_pct > -0.07:
+            logger.info(f"Movement ({movement.movement_pct:+.1%}) below relief threshold (7%) for audit.")
             return None
             
         logger.info(f"🔥 SMART MONEY ALERT: {horse_no} shortened {movement.movement_pct:+.1%}. Triggering DeepSeek-R1...")
