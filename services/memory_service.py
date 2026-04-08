@@ -37,14 +37,16 @@ class MemoryService:
     def mine(self, remote_dir: str = "/root/ultimate_engine/data"):
         """Mines files into the vector store."""
         print(f"[MEMORY] Mining intelligence from {remote_dir}...")
-        # We ensure a background process doesn't hang the SSH session
-        return self._execute_remote([f"nohup {self.venv_bin}/python", "-m", "mempalace.cli", "mine", remote_dir, "--wing", self.wing, "> /root/mempalace_auto_mine.log 2>&1 &"])
+        # Core fix: Use thread limiters to prevent segfaults on VM
+        cmd = f"export OMP_NUM_THREADS=1; export MKL_NUM_THREADS=1; cd /root/ultimate_engine && nohup {self.venv_bin}/python -m mempalace.cli mine {remote_dir} --wing {self.wing} > /root/mempalace_auto_mine.log 2>&1 &"
+        return self._execute_remote([cmd])
 
     def search(self, query: str, limit: int = 3) -> str:
         """Search the palace for relevant historical context."""
         print(f"[MEMORY] Searching for: '{query}'...")
-        # We use a simplified search bridge via SSH
-        return self._execute_remote([f"{self.venv_bin}/python", "-m", "mempalace.cli", "search", f"\"{query}\"", "--wing", self.wing])
+        # Hardened with thread limits
+        cmd = f"export OMP_NUM_THREADS=1; export MKL_NUM_THREADS=1; {self.venv_bin}/python -m mempalace.cli search \"{query}\" --wing {self.wing}"
+        return self._execute_remote([cmd])
 
     def get_status(self):
         """Show current filing status."""
