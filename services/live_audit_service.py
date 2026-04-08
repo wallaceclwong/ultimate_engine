@@ -30,8 +30,8 @@ class LiveAuditService:
             
         movement = state.movements[horse_no]
         
-        # 2. Check if movement qualifies for a 'War Room' audit (>15% shortening)
-        if movement.movement_pct > -0.15:
+        # 2. Check if movement qualifies for a 'War Room' audit (>10% shortening)
+        if movement.movement_pct > -0.10:
             logger.info(f"Movement ({movement.movement_pct:+.1%}) below threshold for audit.")
             return None
             
@@ -51,9 +51,24 @@ class LiveAuditService:
             'trend': movement.trend
         }
         
+        # Reload pedigree cache to pick up any recent scrapes
+        consensus_agent.reload_pedigree()
+        
         verdict, reasoning = await consensus_agent.get_consensus(race_data, horse_no, market_context)
         
-        # 5. Filtering: ONLY notify for high-conviction S/A grades
+        # 5. Append to central log for user visibility
+        try:
+            log_path = Path("final_predictions.log")
+            with open(log_path, "a", encoding="utf-8") as f:
+                f.write(f"\n[LIVE AUDIT] {date_str} {venue} R{race_no} | Horse #{horse_no}\n")
+                f.write(f"Movement: {movement.initial_odds} -> {movement.current_odds} ({movement.movement_pct:+.1%})\n")
+                f.write(f"Verdict: {verdict}\n")
+                f.write(f"Brief: {reasoning}\n")
+                f.write("-" * 60 + "\n")
+        except Exception as e:
+            logger.error(f"Failed to append live brief to log: {e}")
+
+        # 6. Filtering: ONLY notify for high-conviction S/A grades
         is_high_conviction = "Grade [S]" in reasoning or "Grade [A]" in reasoning
         
         if is_high_conviction and verdict == "CONFIRMED":
@@ -73,16 +88,20 @@ class LiveAuditService:
         return verdict, reasoning
 
     def _load_race_data(self, date_str, venue, race_no):
-        """Loads the horse data for the race from prediciton cache."""
-        # Implementation depends on where predict_today.py saves its intermediate results
-        # Usually it's in data/feature_matrix_*.parquet or a similar cache
-        # For this audit, we need the win_odds and fair_odds.
+        """Loads the horse data for the race from prediction cache."""
         try:
-            # Mock loading - in reality, we'd fetch the DF used by predict_today.py
-            # For now, we'll return a minimal DF that get_consensus can use
-            # This would be fleshed out to use the actual feature matrix
-            return None 
-        except:
+            # Construct filename for the processed features
+            # e.g. features_20260408_HV_R2.parquet
+            date_compact = date_str.replace("-", "")
+            file_path = Path("data") / "processed" / f"features_{date_compact}_{venue}_R{race_no}.parquet"
+            
+            if file_path.exists():
+                return pd.read_parquet(file_path)
+            else:
+                logger.error(f"Processed features file not found: {file_path}")
+                return None
+        except Exception as e:
+            logger.error(f"Error loading race data: {e}")
             return None
 
 live_audit_service = LiveAuditService()

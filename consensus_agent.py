@@ -27,6 +27,9 @@ class ConsensusAgent:
         self.pedigree_cache = {}
         self._load_pedigree()
 
+    def reload_pedigree(self):
+        self._load_pedigree()
+
     def _load_pedigree(self):
         if PEDIGREE_FILE.exists():
             try:
@@ -56,6 +59,16 @@ class ConsensusAgent:
         # 1. Gather Pedigree Context
         pedigree = self.pedigree_cache.get(horse_id, {"sire": "Unknown", "dam": "Unknown"})
         
+        # If unknown, try to look up parenthetically if ID was passed as string
+        if pedigree["sire"] == "Unknown" and "(" in str(target.get("horse", "")):
+             match = re.search(r'\(([A-Z0-9]+)\)', target["horse"])
+             if match:
+                 h_id = match.group(1)
+                 pedigree = self.pedigree_cache.get(h_id, {"sire": "Unknown", "dam": "Unknown"})
+
+        # Final check: If still unknown, DeepSeek will flag it, but the nightly scraper 
+        # will have caught most of them.
+        
         # 2. Gather Field Context (Top 14 + Context)
         field_context = []
         for _, h in race_data.iterrows():
@@ -76,7 +89,35 @@ class ConsensusAgent:
             trend = market_context.get('trend', 'stable')
             market_str = f"LATE MONEY TREND: {trend.upper()} ({movement:+.1%})."
 
-        # 4. The 'War Room' Multi-Agent Prompt
+        # 4. Historical Context (Multi-Dimensional Vector Memory)
+        from services.memory_service import memory_service
+        memory_str = "No specific historical intelligence found in Palace."
+        try:
+            # Query 1: Horse Performance history
+            res_bio = memory_service.search(f"{target['horse_name']} performance history")
+            
+            # Query 2: Trainer/Jockey Synergy
+            trainer_name = target.get('trainer', 'Unknown')
+            jockey_name = target.get('jockey', 'Unknown')
+            res_synergy = memory_service.search(f"{trainer_name} and {jockey_name} combination Hong Kong ROI")
+            
+            # Query 3: Surface & Conditions (Track Intelligence)
+            venue = target.get('venue', 'HV')
+            dist = target.get('distance', 1200)
+            res_track = memory_service.search(f"{venue} {dist}m track characteristics and bias")
+
+            # Aggregate context
+            mem_bits = []
+            if "Results for" in res_bio: mem_bits.append(f"--- Horse Bio ---\n{res_bio}")
+            if "Results for" in res_synergy: mem_bits.append(f"--- Synergy Intel ---\n{res_synergy}")
+            if "Results for" in res_track: mem_bits.append(f"--- Track Intel ---\n{res_track}")
+            
+            if mem_bits:
+                memory_str = "\n".join(mem_bits)
+        except Exception as e:
+            print(f"[MEMORY WARN] Multi-search failed: {e}")
+
+        # 5. The 'War Room' Multi-Agent Prompt
         prompt = f"""
 Act as the 'LUNAR LEAP' STRATEGIC ADVISORY for HKJC.
 Audit the following High-Value Trade using a MULTI-AGENT simulation.
@@ -87,6 +128,9 @@ Audit the following High-Value Trade using a MULTI-AGENT simulation.
 - Lineage: Sire: {pedigree['sire']} | Dam: {pedigree['dam']}
 - Stats: Odds {target['win_odds']:.1f} (Fair: {target.get('fair_odds', 'N/A')}), Mult: {target.get('value_mult', 'N/A')}x
 - Logistics: Draw {target['draw']}, Race {target.get('race', 'N/A')} at {target.get('venue', 'N/A')}
+
+### LUNAR INTELLIGENCE (Historical Memory)
+{memory_str}
 
 ### MARKET MOMENTUM (Live T-15 Sniff)
 {market_str}
