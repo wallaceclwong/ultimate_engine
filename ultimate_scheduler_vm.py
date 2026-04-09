@@ -138,10 +138,16 @@ async def run_learn(venue):
     print(f"[LEARN] Step 3: Mining new intelligence into Palace...")
     try:
         # We index the entire data root to capture results, predictions, and processed tables
-        memory_service.mine("/root/ultimate_engine/data/")
+        memory_service.mine(str(BASE_DIR / "data"))
         await telegram_service.send_message("🧠 *Lunar Memory*: Today's results, predictions, and features successfully mined into Palace.")
     except Exception as e:
         print(f"[MEMORY WARN] Mining failed: {e}")
+
+    # 4. Matrix Update (Training Data Append)
+    print(f"[LEARN] Step 4: Updating Master Matrix...")
+    script_learn = BASE_DIR / "scripts" / "learn_today.py"
+    cmd2 = [PYTHON_EXEC, str(script_learn), today_iso, venue]
+    process2 = subprocess.run(cmd2, capture_output=True, text=True, cwd=str(BASE_DIR))
 
     if process2.returncode == 0:
         print(f"[LEARN] SUCCESS: Matrix updated.")
