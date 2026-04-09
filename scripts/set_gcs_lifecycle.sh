@@ -17,7 +17,7 @@ cat > /tmp/lifecycle.json << 'EOF'
 }
 EOF
 
-gcloud storage buckets update gs://hkjc-v2-vault-316780 \
+gcloud storage buckets update gs://ultimate-engine-2026-vault \
   --lifecycle-file=/tmp/lifecycle.json
 
 echo "✅ GCS lifecycle policy set: predictions/ files auto-delete after 30 days"

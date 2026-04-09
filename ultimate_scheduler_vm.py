@@ -243,6 +243,22 @@ async def run_live_war_room(venue):
         print(f"[{now.strftime('%H:%M:%S')}] Polling market for anomalies...")
         await asyncio.sleep(60)
 
+async def check_mempalace():
+    """Verify connectivity to the MemPalace vector store."""
+    from services.memory_service import memory_service
+    print("[CHECK] Verifying MemPalace connection...")
+    try:
+        status = memory_service.get_status()
+        if status and "WING" in status:
+            print("  [OK] MemPalace is online.")
+            return True
+        else:
+            print("  [WARN] MemPalace unreachable or invalid.")
+            return False
+    except Exception as e:
+        print(f"  [ERROR] MemPalace check failed: {e}")
+        return False
+
 async def main():
     mode = sys.argv[1] if len(sys.argv) > 1 else None
     
@@ -252,6 +268,9 @@ async def main():
             print(f"RACE DAY: {fxt['venue']} ({fxt['type']})")
         else:
             print("NO RACE TODAY")
+        
+        # Add MemPalace check
+        await check_mempalace()
             
     elif mode == "--noon":
         fxt = get_today_fixture()

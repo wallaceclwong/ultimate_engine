@@ -2,7 +2,7 @@
 # Run this script as WallaceCLWong@gmail.com to optimize Cloud Logging costs
 # Reduces log retention from 30 days to 7 days for Cloud Run logs
 
-PROJECT_ID="hkjc-v2"
+PROJECT_ID="ultimate-engine-2026"
 
 echo "Setting up optimized log retention for $PROJECT_ID..."
 

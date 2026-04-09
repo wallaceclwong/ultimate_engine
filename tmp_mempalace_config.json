@@ -1,0 +1,28 @@
+{
+  "palace_path": "/root/.mempalace/palace",
+  "collection_name": "mempalace_drawers",
+  "topic_wings": [
+    "form",
+    "odds",
+    "predictions",
+    "results",
+    "horses",
+    "trainers",
+    "racecards",
+    "intelligence",
+    "analytics",
+    "alerts"
+  ],
+  "hall_keywords": {
+    "form": ["form", "performance", "finish", "place", "win", "workout", "trial", "barrier", "draw", "pace", "jockey", "weight", "distance", "class"],
+    "odds": ["odds", "win", "place", "EV", "value", "fair", "shortening", "drifting", "market", "smart money", "movement", "overlay", "kelly", "stake"],
+    "predictions": ["predict", "prediction", "forecast", "rank", "score", "tip", "CONFIRMED", "CAUTION", "VETO", "ensemble", "model", "consensus", "audit"],
+    "results": ["result", "winner", "placed", "dividend", "return", "payout", "finishing", "unplaced", "scratched", "disqualified"],
+    "horses": ["horse", "gelding", "mare", "sire", "dam", "pedigree", "breeding", "lineage", "age", "rating", "import", "local"],
+    "trainers": ["trainer", "jockey", "stable", "apprentice", "partnership", "owner", "handler"],
+    "racecards": ["race", "racecard", "HV", "ST", "Happy Valley", "Sha Tin", "meeting", "fixture", "jump", "field", "turf", "all-weather"],
+    "intelligence": ["DeepSeek", "War Room", "Lunar Leap", "audit", "agent", "analysis", "signal", "pattern", "insight", "seasonality"],
+    "analytics": ["EV", "ROI", "Kelly", "backtest", "bias", "calibration", "softmax", "matrix", "feature", "gradient", "LightGBM", "XGBoost", "CatBoost"],
+    "alerts": ["alert", "telegram", "notification", "SMART MONEY", "HIGH CONVICTION", "Grade A", "Grade S", "confirmed bet"]
+  }
+}
