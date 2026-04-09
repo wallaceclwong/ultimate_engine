@@ -127,7 +127,7 @@ def predict_race(date_str, venue, race_num):
             "track_type":         rc.get("track_type", "Turf"),
             "course":             rc.get("course", "A"),
             "race_class":         rc.get("race_class", "Class 4"),
-            "track_condition":    "Good",  # Assumed default
+            "track_condition":    rc.get("track_condition", "Good"),  # Real going from scraper
             "last_6_avg":         np.mean(last_6) if last_6 else 7.0,
             "last_6_best":        min(last_6) if last_6 else 5.0,
             "last_2_avg":         np.mean(last_6[:2]) if len(last_6)>=2 else 7.0,

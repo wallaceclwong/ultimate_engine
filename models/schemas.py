@@ -40,6 +40,7 @@ class RaceCard(BaseModel):
     track_type: str
     course: str
     race_class: str
+    track_condition: str = "Good"  # Real going: Good, Yielding, Soft, Wet
     predicted_pace: str = "EVEN"
     jump_time: Optional[str] = None  # Added for scheduler awareness
     horses: List[HorseEntry]

@@ -99,6 +99,31 @@ class RacecardIngest:
             if class_match:
                 race_class = class_match.group(1)
 
+            # Parse Track Condition (Going)
+            # HKJC uses: GOOD, GOOD TO YIELDING, YIELDING, SOFT, WET, GOOD TO FIRM
+            track_condition = "Good"  # Default
+            going_match = re.search(
+                r'Going[:\s]*([A-Z][A-Z\s]{2,25})',
+                content_text,
+                re.IGNORECASE
+            )
+            if going_match:
+                raw_going = going_match.group(1).strip().upper()
+                # Normalize to our model's known categories
+                if "WET" in raw_going:
+                    track_condition = "Wet"
+                elif "SOFT" in raw_going:
+                    track_condition = "Soft"
+                elif "FIRM" in raw_going:
+                    track_condition = "Good"  # Map Good to Firm -> Good
+                elif "YIELDING" in raw_going:
+                    track_condition = "Yielding"
+                else:
+                    track_condition = "Good"
+                print(f"[RACECARD] Track condition: {track_condition} (raw: '{raw_going}')")
+            else:
+                print("[RACECARD] Going not found on page; defaulting to 'Good'.")
+
             # Parse Jump Time (e.g., '1:00 PM' or '13:00')
             jump_time = "13:00"
             time_match = re.search(r'(\d{1,2}:\d{2}\s?(?:AM|PM)?)', content_text)
@@ -187,6 +212,7 @@ class RacecardIngest:
                 track_type=track_type,
                 course=course,
                 race_class=race_class,
+                track_condition=track_condition,
                 jump_time=jump_time,
                 horses=horses
             )
