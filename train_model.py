@@ -49,6 +49,7 @@ print("=" * 60)
 print("\nLoading training data...")
 df = pd.read_parquet(TRAINING_FILE)
 df["date"] = pd.to_datetime(df["date"])
+df["race_id"] = df["race_id"].astype(str)  # Fix: ensure mixed int/str race_id is uniform
 
 # Filter out rows with unknown positions (plc=99)
 df = df[df["plc"] != 99].reset_index(drop=True)
