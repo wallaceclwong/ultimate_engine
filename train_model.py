@@ -70,12 +70,26 @@ for col in FORCED_NUMERIC:
     if col in df.columns:
         df[col] = pd.to_numeric(df[col], errors='coerce')
 
-# Populate race_sec_sum from real finish_time_secs data
-# finish_time_secs has real per-race timing; race_sec_sum was always a placeholder (70.0)
-if "finish_time_secs" in df.columns:
-    real_mask = df["finish_time_secs"] > 0
-    df.loc[real_mask, "race_sec_sum"] = df.loc[real_mask, "finish_time_secs"]
-    print(f"Populated race_sec_sum from finish_time_secs for {real_mask.sum():,} rows.")
+# Populate race_sec_sum from finish_time_secs of the WINNER of each race
+# This gives a race-level pace signal (not per-horse), avoiding leakage.
+# Individual per-horse finish times directly encode position (leakage!).
+# Using the winning time as a race-level feature is legitimate — it represents
+# the overall pace context of that race, not the horse's individual result.
+if "finish_time_secs" in df.columns and "plc" in df.columns:
+    # Get the winner's time for each race (plc == 1)
+    race_times = (
+        df[df["plc"] == 1]
+        .groupby("race_id")["finish_time_secs"]
+        .first()
+        .rename("race_winning_time")
+    )
+    df = df.merge(race_times, on="race_id", how="left")
+    # Use winning time where we have it, keep existing race_sec_sum otherwise
+    has_time = df["race_winning_time"].notna() & (df["race_winning_time"] > 0)
+    df.loc[has_time, "race_sec_sum"] = df.loc[has_time, "race_winning_time"]
+    df.drop(columns=["race_winning_time"], inplace=True)
+    print(f"Populated race_sec_sum (winning time per race) for {has_time.sum():,} rows.")
+
 
 print("Data types cleaned.")
 
