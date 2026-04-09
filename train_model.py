@@ -64,11 +64,18 @@ FORCED_NUMERIC = [
     "last_6_avg", "last_6_best", "last_2_avg", "last_6_trend",
     "gear_change", "stable_change", "distance", "ai_unluckiness",
     "win_odds", "market_implied_prob", "actual_wt",
-    "race_sec_sum", "sec_pos_1", "sec_pos_2", "sec_pos_pre"
+    "finish_time_secs", "race_sec_sum", "sec_pos_1", "sec_pos_2", "sec_pos_pre"
 ]
 for col in FORCED_NUMERIC:
     if col in df.columns:
         df[col] = pd.to_numeric(df[col], errors='coerce')
+
+# Populate race_sec_sum from real finish_time_secs data
+# finish_time_secs has real per-race timing; race_sec_sum was always a placeholder (70.0)
+if "finish_time_secs" in df.columns:
+    real_mask = df["finish_time_secs"] > 0
+    df.loc[real_mask, "race_sec_sum"] = df.loc[real_mask, "finish_time_secs"]
+    print(f"Populated race_sec_sum from finish_time_secs for {real_mask.sum():,} rows.")
 
 print("Data types cleaned.")
 

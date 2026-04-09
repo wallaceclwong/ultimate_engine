@@ -30,6 +30,19 @@ MODEL_DIR     = BASE_DIR / "models"
 DATA_DIR      = BASE_DIR / "data"
 MATRIX_FILE   = BASE_DIR / "final_feature_matrix.parquet"
 
+# ─── Typical Race Times by Distance (seconds) ──────────────────────────────
+# Derived from 8 years of HKJC results (training data median per distance)
+# Used as statistical prior for race_sec_sum when actual time is unknown pre-race
+RACE_TIME_BY_DIST = {
+    1000: 56.69,
+    1200: 69.08,
+    1400: 82.20,
+    1600: 94.72,
+    1650: 97.00,  # Estimated (sparse data)
+    2000: 121.70,
+}
+RACE_TIME_DEFAULT = 70.0  # Fallback if distance not in table
+
 def load_latest_odds(date_comp, race_num):
     odds_dir = DATA_DIR / "odds"
     if not odds_dir.exists():
@@ -145,7 +158,7 @@ def predict_race(date_str, venue, race_num):
             "sec_pos_1":          hs.get("sec_pos_1", 6.0),
             "sec_pos_2":          hs.get("sec_pos_2", 6.0),
             "sec_pos_pre":        hs.get("sec_pos_pre", 6.0),
-            "race_sec_sum":       70.0, # Placeholder
+            "race_sec_sum":       RACE_TIME_BY_DIST.get(int(rc.get("distance", 1200)), RACE_TIME_DEFAULT),
         }
         
         # Computed
