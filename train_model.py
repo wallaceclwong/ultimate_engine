@@ -131,6 +131,12 @@ print("Features engineered.")
 
 
 FINAL_MATRIX = BASE_DIR / "final_feature_matrix.parquet"
+# Sanitize all object columns to string to prevent PyArrow mixed-type errors
+# (learn_today.py appends can introduce int race_id/horse_id alongside str ones)
+# Exclude 'date' which is datetime, not string
+obj_cols = [c for c in df.select_dtypes(include=["object"]).columns if c != "date"]
+for col in obj_cols:
+    df[col] = df[col].astype(str)
 df.to_parquet(FINAL_MATRIX, index=False)
 print(f"Unified feature matrix saved to: {FINAL_MATRIX}")
 
@@ -170,6 +176,7 @@ for col in CATEGORICAL_FEATURES:
 
 
 # ─── Temporal Split ──────────────────────────────────────────────────────────
+df["date"] = pd.to_datetime(df["date"], errors="coerce")  # Re-ensure datetime after sanitization
 df["year"] = df["date"].dt.year
 
 train_df = df[df["year"] <= 2024].sort_values("race_id").reset_index(drop=True)
