@@ -1,0 +1,3 @@
+LESSON LEARNT RETROSPECTIVE FOR JUST FOLLOW ME on 2026-04-12:
+Our model highly tipped this horse but it failed (finished 7).
+Analysis: Lesson Learnt: The inside draw (3) likely forced the horse into an early speed duel or a contested position, compromising its energy reserve despite the "Good" track. The model's high jockey rating proved irrelevant against today's specific pace dynamics, which overrode the horse's theoretical form. This highlights how a static statistical view fails to account for real-time tactical disadvantages created by the gate position and early race pressure.

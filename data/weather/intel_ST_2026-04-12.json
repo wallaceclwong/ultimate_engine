@@ -1,0 +1,10 @@
+{
+  "venue": "ST",
+  "date": "2026-04-12",
+  "max_temp_c": null,
+  "prob_rain": null,
+  "prob_temp_above_30": null,
+  "track_condition_forecast": "N/A",
+  "reasoning": "Insufficient data was provided in the HKO Context or current context to predict max_temp_c, probability of rain, probability of temperature above 30 degrees Celsius, or track condition. No WeatherNext 2 data was available for higher confidence in these predictions.",
+  "fetched_at": "2026-04-10T15:39:17.439446+00:00"
+}

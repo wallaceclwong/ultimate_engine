@@ -1,0 +1,3 @@
+LESSON LEARNT RETROSPECTIVE FOR KA YING GRATEFUL on 2026-04-12:
+Our model highly tipped this horse but it failed (finished 6).
+Analysis: The model likely overvalued the advantageous inside draw (#2) on a "Good" track, as a slow early pace may have forced the horse to race in traffic without a clear run. The jockey's low performance metric suggests a potential tactical misjudgment, such as failing to anticipate the raceflow or secure a forward position when needed. This highlights a need to weigh recent jockey form and in-race positioning more heavily against static draw advantages.

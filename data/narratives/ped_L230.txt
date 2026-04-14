@@ -1,0 +1,6 @@
+PEDIGREE FOR HORSE ID L230:
+Sire: Tagaloa
+Dam: True Priority
+Origin: AUS / 3
+Color: Unknown
+Import Type: PPG

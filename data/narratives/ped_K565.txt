@@ -1,0 +1,6 @@
+PEDIGREE FOR HORSE ID K565:
+Sire: Vercingetorix
+Dam: Shauntrel
+Origin: SAF / 3
+Color: Unknown
+Import Type: PPG

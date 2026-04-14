@@ -1,0 +1,6 @@
+PEDIGREE FOR HORSE ID L005:
+Sire: Pierata
+Dam: Nova Rocha
+Origin: AUS / 4
+Color: Unknown
+Import Type: PPG

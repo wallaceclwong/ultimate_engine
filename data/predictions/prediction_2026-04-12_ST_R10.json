@@ -1,0 +1,35 @@
+{
+  "race_id": "2026-04-12_ST_R10",
+  "gemini_model": "gemini-2.5-flash",
+  "confidence_score": 0.75,
+  "is_best_bet": true,
+  "recommended_bet": "WIN 4",
+  "probabilities": {
+    "1": 0.06,
+    "2": 0.07,
+    "3": 0.04,
+    "4": 0.25,
+    "5": 0.13,
+    "6": 0.05,
+    "7": 0.03,
+    "8": 0.18,
+    "9": 0.04,
+    "10": 0.1,
+    "11": 0.02,
+    "12": 0.03
+  },
+  "kelly_stakes": {},
+  "market_odds": {
+    "1": 16.0,
+    "2": 26.0,
+    "3": 17.0,
+    "4": 3.1,
+    "5": 9.9,
+    "6": 15.0,
+    "7": 22.0,
+    "8": 3.6,
+    "9": 20.0,
+    "10": 5.0
+  },
+  "analysis_markdown": "This Class 3 race over 1200m on the turf presents a competitive field, but several factors point to a clear top contender. Without sectional times or detailed synergy stats, the analysis leans heavily on recent form, weight, draw, jockey bookings, and market sentiment.\n\n**Top Contenders & Analysis:**\n\n1.  **JUMBO TREASURE (4)**: The most compelling pick in this race. Carrying 129lb, he benefits from a significant 10lb apprentice claim by H.Y. Yuen, effectively reducing his racing weight to a very competitive 119lb. This substantial relief is a major advantage in Class 3 handicaps. His draw (5) is excellent for the 1200m trip, allowing for a good position without exerting too much early energy. While his recent form (3,4,12,1,11,9) shows some inconsistency, it includes a recent win, indicating he has the ability when well-placed. The market has him as the clear favourite (3.1 win odds), reflecting strong confidence in his chances. The combination of weight relief, good draw, and market support makes him the horse to beat.\n\n2.  **MASTER OF ALL (8)**: The second favourite in the market (3.6 win odds), and for good reason. This horse has shown marked improvement in his last two starts, securing consecutive 2nd-place finishes (12,12,13,13,2,2). With H.T. Mo claiming 2lb, his effective weight is 123lb, which is competitive. His draw (3) is ideal for a 1200m race, giving him every chance to secure a good run. He appears to be peaking and should be a serious threat.\n\n3.  **CHILL BUDDY (5)**: Represents good value at 9.9 win odds. His recent form (1,6,2,3,4,-) includes a dominant win, demonstrating his capability in this class. Crucially, he has drawn barrier 1, which is a significant advantage over 1200m on the turf, allowing for an economical run on the rail. Jockey A. Atzeni is a top-tier rider who can capitalize on the favorable draw. He carries 128lb.\n\n4.  **QUANTUM LEGEND (10)**: An intriguing runner despite no recent recorded form ('-'). The booking of champion jockey Zac Purton on a horse returning from a long break or making its debut is a powerful signal of intent from connections. His market odds (5.0) reflect this underlying confidence. Draw 7 is neutral. While there's an element of fitness unknown, the "
+}

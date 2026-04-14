@@ -7,15 +7,19 @@ from datetime import datetime
 from pathlib import Path
 import pandas as pd
 from telegram_service import telegram_service
+from consensus_agent import consensus_agent
+from services.memory_service import memory_service
+import pytz
 
 # Configuration
+HKT = pytz.timezone('Asia/Hong_Kong')
 BASE_DIR = Path(__file__).parent.absolute()
 FIXTURES_FILE = BASE_DIR / "data" / "fixtures_season.json"
 PYTHON_EXEC = sys.executable  # Cross-platform (Windows/Linux)
 STATE_FILE = BASE_DIR / "data" / "scheduler_state.json"
 
 def load_scheduler_state():
-    today = datetime.now().strftime("%Y-%m-%d")
+    today = datetime.now(HKT).strftime("%Y-%m-%d")
     default_state = {"audited_races": [], "learned_today": False, "last_reset_date": today}
     if STATE_FILE.exists():
         with open(STATE_FILE, "r") as f:
@@ -36,7 +40,7 @@ def save_scheduler_state(state):
 
 def get_dynamic_schedule():
     """Reads all racecard files for today to build a jump-time map."""
-    today_compact = datetime.now().strftime("%Y%m%d")
+    today_compact = datetime.now(HKT).strftime("%Y%m%d")
     schedule = {}
     for r in range(1, 14):
         rc_file = BASE_DIR / "data" / f"racecard_{today_compact}_R{r}.json"
@@ -56,7 +60,7 @@ def get_today_fixture():
         print(f"[ERROR] Fixtures file not found: {FIXTURES_FILE}")
         return None
         
-    now = datetime.now()
+    now = datetime.now(HKT)
     # Format options to match fixtures like "8/04/2026" or "08/04/2026"
     d, m, y = now.day, now.month, now.year
     possible_dates = [
@@ -75,69 +79,80 @@ def get_today_fixture():
     print(f"[DEBUG] No fixture match for possible dates: {possible_dates}")
     return None
 
+async def run_async_command(cmd, log_prefix="SYSTEM"):
+    """Runs a command asynchronously without blocking the event loop."""
+    print(f"[{datetime.now(HKT)}] [{log_prefix}] Executing: {' '.join(cmd)}")
+    process = await asyncio.create_subprocess_exec(
+        *cmd,
+        stdout=asyncio.subprocess.PIPE,
+        stderr=asyncio.subprocess.PIPE,
+        cwd=str(BASE_DIR)
+    )
+    stdout, stderr = await process.communicate()
+    return process.returncode, stdout.decode().strip(), stderr.decode().strip()
+
 async def run_scrape():
     """Triggers the noon scraping of racecards."""
-    print(f"[{datetime.now()}] --- STARTING NOON SCRAPE ---")
+    print(f"[{datetime.now(HKT)}] --- STARTING NOON SCRAPE ---")
     script = BASE_DIR / "scripts" / "smart_racecard_fetcher.py"
-    
-    # Run the fetcher
     cmd = [PYTHON_EXEC, str(script)]
-    process = subprocess.run(cmd, capture_output=True, text=True, cwd=str(BASE_DIR))
     
-    if process.returncode == 0:
+    returncode, stdout, stderr = await run_async_command(cmd, "SCRAPE")
+    
+    if returncode == 0:
         await telegram_service.send_message("✅ *Lunar Heartbeat*: Noon racecard & odds scraped successfully.")
     else:
-        await telegram_service.send_message(f"⚠️ *Lunar Alert*: Scrape failed!\n{process.stderr[:100]}")
+        await telegram_service.send_message(f"⚠️ *Lunar Alert*: Scrape failed!\n{stderr[:100]}")
 
 async def run_predict(venue):
     """Triggers the pre-race predictions and DeepSeek audit."""
-    print(f"[{datetime.now()}] --- STARTING PRE-RACE PREDICTIONS ---")
-    today_iso = datetime.now().strftime("%Y-%m-%d")
+    print(f"[{datetime.now(HKT)}] --- STARTING PRE-RACE PREDICTIONS ---")
+    today_iso = datetime.now(HKT).strftime("%Y-%m-%d")
     script = BASE_DIR / "predict_today.py"
-    
-    # Run predict_today.py
     cmd = [PYTHON_EXEC, str(script), today_iso, venue]
-    process = subprocess.run(cmd, capture_output=True, text=True, cwd=str(BASE_DIR))
     
-    if process.returncode == 0:
-        # The output of predict_today.py contains the DeepSeek reasoning.
-        # We'll parse the 'Elite Tips' and notify.
-        output = process.stdout
+    returncode, stdout, stderr = await run_async_command(cmd, "PREDICT")
+    
+    if returncode == 0:
         await telegram_service.send_message(f"🧠 *Lunar Intelligence*: Predictions generated for {venue}.\nCheck logs for full strategic brief.")
     else:
-        await telegram_service.send_message(f"⚠️ *Vultr VM*: Prediction failed!\n{process.stderr[:100]}")
+        await telegram_service.send_message(f"⚠️ *Vultr VM*: Prediction failed!\n{stderr[:100]}")
 
 async def run_learn(venue):
     """Triggers the post-race ingestion and learning scripts."""
-    print(f"[{datetime.now()}] --- STARTING POST-RACE LEARNING ---")
-    today_iso = datetime.now().strftime("%Y-%m-%d")
+    print(f"[{datetime.now(HKT)}] --- STARTING POST-RACE LEARNING ---")
+    today_iso = datetime.now(HKT).strftime("%Y-%m-%d")
     
     # 1. Fetch official results
     script_results = BASE_DIR / "scripts" / "batch_results.py"
-    print(f"[LEARN] Step 1: Fetching results for {today_iso} {venue}...")
     cmd1 = [PYTHON_EXEC, str(script_results), today_iso, venue]
-    process1 = subprocess.run(cmd1, capture_output=True, text=True, cwd=str(BASE_DIR))
+    rc1, out1, err1 = await run_async_command(cmd1, "LEARN-RESULTS")
     
-    if process1.returncode != 0:
-        await telegram_service.send_message(f"⚠️ *Lunar Alert*: Results ingestion failed!\n{process1.stderr[:100]}")
+    if rc1 != 0:
+        await telegram_service.send_message(f"⚠️ *Lunar Alert*: Results ingestion failed!\n{err1[:100]}")
         return False
 
     # 2. Enrich Pedigree Data
-    print(f"[LEARN] Step 2: Enriching pedigree intelligence...")
     script_pedigree = BASE_DIR / "scripts" / "scrape_pedigree.py"
     cmd_ped = [PYTHON_EXEC, str(script_pedigree), "--all"]
-    # Run in background or wait? Since it's nightly, we'll wait 
-    process_ped = subprocess.run(cmd_ped, capture_output=True, text=True, cwd=str(BASE_DIR))
-    if process_ped.returncode == 0:
+    rc_p, out_p, err_p = await run_async_command(cmd_ped, "LEARN-PEDIGREE")
+    if rc_p == 0:
         print("[LEARN] Pedigree cache updated.")
     else:
-        print(f"[ERROR] Pedigree Enrichment failed: {process_ped.stderr}")
+        print(f"[ERROR] Pedigree Enrichment failed: {err_p}")
 
-    # 3. Memory Sync (MemPalace Mining)
+    # 3. Generate Narratives & Retrospectives (MemPalace Context)
+    print(f"[LEARN] Step 3: Generating MemPalace Narratives & Retrospectives...")
+    script_narrator = BASE_DIR / "scripts" / "mempalace_narrator.py"
+    script_retro = BASE_DIR / "scripts" / "generate_retrospectives.py"
+    
+    await run_async_command([PYTHON_EXEC, str(script_narrator)], "NARRATOR")
+    await run_async_command([PYTHON_EXEC, str(script_retro), today_iso, venue], "RETROSPECTIVES")
+
+    # 4. Memory Sync (MemPalace Mining)
     from services.memory_service import memory_service
-    print(f"[LEARN] Step 3: Mining new intelligence into Palace...")
+    print(f"[LEARN] Step 4: Mining new intelligence into Palace...")
     try:
-        # We index the entire data root to capture results, predictions, and processed tables
         memory_service.mine(str(BASE_DIR / "data"))
         await telegram_service.send_message("🧠 *Lunar Memory*: Today's results, predictions, and features successfully mined into Palace.")
     except Exception as e:
@@ -147,14 +162,14 @@ async def run_learn(venue):
     print(f"[LEARN] Step 4: Updating Master Matrix...")
     script_learn = BASE_DIR / "scripts" / "learn_today.py"
     cmd2 = [PYTHON_EXEC, str(script_learn), today_iso, venue]
-    process2 = subprocess.run(cmd2, capture_output=True, text=True, cwd=str(BASE_DIR))
+    rc2, out2, err2 = await run_async_command(cmd2, "LEARN-MATRIX")
 
-    if process2.returncode == 0:
+    if rc2 == 0:
         print(f"[LEARN] SUCCESS: Matrix updated.")
         await telegram_service.send_message(f"📚 *Lunar Learning*: Today's results ingested and matrix updated for {venue}. Self-learning cycle complete.")
         return True
     else:
-        await telegram_service.send_message(f"⚠️ *Lunar Alert*: Learning logic failed!\n{process2.stderr[:100]}")
+        await telegram_service.send_message(f"⚠️ *Lunar Alert*: Learning logic failed!\n{err2[:100]}")
         return False
 
 async def run_live_war_room(venue):
@@ -167,17 +182,26 @@ async def run_live_war_room(venue):
     
     ingest = OddsIngest(headless=True)
     
-    print(f"[{datetime.now()}] --- STARTING LIVE WAR ROOM (Venue: {venue}) ---")
-    await telegram_service.send_message(f"📡 *Lunar War Room*: Active for {venue}.\nWaiting for Smart Money signatures...")
+    print(f"[{datetime.now(HKT)}] --- STARTING LIVE WAR ROOM (Venue: {venue}) ---")
+    
+    # Check health of dependencies before starting
+    ds_ok = await consensus_agent.check_health()
+    mem_ok = await check_mempalace()
+    
+    if not ds_ok or not mem_ok:
+        status_msg = f"⚠️ *Lunar Alert*: War Room started with issues!\n- DeepSeek: {'✅' if ds_ok else '❌'}\n- MemPalace: {'✅' if mem_ok else '❌'}"
+        await telegram_service.send_message(status_msg)
+    else:
+        await telegram_service.send_message(f"📡 *Lunar War Room*: Active for {venue}.\nWaiting for Smart Money signatures...")
 
     # Load dynamic schedule and persistence state
     schedule = get_dynamic_schedule()
     state = load_scheduler_state()
 
     while True:
-        now = datetime.now()
+        now = datetime.now(HKT)
         today_iso = now.strftime("%Y-%m-%d")
-        hkt_now = now.strftime("%H:%M") # Assumes VM is in HKT or synced
+        hkt_now = now.strftime("%H:%M")
         
         for r_no, j_time in schedule.items():
             if str(r_no) in state["audited_races"]:
@@ -245,8 +269,7 @@ async def run_live_war_room(venue):
 
 async def check_mempalace():
     """Verify connectivity to the MemPalace vector store."""
-    from services.memory_service import memory_service
-    print("[CHECK] Verifying MemPalace connection...")
+    print(f"[{datetime.now(HKT)}] [CHECK] Verifying MemPalace connection...")
     try:
         status = memory_service.get_status()
         if status and "WING" in status:
@@ -259,6 +282,16 @@ async def check_mempalace():
         print(f"  [ERROR] MemPalace check failed: {e}")
         return False
 
+async def check_deepseek():
+    """Verify connectivity to the DeepSeek API."""
+    print(f"[{datetime.now(HKT)}] [CHECK] Verifying DeepSeek API...")
+    ok = await consensus_agent.check_health()
+    if ok:
+        print("  [OK] DeepSeek API is online.")
+    else:
+        print("  [WARN] DeepSeek API unreachable.")
+    return ok
+
 async def main():
     mode = sys.argv[1] if len(sys.argv) > 1 else None
     
@@ -269,8 +302,9 @@ async def main():
         else:
             print("NO RACE TODAY")
         
-        # Add MemPalace check
+        # Comprehensive Health Check
         await check_mempalace()
+        await check_deepseek()
             
     elif mode == "--noon":
         fxt = get_today_fixture()
@@ -300,6 +334,15 @@ async def main():
         else:
             # Fallback for non-race days if forced
             await run_learn("ST")
+            
+    elif mode == "--restday":
+        fxt = get_today_fixture()
+        if not fxt:
+            print("NON-RACE DAY DETECTED. Triggering intensive Rest Day Orchestrator...")
+            script_restday = BASE_DIR / "scripts" / "lunar_rest_day.py"
+            await run_async_command([PYTHON_EXEC, str(script_restday)], "RESTDAY")
+        else:
+            print("Today is a Race Day! Skipping deep rest-day optimizations to preserve CPU.")
 
 if __name__ == "__main__":
     asyncio.run(main())

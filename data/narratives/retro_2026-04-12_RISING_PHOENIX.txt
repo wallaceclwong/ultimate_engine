@@ -1,0 +1,3 @@
+LESSON LEARNT RETROSPECTIVE FOR RISING PHOENIX on 2026-04-12:
+Our model highly tipped this horse but it failed (finished 4).
+Analysis: Despite the favorable low draw (#2), which our model likely weighted heavily, the "Good" track condition may have neutralized RISING PHOENIX's running style, possibly favoring horses with more early speed on a firm surface. The jockey's statistical rating, while strong, may reflect a profile that is less effective at navigating traffic from an inside post when the pace scenario collapses. The lesson is that a low draw's advantage can become a tactical disadvantage if the horse gets boxed in on a track playing fairly, an outcome our pure statistical model did not anticipate today.

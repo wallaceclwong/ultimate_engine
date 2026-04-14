@@ -1,0 +1,39 @@
+{
+  "race_id": "2026-04-12_ST_R3",
+  "gemini_model": "gemini-2.5-flash",
+  "confidence_score": 0.75,
+  "is_best_bet": true,
+  "recommended_bet": "WIN 13",
+  "probabilities": {
+    "1": 0.09,
+    "2": 0.07,
+    "3": 0.11,
+    "4": 0.08,
+    "5": 0.06,
+    "6": 0.03,
+    "7": 0.07,
+    "8": 0.05,
+    "9": 0.02,
+    "10": 0.05,
+    "11": 0.08,
+    "12": 0.12,
+    "13": 0.15,
+    "14": 0.02
+  },
+  "kelly_stakes": {},
+  "market_odds": {
+    "1": 6.7,
+    "2": 13.0,
+    "3": 5.6,
+    "4": 4.8,
+    "5": 88.0,
+    "6": 33.0,
+    "7": 36.0,
+    "8": 3.1,
+    "9": 103.0,
+    "10": 17.0,
+    "11": 22.0,
+    "12": 10.0
+  },
+  "analysis_markdown": "### Race Analysis: Class 5, 1600m, Turf\n\nThis Class 5 race over 1600m on turf presents a competitive field with several interesting dynamics, particularly given the absence of detailed sectional data, barrier trial information, jockey-trainer synergy, and stewards' reports. Our analysis will therefore focus primarily on recent form, market odds, draw, weight, and jockey strength.\n\n**Market Observations & Form Discrepancies:**\n\n*   **Speedy Trident (#8)** is the market favourite at 3.1 win odds, yet its last 6 runs (9, 11, 9, 7, 9, 13) are exceedingly poor, and it has drawn a wide gate (12). This represents a significant discrepancy between market perception and readily available form. Without any hidden form or forgiveness tags, this horse appears to be heavily overbet, suggesting punters might be privy to information not provided or are speculating on a drastic class drop. We will heavily downgrade its probability based on objective data.\n*   **Rattan Galaxy (#4)** is the second favourite at 4.8 odds, having placed second once recently. However, a wide draw (11) for the 1600m at Happy Valley is a significant negative.\n\n**Key Contenders & Value Bets:**\n\nGiven the limitations in data, we identify several horses offering excellent value or possessing strong fundamental advantages:\n\n1.  **Mr Aladdin (#13):** Despite missing market odds, this horse stands out as a top contender. It carries the lowest weight (115 lbs), has drawn the coveted inside gate (1), and is partnered with top jockey A Badel. Its recent 4th place indicates returning form, and this combination of factors is often highly potent in Class 5 races. We assess its probability as the highest due to these strong advantages.\n2.  **Casa Legend (#12):** Another strong candidate, this horse also benefits from a very low weight (116 lbs), an excellent draw (2), and the services of a top jockey in K Teetan. While its recent form (including a 4th) isn't spectacular, the ideal racing conditions provided by its draw, weight, and jockey make it a serious threat at attractive odds of 10.0.\n3.  **Harry's Hero (#11):** This horse presents excellent value at 22.0 odds. It has recorded two recent 2nd-place finishes, carries a low weight (117 lbs), and has drawn a favourable gate (4). Jockey H Bentley is a capable rider, and all signs point to this horse being highly competitive.\n4.  **Iron Legion (#3):** A recent winner (1st in its last 6 runs) and an inside draw (7) make this horse a logical contender. Jockey Y L Chung's 2kg weight claim is an added bonus. Its odds of 5.6 reflect its solid chances.\n5.  **Beauty Missile (#1):** Also a recent winner and piloted by a quality jockey in H Bowman. While its draw (9) is not ideal, its consistent performance (3,1,4,5,8,4) keeps it in contention at 6.7 odds.\n6.  **Cool Blue (#7):** With a win and two 2nd-place finishes in its last six starts, this horse has demonstrated good form and carries a manageable weight (129 lbs). At 36.0 odds, it's a huge value play for exotics, despite a slightly wide draw (10).\n7.  **Bling Bling Genius (#5):** The odds of 88.0 are baffling for a horse that has two 2nd-place finishes and an excellent draw (3). While there might be underlying reasons for these long odds (e.g., previous 2nds in very weak company or poor track work), based purely on the provided form and draw, it looks like an extreme value bet if its form holds.\n\n**Considerations for Dismissed Runners:**\n\n*   **General Smart (#6):** While Z Purton is a significant booking, the extremely wide draw (13) severely compromises this horse's chances over 1600m at Happy Valley.\n*   **The Way We Win (#14):** Poor recent form and a very wide draw (14) make it a long shot.\n\n**Recommended Bet Justification:**\n\nOur top recommendation is **WIN 13 (MR ALADDIN)**. This selection is based on the optimal combination of critical success factors in Hong Kong Class 5 racing: the best draw (1), the lowest weight (115 lbs), and a top-tier jockey (A Badel). This trifecta of advantages often proves decisive in competitive fields. Given the absence of market odds for this horse, there's a strong possibility it will offer exceptional value. Its recent 4th place indicates it is nearing peak fitness, and this race setup is ideal for a bold performance.\n\nOur confidence score is set at 0.75, reflecting a reasoned assessment based on available data, acknowledging the inherent unpredictability of Class 5 racing and the lack of comprehensive analytical data beyond basic form and market odds."
+}

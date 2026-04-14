@@ -1,0 +1,3 @@
+LESSON LEARNT RETROSPECTIVE FOR MR ALADDIN on 2026-04-12:
+Our model highly tipped this horse but it failed (finished 6).
+Analysis: The tight Draw 1 likely forced MR ALADDIN to use significant early energy to secure position on the Good surface, compromising its finish despite the favorable statistical profile. The jockey's historical win rate, while strong, may not have accounted for the specific tactical challenge presented by the rail draw in this race. This suggests the model may overvalue static draw stats without sufficiently weighting the tactical disadvantage it can create on a track promoting fair but demanding runs.

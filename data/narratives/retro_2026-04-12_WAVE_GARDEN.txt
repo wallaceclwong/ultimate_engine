@@ -1,0 +1,3 @@
+LESSON LEARNT RETROSPECTIVE FOR WAVE GARDEN on 2026-04-12:
+Our model highly tipped this horse but it failed (finished 9).
+Analysis: The model likely overvalued the jockey's impact, as the provided statistic (0.037) indicates a very low win rate, which may have translated into a poor tactical ride from gate 6. On a "Good" track where early position is critical, the horse may have been forced wide or trapped in an unfavorable pace scenario, nullifying any perceived statistical advantage. This disconnect suggests the algorithm needs greater weighting for tactical outcomes linked to both draw and jockey form, rather than raw statistical inputs.

@@ -1,0 +1,37 @@
+{
+  "race_id": "2026-04-08_HV_R5",
+  "gemini_model": "gemini-2.5-flash",
+  "confidence_score": 0.95,
+  "is_best_bet": true,
+  "recommended_bet": "WIN 9",
+  "probabilities": {
+    "1": 0.03,
+    "2": 0.06,
+    "3": 0.02,
+    "4": 0.07,
+    "5": 0.18,
+    "6": 0.12,
+    "7": 0.1,
+    "8": 0.04,
+    "9": 0.25,
+    "10": 0.03,
+    "11": 0.08,
+    "12": 0.02
+  },
+  "kelly_stakes": {},
+  "market_odds": {
+    "1": 15.0,
+    "2": 2.8,
+    "3": 24.0,
+    "4": 16.0,
+    "5": 10.0,
+    "6": 7.3,
+    "7": 10.0,
+    "8": 40.0,
+    "9": 6.8,
+    "10": 10.0,
+    "11": 13.0,
+    "12": 68.0
+  },
+  "analysis_markdown": "### Post-Race Audit: Class 4 1200m\n\nThis post-race audit confirms the impressive victory of **Horse #9 SMART FIGHTER**, who defied its starting odds of 6.8 to deliver a significant win dividend of 40.50. This performance firmly establishes #9 as the best bet of the race retrospectively, offering excellent value for punters who might have identified its potential.\n\n**Winner's Analysis: #9 SMART FIGHTER (Z Purton)**\nSMART FIGHTER delivered a clean and unhindered run, as evidenced by the stewards' report noting only that the horse was \"Sent for sampling post-race,\" which is standard procedure for winners and placegetters without adverse incidents. This indicates a strong, well-executed race by both horse and jockey, maximizing its fitness and ability on the day. Despite its recent form showing several double-digit finishes, the horse's last run of \"9\" in the last 6 indicates it was coming into form, and the combination with premier jockey Z. Purton was clearly potent.\n\n**Second Place: #5 BRIGHT DAY (P N Wong)**\nBRIGHT DAY also put in a stellar performance, securing second place and contributing to a Quinella dividend of 138.50 with SMART FIGHTER. Like the winner, #5's stewards' report was clean, indicating a strong run without interference. This horse significantly outran its market odds of 10.0, highlighting its underlying form and readiness.\n\n**Third Place: #6 FREE PONY (J Orman)**\nFREE PONY ran a solid race to secure third. While it did experience some contact with #2 MONARCH COUNTY early on, it managed to maintain its composure and finish strongly, validating its market odds of 7.3.\n\n**Audit of Underperformers & Key Incidents:**\n\n*   **#2 MONARCH COUNTY (J Moreira)**: The pre-race favorite at 2.8, MONARCH COUNTY finished a disappointing 7th. The stewards' report provides a clear explanation for this underperformance. The horse was involved in multiple incidents: \"Leaving the 1100 Metres made contact with FREE PONY, resulting in MONARCH COUNTY commencing to race ungenerously.\" It then shifted out and got its head up to avoid #7 FORERUNNER and continued to race ungenerously. Jockey J Moreira explicitly stated that the horse was \"not suited by the early stages of the event being run outside of standard time\" and finished only fairly. These interferences and an unsuitable race tempo directly led to its poor showing, allowing the deeper closing horses like #9 and #5 to prevail.\n\n*   **#1 A TIME FOR US (B Avdulla)**: Finished 9th. It faced significant challenges, including racing \"wide and without cover for the majority of the event\" and then finding \"restricted room\" in the final 50 metres, preventing it from being fully ridden out. These are legitimate excuses for its position.\n\n*   **#10 STAR FIGURE (A Atzeni)**: Finished 10th. Its run was severely hampered when \"Near the 200 Metres was eased to avoid MARVEL AND GOLD which shifted out to obtain clear running.\" This, combined with being taken wider on the Home Turn, meant the horse couldn't make an impact.\n\n*   **#7 FORERUNNER (A Badel)**: Despite clear instructions to go forward and obtain cover, it was unable to secure cover after commencing well. To still manage a 4th place finish under these circumstances is commendable.\n\n**Conclusion:**\nThis audit highlights that while pre-race market odds often reflect perceived chances, unforeseen race incidents and specific race dynamics can drastically alter outcomes. SMART FIGHTER (#9) and BRIGHT DAY (#5) benefited from clear passages and excellent race execution, allowing them to capitalize on the troubled runs of favored contenders like MONARCH COUNTY (#2). The stewards' reports were instrumental in understanding the legitimate excuses for several horses and validating the strong performances of the top finishers."
+}

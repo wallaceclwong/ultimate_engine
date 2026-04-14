@@ -17,7 +17,7 @@ from pathlib import Path
 
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
 VM_HOST = "root@100.109.76.69"  # Vultr VM via Tailscale
-VM_PATH = "/opt/ultimate_engine"
+VM_PATH = "/root/ultimate_engine"
 
 def load_fixtures(date_str):
     year = datetime.strptime(date_str, "%Y-%m-%d").year
@@ -94,7 +94,18 @@ def sync_to_vm(date_str):
     for f in racecard_files:
         run_cmd(["scp", "-o", "ConnectTimeout=10", str(f), f"{VM_HOST}:{VM_PATH}/data/{f.name}"])
     
-    print(f"  Synced {len(racecard_files)} racecard files to VM")
+    # Also sync results for today
+    result_files = list((PROJECT_ROOT / "data" / "results").glob(f"results_{date_str}_*.json"))
+    for f in result_files:
+        run_cmd(["scp", "-o", "ConnectTimeout=10", str(f), f"{VM_HOST}:{VM_PATH}/data/results/{f.name}"])
+
+    # Sync Master Matrix
+    matrix_file = PROJECT_ROOT / "training_data_hybrid.parquet"
+    if matrix_file.exists():
+        print("  Syncing Master Matrix to VM...")
+        run_cmd(["scp", "-o", "ConnectTimeout=10", str(matrix_file), f"{VM_HOST}:{VM_PATH}/training_data_hybrid.parquet"])
+
+    print(f"  Synced {len(racecard_files)} racecards, {len(result_files)} results, and matrix to VM")
     return True
 
 def trigger_vm_predictions(date_str, venue):

@@ -21,8 +21,11 @@ async def run_modern_cycle():
 
     # 1. Phase 1: Late 2025 (Season Kickoff)
     print("\n--- Phase 1: Sept - Dec 2025 ---")
-    engine_2025 = BacktestEngine(fixtures_path="data/fixtures_2025.json")
-    await engine_2025.run_backtest(start_date="2025-09-01", end_date="2025-12-31")
+    try:
+        engine_2025 = BacktestEngine(fixtures_path="data/fixtures_2025.json")
+        await engine_2025.run_backtest(start_date="2025-09-01", end_date="2025-12-31")
+    except Exception as e:
+        print(f"Skipping Phase 1 due to missing data: {e}")
 
     # 2. Phase 2: Early 2026 (Live Trend)
     print("\n--- Phase 2: Jan - Mar 2026 ---")

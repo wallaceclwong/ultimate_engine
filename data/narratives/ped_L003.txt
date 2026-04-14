@@ -1,0 +1,6 @@
+PEDIGREE FOR HORSE ID L003:
+Sire: Headwater
+Dam: Rose Queen
+Origin: AUS / 4
+Color: Unknown
+Import Type: PPG

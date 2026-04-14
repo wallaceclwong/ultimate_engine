@@ -1,0 +1,3 @@
+LESSON LEARNT RETROSPECTIVE FOR LEGEND WINNER on 2026-04-12:
+Our model highly tipped this horse but it failed (finished 9).
+Analysis: **Lesson Learnt:** The very wide draw (Gate 10) on a "Good" surface likely forced a costly, energy-sapping wide run to gain position, negating any statistical advantage. The jockey's modest historical win rate (0.037) may have translated to sub-optimal tactical execution in navigating this specific traffic challenge. The model undervalued the combined tactical deficit of a poor draw and the jockey's ability to overcome it under today's conditions.

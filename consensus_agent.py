@@ -27,6 +27,20 @@ class ConsensusAgent:
         self.pedigree_cache = {}
         self._load_pedigree()
 
+    async def check_health(self):
+        """Verifies API connectivity with a minimal prompt."""
+        try:
+            resp = await client.chat.completions.create(
+                model=self.model,
+                messages=[{"role": "user", "content": "ping"}],
+                max_tokens=10,
+                timeout=10
+            )
+            return True if resp.choices else False
+        except Exception as e:
+            print(f"[API HEALTH ERROR] DeepSeek unreachable: {e}")
+            return False
+
     def reload_pedigree(self):
         self._load_pedigree()
 
@@ -105,12 +119,20 @@ class ConsensusAgent:
             venue = target.get('venue', 'HV')
             dist = target.get('distance', 1200)
             res_track = memory_service.search(f"{venue} {dist}m track characteristics and bias")
+            
+            # Query 4: Lesson Learnt Retrospective
+            res_retro = memory_service.search(f"{target['horse_name']} LESSON LEARNT retrospective failed prediction")
+            
+            # Query 5: Pedigree Characteristics
+            res_ped = memory_service.search(f"PEDIGREE for horse {horse_id} sired by {pedigree['sire']}")
 
             # Aggregate context
             mem_bits = []
             if "Results for" in res_bio: mem_bits.append(f"--- Horse Bio ---\n{res_bio}")
             if "Results for" in res_synergy: mem_bits.append(f"--- Synergy Intel ---\n{res_synergy}")
             if "Results for" in res_track: mem_bits.append(f"--- Track Intel ---\n{res_track}")
+            if "Results for" in res_retro: mem_bits.append(f"--- FAIL RETROSPECTIVE ---\n{res_retro}")
+            if "Results for" in res_ped: mem_bits.append(f"--- PEDIGREE INTEL ---\n{res_ped}")
             
             if mem_bits:
                 memory_str = "\n".join(mem_bits)
@@ -167,10 +189,22 @@ Respond with a JSON block followed by a brief 'Expert Note'.
             )
             
             full_content = resp.choices[0].message.content
-            # Extraction logic
-            json_match = re.search(r'\{.*\}', full_content, re.DOTALL)
-            if json_match:
-                result = json.loads(json_match.group(0))
+            
+            # --- Robust EXTRACTION LOGIC ---
+            # 1. Remove <think> tags if present
+            clean_content = re.sub(r'<think>.*?</think>', '', full_content, flags=re.DOTALL)
+            
+            # 2. Try to find markdown JSON block
+            json_block_match = re.search(r'```json\s*(\{.*?\})\s*```', clean_content, re.DOTALL)
+            if json_block_match:
+                result_str = json_block_match.group(1)
+            else:
+                # 3. Fallback to raw braces
+                json_match = re.search(r'\{.*\}', clean_content, re.DOTALL)
+                result_str = json_match.group(0) if json_match else None
+
+            if result_str:
+                result = json.loads(result_str)
                 return result.get("verdict", "CAUTION"), (
                     f"Grade [{result.get('conviction_grade', '?')}] — "
                     f"SIGNAL: {result.get('market_signal')} — "
@@ -178,7 +212,9 @@ Respond with a JSON block followed by a brief 'Expert Note'.
                     f"NOTE: {result.get('expert_note')}"
                 )
             else:
-                return "CAUTION", f"DeepSeek-R1 (War Room): {full_content[:200]}..."
+                # Log the raw content for debugging if extraction fails
+                print(f"[DEBUG] Extraction failed. Raw: {full_content[:300]}...")
+                return "CAUTION", "DeepSeek-R1: Failed to parse strategic JSON."
                 
         except Exception as e:
             return "ERROR", f"War Room Audit failed: {str(e)}"

@@ -1,0 +1,140 @@
+{
+  "race_id": "2026-04-12_ST_R1",
+  "date": "2026-04-12T00:00:00",
+  "race_number": 1,
+  "distance": 1000,
+  "track_type": "Turf",
+  "course": "A",
+  "race_class": "Griffin",
+  "track_condition": "Good",
+  "predicted_pace": "EVEN",
+  "jump_time": "12:30\n",
+  "horses": [
+    {
+      "horse_id": "N/A",
+      "horse_name": "KA YING GRATEFUL",
+      "owner": "",
+      "sire": null,
+      "dam": null,
+      "saddle_number": 1,
+      "draw": 2,
+      "jockey": "K C Leung",
+      "trainer": "W K Mo",
+      "weight": 126.0,
+      "optimal_weight_range": null,
+      "training_location": "HK",
+      "last_6_runs": [
+        "-"
+      ],
+      "gear": "",
+      "stable_change": false,
+      "trial_comments": null,
+      "synergy_score": 0.0
+    },
+    {
+      "horse_id": "N/A",
+      "horse_name": "PERFECT ONE",
+      "owner": "",
+      "sire": null,
+      "dam": null,
+      "saddle_number": 2,
+      "draw": 4,
+      "jockey": "Z Purton",
+      "trainer": "C H Yip",
+      "weight": 126.0,
+      "optimal_weight_range": null,
+      "training_location": "HK",
+      "last_6_runs": [
+        "-"
+      ],
+      "gear": "",
+      "stable_change": false,
+      "trial_comments": null,
+      "synergy_score": 0.0
+    },
+    {
+      "horse_id": "N/A",
+      "horse_name": "SILVERY KNIGHT",
+      "owner": "",
+      "sire": null,
+      "dam": null,
+      "saddle_number": 3,
+      "draw": 3,
+      "jockey": "L Hewitson",
+      "trainer": "D J Whyte",
+      "weight": 126.0,
+      "optimal_weight_range": null,
+      "training_location": "HK",
+      "last_6_runs": [
+        "-"
+      ],
+      "gear": "",
+      "stable_change": false,
+      "trial_comments": null,
+      "synergy_score": 0.0
+    },
+    {
+      "horse_id": "N/A",
+      "horse_name": "GLORIOUS HERO",
+      "owner": "",
+      "sire": null,
+      "dam": null,
+      "saddle_number": 4,
+      "draw": 5,
+      "jockey": "K Teetan",
+      "trainer": "D A Hayes",
+      "weight": 121.0,
+      "optimal_weight_range": null,
+      "training_location": "HK",
+      "last_6_runs": [
+        "-"
+      ],
+      "gear": "",
+      "stable_change": false,
+      "trial_comments": null,
+      "synergy_score": 0.0
+    },
+    {
+      "horse_id": "N/A",
+      "horse_name": "SECRET INGREDIENT",
+      "owner": "",
+      "sire": null,
+      "dam": null,
+      "saddle_number": 5,
+      "draw": 6,
+      "jockey": "H Bentley",
+      "trainer": "D A Hayes",
+      "weight": 121.0,
+      "optimal_weight_range": null,
+      "training_location": "HK",
+      "last_6_runs": [
+        "-"
+      ],
+      "gear": "",
+      "stable_change": false,
+      "trial_comments": null,
+      "synergy_score": 0.0
+    },
+    {
+      "horse_id": "N/A",
+      "horse_name": "TALENTS CHAMPION",
+      "owner": "",
+      "sire": null,
+      "dam": null,
+      "saddle_number": 6,
+      "draw": 1,
+      "jockey": "M L Yeung",
+      "trainer": "D A Hayes",
+      "weight": 121.0,
+      "optimal_weight_range": null,
+      "training_location": "HK",
+      "last_6_runs": [
+        "-"
+      ],
+      "gear": "",
+      "stable_change": false,
+      "trial_comments": null,
+      "synergy_score": 0.0
+    }
+  ]
+}

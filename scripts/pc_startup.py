@@ -21,7 +21,7 @@ from pathlib import Path
 # Add project root to sys.path
 sys.path.append(str(Path(__file__).resolve().parent.parent))
 from services.memory_service import memory_service
-from services.telegram_service import telegram_service
+from telegram_service import telegram_service
 
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
 VM_HOST = "root@100.109.76.69"
@@ -127,14 +127,14 @@ def trigger_vm_predictions(date_str, venue):
 
 def start_local_server():
     """Start the local dashboard + watchdog in background."""
-    log("Starting local dashboard server (localhost:8000)...")
-    py = str(PROJECT_ROOT / ".venv" / "Scripts" / "python.exe")
-    subprocess.Popen(
-        [py, "-m", "uvicorn", "dashboard.server:app", "--host", "0.0.0.0", "--port", "8000"],
-        cwd=str(PROJECT_ROOT),
-        creationflags=subprocess.CREATE_NEW_CONSOLE
-    )
-    log("Local server started in new window.")
+    log("Skipping local dashboard startup (dashboard module currently missing).")
+    # py = str(PROJECT_ROOT / ".venv" / "Scripts" / "python.exe")
+    # subprocess.Popen(
+    #     [py, "-m", "uvicorn", "dashboard.server:app", "--host", "0.0.0.0", "--port", "8000"],
+    #     cwd=str(PROJECT_ROOT),
+    #     creationflags=subprocess.CREATE_NEW_CONSOLE
+    # )
+    # log("Local server started in new window.")
 
 
 async def check_mempalace():

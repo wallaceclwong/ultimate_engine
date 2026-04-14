@@ -1,0 +1,6 @@
+PEDIGREE FOR HORSE ID H089:
+Sire: Snitzel
+Dam: Nayeli
+Origin: AUS / 6
+Color: Unknown
+Import Type: PP

@@ -1,5 +1,12 @@
 {
-  "audited_races": [],
-  "learned_today": false,
-  "last_reset_date": "2026-04-09"
+  "audited_races": [
+    "9",
+    "10",
+    "11"
+  ],
+  "learned_today": true,
+  "last_reset_date": "2026-04-12",
+  "last_scrape_R9": 1775981896.124211,
+  "last_scrape_R10": 1775984088.810218,
+  "last_scrape_R11": 1775986033.632304
 }

@@ -1,0 +1,31 @@
+{
+  "race_id": "2026-04-12_ST_R1",
+  "gemini_model": "gemini-2.5-flash",
+  "confidence_score": 0.45,
+  "is_best_bet": true,
+  "recommended_bet": "WIN 4",
+  "probabilities": {
+    "1": 0.37,
+    "2": 0.03,
+    "3": 0.12,
+    "4": 0.43,
+    "5": 0.02,
+    "6": 0.03
+  },
+  "kelly_stakes": {},
+  "market_odds": {
+    "1": 3.4,
+    "2": 31.0,
+    "3": 12.0,
+    "4": 5.1,
+    "5": 38.0,
+    "6": 23.0,
+    "7": 12.0,
+    "8": 19.0,
+    "9": 16.0,
+    "10": 9.1,
+    "11": 5.4,
+    "12": 17.0
+  },
+  "analysis_markdown": "### Race Analysis: Griffin Stakes - 1000m Turf\n\nThis is a challenging Griffin race over 1000m on the turf, characterized by an extreme scarcity of conventional race data. All horses appear to be debutants or have had very few runs, as indicated by the high \"Days since Last Run\" figures (all over 900 days) and the 'PPG' (Private Purchase Griffin) designation for trainers. Crucially, there are no barrier trial reports, no historical sectional times, no pedigree information, and no detailed weather forecasts available. This forces an analysis heavily reliant on market odds, jockey and trainer reputations, assigned weights, and barrier draws.\n\n#### Key Factors & Contenders:\n\n1.  **Market Sentiment:** In races with limited form, market odds often reflect stable confidence and private trial performances. **KA YING GRATEFUL (1)** is the clear favourite at 3.4, with **GLORIOUS HERO (4)** as the second favourite at 5.1. The significant difference in odds for Horse 2 (Zac Purton's ride at 31.0) is a major red flag, suggesting a lack of underlying confidence despite the top jockey.\n\n2.  **Jockey-Trainer Combinations:**\n    *   **GLORIOUS HERO (4):** Carries the powerful combination of top jockey Karis Teetan and respected trainer David Hayes. Hayes is a proven handler of young stock, and Teetan's presence on a well-backed debutant is a strong indicator.\n    *   **KA YING GRATEFUL (1):** Ridden by K C Leung for W K Mo. Leung is a competent jockey, but the trainer is not typically among the top echelons known for immediate Griffin success. Its favouritism is therefore intriguing.\n    *   **SILVERY KNIGHT (3):** Ridden by L Hewitson for D J Whyte. Both are respected, making this a legitimate, albeit outside, contender.\n    *   **PERFECT ONE (2):** Ridden by champion Zac Purton for C H Yip. Despite Purton's presence, the astronomical odds are a concern, implying the horse has not shown much in private.\n\n3.  **Weight & Draw:**\n    *   **Weight Advantage:** Horses 4, 5, and 6 carry 121 lbs, 5 lbs less than horses 1, 2, and 3 (126 lbs). For inexperienced horses, this weight differential can be highly significant.\n    *   **Draw for 1000m:** For a straight 1000m course (common in Hong Kong), middle to outside draws (e.g., 2, 3, 4, 5, 6) are generally preferred for clear running. Draw 1 (TALENTS CHAMPION, 6) can be tricky for debutants if they get trapped on the rail. Both KA YING GRATEFUL (Draw 2) and GLORIOUS HERO (Draw 5) have favourable draws.\n\n#### Conclusion & Recommendation:\n\nWhile **KA YING GRATEFUL (1)** is the market favourite, the overall profile of **GLORIOUS HERO (4)** is more compelling. The combination of a top-tier jockey in Karis Teetan, a respected trainer in David Hayes (who also has the advantage of having three runners in the race, likely indicating a good handle on his debutants), a significant 5-pound weight advantage, and an excellent draw in gate 5, makes it the strongest proposition. The slightly longer odds compared to the favourite also suggest potential value. Given the extreme lack of data, this prediction carries a moderate confidence score, but Horse 4's package appears to be the most robust.\n\n**Best Bet:** WIN 4"
+}

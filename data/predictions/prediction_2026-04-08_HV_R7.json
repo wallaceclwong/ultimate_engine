@@ -1,0 +1,37 @@
+{
+  "race_id": "2026-04-08_HV_R7",
+  "gemini_model": "gemini-2.5-flash",
+  "confidence_score": 0.9,
+  "is_best_bet": false,
+  "recommended_bet": "WIN 1",
+  "probabilities": {
+    "1": 0.3499999999999999,
+    "2": 0.19999999999999996,
+    "3": 0.009999999999999998,
+    "4": 0.039999999999999994,
+    "5": 0.04999999999999999,
+    "6": 0.07999999999999999,
+    "7": 0.029999999999999992,
+    "8": 0.09999999999999998,
+    "9": 0.029999999999999992,
+    "10": 0.029999999999999992,
+    "11": 0.009999999999999998,
+    "12": 0.06999999999999999
+  },
+  "kelly_stakes": {},
+  "market_odds": {
+    "1": 4.9,
+    "2": 2.8,
+    "3": 32.0,
+    "4": 17.0,
+    "5": 11.0,
+    "6": 14.0,
+    "7": 15.0,
+    "8": 7.9,
+    "9": 9.7,
+    "10": 19.0,
+    "11": 40.0,
+    "12": 26.0
+  },
+  "analysis_markdown": "### Post-Race Audit: Class 3, 1650m Turf\n\nThis audit reflects on the outcome of the race where Horse #1, SILVERY BREEZE, emerged as the winner at odds of 4.9. The market favorite, Horse #2 SKY VINO, finished in the place. My analysis here will account for the actual result and explain the factors that led to SILVERY BREEZE's victory.\n\n#### Winner: Horse #1 - SILVERY BREEZE (4.9 Odds)\n\nSILVERY BREEZE, under the skillful guidance of H Bowman, delivered a strong performance to secure the win. Despite carrying the top weight of 135 lbs, the horse demonstrated excellent form, which was evident in its consistent recent record (last 6 runs: 4, 4, 2, 1, 2, 2). This record included a previous win and multiple placings, indicating both class and resilience. While not the market favorite, the horse's proven ability to perform consistently at this level, coupled with a well-timed ride, allowed it to outclass its rivals on the day. The 4.9 odds for a horse with such consistent form presented significant value retrospectively.\n\n#### Market Favorite: Horse #2 - SKY VINO (2.8 Odds)\n\nSKY VINO, ridden by J Moreira and starting as the odds-on favorite, ran a commendable race to secure a place finish. Its recent form (last 6 runs: 6, 7, 1, 2, 12, 9) included a win and a second, suggesting strong potential. However, on this occasion, it could not match the finishing power of SILVERY BREEZE. While a solid effort, it ultimately fell short of expectations for a favorite, highlighting that even strong form and top jockeys don't guarantee a win in competitive Class 3 races.\n\n#### Other Key Contenders:\n\n*   **Horse #8 - STORMI (7.9 Odds):** STORMI came into the race with an impressive last 6 runs of 6, 1, 1, 1, 8, 2, boasting three recent wins. Despite this excellent prior form, the horse was unable to make a significant impact in the finish. There were no Stewards' reports or obvious incidents to explain this underperformance, suggesting it simply wasn't its day or the race dynamics didn't suit its running style. This serves as a reminder that past form, no matter how strong, isn't always a direct predictor of future success.\n*   **Horse #6 - SUPER UNICORN (14.0 Odds):** With a recent win in its last 6 runs (6, 3, 8, 12, 4, 1), SUPER UNICORN showed glimmers of ability but was unable to feature prominently in the placings.\n*   **Horse #12 - ALLCASH (26.0 Odds):** Also boasting a recent win (last 6 runs: 8, 10, 3, 6, 3, 1), ALLCASH, despite favorable weight, could not sustain a challenge to the front-runners.\n\n#### Conclusion:\n\nThe victory of SILVERY BREEZE was a testament to its consistent form and ability to carry weight effectively, orchestrated by an expert ride from H Bowman. While the market favored SKY VINO, SILVERY BREEZE demonstrated superior performance when it mattered most. The absence of specific sectional data, stewards' reports, or weather impacts means the outcome primarily reflects the horses' inherent abilities and race-day performance."
+}

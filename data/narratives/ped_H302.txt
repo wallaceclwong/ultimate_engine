@@ -1,0 +1,6 @@
+PEDIGREE FOR HORSE ID H302:
+Sire: Toronado
+Dam: Paris Texas
+Origin: AUS / 6
+Color: Unknown
+Import Type: PP

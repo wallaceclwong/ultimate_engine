@@ -1,0 +1,3 @@
+LESSON LEARNT RETROSPECTIVE FOR FULL OF LAUGHTER on 2026-04-12:
+Our model highly tipped this horse but it failed (finished 12).
+Analysis: The model likely overvalued the horse's statistical profile without adequately penalizing the disadvantage of Draw 7 on a likely firm "Good" track, where inside paths are favored and a wide run wastes crucial energy. The jockey's low win rate suggests a possible tactical misjudgment, such as failing to secure a forward position early from the wide gate, leaving the horse trapped in traffic. This highlights a need for the model to incorporate a "draw/condition interaction" factor, where wide barriers receive a heavier penalty on fast, rail-favoring surfaces.

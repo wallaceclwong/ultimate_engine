@@ -1,0 +1,3 @@
+LESSON LEARNT RETROSPECTIVE FOR KINGDOM OF RICHES on 2026-04-12:
+Our model highly tipped this horse but it failed (finished 8).
+Analysis: The wide draw (9) likely forced the horse to expend significant early energy to gain position, compromising its finishing kick on a "Good" surface that often favors horses settling closer to the pace. The jockey's current form metric (0.037) suggests recent tactical decisions may have been suboptimal, potentially misjudging the race's early tempo. The model likely overvalued raw odds and EV without fully accounting for the compound disadvantage of the draw and the specific jockey's recent in-race decision-making.

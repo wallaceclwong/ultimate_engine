@@ -1,0 +1,3 @@
+LESSON LEARNT RETROSPECTIVE FOR GOLDEN WIN on 2026-04-12:
+Our model highly tipped this horse but it failed (finished 9).
+Analysis: Despite the favorable inside draw, today's strong early pace likely forced GOLDEN WIN into a contested, energy-sapping position early on, nullifying its positional advantage. The model may have overvalued the jockey's statistical rating without accounting for a specific tactical misjudgment in navigating the traffic from stall one. Additionally, a "Good" track condition can still contain subtle, day-specific biases that disadvantage certain running styles, which a purely statistical model fails to capture.

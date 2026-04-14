@@ -130,34 +130,56 @@ class RacecardIngest:
             if time_match:
                 jump_time = time_match.group(1)
 
-            # --- Ultra-Resilient Global Row Scan ---
+            # --- Precise HKJC Layout Extraction ---
             horses_data = await page.evaluate(r'''() => {
-                const allRows = Array.from(document.querySelectorAll('tr'));
-                return allRows.map(row => {
-                    const cols = Array.from(row.querySelectorAll('td')).map(td => td.innerText.trim());
-                    if (cols.length < 5) return null;
+                const results = [];
+                // Target the main racecard table specifically
+                const tables = Array.from(document.querySelectorAll('table.starter, table.table_bd.racecard, #racecardlist table'));
+                
+                for (const table of tables) {
+                    const rows = Array.from(table.querySelectorAll('tr'));
+                    let headerFound = false;
+                    let mapping = { saddle: 0, last_6: 1, horse: 3, weight: 4, jockey: 5, draw: 6, trainer: 7 };
 
-                    const saddle = cols.find(c => /^\d+$/.test(c));
-                    if (!saddle) return null;
+                    for (const row of rows) {
+                        const cells = Array.from(row.querySelectorAll('td, th'));
+                        const cellTexts = cells.map(c => c.innerText.trim());
+                        
+                        // Identify Header Row
+                        if (!headerFound && cellTexts.includes('Horse No.') && cellTexts.includes('Jockey')) {
+                            headerFound = true;
+                            mapping.saddle = cellTexts.indexOf('Horse No.');
+                            mapping.horse = cellTexts.indexOf('Horse');
+                            mapping.weight = cellTexts.indexOf('Wt.');
+                            mapping.jockey = cellTexts.indexOf('Jockey');
+                            mapping.draw = cellTexts.indexOf('Draw');
+                            mapping.trainer = cellTexts.indexOf('Trainer');
+                            mapping.last_6 = cellTexts.indexOf('Last 6 Runs');
+                            continue;
+                        }
 
-                    // Heuristic Content Detection - Relaxed to handle VM's "Lite" layout
-                    const horse = cols.find(c => /[A-Z]{3,}/.test(c) && c === c.toUpperCase());
-                    const last_6 = cols.find(c => c.includes('/') || (c.length > 3 && /^[\d\-W/]+$/.test(c)));
-                    const weight = cols.find(c => /^\d{3}$/.test(c) && parseInt(c) > 100 && parseInt(c) < 155);
+                        // Process Data Rows
+                        if (headerFound && cellTexts.length >= 8) {
+                            const saddle = cellTexts[mapping.saddle];
+                            if (!saddle || !/^\d+$/.test(saddle)) continue;
 
-                    if (!horse || !saddle) return null;
+                            const horse = cellTexts[mapping.horse] ? cellTexts[mapping.horse].split('\n')[0].trim() : "";
+                            if (!horse || horse === 'Horse') continue;
 
-                    const horseIdx = cols.indexOf(horse);
-                    return {
-                        saddle: saddle,
-                        horse: horse,
-                        last_6: last_6 || "",
-                        weight: weight || "",
-                        jockey: cols[horseIdx + 2] || cols[horseIdx + 1] || "",
-                        draw: cols[horseIdx + 3] || "",
-                        trainer: cols[horseIdx + 4] || cols[cols.length - 1] || ""
-                    };
-                }).filter(h => h !== null);
+                            results.push({
+                                saddle: saddle,
+                                horse: horse,
+                                last_6: cellTexts[mapping.last_6] || "",
+                                weight: cellTexts[mapping.weight] || "",
+                                jockey: cellTexts[mapping.jockey] || "",
+                                draw: cellTexts[mapping.draw] || "",
+                                trainer: cellTexts[mapping.trainer] || ""
+                            });
+                        }
+                    }
+                    if (results.length > 0) break; // Found the main table
+                }
+                return results;
             }''')
 
             horses = []

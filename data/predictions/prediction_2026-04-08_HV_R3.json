@@ -1,0 +1,37 @@
+{
+  "race_id": "2026-04-08_HV_R3",
+  "gemini_model": "gemini-2.5-flash",
+  "confidence_score": 0.95,
+  "is_best_bet": true,
+  "recommended_bet": "WIN 4",
+  "probabilities": {
+    "1": 0.14999999999999997,
+    "2": 0.09999999999999998,
+    "3": 0.17999999999999997,
+    "4": 0.24999999999999994,
+    "5": 0.029999999999999992,
+    "6": 0.019999999999999997,
+    "7": 0.019999999999999997,
+    "8": 0.04999999999999999,
+    "9": 0.019999999999999997,
+    "10": 0.029999999999999992,
+    "11": 0.059999999999999984,
+    "12": 0.08999999999999998
+  },
+  "kelly_stakes": {},
+  "market_odds": {
+    "1": 6.7,
+    "2": 13.0,
+    "3": 5.6,
+    "4": 4.8,
+    "5": 88.0,
+    "6": 33.0,
+    "7": 36.0,
+    "8": 3.1,
+    "9": 103.0,
+    "10": 17.0,
+    "11": 22.0,
+    "12": 10.0
+  },
+  "analysis_markdown": "### Post-Race Audit: Class 4 1000m\n\nThis audit reviews the actual outcome of the race where **Horse #4, TYCOON RESOURCES**, emerged victorious at a Win dividend of $52.00. This was a notable win, especially considering the pre-race market had the favourite, ELEGANT LIFE (#8), at significantly shorter odds of $3.1.\n\n**Winner Analysis - TYCOON RESOURCES (#4):**\nTYCOON RESOURCES delivered a strong performance, securing a victory that paid handsomely. The stewards' report indicates that over the concluding stages, the horse shifted in, requiring rider Y L Chung to stop riding and straighten his mount. Despite this minor incident, the horse demonstrated sufficient power to cross the line first, suggesting underlying class or a well-executed ride to overcome the interference. The win at 4.8 odds pre-race makes it a value pick for those who identified its potential.\n\n**Placegetters:**\n*   **BEAUTY SHOW (#3)** ran a commendable race to finish second. The stewards noted it jumped awkwardly and raced tight to the inside of TYCOON RESOURCES during the concluding stages, which may have cost it a cleaner run or even challenged for the lead. Its ability to still secure second place despite these hindrances highlights its resilience.\n*   **SUPERB KING (#1)** secured third place with no reported incidents, indicating a clean and well-ridden race to round out the placings.\n*   **BEAUTY THUNDER (#2)** finished fourth, running a clean race with no reported incidents, showcasing its consistent form.\n\n**Disappointment of the Race - ELEGANT LIFE (#8):**\nThe favourite, ELEGANT LIFE (#8), proved to be the biggest disappointment, finishing 7th. Jockey J Moreira reported that his mount was fractious in the starting gates, jumped awkwardly, and lost ground. Further, during the race, it lay out approaching the 500m, was steadied to avoid JOY STAR (#7), and in the concluding stages, could not be ridden out when held up behind BEAUTY THUNDER (#2). Moreira's assessment of ELEGANT LIFE travelling only fairly and finishing one-paced explains its inability to contend. This combination of pre-race temperament, in-race interference, and lack of finish confirms the reasons for its failure to live up to its favouritism.\n\n**Other Noteworthy Incidents:**\n*   **ZETA HEDGE (#6)** raced wide and without cover for the majority of the event, with its rider indicating the horse lacked the pace to lead as intended, contributing to its last-place finish.\n*   **GET FRIENDLY (#10)** and **JOY STAR (#7)** both experienced significant interference shortly after the start and again approaching the 800m mark, which undoubtedly compromised their chances.\n*   **HAPPY UNITED (#12)** and **GOLDEN FRIENDSHIP (#11)** completed the top six without any reported incidents, indicating solid, unhindered performances for their respective finishes.\n\n**Conclusion:**\nThe race was won by a horse that showed strong finishing power despite a minor incident. The favourite, ELEGANT LIFE, had a litany of excuses for its poor performance, highlighting the unpredictability of racing and the importance of in-race events. The quinella of #3 and #4 and the placegetters #1 and #2 ran solid races, with #3 overcoming early trouble. The dividends reflect a race where value could be found beyond the market's initial top pick."
+}

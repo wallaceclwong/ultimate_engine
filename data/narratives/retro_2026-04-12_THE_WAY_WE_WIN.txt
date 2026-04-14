@@ -1,0 +1,3 @@
+LESSON LEARNT RETROSPECTIVE FOR THE WAY WE WIN on 2026-04-12:
+Our model highly tipped this horse but it failed (finished 5).
+Analysis: **Lesson Learnt:** The model likely overvalued this runner's ability to overcome the significant tactical disadvantage of stall 14 on a **Good** track. On a firm surface, horses drawn wide are often forced to expend crucial energy early to find a forward position, compromising their finishing effort. This, combined with the jockey's below-average win rate, suggests the prediction failed to adequately penalize for the high draw's specific impact under these fast conditions.
