@@ -1,8 +1,7 @@
 import json
 import os
 import sys
-from google import genai
-from google.genai import types
+from openai import OpenAI
 from pathlib import Path
 from typing import Dict, Any, Optional
 from datetime import datetime
@@ -110,42 +109,37 @@ from services.race_pace_analyzer import get_race_pace_analyzer
 
 class PredictionEngine:
     def __init__(self):
-        # Tuned model requires Vertex AI; always use Vertex for predictions
-        print(f"[INFO] Initializing Vertex AI Client in {Config.GCP_LOCATION}...")
-        self.client = genai.Client(
-            vertexai=True,
-            project=Config.MODEL_PROJECT_ID,
-            location=Config.GCP_LOCATION
+        print(f"[INFO] Initializing DeepSeek AI Client ({Config.DEEPSEEK_MODEL})...")
+        self.client = OpenAI(
+            api_key=Config.DEEPSEEK_API_KEY,
+            base_url=Config.DEEPSEEK_BASE_URL,
         )
-            
-        self.cache_id = None # Can be set after initialization if using Vertex AI
-        self.model_id = Config.GEMINI_MODEL
+        self.model_id = Config.DEEPSEEK_MODEL
         print(f"[INFO] Prediction model: {self.model_id}")
         self.base_dir = Path(__file__).resolve().parent.parent
         self.data_dir = self.base_dir / "data"
         self.predictions_dir = self.data_dir / "predictions"
         self.predictions_dir.mkdir(parents=True, exist_ok=True)
-        self.firestore = FirestoreService()
+        self.firestore = FirestoreService()   # no-op stub
         self.synergy = SynergyService()
         self.steward = StewardAnalyser()
         self.weathernext = WeatherNextClient()
         self.pedigree = PedigreeService()
-        
+
         from services.bankroll_manager import BankrollManager
         self.bankroll_manager = BankrollManager()
-        
+
         self.kelly = KellyCriterion(
-            bankroll=self.bankroll_manager.get_current_bankroll(), 
+            bankroll=self.bankroll_manager.get_current_bankroll(),
             fractional_kelly=Config.KELLY_FRACTION
         )
         self.notifications = NotificationService()
-        self.bigquery = BigQueryService()
-        self.storage = StorageService()
-        
-        # Load RL Bias Correction with contextual awareness
+        self.bigquery = BigQueryService()     # no-op stub
+        self.storage = StorageService()       # no-op stub
+
         from services.rl_optimizer import RLOptimizer
         self.optimizer = RLOptimizer()
-        
+
         from services.deep_dive_agent import DeepDiveAgent
         self.deep_dive_agent = DeepDiveAgent()
 
@@ -321,43 +315,19 @@ class PredictionEngine:
             return await self._generate_single_prediction(date_str, venue, race_no, prompt, data)
     
     async def _generate_single_prediction(self, date_str: str, venue: str, race_no: int, prompt: str, data: Dict) -> Optional[Prediction]:
-        """Generate prediction using single model (original logic)"""
+        """Generate prediction using DeepSeek (OpenAI-compatible JSON mode)."""
         try:
-            # Define dynamic probability properties for the schema
             racecard = data.get("racecard", {})
-            horses = racecard.get("horses", [])
-            prob_props = {
-                str(h.get("saddle_number") or h.get("horse_no")): {"type": "number"}
-                for h in horses
-            }
 
-            response_schema = {
-                "type": "object",
-                "properties": {
-                    "confidence_score": {"type": "number"},
-                    "is_best_bet": {"type": "boolean"},
-                    "recommended_bet": {"type": "string"},
-                    "probabilities": {
-                        "type": "object",
-                        "properties": prob_props,
-                        "required": list(prob_props.keys())
-                    },
-                    "analysis_markdown": {"type": "string"}
-                },
-                "required": ["confidence_score", "is_best_bet", "recommended_bet", "probabilities", "analysis_markdown"]
-            }
-
-            response = self.client.models.generate_content(
+            response = self.client.chat.completions.create(
                 model=self.model_id,
-                contents=prompt,
-                config=types.GenerateContentConfig(
-                    response_mime_type="application/json",
-                    response_schema=response_schema,
-                    cached_content=self.cache_id
-                )
+                messages=[{"role": "user", "content": prompt}],
+                response_format={"type": "json_object"},
+                temperature=0.3,
+                max_tokens=4096,
             )
-            
-            prediction_dict = json.loads(response.text)
+
+            prediction_dict = json.loads(response.choices[0].message.content)
             
             # Calculate Kelly Stakes
             win_odds = data.get("odds", {}).get("win_odds", {})
@@ -487,10 +457,10 @@ class PredictionEngine:
             # Create Prediction object
             prediction = Prediction(
                 race_id=f"{date_str}_{venue}_R{race_no}",
-                gemini_model=Config.GEMINI_MODEL,
+                gemini_model=self.model_id,  # stores DeepSeek model name
                 **prediction_dict
             )
-            
+
             self._save_prediction(prediction)
             
             # Send Push Notification for High Confidence / High EV bets
@@ -543,7 +513,7 @@ class PredictionEngine:
             # Create Prediction object
             prediction = Prediction(
                 race_id=f"{date_str}_{venue}_R{race_no}",
-                gemini_model=Config.GEMINI_MODEL,
+                gemini_model=self.model_id,
                 **prediction_dict
             )
             
@@ -573,17 +543,14 @@ class PredictionEngine:
             return None
 
     def _run_shadow_prediction(self, prompt, response_schema, data, date_str, venue, race_no):
-        """Run the same prompt through the shadow model for A/B comparison."""
-        shadow_id = Config.SHADOW_MODEL
-        print(f"[SHADOW] Running A/B shadow prediction with {shadow_id}...")
-
-        shadow_resp = self.client.models.generate_content(
-            model=shadow_id,
-            contents=prompt,
-            config=types.GenerateContentConfig(
-                response_mime_type="application/json",
-                response_schema=response_schema,
-            )
+        """
+        DEPRECATED: Shadow prediction previously ran a second Gemini model for A/B consensus.
+        Google AI (Gemini/Vertex) has been removed. SHADOW_MODEL is disabled (empty string).
+        This method is unreachable in normal operation but kept to avoid NameErrors.
+        """
+        raise NotImplementedError(
+            "[SHADOW] Shadow prediction is disabled \u2014 Google AI removed. "
+            "Config.SHADOW_MODEL is empty so this path should never be called."
         )
 
         shadow_dict = json.loads(shadow_resp.text)

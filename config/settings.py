@@ -6,21 +6,30 @@ load_dotenv()
 
 class Config:
     BASE_DIR = Path(__file__).resolve().parent.parent
-    PROJECT_ID = os.getenv("GCP_PROJECT_ID")
-    REGION = os.getenv("GCP_REGION", "asia-east1")
-    FIRESTORE_DATABASE = os.getenv("FIRESTORE_DATABASE", "(default)")
-    GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
-    MODEL_PROJECT_ID = os.getenv("VERTEX_MODEL_PROJECT", PROJECT_ID)  # Consolidated: same as PROJECT_ID
-    GOOGLE_APPLICATION_CREDENTIALS = os.getenv("GOOGLE_APPLICATION_CREDENTIALS")
-    
-    # AI Config
-    TUNED_MODEL_ENDPOINT = os.getenv("TUNED_MODEL_ENDPOINT", "")
-    GEMINI_MODEL = os.getenv("GEMINI_MODEL", TUNED_MODEL_ENDPOINT) or "gemini-2.5-flash"  # Falls back if endpoint not set
-    GEMINI_MODEL_FALLBACK = "gemini-2.5-flash"  # For weather intel and non-prediction tasks
-    SHADOW_MODEL = os.getenv("SHADOW_MODEL", "gemini-2.5-pro")  # A/B test: shadow model runs in parallel
-    USE_VERTEX_AI = os.getenv("USE_VERTEX_AI", "True").lower() == "true"
-    GCP_LOCATION = "us-central1"       # Models are confirmed available here
-    GCS_BUCKET_NAME = os.getenv("GCS_BUCKET_NAME")
+
+    # ── DeepSeek AI (replaces Google Gemini / Vertex AI) ──────────────────────
+    DEEPSEEK_API_KEY   = os.getenv("DEEPSEEK_API_KEY", "")
+    DEEPSEEK_BASE_URL  = os.getenv("DEEPSEEK_BASE_URL", "https://api.deepseek.com")
+    DEEPSEEK_MODEL     = os.getenv("DEEPSEEK_MODEL", "deepseek-chat")      # fast, structured output
+    DEEPSEEK_MODEL_R1  = os.getenv("DEEPSEEK_MODEL_R1", "deepseek-reasoner")  # heavy reasoning tasks
+
+    # ── Legacy AI aliases (Google AI disabled, mapped to DeepSeek) ──────────────
+    GEMINI_MODEL          = DEEPSEEK_MODEL   # maps old references → DeepSeek
+    GEMINI_MODEL_FALLBACK = DEEPSEEK_MODEL   # same
+    SHADOW_MODEL          = ""               # disabled
+    USE_VERTEX_AI         = False            # Vertex AI disabled
+
+    # ── GCP Cloud Services (non-AI: Firestore, GCS, FCM) ─────────────────────
+    # Google AI is OFF, but GCP infrastructure services remain active.
+    GCP_LOCATION         = os.getenv("GCP_REGION", "asia-east1")
+    PROJECT_ID           = os.getenv("GCP_PROJECT_ID", "ultimate-engine-2026")
+    MODEL_PROJECT_ID     = PROJECT_ID  # alias
+    GCS_BUCKET_NAME      = os.getenv("GCS_BUCKET_NAME", "ultimate-engine-2026-vault")
+    FIRESTORE_DATABASE   = os.getenv("FIRESTORE_DATABASE", "(default)")
+    GOOGLE_APPLICATION_CREDENTIALS = os.getenv(
+        "GOOGLE_APPLICATION_CREDENTIALS",
+        str(Path(__file__).resolve().parent / "ultimate-engine-sa-key.json")
+    )
     
     # --- Betting Account (User must fill these in .env) ---
     HKJC_ACCOUNT = os.getenv("HKJC_ACCOUNT", "YOUR_ACCOUNT_ID")
@@ -117,13 +126,18 @@ class Config:
 
     @classmethod
     def get_firestore_client(cls):
-        from google.cloud import firestore
-        from google.oauth2 import service_account
-        
-        creds_path = os.getenv("GOOGLE_APPLICATION_CREDENTIALS")
-        if creds_path and os.path.exists(creds_path):
-            print(f"[INFO] Using Service Account Key: {creds_path}")
-            creds = service_account.Credentials.from_service_account_file(creds_path)
-            return firestore.Client(project=cls.PROJECT_ID, database=cls.FIRESTORE_DATABASE, credentials=creds)
-            
-        return firestore.Client(project=cls.PROJECT_ID, database=cls.FIRESTORE_DATABASE)
+        """Returns a live Firestore client using the GCP service account."""
+        try:
+            from google.cloud import firestore
+            import google.auth
+            if cls.GOOGLE_APPLICATION_CREDENTIALS and os.path.exists(cls.GOOGLE_APPLICATION_CREDENTIALS):
+                from google.oauth2 import service_account
+                creds = service_account.Credentials.from_service_account_file(
+                    cls.GOOGLE_APPLICATION_CREDENTIALS
+                )
+                return firestore.Client(project=cls.PROJECT_ID, credentials=creds, database=cls.FIRESTORE_DATABASE)
+            else:
+                return firestore.Client(project=cls.PROJECT_ID, database=cls.FIRESTORE_DATABASE)
+        except Exception as e:
+            print(f"[WARN] Firestore client init failed: {e}")
+            return None

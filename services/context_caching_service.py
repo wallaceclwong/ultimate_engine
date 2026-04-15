@@ -1,28 +1,24 @@
-import json
-import os
-import sys
-from pathlib import Path
-from datetime import datetime, timedelta
-from typing import List, Dict, Any, Optional
-from google import genai
-from google.genai import types
+"""
+ContextCachingService — DEPRECATED
+====================================
+This service previously used Google Vertex AI context caching (Gemini API).
+Google AI has been fully removed from the Ultimate Engine. USE_VERTEX_AI=False.
 
-# Add project root to path
+This file is kept as a tombstone to avoid import errors in any legacy code paths.
+Do NOT re-enable without explicit approval.
+"""
+import sys
+import os
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from config.settings import Config
 
 class ContextCachingService:
+    """DEPRECATED: Vertex AI context caching. Raises on init — Google AI removed."""
     def __init__(self):
-        if not Config.USE_VERTEX_AI:
-            raise ValueError("[ERROR] Context Caching requires USE_VERTEX_AI=True.")
-            
-        self.client = genai.Client(
-            vertexai=True,
-            project=Config.PROJECT_ID,
-            location=Config.GCP_LOCATION
+        raise NotImplementedError(
+            "[ContextCachingService] DISABLED — Google Vertex AI has been removed. "
+            "All AI inference now runs via DeepSeek-R1."
         )
-        self.base_dir = Config.BASE_DIR
-        self.data_dir = self.base_dir / "data"
 
     def gather_historical_context(self, num_meetings=5) -> str:
         """
