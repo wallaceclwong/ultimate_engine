@@ -1,10 +1,13 @@
+"""
+DeepDiveAgent — migrated to DeepSeek-R1.
+Google Gemini/Vertex AI removed.
+"""
 import os
 import sys
 import json
-from google import genai
-from google.genai import types
 from pathlib import Path
 from loguru import logger
+from openai import OpenAI
 
 # Add project root to path
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
@@ -15,12 +18,11 @@ from config.settings import Config
 
 class DeepDiveAgent:
     def __init__(self):
-        self.client = genai.Client(
-            vertexai=True,
-            project=Config.MODEL_PROJECT_ID,
-            location=Config.GCP_LOCATION
+        self.client = OpenAI(
+            api_key=Config.DEEPSEEK_API_KEY,
+            base_url=Config.DEEPSEEK_BASE_URL,
         )
-        self.model_id = "gemini-2.0-pro-exp-02-05" # Always use Pro for deep dives
+        self.model_id = Config.DEEPSEEK_MODEL_R1  # Use R1 for deep dives
         self.firestore = FirestoreService()
         self.weather = WeatherNextClient()
         self.base_dir = Path(__file__).resolve().parent.parent
@@ -30,7 +32,7 @@ class DeepDiveAgent:
     async def generate_report(self, card, saddle_number: int):
         """
         Performs an 'Extreme Reasoning' deep dive on a single horse.
-        Focuses on qualitative form, pedigree suitability, and weather impact.
+        Uses DeepSeek-R1 for qualitative form analysis.
         """
         logger.info(f"🔍 DEEP DIVE AGENT: Starting analysis for {card.date} R{card.race_no} Horse #{saddle_number}")
         
@@ -41,18 +43,14 @@ class DeepDiveAgent:
         prompt = self._construct_deep_dive_prompt(card, saddle_number, weather_intel)
         
         try:
-            # We use DeepSeek-R1 logic here via the Vertex AI / GenAI client if configured, 
-            # or simply use Gemini 2.0 Pro for the Reasoning step.
-            response = self.client.models.generate_content(
+            response = self.client.chat.completions.create(
                 model=self.model_id,
-                contents=prompt,
-                config=types.GenerateContentConfig(
-                    temperature=0.7, 
-                    max_output_tokens=4096
-                )
+                messages=[{"role": "user", "content": prompt}],
+                temperature=0.6,
+                max_tokens=4096
             )
             
-            report_text = response.text
+            report_text = response.choices[0].message.content
             
             # Save the report
             report_path = self.reports_dir / f"deep_dive_{card.date}_R{card.race_no}_S{saddle_number}.md"
@@ -77,8 +75,7 @@ class DeepDiveAgent:
             weather_block = f"""
 - Max Temp: {weather_intel.max_temp_c}C
 - Prob. Rain: {weather_intel.prob_rain:.0%}
-- Forecast: {weather_intel.track_condition_forecast}
-- Context: {weather_intel.reasoning}
+- Forecast: {weather_intel.description}
 """
 
         prompt = f"""
