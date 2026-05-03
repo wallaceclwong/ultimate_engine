@@ -1,5 +1,5 @@
 {
-  "train_rows": 69700,
+  "train_rows": 69911,
   "val_rows": 10360,
   "train_races": 5637,
   "val_races": 840,
@@ -35,10 +35,10 @@
     "race_class",
     "track_condition"
   ],
-  "lgb_win_acc": 0.319,
-  "xgb_win_acc": 0.3155,
-  "cat_win_acc": 0.3429,
-  "ensemble_win_acc": 0.3226,
-  "lgb_place_acc": 0.6226,
-  "ensemble_place_acc": 0.6321
+  "lgb_win_acc": 0.325,
+  "xgb_win_acc": 0.3286,
+  "cat_win_acc": 0.3417,
+  "ensemble_win_acc": 0.3321,
+  "lgb_place_acc": 0.6345,
+  "ensemble_place_acc": 0.6417
 }
