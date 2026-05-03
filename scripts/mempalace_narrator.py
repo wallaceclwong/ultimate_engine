@@ -97,6 +97,58 @@ Detailed Context:
         except Exception as e:
             print(f"Error processing pedigree: {e}")
 
+    # 4. Racecard Soft Data (Gear Changes & CTC Horses)
+    racecard_files = sorted(glob.glob(str(DATA_DIR / "racecard_*.json")))
+    for f in racecard_files[-200:]:  # Last 200 racecards
+        try:
+            with open(f, 'r', encoding='utf-8') as jf:
+                data = json.load(jf)
+            race_id  = data.get('race_id', Path(f).stem)
+            date     = data.get('date', 'Unknown')[:10]
+            venue    = 'ST' if 'ST' in Path(f).stem.upper() else 'HV'
+            distance = data.get('distance', '?')
+
+            for h in data.get('horses', []):
+                name     = h.get('horse_name', 'Unknown')
+                h_id     = h.get('horse_id', '')
+                gear     = h.get('gear', '').strip()
+                location = h.get('training_location', 'HK')
+                allowance = h.get('weight_allowance', 0)
+                jockey   = h.get('jockey', '')
+                trainer  = h.get('trainer', '')
+
+                lines = []
+
+                # Gear narrative — only emit when gear is non-empty
+                if gear:
+                    lines.append(
+                        f"GEAR CHANGE for {name} ({h_id}) on {date} at {venue} {distance}m: "
+                        f"Equipped with {gear} under {jockey} for trainer {trainer}."
+                    )
+
+                # CTC narrative
+                if location == 'CTC':
+                    lines.append(
+                        f"CTC HORSE: {name} ({h_id}) was trained at Conghua Training Centre "
+                        f"ahead of {date} at {venue} {distance}m. Trainer: {trainer}."
+                    )
+
+                # Apprentice allowance narrative
+                if allowance != 0:
+                    lines.append(
+                        f"APPRENTICE CLAIM: {name} ({h_id}) on {date} at {venue} — "
+                        f"jockey {jockey} carried a {abs(allowance)}lb weight claim."
+                    )
+
+                if lines:
+                    narrative = "\n".join(lines)
+                    slug = name.replace(' ', '_')
+                    out_path = NARR_DIR / f"rc_{date}_{slug}.txt"
+                    out_path.write_text(narrative, encoding='utf-8')
+                    count += 1
+        except:
+            continue
+
     print(f"Narrator complete. Generated {count} semantic files in {NARR_DIR}")
 
 if __name__ == "__main__":

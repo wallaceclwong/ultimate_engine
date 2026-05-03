@@ -21,8 +21,12 @@ def load_fixtures(date_str):
     year = datetime.strptime(date_str, "%Y-%m-%d").year
     fixtures_path = PROJECT_ROOT / "data" / f"fixtures_{year}.json"
     if fixtures_path.exists():
-        with open(fixtures_path, "r", encoding="utf-8") as f:
-            return json.load(f)
+        try:
+            with open(fixtures_path, "r", encoding="utf-8") as f:
+                return json.load(f)
+        except UnicodeDecodeError:
+            with open(fixtures_path, "r", encoding="utf-16") as f:
+                return json.load(f)
     return []
 
 def find_meeting(date_str):

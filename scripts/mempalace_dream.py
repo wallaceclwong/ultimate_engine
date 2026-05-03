@@ -16,13 +16,14 @@ client = AsyncOpenAI(api_key=os.getenv('DEEPSEEK_API_KEY'), base_url='https://ap
 
 async def generate_golden_rule(retrospectives):
     """Asks DeepSeek to synthesize a golden rule from failed retrospectives."""
+    retrospectives_str = '\n- '.join(retrospectives)
     prompt = f"""
 Act as a Master Strategist for Hong Kong Horse Racing.
 I am providing you with multiple "Lesson Learnt" failure reports from our statistical model. 
 These are situations where our model was highly confident, but visually/tactically failed.
 
 Reports:
-{'- ' + '\n- '.join(retrospectives)}
+- {retrospectives_str}
 
 Synthesize these failures into a single, highly concentrated "GOLDEN RULE META-STRATEGY". 
 Do not restate the individual horse names. Look for underlying macro trends (e.g. "Avoid inside barriers for fast starters on yielding tracks").
