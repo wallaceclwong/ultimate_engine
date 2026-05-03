@@ -24,10 +24,11 @@ class HorseEntry(BaseModel):
     jockey: str
     trainer: str
     weight: float
+    weight_allowance: int = 0          # Jockey claim in lbs (e.g. -3 = apprentice claiming 3lb)
+    gear: str = ""                     # Equipment codes expanded: e.g. "Blinkers, Tongue Tie"
     optimal_weight_range: Optional[List[float]] = None
-    training_location: str = "HK"  # "HK" or "CTC" (Conghua)
+    training_location: str = "HK"      # "HK" or "CTC" (Conghua Training Centre)
     last_6_runs: List[str] = []
-    gear: str = ""
     stable_change: bool = False
     trial_comments: Optional[str] = None
     synergy_score: float = 0.0
