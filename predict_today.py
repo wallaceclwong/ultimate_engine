@@ -225,7 +225,7 @@ def predict_race(date_str, venue, race_num):
     df_race["rank"] = df_race["ensemble_score"].rank(ascending=False, method="first").astype(int)
     
     # ── Final Probability Calibration (Softmax) ──
-    TEMPERATURE = 0.6
+    TEMPERATURE = 0.3  # calibrated via backtest on 2025 races (was 0.6)
     scores = df_race["ensemble_score"].values
     exp_scores = np.exp((scores - np.max(scores)) / TEMPERATURE)
     df_race["pred_prob"] = exp_scores / exp_scores.sum()
