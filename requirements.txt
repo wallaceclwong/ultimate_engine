@@ -22,21 +22,24 @@ distro==1.9.0
 docstring_parser==0.17.0
 fastapi==0.135.1
 fastparquet==2026.3.0
-firebase_admin==7.3.0
+# firebase_admin removed (Telegram Only)
+
 fonttools==4.62.1
 frozenlist==1.8.0
 fsspec==2026.3.0
 google-api-core==2.30.0
 google-auth==2.49.1
-google-cloud-aiplatform==1.142.0
-google-cloud-bigquery==3.40.1
+# google-cloud-aiplatform removed (Moving to DeepSeek)
+# google-cloud-bigquery removed (Moving to Local Parquet)
+
 google-cloud-core==2.5.0
 google-cloud-firestore==2.25.0
 google-cloud-monitoring==2.30.0
 google-cloud-resource-manager==1.16.0
 google-cloud-storage==3.10.0
 google-crc32c==1.8.0
-google-genai==1.67.0
+# google-genai removed
+
 google-resumable-media==2.8.0
 googleapis-common-protos==1.73.0
 graphviz==0.21
@@ -108,5 +111,8 @@ websockets==16.0
 win32_setctime==1.2.0
 xgboost==3.2.0
 yarl==1.23.0
-google-cloud-pubsub
-google-cloud-scheduler
+# google-cloud-pubsub removed
+# google-cloud-scheduler removed
+
+
+psutil>=5.9
