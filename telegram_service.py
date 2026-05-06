@@ -14,6 +14,21 @@ class TelegramService:
         self.chat_id = os.getenv("TELEGRAM_CHAT_ID")
         self.base_url = f"https://api.telegram.org/bot{self.bot_token}"
 
+    @staticmethod
+    def _safe_markdown(text: str) -> str:
+        """Escapes unmatched Markdown special chars in AI-generated content."""
+        import re
+        # Protect intentional bold/italic by only escaping lone underscores not part of **/__
+        # Simplest robust approach: escape _ [ ] ( ) that are outside of known patterns
+        text = text.replace("_", "\\_")
+        # Re-allow **bold** and *italic* patterns
+        text = re.sub(r'\\\*\\\*(.*?)\\\*\\\*', r'**\1**', text)
+        text = re.sub(r'\\\*(.*?)\\\*', r'*\1*', text)
+        # Truncate to Telegram's 4096 char limit
+        if len(text) > 4000:
+            text = text[:4000] + "…"
+        return text
+
     async def send_message(self, text: str):
         """Sends a simple text message."""
         if not self.bot_token or not self.chat_id:
@@ -22,22 +37,35 @@ class TelegramService:
 
         # Add isolation prefix
         prefixed_text = f"🛡️ *[LUNAR LEAP v3]*\n{text}"
-
         url = f"{self.base_url}/sendMessage"
-        payload = {
-            "chat_id": self.chat_id,
-            "text": prefixed_text,
-            "parse_mode": "Markdown"
-        }
 
         async with httpx.AsyncClient() as client:
+            # Try Markdown first
             try:
-                response = await client.post(url, json=payload, timeout=10)
+                response = await client.post(url, json={
+                    "chat_id": self.chat_id,
+                    "text": prefixed_text,
+                    "parse_mode": "Markdown"
+                }, timeout=10)
                 if response.status_code == 200:
                     return True
-                else:
-                    print(f"[ERROR] Telegram send failed: {response.status_code} {response.text}")
-                    return False
+                print(f"[WARN] Telegram Markdown failed ({response.status_code}), retrying as plain text...")
+            except Exception as e:
+                print(f"[WARN] Telegram Markdown exception: {e}, retrying as plain text...")
+
+            # Fallback: plain text, stripped of Markdown, truncated
+            plain = prefixed_text.replace("*", "").replace("_", "").replace("`", "")
+            if len(plain) > 4096:
+                plain = plain[:4093] + "..."
+            try:
+                response = await client.post(url, json={
+                    "chat_id": self.chat_id,
+                    "text": plain,
+                }, timeout=10)
+                if response.status_code == 200:
+                    return True
+                print(f"[ERROR] Telegram send failed: {response.status_code} {response.text}")
+                return False
             except Exception as e:
                 print(f"[ERROR] Telegram exception: {e}")
                 return False
