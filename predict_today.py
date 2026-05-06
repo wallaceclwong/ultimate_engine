@@ -271,22 +271,30 @@ def predict_race(date_str, venue, race_num):
     # Positive = model sees genuine value vs market; negative = market is right
     top_pick_edge = float(top_pick["value_edge"])
 
-    # ── Skip Threshold (Priority 3) ──────────────────────────────────────────
-    # Only flag as a best bet when ALL three conditions hold:
-    #   1. Edge > 5%  (model genuinely disagrees with market)
-    #   2. Market odds > 6.0  (avoid short-priced chalk where margin is thin)
-    #   3. Top pick is rank-1  (we only back our strongest selection)
+    # ── Edge Cap: >80% signals model uncertainty, not genuine edge ───────────
+    capped_edge = min(top_pick_edge, 0.80)
+
+    # ── Track Condition: wet/soft = less reliable predictions ────────────────
+    track_condition_raw = rc.get("track_condition", "Good").upper()
+    WET_KEYWORDS = {"WET", "SOFT", "YIELDING", "HEAVY", "SLOW"}
+    is_wet_track = any(w in track_condition_raw for w in WET_KEYWORDS)
+
+    # ── Skip Threshold ────────────────────────────────────────────────────────
+    # edge > 15% (was 5%), odds > 4.0 (was 6.0), rank-1
+    # Wet tracks: raise threshold to 25% (less model confidence)
+    edge_threshold = 0.25 if is_wet_track else 0.15
     is_best_bet = (
-        top_pick_edge > 0.05
-        and float(top_pick["win_odds"]) > 6.0
+        capped_edge > edge_threshold
+        and float(top_pick["win_odds"]) > 4.0
         and int(top_pick["rank"]) == 1
     )
 
     prediction_json = {
         "race_id": race_id,
         "gemini_model": "ensemble_lgb_xgb_cat",
-        "confidence_score": round(top_pick_edge, 4),   # value edge, not raw prob
+        "confidence_score": round(capped_edge, 4),   # value edge capped at 0.80
         "is_best_bet": is_best_bet,
+        "wet_track": is_wet_track,
         "recommended_bet": recommended_bet if is_best_bet else "NO BET",
         "probabilities": probabilities,
         "kelly_stakes": {},

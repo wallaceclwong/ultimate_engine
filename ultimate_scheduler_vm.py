@@ -328,11 +328,20 @@ async def run_odds_refresh(venue: str):
                 bk = json.loads(bankroll_file.read_text(encoding="utf-8"))
                 bankroll = float(bk.get("current_bankroll", bk.get("bankroll", 9000.0)))
 
+            # Wet track dampener: halve Kelly stakes when track is non-standard
+            rc_file = BASE_DIR / "data" / f"racecard_{today_compact}_R{r_no}.json"
+            is_wet = False
+            if rc_file.exists():
+                rc_data = json.loads(rc_file.read_text(encoding="utf-8"))
+                tc = rc_data.get("track_condition", "Good").upper()
+                is_wet = any(w in tc for w in {"WET", "SOFT", "YIELDING", "HEAVY", "SLOW"})
+            wet_multiplier = 0.5 if is_wet else 1.0
+
             kelly_stakes = {}
             for h_id, edge in sorted(edges.items(), key=lambda x: x[1], reverse=True):
                 if len(kelly_stakes) >= 2:
                     break
-                stake = max(10, int(bankroll * Config.KELLY_FRACTION * edge // 10) * 10)
+                stake = max(10, int(bankroll * Config.KELLY_FRACTION * wet_multiplier * edge // 10) * 10)
                 kelly_stakes[h_id] = float(stake)
 
             # Patch fields
@@ -340,10 +349,13 @@ async def run_odds_refresh(venue: str):
             pred["kelly_stakes"] = kelly_stakes
 
             # Re-evaluate is_best_bet
+            # NOTE: confidence_score is value_edge (0.0-0.80), NOT win probability
+            # Threshold: 0.15 dry / 0.25 wet (not Config.MIN_CONFIDENCE=0.50 which is for probabilities)
             has_real_kelly = any(v >= 10 for v in kelly_stakes.values())
+            bet_threshold = 0.25 if is_wet else 0.15
             pred["is_best_bet"] = (
                 has_real_kelly
-                and pred.get("confidence_score", 0) >= Config.MIN_CONFIDENCE
+                and pred.get("confidence_score", 0) >= bet_threshold
             )
 
             pred_file.write_text(
