@@ -143,23 +143,21 @@ async def run_final_war_room_verdict(r_no, today_iso, venue, j_time):
             pred = json.load(f)
 
         market_odds = pred.get("market_odds", {})
-        kelly_stakes = pred.get("kelly_stakes", {})
         probabilities = pred.get("probabilities", {})
+        is_best_bet = pred.get("is_best_bet", False)
+        is_wet = pred.get("wet_track", False)
 
-        # Check for Kelly stake
-        has_kelly = any(v >= 10 for v in kelly_stakes.values())
-        top_kelly_horse = None
-        edge = 0.0
-        odds = 0.0
-        prob = 0.0
+        # Use top probability horse as our pick (Kelly disabled until proven track record)
+        if not probabilities:
+            print(f"[FINAL VERDICT] R{r_no}: no probabilities found.")
+            return
+        top_horse = max(probabilities, key=probabilities.get)
+        odds = float(market_odds.get(top_horse, 0))
+        prob = float(probabilities.get(top_horse, 0))
+        fair_odds = round(1 / prob, 2) if prob > 0 else 99.0
+        edge = (odds / fair_odds - 1) if fair_odds > 0 and odds > 1 else -1.0
 
-        if has_kelly:
-            top_kelly_horse = max(kelly_stakes, key=kelly_stakes.get)
-            odds = float(market_odds.get(top_kelly_horse, 0))
-            prob = float(probabilities.get(top_kelly_horse, 0))
-            edge = prob * odds - 1 if odds > 1 else -1.0
-
-        if not has_kelly or edge <= 0.05 or odds <= 6.0:
+        if not is_best_bet:
             print(f"[FINAL VERDICT] R{r_no}: NO BET (below threshold).")
             state[final_verdict_key] = True
             save_scheduler_state(state)
@@ -197,7 +195,7 @@ async def run_final_war_room_verdict(r_no, today_iso, venue, j_time):
                 "fair_odds":  fair_odds,
                 "value_mult": value_mult,
                 "draw":       h.get("draw", h.get("barrier", 0)),
-                "rank":       1 if h_no == top_kelly_horse else 0,
+                "rank":       1 if h_no == top_horse else 0,
                 "jockey":     h.get("jockey", ""),
                 "trainer":    h.get("trainer", ""),
                 "venue":      venue,
@@ -211,11 +209,12 @@ async def run_final_war_room_verdict(r_no, today_iso, venue, j_time):
             return
 
         df = pd.DataFrame(rows)
-        horse_name = df[df["horse_no"] == top_kelly_horse]["horse_name"].iloc[0] if not df[df["horse_no"] == top_kelly_horse].empty else f"#{top_kelly_horse}"
+        horse_name = df[df["horse_no"] == top_horse]["horse_name"].iloc[0] if not df[df["horse_no"] == top_horse].empty else f"#{top_horse}"
 
-        print(f"[FINAL VERDICT] R{r_no}: #{top_kelly_horse} {horse_name} CONFIRMED (edge={edge:+.1%}, odds={odds:.1f}). Firing pre-race audit...")
+        wet_note = " | ⚠️ WET TRACK (reduced confidence)" if is_wet else ""
+        print(f"[FINAL VERDICT] R{r_no}: #{top_horse} {horse_name} CONFIRMED (edge={edge:+.1%}, odds={odds:.1f}){wet_note}. Firing pre-race audit...")
 
-        verdict, reasoning = await consensus_agent.get_consensus(df, top_kelly_horse)
+        verdict, reasoning = await consensus_agent.get_consensus(df, top_horse)
 
         state[final_verdict_key] = True
         save_scheduler_state(state)
@@ -223,8 +222,8 @@ async def run_final_war_room_verdict(r_no, today_iso, venue, j_time):
         icon = "🏆" if ("Grade [S]" in reasoning or "Grade [A]" in reasoning) else "⚠️"
         await telegram_service.send_message(
             f"{icon} *WAR ROOM VERDICT: {venue} R{r_no}*\n"
-            f"🎯 *Pick:* #{top_kelly_horse} {horse_name}\n"
-            f"📊 *Market Confirmed:* Odds {odds:.1f} | EV Edge {edge:+.1%}\n"
+            f"🎯 *Pick:* #{top_horse} {horse_name}\n"
+            f"📊 *Edge:* Odds {odds:.1f} | Fair {fair_odds:.1f} | EV {edge:+.1%}{wet_note}\n"
             f"⏱ *Jump:* {j_time} HKT\n\n"
             f"🧠 *DeepSeek Verdict:* {verdict}\n{reasoning}"
         )
@@ -313,50 +312,22 @@ async def run_odds_refresh(venue: str):
             pred = json.loads(pred_file.read_text(encoding="utf-8"))
             probs = pred.get("probabilities", {})
 
-            # Recalculate Kelly stakes with real odds
-            edges = {}
-            for h_id, p in probs.items():
-                o = win_odds.get(h_id)
-                if o and o > 1.0 and p > 0:
-                    edge = (p * o - 1) / (o - 1)
-                    if edge > Config.MIN_EDGE:
-                        edges[h_id] = edge
+            # Kelly stakes disabled until proven track record — always empty
+            pred["market_odds"] = win_odds
+            pred["kelly_stakes"] = {}
 
-            bankroll_file = BASE_DIR / "data" / "bankroll.json"
-            bankroll = 9000.0
-            if bankroll_file.exists():
-                bk = json.loads(bankroll_file.read_text(encoding="utf-8"))
-                bankroll = float(bk.get("current_bankroll", bk.get("bankroll", 9000.0)))
-
-            # Wet track dampener: halve Kelly stakes when track is non-standard
+            # Re-evaluate is_best_bet using top horse edge vs threshold
+            # confidence_score is value_edge (0.0-0.80), NOT win probability
             rc_file = BASE_DIR / "data" / f"racecard_{today_compact}_R{r_no}.json"
             is_wet = False
             if rc_file.exists():
                 rc_data = json.loads(rc_file.read_text(encoding="utf-8"))
                 tc = rc_data.get("track_condition", "Good").upper()
                 is_wet = any(w in tc for w in {"WET", "SOFT", "YIELDING", "HEAVY", "SLOW"})
-            wet_multiplier = 0.5 if is_wet else 1.0
 
-            kelly_stakes = {}
-            for h_id, edge in sorted(edges.items(), key=lambda x: x[1], reverse=True):
-                if len(kelly_stakes) >= 2:
-                    break
-                stake = max(10, int(bankroll * Config.KELLY_FRACTION * wet_multiplier * edge // 10) * 10)
-                kelly_stakes[h_id] = float(stake)
-
-            # Patch fields
-            pred["market_odds"] = win_odds
-            pred["kelly_stakes"] = kelly_stakes
-
-            # Re-evaluate is_best_bet
-            # NOTE: confidence_score is value_edge (0.0-0.80), NOT win probability
-            # Threshold: 0.15 dry / 0.25 wet (not Config.MIN_CONFIDENCE=0.50 which is for probabilities)
-            has_real_kelly = any(v >= 10 for v in kelly_stakes.values())
             bet_threshold = 0.25 if is_wet else 0.15
-            pred["is_best_bet"] = (
-                has_real_kelly
-                and pred.get("confidence_score", 0) >= bet_threshold
-            )
+            pred["wet_track"] = is_wet
+            pred["is_best_bet"] = pred.get("confidence_score", 0) >= bet_threshold
 
             pred_file.write_text(
                 json.dumps(pred, indent=2, ensure_ascii=False), encoding="utf-8"
@@ -365,13 +336,12 @@ async def run_odds_refresh(venue: str):
             best_flag = "BET" if pred["is_best_bet"] else "   "
             top = max(probs.items(), key=lambda x: x[1]) if probs else ("?", 0)
             top_odds = win_odds.get(top[0], "?")
-            top_kelly = kelly_stakes.get(top[0], 0)
-            print(f"  [{best_flag}] R{r_no}: top=#{top[0]} prob={top[1]:.1%} odds={top_odds} kelly=HK${top_kelly:.0f}")
+            print(f"  [{best_flag}] R{r_no}: top=#{top[0]} prob={top[1]:.1%} odds={top_odds} edge={pred.get('confidence_score',0):+.1%}")
         except Exception as e:
             print(f"  [ERROR] R{r_no} patch failed: {e}")
 
     await ingest.browser_mgr.stop()
-    summary = f"📊 *Morning Odds Refresh*: {scraped} races scraped, {patched} predictions patched with real Kelly stakes."
+    summary = f"📊 *Morning Odds Refresh*: {scraped} races scraped, {patched} predictions updated with live odds."
     print(f"[ODDS REFRESH] {summary}")
     await telegram_service.send_message(summary)
 
