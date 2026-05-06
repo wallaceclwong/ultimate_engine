@@ -1,7 +1,10 @@
 import subprocess
 import os
 import json
-import paramiko
+try:
+    import paramiko
+except ImportError:
+    paramiko = None
 import socket
 from pathlib import Path
 from typing import List, Dict, Any, Optional
@@ -12,7 +15,7 @@ class MemoryService:
     Enables semantic long-term memory for the Ultimate Engine.
     Optimized for production: uses direct execution if on the VM, otherwise use SSH.
     """
-    def __init__(self, vm_ip: str = "45.32.255.155", user: str = "root", password: str = "6{tJs[Dhe,jv3@_G"):
+    def __init__(self, vm_ip: str = "100.109.76.69", user: str = "root", password: str = "6{tJs[Dhe,jv3@_G"):
         self.vm_ip = vm_ip
         self.user = user
         self.password = password
@@ -34,12 +37,15 @@ class MemoryService:
         
         if self.is_on_vm:
             try:
-                result = subprocess.run(env_cmd, shell=True, capture_output=True, text=True, timeout=30)
+                result = subprocess.run(env_cmd, shell=True, capture_output=True, text=True, timeout=60)
                 return result.stdout
             except Exception as e:
                 print(f"[MEMORY ERROR] Local Execution Failed: {e}")
                 return ""
         else:
+            if paramiko is None:
+                print("[MEMORY ERROR] paramiko not installed — cannot SSH to VM from this host.")
+                return ""
             try:
                 ssh = paramiko.SSHClient()
                 ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())

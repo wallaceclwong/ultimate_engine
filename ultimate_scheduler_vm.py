@@ -446,12 +446,13 @@ async def run_live_war_room(venue):
     # Check health of dependencies before starting
     ds_ok = await consensus_agent.check_health()
     mem_ok = await check_mempalace()
-    
-    if not ds_ok or not mem_ok:
-        status_msg = f"⚠️ *Lunar Alert*: War Room started with issues!\n- DeepSeek: {'✅' if ds_ok else '❌'}\n- MemPalace: {'✅' if mem_ok else '❌'}"
+
+    if not ds_ok:
+        status_msg = f"🚨 *Lunar Alert*: War Room started but DeepSeek is DOWN ❌\n- MemPalace: {'✅' if mem_ok else '⚠️ degraded (non-critical)'}"
         await telegram_service.send_message(status_msg)
     else:
-        await telegram_service.send_message(f"📡 *Lunar War Room*: Active for {venue}.\nWaiting for Smart Money signatures...")
+        mem_note = "✅" if mem_ok else "⚠️ degraded"
+        await telegram_service.send_message(f"📡 *Lunar War Room*: Active for {venue}.\n- DeepSeek: ✅\n- MemPalace: {mem_note}\nWaiting for Smart Money signatures...")
 
     # Load dynamic schedule
     schedule = get_dynamic_schedule()
