@@ -100,7 +100,7 @@ def clean_stale_lock():
 
 async def heal_scheduler():
     """Relaunches the scheduler in --live mode."""
-    py_path = str(BASE_DIR / ".venv" / "Scripts" / "python.exe")
+    py_path = str(BASE_DIR / ".venv" / "bin" / "python")
     script_path = str(BASE_DIR / SCHEDULER_SCRIPT)
     print(f"  [HEAL] Executing: {py_path} {script_path} --live")
     
