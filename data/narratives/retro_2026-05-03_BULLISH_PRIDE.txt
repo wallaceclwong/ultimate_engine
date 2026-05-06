@@ -1,0 +1,3 @@
+LESSON LEARNT RETROSPECTIVE FOR BULLISH PRIDE on 2026-05-03:
+Our model highly tipped this horse but it failed (finished 8).
+Analysis: Despite the statistical value, the wide draw (11) on a yielding surface likely forced BULLISH PRIDE to race wide and exhaust energy early, negating any tactical advantage. The jockey's low historical performance rating (0.076) further suggests an inability to adapt positioning on the softer ground, leading to a compromised finish. Future models should penalize extreme outside draws on yielding tracks, as the added distance and footing challenges disproportionately harm longshot chances.

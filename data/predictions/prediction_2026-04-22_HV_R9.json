@@ -1,0 +1,37 @@
+{
+  "race_id": "2026-04-22_HV_R9",
+  "gemini_model": "ensemble_lgb_xgb_cat",
+  "confidence_score": 0.0903,
+  "is_best_bet": false,
+  "recommended_bet": "NO BET",
+  "probabilities": {
+    "1": 0.1708018803697072,
+    "2": 0.05988758564158667,
+    "3": 0.1590129089794793,
+    "4": 0.0705169175892451,
+    "5": 0.01958986475537282,
+    "6": 0.0825646851608863,
+    "7": 0.03964129093511977,
+    "8": 0.008643618881834405,
+    "9": 0.0683316847156125,
+    "10": 0.055290587726968946,
+    "11": 0.02342429352212522,
+    "12": 0.24229468172206173
+  },
+  "kelly_stakes": {},
+  "market_odds": {
+    "1": 4.3,
+    "2": 10.0,
+    "3": 5.5,
+    "4": 10.0,
+    "5": 46.0,
+    "6": 8.8,
+    "7": 21.0,
+    "8": 85.0,
+    "9": 10.0,
+    "10": 13.0,
+    "11": 31.0,
+    "12": 4.5
+  },
+  "analysis_markdown": "## Race Analysis: Class 3 1200m Turf (Good)\n\n### Top Pick\n- **#12 PACKING GLORY** (Rank 1, Odds 4.5, Fair 4.1, Edge +9.0%)\n\n### Bet Signal\n- **\u26d4 NO BET** (edge=+9.0%, odds=4.5)\n\n### Key Stats\n- Field Size: 12\n- Track: HV A\n- Going: Good"
+}

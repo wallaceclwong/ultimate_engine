@@ -1,0 +1,6 @@
+PEDIGREE FOR HORSE ID J205:
+Sire: Vespa
+Dam: Leica Glory
+Origin: NZ / 5
+Color: Unknown
+Import Type: PPG

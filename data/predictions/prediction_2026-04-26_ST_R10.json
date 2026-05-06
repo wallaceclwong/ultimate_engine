@@ -1,0 +1,37 @@
+{
+  "race_id": "2026-04-26_ST_R10",
+  "gemini_model": "deepseek-chat",
+  "confidence_score": 0.75,
+  "is_best_bet": true,
+  "recommended_bet": "WIN 8",
+  "probabilities": {
+    "1": 0.06,
+    "2": 0.03,
+    "3": 0.1,
+    "4": 0.18,
+    "5": 0.12,
+    "6": 0.05,
+    "7": 0.04,
+    "8": 0.2,
+    "9": 0.08,
+    "10": 0.07,
+    "11": 0.02,
+    "12": 0.02,
+    "13": 0.01,
+    "14": 0.02
+  },
+  "kelly_stakes": {},
+  "market_odds": {
+    "1": 16.0,
+    "2": 26.0,
+    "3": 17.0,
+    "4": 3.1,
+    "5": 9.9,
+    "6": 15.0,
+    "7": 22.0,
+    "8": 3.6,
+    "9": 20.0,
+    "10": 5.0
+  },
+  "analysis_markdown": "## Race Analysis: Class 3 1600m Turf\n\n### Key Contenders\n- **#8 BLAZING WUKONG** (Draw 13, Jockey A Atzeni, Trainer P F Yiu): Recent form includes a win and a third in last 6 runs. Despite wide draw, jockey Atzeni is capable of finding position. Odds 3.6 suggest strong market confidence. Weight 126lbs is manageable. Likely to improve.\n- **#4 SHANWAH** (Draw 12, Jockey H Bowman, Trainer D J Whyte): Market favorite at 3.1, but recent form is poor (6,14,11,14,10,14). However, Bowman is a top jockey and Whyte's stable can produce surprises. Might bounce back.\n- **#5 LOVERO** (Draw 11, Jockey Z Purton, Trainer B Crawford): Consistent performer with recent 2nd and 1st. Purton is elite. Weight 130lbs is a concern but manageable. Odds 9.9 offer value.\n- **#3 ENDUED** (Draw 8, Jockey C Williams, Trainer J Size): Solid form with a win and placings. Williams and Size are a strong combo. Weight 132lbs is high but horse has carried similar.\n\n### Weather & Track\nForecast is Good with no rain, so no bias towards wet-track specialists.\n\n### Betting Strategy\n**WIN on #8 BLAZING WUKONG** at odds ~3.6. The horse has shown ability to win and is improving. The wide draw is mitigated by the jockey's skill. Confidence is high.\n\n### Probabilities\nProbabilities are assigned based on form, jockey, trainer, weight, draw, and market odds. #8 leads with 20%, followed by #4 (18%), #5 (12%), and #3 (10%). Others have lower chances."
+}

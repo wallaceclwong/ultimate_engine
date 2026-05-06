@@ -1,0 +1,40 @@
+{
+  "race_id": "2026-04-26_ST_R3",
+  "gemini_model": "deepseek-chat",
+  "confidence_score": 0.75,
+  "is_best_bet": true,
+  "recommended_bet": "WIN 3",
+  "probabilities": {
+    "1": 0.12,
+    "2": 0.1,
+    "3": 0.2,
+    "4": 0.08,
+    "5": 0.07,
+    "6": 0.06,
+    "7": 0.05,
+    "8": 0.04,
+    "9": 0.06,
+    "10": 0.02,
+    "11": 0.04,
+    "12": 0.05,
+    "13": 0.08,
+    "14": 0.03
+  },
+  "kelly_stakes": {},
+  "market_odds": {
+    "1": 6.0,
+    "2": 5.9,
+    "3": 4.2,
+    "4": 10.0,
+    "5": 9.3,
+    "6": 18.0,
+    "7": 18.0,
+    "8": 7.9,
+    "9": 15.0,
+    "10": 119.0,
+    "11": 27.0,
+    "12": 17.0,
+    "13": 27.0
+  },
+  "analysis_markdown": "## Race Analysis: Class 4 1200m Turf\n\n**Weather & Track:** Good to firm, no rain expected. Ideal for all runners.\n\n**Key Contenders:**\n- **#3 HAYDAY (Win Odds 4.2):** Consistent performer with recent form 3,5,6. Draw 11 is wide but jockey H Y Yuen has good stats on this horse. Trainer P F Yiu has strong record in this class. Likely to sit midfield and finish strongly.\n- **#1 ABSOLUTE HEART (Win Odds 6.0):** Won last start but that was in Class 5. Step up in class may be tough. Draw 1 is ideal, but weight 132 is high.\n- **#2 MR INCREDIBLE (Win Odds 5.9):** Won two starts ago, then 6th last time. Jockey K Teetan is in form. Draw 2 is good. Could bounce back.\n- **#13 BETTER AND BETTER (Win Odds 27.0):** Consistent with recent form 1,4,4. Light weight 121. Draw 8 is okay. Each-way value.\n\n**Selection:** HAYDAY (#3) has the best overall profile: consistent form, suitable distance, and good value at 4.2. He should handle the wide draw and finish strongly.\n\n**Betting Strategy:** WIN on #3. For place, consider #13 BETTER AND BETTER as a value option."
+}

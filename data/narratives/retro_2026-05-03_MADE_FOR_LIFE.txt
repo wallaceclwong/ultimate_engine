@@ -1,0 +1,3 @@
+LESSON LEARNT RETROSPECTIVE FOR MADE FOR LIFE on 2026-05-03:
+Our model highly tipped this horse but it failed (finished 8).
+Analysis: The model overestimated the impact of a favorable draw (#4) on yielding ground, failing to account that the horse’s low jockey rating (0.038) likely hindered tactical execution in soft conditions, where rider judgment is critical. Furthermore, the 35-1 odds already reflected market skepticism about its ability to handle the track, yet the EV calculation assumed market inefficiency rather than a genuine performance limitation. Ultimately, the horse’s midfield finish (8th) suggests it lacked both the acceleration for the yielding surface and the jockey's ability to exploit the inside draw effectively.

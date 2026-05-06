@@ -1,0 +1,37 @@
+{
+  "race_id": "2026-04-29_HV_R1",
+  "gemini_model": "ensemble_lgb_xgb_cat",
+  "confidence_score": -0.3589,
+  "is_best_bet": false,
+  "recommended_bet": "NO BET",
+  "probabilities": {
+    "1": 0.06410848060943941,
+    "2": 0.15184326233087309,
+    "3": 0.12455561778230209,
+    "4": 0.058636721032539245,
+    "5": 0.06651149205860438,
+    "6": 0.07218253186932397,
+    "7": 0.07160763947366343,
+    "8": 0.12014817370931537,
+    "9": 0.06616895339509696,
+    "10": 0.06611347668567276,
+    "11": 0.07705887125363493,
+    "12": 0.06106477979953447
+  },
+  "kelly_stakes": {},
+  "market_odds": {
+    "1": 10.0,
+    "2": 10.0,
+    "3": 10.0,
+    "4": 10.0,
+    "5": 10.0,
+    "6": 10.0,
+    "7": 10.0,
+    "8": 10.0,
+    "9": 10.0,
+    "10": 10.0,
+    "11": 10.0,
+    "12": 10.0
+  },
+  "analysis_markdown": "## Race Analysis: Class 5 1800m Turf (Good)\n\n### Top Pick\n- **#1 CELESTIAL HARMONY** (Rank 10, Odds 10.0, Fair 15.6, Edge -35.9%)\n\n### Bet Signal\n- **\u26d4 NO BET** (edge=-35.9%, odds=10.0)\n\n### Key Stats\n- Field Size: 12\n- Track: HV A\n- Going: Good"
+}

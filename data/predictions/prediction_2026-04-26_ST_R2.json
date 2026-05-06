@@ -1,0 +1,41 @@
+{
+  "race_id": "2026-04-26_ST_R2",
+  "gemini_model": "deepseek-chat",
+  "confidence_score": 0.75,
+  "is_best_bet": true,
+  "recommended_bet": "WIN 8",
+  "probabilities": {
+    "1": 0.12,
+    "2": 0.03,
+    "3": 0.04,
+    "4": 0.05,
+    "5": 0.1,
+    "6": 0.1,
+    "7": 0.06,
+    "8": 0.18,
+    "9": 0.08,
+    "10": 0.07,
+    "11": 0.06,
+    "12": 0.05,
+    "13": 0.03,
+    "14": 0.03
+  },
+  "kelly_stakes": {},
+  "market_odds": {
+    "1": 5.5,
+    "2": 10.0,
+    "3": 13.0,
+    "4": 40.0,
+    "5": 5.3,
+    "6": 12.0,
+    "7": 32.0,
+    "8": 4.2,
+    "9": 31.0,
+    "10": 26.0,
+    "11": 15.0,
+    "12": 11.0,
+    "13": 29.0,
+    "14": 24.0
+  },
+  "analysis_markdown": "**Race Analysis: Class 4 1600m Turf (Sha Tin)**\n\n**Weather & Track:** Good to firm, no rain expected. No bias from weather.\n\n**Key Contenders:**\n- **#8 AMAZING AWARD (E Brown/D Eustace):** Consistent performer with recent form 4-4-2-7-7-4. Draw 5 is ideal, jockey-trainer combo solid. Odds 4.2 (win) suggest strong chance. Best bet.\n- **#1 TURIN CHAMPIONS (Z Purton/D A Hayes):** Top weight but Purton aboard. Recent form includes a win and two seconds. Draw 4 good. Odds 5.5.\n- **#5 MASSIVE GLORY (K C Leung/F C Lor):** Only one run (6th) but low weight and good draw. Odds 5.3 indicate market respect.\n- **#6 BIG RETURN (A Badel/J Richards):** Recent win and consistent. Draw 3 ideal. Odds 12.0 each-way value.\n- **#9 CIRCUIT MARSHAL (C L Chau/M Newnham):** Recent 2nd, improving. Draw 12 wide but can close. Odds 31.0 value.\n\n**Outsiders:** #2 SHAMZ poor form, #3 FAMILY KNIGHT inconsistent, #4 AESTHETICISM moderate, #7 JOLLY BRILLIANT needs improvement, #10 TYCOON EXPRESS unproven, #11 SMILING FALCON draw 1 but inconsistent, #12 AMAZING FUN poor recent, #13 FLYING AMANI weak, #14 SPECIAL HEDGE poor.\n\n**Conclusion:** AMAZING AWARD (#8) is the most reliable with consistent form, good draw, and fair odds. TURIN CHAMPIONS (#1) and MASSIVE GLORY (#5) are threats. Recommended win bet on #8."
+}

@@ -1,0 +1,27 @@
+{
+  "race_id": "2026-05-03_ST_R6",
+  "gemini_model": "ensemble_lgb_xgb_cat",
+  "confidence_score": -0.3214,
+  "is_best_bet": false,
+  "recommended_bet": "NO BET",
+  "probabilities": {
+    "1": 0.07388385850237875,
+    "2": 0.1353014655336986,
+    "3": 0.1847170958916637,
+    "4": 0.06408186170888876,
+    "5": 0.33928077896657816,
+    "6": 0.09444176533802012,
+    "7": 0.10829317405877192
+  },
+  "kelly_stakes": {},
+  "market_odds": {
+    "1": 15.0,
+    "2": 6.6,
+    "3": 4.1,
+    "4": 20.0,
+    "5": 2.0,
+    "6": 10.0,
+    "7": 9.3
+  },
+  "analysis_markdown": "## Race Analysis: Class 4 2400m Turf (Yielding)\n\n### Top Pick\n- **#5 NAUTICAL FORCE** (Rank 1, Odds 2.0, Fair 2.9, Edge -32.1%)\n\n### Bet Signal\n- **\u26d4 NO BET** (edge=-32.1%, odds=2.0)\n\n### Key Stats\n- Field Size: 7\n- Track: ST A\n- Going: Yielding"
+}

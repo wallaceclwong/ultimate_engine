@@ -1,0 +1,15 @@
+{
+  "race_id": "2026-04-26_ST_R1",
+  "gemini_model": "deepseek-chat",
+  "confidence_score": 0.75,
+  "is_best_bet": true,
+  "recommended_bet": "WIN 1",
+  "probabilities": {
+    "1": 1.0
+  },
+  "kelly_stakes": {},
+  "market_odds": {
+    "1": 5.0
+  },
+  "analysis_markdown": "Test"
+}

@@ -3568,5 +3568,4395 @@
     "sex": "Unknown",
     "import_type": "PPG",
     "last_updated": "2026-04-12T23:46:52.004488"
+  },
+  "H087": {
+    "sire": "Per Incanto",
+    "dam": "O'Really Baheeya",
+    "dam_sire": "O'Reilly",
+    "origin": "NZ / 7",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PP",
+    "last_updated": "2026-04-15T23:21:53.982005"
+  },
+  "H168": {
+    "sire": "Fascinating Rock",
+    "dam": "Ataahua",
+    "dam_sire": "Tertullian",
+    "origin": "IRE / 6",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PPG",
+    "last_updated": "2026-04-15T23:21:59.956729"
+  },
+  "H229": {
+    "sire": "Swiss Ace",
+    "dam": "Sainted",
+    "dam_sire": "More Than Ready",
+    "origin": "NZ / 6",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PP",
+    "last_updated": "2026-04-15T23:22:05.967059"
+  },
+  "H235": {
+    "sire": "Pariah",
+    "dam": "Watchful Eyes",
+    "dam_sire": "Street Sense",
+    "origin": "AUS / 6",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PPG",
+    "last_updated": "2026-04-15T23:22:12.265916"
+  },
+  "H276": {
+    "sire": "Redwood",
+    "dam": "Wandane",
+    "dam_sire": "Danehill",
+    "origin": "NZ / 6",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PPG",
+    "last_updated": "2026-04-15T23:22:21.573445"
+  },
+  "H290": {
+    "sire": "Savabeel",
+    "dam": "Karla Bruni",
+    "dam_sire": "Pins",
+    "origin": "NZ / 6",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PPG",
+    "last_updated": "2026-04-15T23:22:27.418838"
+  },
+  "H298": {
+    "sire": "Sebring",
+    "dam": "Snitzel's Jewel",
+    "dam_sire": "Snitzel",
+    "origin": "AUS / 6",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PP",
+    "last_updated": "2026-04-15T23:22:33.246912"
+  },
+  "H324": {
+    "sire": "Savabeel",
+    "dam": "Okahu Bay",
+    "dam_sire": "Flying Spur",
+    "origin": "NZ / 6",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PPG",
+    "last_updated": "2026-04-15T23:22:39.232061"
+  },
+  "H381": {
+    "sire": "Iffraaj",
+    "dam": "Khaseeb",
+    "dam_sire": "New Approach",
+    "origin": "NZ / 6",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PP",
+    "last_updated": "2026-04-15T23:22:45.276695"
+  },
+  "H403": {
+    "sire": "Deep Field",
+    "dam": "Exotic Escape",
+    "dam_sire": "Commands",
+    "origin": "AUS / 5",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PPG",
+    "last_updated": "2026-04-15T23:22:52.566549"
+  },
+  "H429": {
+    "sire": "Frankel",
+    "dam": "Janey Muddles",
+    "dam_sire": "Lawman",
+    "origin": "GB / 7",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PP",
+    "last_updated": "2026-04-15T23:22:58.471228"
+  },
+  "H432": {
+    "sire": "Tavistock",
+    "dam": "Here We Come",
+    "dam_sire": "Exceed And Excel",
+    "origin": "NZ / 6",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PP",
+    "last_updated": "2026-04-15T23:23:04.310529"
+  },
+  "H436": {
+    "sire": "Nicconi",
+    "dam": "Alana's Party",
+    "dam_sire": "Exceed And Excel",
+    "origin": "AUS / 5",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PPG",
+    "last_updated": "2026-04-15T23:23:11.375257"
+  },
+  "H447": {
+    "sire": "Derryn",
+    "dam": "Waiana Gold",
+    "dam_sire": "Gold Centre",
+    "origin": "NZ / 5",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PPG",
+    "last_updated": "2026-04-15T23:23:17.080925"
+  },
+  "H456": {
+    "sire": "Deep Field",
+    "dam": "Twist Tops",
+    "dam_sire": "Beneteau",
+    "origin": "AUS / 6",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PP",
+    "last_updated": "2026-04-15T23:23:32.479454"
+  },
+  "H459": {
+    "sire": "Impending",
+    "dam": "Isola Blu",
+    "dam_sire": "Blackfriars",
+    "origin": "AUS / 6",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PP",
+    "last_updated": "2026-04-15T23:23:38.821389"
+  },
+  "H486": {
+    "sire": "Oasis Dream",
+    "dam": "Brom Felinity",
+    "dam_sire": "Encosta de Lago",
+    "origin": "GB / 6",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "ISG",
+    "last_updated": "2026-04-15T23:23:44.784070"
+  },
+  "J003": {
+    "sire": "Sweynesse",
+    "dam": "Coterie",
+    "dam_sire": "Keeper",
+    "origin": "NZ / 5",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PPG",
+    "last_updated": "2026-04-15T23:23:56.142677"
+  },
+  "J087": {
+    "sire": "Headwater",
+    "dam": "Beechal",
+    "dam_sire": "Lonhro",
+    "origin": "AUS / 5",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PPG",
+    "last_updated": "2026-04-15T23:24:01.702840"
+  },
+  "J098": {
+    "sire": "Sacred Falls",
+    "dam": "Pleased",
+    "dam_sire": "Savabeel",
+    "origin": "NZ / 5",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PPG",
+    "last_updated": "2026-04-15T23:24:06.908962"
+  },
+  "J131": {
+    "sire": "Mehmas",
+    "dam": "Obama Rule",
+    "dam_sire": "Danehill Dancer",
+    "origin": "IRE / 5",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PPG",
+    "last_updated": "2026-04-15T23:24:18.214206"
+  },
+  "J174": {
+    "sire": "Zoustar",
+    "dam": "Summer Girlfriend",
+    "dam_sire": "Forest Camp",
+    "origin": "AUS / 5",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PP",
+    "last_updated": "2026-04-15T23:24:23.459678"
+  },
+  "J193": {
+    "sire": "Churchill",
+    "dam": "Jira",
+    "dam_sire": "Medicean",
+    "origin": "IRE / 5",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PP",
+    "last_updated": "2026-04-15T23:24:28.399102"
+  },
+  "J198": {
+    "sire": "All Too Hard",
+    "dam": "Star Of Darwin",
+    "dam_sire": "Northern Meteor",
+    "origin": "AUS / 5",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PPG",
+    "last_updated": "2026-04-15T23:24:33.769785"
+  },
+  "J213": {
+    "sire": "Lonhro",
+    "dam": "Words Are Weapons",
+    "dam_sire": "Dubawi",
+    "origin": "AUS / 6",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PP",
+    "last_updated": "2026-04-15T23:24:39.295862"
+  },
+  "J227": {
+    "sire": "Wrote",
+    "dam": "Trissie",
+    "dam_sire": "Giant's Causeway",
+    "origin": "NZ / 5",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PPG",
+    "last_updated": "2026-04-15T23:24:44.458307"
+  },
+  "J237": {
+    "sire": "Star Turn",
+    "dam": "Sessantesimo",
+    "dam_sire": "Flying Spur",
+    "origin": "AUS / 5",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PPG",
+    "last_updated": "2026-04-15T23:24:49.987015"
+  },
+  "J260": {
+    "sire": "Starcraft",
+    "dam": "Rezyana",
+    "dam_sire": "Redoute's Choice",
+    "origin": "AUS / 5",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PPG",
+    "last_updated": "2026-04-15T23:24:55.577152"
+  },
+  "J264": {
+    "sire": "Yes Yes Yes",
+    "dam": "Bella Vino",
+    "dam_sire": "Exceed And Excel",
+    "origin": "AUS / 4",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PPG",
+    "last_updated": "2026-04-15T23:25:00.919018"
+  },
+  "J266": {
+    "sire": "Courtier",
+    "dam": "Zealous Vixen",
+    "dam_sire": "Inexplicable",
+    "origin": "BRZ / 5",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PP",
+    "last_updated": "2026-04-15T23:25:21.005513"
+  },
+  "J269": {
+    "sire": "Frosted",
+    "dam": "My Rachel",
+    "dam_sire": "Horse Chestnut",
+    "origin": "USA / 5",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PPG",
+    "last_updated": "2026-04-15T23:25:26.297997"
+  },
+  "J288": {
+    "sire": "U S Navy Flag",
+    "dam": "Savabeel Star",
+    "dam_sire": "Savabeel",
+    "origin": "NZ / 5",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PPG",
+    "last_updated": "2026-04-15T23:25:31.187531"
+  },
+  "J309": {
+    "sire": "Charm Spirit",
+    "dam": "Estrela Flicka",
+    "dam_sire": "O'Reilly",
+    "origin": "NZ / 5",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PPG",
+    "last_updated": "2026-04-15T23:25:36.604920"
+  },
+  "J314": {
+    "sire": "Pride Of Dubai",
+    "dam": "Allez France",
+    "dam_sire": "Hennessy",
+    "origin": "AUS / 5",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PPG",
+    "last_updated": "2026-04-15T23:25:41.611818"
+  },
+  "J364": {
+    "sire": "Justify",
+    "dam": "Tails Wins",
+    "dam_sire": "Tale Of The Cat",
+    "origin": "AUS / 5",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PP",
+    "last_updated": "2026-04-15T23:25:46.546222"
+  },
+  "J385": {
+    "sire": "Capitalist",
+    "dam": "Consolari",
+    "dam_sire": "Haradasun",
+    "origin": "AUS / 5",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PPG",
+    "last_updated": "2026-04-15T23:25:51.791745"
+  },
+  "J395": {
+    "sire": "Invincible Spirit",
+    "dam": "Purple Sage",
+    "dam_sire": "Danehill Dancer",
+    "origin": "IRE / 5",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PP",
+    "last_updated": "2026-04-15T23:25:57.412212"
+  },
+  "J413": {
+    "sire": "Written Tycoon",
+    "dam": "Shaaheq",
+    "dam_sire": "Redoute's Choice",
+    "origin": "AUS / 4",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PPG",
+    "last_updated": "2026-04-15T23:26:03.065325"
+  },
+  "J444": {
+    "sire": "Coats Choice",
+    "dam": "Blue Blond",
+    "dam_sire": "Stravinsky",
+    "origin": "NZ / 5",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PP",
+    "last_updated": "2026-04-15T23:26:16.949676"
+  },
+  "J446": {
+    "sire": "U S Navy Flag",
+    "dam": "Pinstripe",
+    "dam_sire": "Pins",
+    "origin": "NZ / 5",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PP",
+    "last_updated": "2026-04-15T23:26:22.211332"
+  },
+  "J480": {
+    "sire": "Maurice",
+    "dam": "Sharnee Rose",
+    "dam_sire": "Nadeem",
+    "origin": "AUS / 5",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PPG",
+    "last_updated": "2026-04-15T23:26:27.250453"
+  },
+  "J484": {
+    "sire": "Russian Revolution",
+    "dam": "River Vixen",
+    "dam_sire": "Hard Spun",
+    "origin": "AUS / 5",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PPG",
+    "last_updated": "2026-04-15T23:26:32.083138"
+  },
+  "J488": {
+    "sire": "Sooboog",
+    "dam": "Andronica",
+    "dam_sire": "Mujahid",
+    "origin": "AUS / 4",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PPG",
+    "last_updated": "2026-04-15T23:26:37.099575"
+  },
+  "J490": {
+    "sire": "Star Turn",
+    "dam": "Zagara",
+    "dam_sire": "More Than Ready",
+    "origin": "AUS / 4",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PPG",
+    "last_updated": "2026-04-15T23:26:42.326944"
+  },
+  "J502": {
+    "sire": "Embellish",
+    "dam": "Preetha Varma",
+    "dam_sire": "Keeper",
+    "origin": "NZ / 5",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PPG",
+    "last_updated": "2026-04-15T23:26:47.396858"
+  },
+  "J503": {
+    "sire": "Lonhro",
+    "dam": "Sabia",
+    "dam_sire": "Sadler's Wells",
+    "origin": "AUS / 4",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PPG",
+    "last_updated": "2026-04-15T23:26:52.666695"
+  },
+  "J532": {
+    "sire": "Universal Ruler",
+    "dam": "True Storm",
+    "dam_sire": "Hurricane Sky",
+    "origin": "AUS / 6",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PP",
+    "last_updated": "2026-04-15T23:26:57.939079"
+  },
+  "J538": {
+    "sire": "Snitzel",
+    "dam": "Street Secret",
+    "dam_sire": "Street Cry",
+    "origin": "AUS / 5",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PP",
+    "last_updated": "2026-04-15T23:27:03.106888"
+  },
+  "J546": {
+    "sire": "Mendelssohn",
+    "dam": "Joka",
+    "dam_sire": "Henrythenavigator",
+    "origin": "AUS / 5",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PPG",
+    "last_updated": "2026-04-15T23:27:07.967787"
+  },
+  "K040": {
+    "sire": "Belardo",
+    "dam": "Asmahal",
+    "dam_sire": "Falkirk",
+    "origin": "NZ / 4",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PPG",
+    "last_updated": "2026-04-15T23:27:12.806039"
+  },
+  "K044": {
+    "sire": "Per Incanto",
+    "dam": "Kay's Trophy",
+    "dam_sire": "Towkay",
+    "origin": "NZ / 4",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PPG",
+    "last_updated": "2026-04-15T23:27:17.539056"
+  },
+  "K076": {
+    "sire": "Spirit Of Boom",
+    "dam": "Token Of Love",
+    "dam_sire": "Al Maher",
+    "origin": "AUS / 5",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PPG",
+    "last_updated": "2026-04-15T23:27:21.972254"
+  },
+  "K081": {
+    "sire": "Profitable",
+    "dam": "So Funny",
+    "dam_sire": "Distorted Humor",
+    "origin": "IRE / 5",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PP",
+    "last_updated": "2026-04-15T23:27:26.137008"
+  },
+  "K113": {
+    "sire": "Darci Brahma",
+    "dam": "Mi Shari",
+    "dam_sire": "Shinko King",
+    "origin": "NZ / 5",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PPG",
+    "last_updated": "2026-04-15T23:27:30.918417"
+  },
+  "K115": {
+    "sire": "Russian Revolution",
+    "dam": "One Mansini",
+    "dam_sire": "Nicconi",
+    "origin": "AUS / 5",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PPG",
+    "last_updated": "2026-04-15T23:27:35.573349"
+  },
+  "K120": {
+    "sire": "Wrote",
+    "dam": "Alberta",
+    "dam_sire": "Magic Albert",
+    "origin": "NZ / 4",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PPG",
+    "last_updated": "2026-04-15T23:27:40.187353"
+  },
+  "K132": {
+    "sire": "Too Darn Hot",
+    "dam": "Planet Rock",
+    "dam_sire": "Fastnet Rock",
+    "origin": "AUS / 4",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PP",
+    "last_updated": "2026-04-15T23:27:44.684252"
+  },
+  "K145": {
+    "sire": "Per Incanto",
+    "dam": "Starossa",
+    "dam_sire": "Testa Rossa",
+    "origin": "NZ / 4",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PPG",
+    "last_updated": "2026-04-15T23:27:48.780486"
+  },
+  "K154": {
+    "sire": "Advertise",
+    "dam": "Squash",
+    "dam_sire": "Pastoral Pursuits",
+    "origin": "GB / 5",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PP",
+    "last_updated": "2026-04-15T23:27:53.121615"
+  },
+  "K162": {
+    "sire": "Kodi Bear",
+    "dam": "Malilla",
+    "dam_sire": "Red Clubs",
+    "origin": "IRE / 5",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PP",
+    "last_updated": "2026-04-15T23:27:57.415015"
+  },
+  "K165": {
+    "sire": "Fastnet Rock",
+    "dam": "Orangey Red",
+    "dam_sire": "Lawman",
+    "origin": "IRE / 4",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PPG",
+    "last_updated": "2026-04-15T23:28:01.703699"
+  },
+  "K186": {
+    "sire": "Royal Meeting",
+    "dam": "L'Etoile",
+    "dam_sire": "Pierro",
+    "origin": "AUS / 4",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PPG",
+    "last_updated": "2026-04-15T23:28:06.200398"
+  },
+  "K226": {
+    "sire": "Wrote",
+    "dam": "My Amazing Cool",
+    "dam_sire": "Danroad",
+    "origin": "NZ / 4",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PPG",
+    "last_updated": "2026-04-15T23:28:15.514958"
+  },
+  "K252": {
+    "sire": "American Pharoah",
+    "dam": "Amuser",
+    "dam_sire": "Galileo",
+    "origin": "USA / 5",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PP",
+    "last_updated": "2026-04-15T23:28:19.928997"
+  },
+  "K302": {
+    "sire": "Super Seth",
+    "dam": "Savodara",
+    "dam_sire": "Savabeel",
+    "origin": "NZ / 4",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PPG",
+    "last_updated": "2026-04-15T23:28:24.111064"
+  },
+  "K322": {
+    "sire": "D'Argento",
+    "dam": "Ocean Spray",
+    "dam_sire": "Fastnet Rock",
+    "origin": "AUS / 4",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PPG",
+    "last_updated": "2026-04-15T23:28:32.081266"
+  },
+  "K340": {
+    "sire": "Hellbent",
+    "dam": "Witless",
+    "dam_sire": "Stratum",
+    "origin": "AUS / 4",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PPG",
+    "last_updated": "2026-04-15T23:28:36.905610"
+  },
+  "K352": {
+    "sire": "Kodiac",
+    "dam": "Symbol Of Love",
+    "dam_sire": "Shamardal",
+    "origin": "IRE / 4",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PP",
+    "last_updated": "2026-04-15T23:28:41.119175"
+  },
+  "K381": {
+    "sire": "Time Test",
+    "dam": "Naive",
+    "dam_sire": "Nayef",
+    "origin": "GB / 4",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PP",
+    "last_updated": "2026-04-15T23:28:46.203402"
+  },
+  "K384": {
+    "sire": "Pierro",
+    "dam": "Don't Cry Wolf",
+    "dam_sire": "Street Cry",
+    "origin": "AUS / 5",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PP",
+    "last_updated": "2026-04-15T23:28:50.617077"
+  },
+  "K387": {
+    "sire": "The Autumn Sun",
+    "dam": "Sultry Dreamer",
+    "dam_sire": "Dream Ahead",
+    "origin": "AUS / 4",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PP",
+    "last_updated": "2026-04-15T23:28:55.072937"
+  },
+  "K406": {
+    "sire": "Written Tycoon",
+    "dam": "Sopraffina",
+    "dam_sire": "Exceed And Excel",
+    "origin": "AUS / 3",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PPG",
+    "last_updated": "2026-04-15T23:29:00.198327"
+  },
+  "K434": {
+    "sire": "Exceed And Excel",
+    "dam": "Josdesanimaux",
+    "dam_sire": "Leroidesanimaux",
+    "origin": "AUS / 4",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PPG",
+    "last_updated": "2026-04-15T23:29:04.653689"
+  },
+  "K517": {
+    "sire": "Rebel Dane",
+    "dam": "Braeview Miss",
+    "dam_sire": "Testafiable",
+    "origin": "AUS / 4",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PP",
+    "last_updated": "2026-04-15T23:29:08.863037"
+  },
+  "K548": {
+    "sire": "Deep Field",
+    "dam": "Pane In The Glass",
+    "dam_sire": "Testa Rossa",
+    "origin": "AUS / 4",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PP",
+    "last_updated": "2026-04-15T23:29:13.185093"
+  },
+  "K550": {
+    "sire": "Shamus Award",
+    "dam": "Recoinage",
+    "dam_sire": "Flying Spur",
+    "origin": "AUS / 4",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PP",
+    "last_updated": "2026-04-15T23:29:17.400330"
+  },
+  "K566": {
+    "sire": "Ace High",
+    "dam": "Akerra",
+    "dam_sire": "Ekraar",
+    "origin": "NZ / 4",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PP",
+    "last_updated": "2026-04-15T23:29:21.649455"
+  },
+  "K575": {
+    "sire": "Capitalist",
+    "dam": "Consolari",
+    "dam_sire": "Haradasun",
+    "origin": "AUS / 4",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PP",
+    "last_updated": "2026-04-15T23:29:26.127060"
+  },
+  "K580": {
+    "sire": "Gold Standard",
+    "dam": "Airino",
+    "dam_sire": "Canford Cliffs",
+    "origin": "AUS / 4",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PPG",
+    "last_updated": "2026-04-15T23:29:36.374908"
+  },
+  "K582": {
+    "sire": "Shamus Award",
+    "dam": "Under The Sea",
+    "dam_sire": "Husson",
+    "origin": "AUS / 4",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PPG",
+    "last_updated": "2026-04-15T23:29:41.140037"
+  },
+  "L050": {
+    "sire": "Tiger Heart",
+    "dam": "Lukinha",
+    "dam_sire": "Vettori",
+    "origin": "BRZ / 3",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PPG",
+    "last_updated": "2026-04-15T23:29:44.830955"
+  },
+  "L065": {
+    "sire": "Sooboog",
+    "dam": "Misasio",
+    "dam_sire": "Strategic",
+    "origin": "AUS / 4",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PPG",
+    "last_updated": "2026-04-15T23:29:53.469414"
+  },
+  "L094": {
+    "sire": "So You Think",
+    "dam": "Estijmaam",
+    "dam_sire": "Exceed And Excel",
+    "origin": "AUS / 3",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PP",
+    "last_updated": "2026-04-15T23:29:56.880336"
+  },
+  "L110": {
+    "sire": "Beckford",
+    "dam": "Young Daisy Miller",
+    "dam_sire": "Azamour",
+    "origin": "IRE / 4",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PP",
+    "last_updated": "2026-04-15T23:30:03.445563"
+  },
+  "L120": {
+    "sire": "Ilovethiscity",
+    "dam": "O'Reilly's Charm",
+    "dam_sire": "O'Reilly",
+    "origin": "AUS / 4",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PP",
+    "last_updated": "2026-04-15T23:30:06.953842"
+  },
+  "L199": {
+    "sire": "Churchill",
+    "dam": "Latest Plan",
+    "dam_sire": "Dubawi",
+    "origin": "AUS / 3",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PPG",
+    "last_updated": "2026-04-15T23:30:10.593537"
+  },
+  "L209": {
+    "sire": "Star Turn",
+    "dam": "Lots Of Dosh",
+    "dam_sire": "Ocean Park",
+    "origin": "AUS / 3",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PPG",
+    "last_updated": "2026-04-15T23:30:14.268203"
+  },
+  "L225": {
+    "sire": "Zousain",
+    "dam": "My Miss Pedrille",
+    "dam_sire": "Lonhro",
+    "origin": "AUS / 4",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PP",
+    "last_updated": "2026-04-15T23:30:17.740605"
+  },
+  "L248": {
+    "sire": "Rageese",
+    "dam": "Meir",
+    "dam_sire": "Volksraad",
+    "origin": "NZ / 4",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PP",
+    "last_updated": "2026-04-15T23:30:21.399395"
+  },
+  "L263": {
+    "sire": "Super Seth",
+    "dam": "Thee",
+    "dam_sire": "Savabeel",
+    "origin": "NZ / 3",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PPG",
+    "last_updated": "2026-04-15T23:30:25.021842"
+  },
+  "H120": {
+    "sire": "Deep Impact",
+    "dam": "Amanee",
+    "dam_sire": "Pivotal",
+    "origin": "AUS / 7",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PP",
+    "last_updated": "2026-04-20T11:25:12.789167"
+  },
+  "H144": {
+    "sire": "Better Than Ready",
+    "dam": "Lune Rouge",
+    "dam_sire": "Malibu Moon",
+    "origin": "AUS / 5",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PPG",
+    "last_updated": "2026-04-20T11:25:19.752289"
+  },
+  "H155": {
+    "sire": "Charm Spirit",
+    "dam": "No Pushover",
+    "dam_sire": "Pins",
+    "origin": "NZ / 6",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PPG",
+    "last_updated": "2026-04-20T11:25:25.811444"
+  },
+  "H178": {
+    "sire": "Deep Field",
+    "dam": "Buenismo",
+    "dam_sire": "Snitzel",
+    "origin": "AUS / 6",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PPG",
+    "last_updated": "2026-04-20T11:25:32.090777"
+  },
+  "H234": {
+    "sire": "Not A Single Doubt",
+    "dam": "Gallant Tess",
+    "dam_sire": "Galileo",
+    "origin": "AUS / 6",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PPG",
+    "last_updated": "2026-04-20T11:25:38.760061"
+  },
+  "H293": {
+    "sire": "New Bay",
+    "dam": "Ardeola",
+    "dam_sire": "Manduro",
+    "origin": "GER / 7",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PP",
+    "last_updated": "2026-04-20T11:25:49.318044"
+  },
+  "H320": {
+    "sire": "Charm Spirit",
+    "dam": "Lucky's Revenge",
+    "dam_sire": "Darci Brahma",
+    "origin": "NZ / 6",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PPG",
+    "last_updated": "2026-04-20T11:25:59.688217"
+  },
+  "H383": {
+    "sire": "Deep Field",
+    "dam": "Certitude",
+    "dam_sire": "Not A Single Doubt",
+    "origin": "AUS / 6",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PPG",
+    "last_updated": "2026-04-20T11:26:05.694364"
+  },
+  "H392": {
+    "sire": "Cluster",
+    "dam": "Grand City",
+    "dam_sire": "Ilovethiscity",
+    "origin": "AUS / 6",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PP",
+    "last_updated": "2026-04-20T11:26:11.105443"
+  },
+  "H405": {
+    "sire": "Deep Field",
+    "dam": "National Anthem",
+    "dam_sire": "Rock Of Gibraltar",
+    "origin": "AUS / 5",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PPG",
+    "last_updated": "2026-04-20T11:26:16.470354"
+  },
+  "H430": {
+    "sire": "Bungle Inthejungle",
+    "dam": "Ayr Missile",
+    "dam_sire": "Cadeaux Genereux",
+    "origin": "IRE / 6",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PPG",
+    "last_updated": "2026-04-20T11:26:22.130811"
+  },
+  "H472": {
+    "sire": "U S Navy Flag",
+    "dam": "Lazaan",
+    "dam_sire": "Zabeel",
+    "origin": "NZ / 5",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PPG",
+    "last_updated": "2026-04-20T11:26:27.743667"
+  },
+  "H474": {
+    "sire": "Lookin At Lucky",
+    "dam": "Magia Para Todos",
+    "dam_sire": "Rock Of Gibraltar",
+    "origin": "CHI / 6",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PP",
+    "last_updated": "2026-04-20T11:26:33.510665"
+  },
+  "J002": {
+    "sire": "No Nay Never",
+    "dam": "Planet's Princess",
+    "dam_sire": "Not A Single Doubt",
+    "origin": "AUS / 5",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PPG",
+    "last_updated": "2026-04-20T11:26:38.388220"
+  },
+  "J026": {
+    "sire": "Dissident",
+    "dam": "Love Commands",
+    "dam_sire": "Commands",
+    "origin": "AUS / 6",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PPG",
+    "last_updated": "2026-04-20T11:26:43.669949"
+  },
+  "J039": {
+    "sire": "War Decree",
+    "dam": "Enthusabelle",
+    "dam_sire": "Savabeel",
+    "origin": "NZ / 6",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PP",
+    "last_updated": "2026-04-20T11:26:48.526791"
+  },
+  "J050": {
+    "sire": "Awesome Rock",
+    "dam": "Jayquin Star",
+    "dam_sire": "O'Reilly",
+    "origin": "AUS / 6",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PP",
+    "last_updated": "2026-04-20T11:26:54.338550"
+  },
+  "J058": {
+    "sire": "Fastnet Rock",
+    "dam": "Moqueen",
+    "dam_sire": "Uncle Mo",
+    "origin": "AUS / 5",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PPG",
+    "last_updated": "2026-04-20T11:27:00.566234"
+  },
+  "J075": {
+    "sire": "Churchill",
+    "dam": "War Goddess",
+    "dam_sire": "Champs Elysees",
+    "origin": "IRE / 6",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PP",
+    "last_updated": "2026-04-20T11:27:08.348330"
+  },
+  "J080": {
+    "sire": "Deep Field",
+    "dam": "Sarong",
+    "dam_sire": "Exceed And Excel",
+    "origin": "AUS / 6",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PP",
+    "last_updated": "2026-04-20T11:29:21.317969"
+  },
+  "J092": {
+    "sire": "Ardrossan",
+    "dam": "Luroel",
+    "dam_sire": "Per Incanto",
+    "origin": "NZ / 5",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PPG",
+    "last_updated": "2026-04-20T11:29:26.360099"
+  },
+  "J093": {
+    "sire": "Belardo",
+    "dam": "Cantata",
+    "dam_sire": "Stravinsky",
+    "origin": "NZ / 5",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PPG",
+    "last_updated": "2026-04-20T11:29:31.545627"
+  },
+  "J118": {
+    "sire": "Proisir",
+    "dam": "Artemis",
+    "dam_sire": "Thorn Park",
+    "origin": "NZ / 5",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PPG",
+    "last_updated": "2026-04-20T11:29:36.710705"
+  },
+  "J123": {
+    "sire": "Starspangledbanner",
+    "dam": "Marechale",
+    "dam_sire": "Anabaa",
+    "origin": "FR / 5",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PPG",
+    "last_updated": "2026-04-20T11:29:41.562279"
+  },
+  "J133": {
+    "sire": "All Too Hard",
+    "dam": "Madame Moustache",
+    "dam_sire": "Hinchinbrook",
+    "origin": "AUS / 5",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PP",
+    "last_updated": "2026-04-20T11:29:46.185440"
+  },
+  "J143": {
+    "sire": "Capitalist",
+    "dam": "Malakiya",
+    "dam_sire": "Redoute's Choice",
+    "origin": "AUS / 5",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PPG",
+    "last_updated": "2026-04-20T11:29:51.325219"
+  },
+  "J157": {
+    "sire": "Deep Field",
+    "dam": "Secretly Discreet",
+    "dam_sire": "Lonhro",
+    "origin": "AUS / 5",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PPG",
+    "last_updated": "2026-04-20T11:29:56.207641"
+  },
+  "J183": {
+    "sire": "Shooting To Win",
+    "dam": "High Class",
+    "dam_sire": "Shocking",
+    "origin": "AUS / 5",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PPG",
+    "last_updated": "2026-04-20T11:30:01.271289"
+  },
+  "J205": {
+    "sire": "Vespa",
+    "dam": "Leica Glory",
+    "dam_sire": "Iffraaj",
+    "origin": "NZ / 5",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PPG",
+    "last_updated": "2026-04-20T11:30:06.522860"
+  },
+  "J239": {
+    "sire": "Swiss Ace",
+    "dam": "Jolie Blonde",
+    "dam_sire": "Testa Rossa",
+    "origin": "NZ / 5",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PPG",
+    "last_updated": "2026-04-20T11:30:11.412969"
+  },
+  "J267": {
+    "sire": "Setembro Chove",
+    "dam": "Margaery",
+    "dam_sire": "Agnes Gold",
+    "origin": "BRZ / 5",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PP",
+    "last_updated": "2026-04-20T11:30:16.697102"
+  },
+  "J312": {
+    "sire": "Frosted",
+    "dam": "Highchap Dancer",
+    "dam_sire": "High Chaparral",
+    "origin": "AUS / 5",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PPG",
+    "last_updated": "2026-04-20T11:30:21.802728"
+  },
+  "J357": {
+    "sire": "Super Seth",
+    "dam": "Thee",
+    "dam_sire": "Savabeel",
+    "origin": "NZ / 4",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PPG",
+    "last_updated": "2026-04-20T11:30:26.818140"
+  },
+  "J391": {
+    "sire": "Too Darn Hot",
+    "dam": "Refreshing",
+    "dam_sire": "Stratum",
+    "origin": "NZ / 4",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PPG",
+    "last_updated": "2026-04-20T11:30:31.436867"
+  },
+  "J394": {
+    "sire": "Blue Point",
+    "dam": "Dame Hester",
+    "dam_sire": "Diktat",
+    "origin": "IRE / 5",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PP",
+    "last_updated": "2026-04-20T11:30:35.824255"
+  },
+  "J405": {
+    "sire": "Zoustar",
+    "dam": "Soriano",
+    "dam_sire": "Savabeel",
+    "origin": "AUS / 5",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PP",
+    "last_updated": "2026-04-20T11:30:40.932427"
+  },
+  "J453": {
+    "sire": "Proisir",
+    "dam": "Wentwood Parade",
+    "dam_sire": "Perfectly Ready",
+    "origin": "NZ / 5",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PPG",
+    "last_updated": "2026-04-20T11:30:45.831933"
+  },
+  "J479": {
+    "sire": "Lean Mean Machine",
+    "dam": "Carashan Girl",
+    "dam_sire": "Artie Schiller",
+    "origin": "AUS / 5",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PPG",
+    "last_updated": "2026-04-20T11:30:51.041952"
+  },
+  "J486": {
+    "sire": "Shooting To Win",
+    "dam": "Attracted",
+    "dam_sire": "Commands",
+    "origin": "AUS / 5",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PPG",
+    "last_updated": "2026-04-20T11:30:56.100958"
+  },
+  "J508": {
+    "sire": "Almanzor",
+    "dam": "Saas Fee",
+    "dam_sire": "Holy Roman Emperor",
+    "origin": "FR / 5",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PPG",
+    "last_updated": "2026-04-20T11:31:03.378569"
+  },
+  "J510": {
+    "sire": "Night Of Thunder",
+    "dam": "Braided",
+    "dam_sire": "Elusive Quality",
+    "origin": "IRE / 5",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PPG",
+    "last_updated": "2026-04-20T11:31:08.528452"
+  },
+  "J513": {
+    "sire": "Pride Of Dubai",
+    "dam": "Dubawi's Image",
+    "dam_sire": "Dubawi",
+    "origin": "AUS / 5",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PP",
+    "last_updated": "2026-04-20T11:31:13.930116"
+  },
+  "J524": {
+    "sire": "Proisir",
+    "dam": "Ends Meet",
+    "dam_sire": "Anabaa",
+    "origin": "NZ / 5",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PPG",
+    "last_updated": "2026-04-20T11:31:18.855937"
+  },
+  "J537": {
+    "sire": "Smart Missile",
+    "dam": "Remlaps Jewel",
+    "dam_sire": "Choisir",
+    "origin": "AUS / 5",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PP",
+    "last_updated": "2026-04-20T11:31:23.911806"
+  },
+  "J541": {
+    "sire": "All Too Hard",
+    "dam": "Tahnee Tiara",
+    "dam_sire": "Commands",
+    "origin": "AUS / 4",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PPG",
+    "last_updated": "2026-04-20T11:31:28.864555"
+  },
+  "K009": {
+    "sire": "Calyx",
+    "dam": "Dazzling Rose",
+    "dam_sire": "Raven's Pass",
+    "origin": "GB / 5",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PP",
+    "last_updated": "2026-04-20T11:31:32.788064"
+  },
+  "K032": {
+    "sire": "The Autumn Sun",
+    "dam": "Rollout The Carpet",
+    "dam_sire": "Holy Roman Emperor",
+    "origin": "AUS / 4",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PPG",
+    "last_updated": "2026-04-20T11:31:37.282583"
+  },
+  "K052": {
+    "sire": "Toronado",
+    "dam": "Big Spirit",
+    "dam_sire": "Invincible Spirit",
+    "origin": "AUS / 4",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PPG",
+    "last_updated": "2026-04-20T11:31:41.500228"
+  },
+  "K086": {
+    "sire": "No Nay Never",
+    "dam": "Hermosa",
+    "dam_sire": "Galileo",
+    "origin": "IRE / 5",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PP",
+    "last_updated": "2026-04-20T11:31:45.476917"
+  },
+  "K096": {
+    "sire": "Savabeel",
+    "dam": "Relentless Desire",
+    "dam_sire": "O'Reilly",
+    "origin": "NZ / 5",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PP",
+    "last_updated": "2026-04-20T11:31:49.571698"
+  },
+  "K097": {
+    "sire": "Showtime",
+    "dam": "Miss Fascinator",
+    "dam_sire": "Fasliyev",
+    "origin": "AUS / 5",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PP",
+    "last_updated": "2026-04-20T11:31:53.870115"
+  },
+  "K107": {
+    "sire": "Derryn",
+    "dam": "Magic Tryst",
+    "dam_sire": "Magic Ring",
+    "origin": "NZ / 4",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PP",
+    "last_updated": "2026-04-20T11:31:58.155691"
+  },
+  "K129": {
+    "sire": "Preferment",
+    "dam": "Stand Firm",
+    "dam_sire": "Perfectly Ready",
+    "origin": "NZ / 5",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PP",
+    "last_updated": "2026-04-20T11:32:03.279992"
+  },
+  "K153": {
+    "sire": "Wrote",
+    "dam": "Wild Rock",
+    "dam_sire": "Fastnet Rock",
+    "origin": "NZ / 4",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PPG",
+    "last_updated": "2026-04-20T11:32:07.469539"
+  },
+  "K167": {
+    "sire": "Alabama Express",
+    "dam": "World Awaits",
+    "dam_sire": "Written Tycoon",
+    "origin": "AUS / 4",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PP",
+    "last_updated": "2026-04-20T11:32:12.055409"
+  },
+  "K170": {
+    "sire": "Microphone",
+    "dam": "South Of France",
+    "dam_sire": "Quality Road",
+    "origin": "AUS / 4",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PP",
+    "last_updated": "2026-04-20T11:32:16.210094"
+  },
+  "K172": {
+    "sire": "Puissance de Lune",
+    "dam": "South Street",
+    "dam_sire": "Street Cry",
+    "origin": "AUS / 5",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PP",
+    "last_updated": "2026-04-20T11:32:20.550657"
+  },
+  "K200": {
+    "sire": "Justify",
+    "dam": "Hence",
+    "dam_sire": "Galileo",
+    "origin": "IRE / 5",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PP",
+    "last_updated": "2026-04-20T11:32:25.284191"
+  },
+  "K204": {
+    "sire": "Advertise",
+    "dam": "Capla Cubiste",
+    "dam_sire": "Archipenko",
+    "origin": "IRE / 4",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PPG",
+    "last_updated": "2026-04-20T11:32:30.051515"
+  },
+  "K217": {
+    "sire": "Deep Field",
+    "dam": "Criquette",
+    "dam_sire": "I Am Invincible",
+    "origin": "AUS / 4",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PPG",
+    "last_updated": "2026-04-20T11:32:34.290748"
+  },
+  "K238": {
+    "sire": "Gingerbread Man",
+    "dam": "Sonata",
+    "dam_sire": "Bahhare",
+    "origin": "AUS / 4",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PPG",
+    "last_updated": "2026-04-20T11:32:38.745526"
+  },
+  "K245": {
+    "sire": "Ten Sovereigns",
+    "dam": "Bronte Lass",
+    "dam_sire": "Stravinsky",
+    "origin": "NZ / 4",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PPG",
+    "last_updated": "2026-04-20T11:32:42.719756"
+  },
+  "K260": {
+    "sire": "Saxon Warrior",
+    "dam": "Blending",
+    "dam_sire": "Medicean",
+    "origin": "IRE / 4",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PP",
+    "last_updated": "2026-04-20T11:32:47.176821"
+  },
+  "K276": {
+    "sire": "Shalaa",
+    "dam": "Adviso",
+    "dam_sire": "Street Cry",
+    "origin": "AUS / 4",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PPG",
+    "last_updated": "2026-04-20T11:32:51.130929"
+  },
+  "K285": {
+    "sire": "Almanzor",
+    "dam": "Nucleonic",
+    "dam_sire": "Burgundy",
+    "origin": "NZ / 4",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PP",
+    "last_updated": "2026-04-20T11:32:55.380439"
+  },
+  "K293": {
+    "sire": "Denman",
+    "dam": "Shutout",
+    "dam_sire": "Redoute's Choice",
+    "origin": "AUS / 4",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PPG",
+    "last_updated": "2026-04-20T11:33:00.619733"
+  },
+  "K305": {
+    "sire": "The Autumn Sun",
+    "dam": "Walk With Attitude",
+    "dam_sire": "Hussonet",
+    "origin": "AUS / 4",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PPG",
+    "last_updated": "2026-04-20T11:33:06.771144"
+  },
+  "K320": {
+    "sire": "Cosmic Force",
+    "dam": "Parjinka",
+    "dam_sire": "I Am Invincible",
+    "origin": "AUS / 4",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PPG",
+    "last_updated": "2026-04-20T11:33:12.214318"
+  },
+  "K321": {
+    "sire": "Darci Brahma",
+    "dam": "Italic",
+    "dam_sire": "Medicean",
+    "origin": "NZ / 4",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PPG",
+    "last_updated": "2026-04-20T11:33:16.613874"
+  },
+  "K323": {
+    "sire": "Magna Grecia",
+    "dam": "Cat's Wish",
+    "dam_sire": "Rock Of Gibraltar",
+    "origin": "AUS / 4",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PPG",
+    "last_updated": "2026-04-20T11:33:22.666159"
+  },
+  "K327": {
+    "sire": "Saxon Warrior",
+    "dam": "My Sweet Fish",
+    "dam_sire": "Shamus Award",
+    "origin": "AUS / 4",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PPG",
+    "last_updated": "2026-04-20T11:33:27.284667"
+  },
+  "K367": {
+    "sire": "I Am Invincible",
+    "dam": "Mysterious Light",
+    "dam_sire": "Fantastic Light",
+    "origin": "AUS / 4",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PP",
+    "last_updated": "2026-04-20T11:33:31.528574"
+  },
+  "K385": {
+    "sire": "Showtime",
+    "dam": "Chaplet",
+    "dam_sire": "Street Cry",
+    "origin": "AUS / 5",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PP",
+    "last_updated": "2026-04-20T11:33:36.107423"
+  },
+  "K390": {
+    "sire": "Nicconi",
+    "dam": "Brooklyn Rain",
+    "dam_sire": "Manhattan Rain",
+    "origin": "AUS / 3",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PPG",
+    "last_updated": "2026-04-20T11:33:40.700245"
+  },
+  "K399": {
+    "sire": "Deep Field",
+    "dam": "Anyaas",
+    "dam_sire": "Commands",
+    "origin": "AUS / 4",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PPG",
+    "last_updated": "2026-04-20T11:33:45.708523"
+  },
+  "K400": {
+    "sire": "Frosted",
+    "dam": "Conscious",
+    "dam_sire": "So You Think",
+    "origin": "AUS / 4",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PPG",
+    "last_updated": "2026-04-20T11:33:51.024508"
+  },
+  "K402": {
+    "sire": "Per Incanto",
+    "dam": "I Got A Rock",
+    "dam_sire": "Fastnet Rock",
+    "origin": "AUS / 4",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PPG",
+    "last_updated": "2026-04-20T11:33:56.436604"
+  },
+  "K405": {
+    "sire": "Territories",
+    "dam": "Escobar",
+    "dam_sire": "Not A Single Doubt",
+    "origin": "AUS / 4",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PPG",
+    "last_updated": "2026-04-20T11:34:01.449095"
+  },
+  "K409": {
+    "sire": "Showtime",
+    "dam": "Single Dancer",
+    "dam_sire": "Not A Single Doubt",
+    "origin": "AUS / 4",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PP",
+    "last_updated": "2026-04-20T11:34:06.280069"
+  },
+  "K415": {
+    "sire": "Dundeel",
+    "dam": "Savvan",
+    "dam_sire": "Savabeel",
+    "origin": "AUS / 4",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PPG",
+    "last_updated": "2026-04-20T11:34:11.495346"
+  },
+  "K426": {
+    "sire": "Mehmas",
+    "dam": "Lady Of The Lamp",
+    "dam_sire": "Invincible Spirit",
+    "origin": "IRE / 4",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PP",
+    "last_updated": "2026-04-20T11:34:17.116767"
+  },
+  "K465": {
+    "sire": "Per Incanto",
+    "dam": "Makkura",
+    "dam_sire": "Falkirk",
+    "origin": "NZ / 4",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "ISG",
+    "last_updated": "2026-04-20T11:34:22.993235"
+  },
+  "K481": {
+    "sire": "All Too Hard",
+    "dam": "The Countess",
+    "dam_sire": "Mossman",
+    "origin": "AUS / 4",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PPG",
+    "last_updated": "2026-04-20T11:34:30.154117"
+  },
+  "K484": {
+    "sire": "Hellbent",
+    "dam": "Bold Runner",
+    "dam_sire": "Choisir",
+    "origin": "AUS / 3",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PPG",
+    "last_updated": "2026-04-20T11:34:35.859021"
+  },
+  "K485": {
+    "sire": "Hellbent",
+    "dam": "Silent Rage",
+    "dam_sire": "Nicconi",
+    "origin": "AUS / 4",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PPG",
+    "last_updated": "2026-04-20T11:34:40.927826"
+  },
+  "K487": {
+    "sire": "Pariah",
+    "dam": "Didn't Mention It",
+    "dam_sire": "More Than Ready",
+    "origin": "AUS / 4",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PPG",
+    "last_updated": "2026-04-20T11:34:49.680067"
+  },
+  "K490": {
+    "sire": "Mohaather",
+    "dam": "Brom Felinity",
+    "dam_sire": "Encosta de Lago",
+    "origin": "GB / 4",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PP",
+    "last_updated": "2026-04-20T11:34:56.165647"
+  },
+  "K511": {
+    "sire": "Brazen Beau",
+    "dam": "Lerina Gold",
+    "dam_sire": "Medaglia d'Oro",
+    "origin": "AUS / 4",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PP",
+    "last_updated": "2026-04-20T11:35:01.242765"
+  },
+  "K519": {
+    "sire": "Toronado",
+    "dam": "Petite Briefs",
+    "dam_sire": "Brief Truce",
+    "origin": "AUS / 4",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PP",
+    "last_updated": "2026-04-20T11:35:05.643228"
+  },
+  "K524": {
+    "sire": "Pariah",
+    "dam": "Allariza",
+    "dam_sire": "Linamix",
+    "origin": "AUS / 4",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PPG",
+    "last_updated": "2026-04-20T11:35:10.193097"
+  },
+  "K541": {
+    "sire": "Fastnet Rock",
+    "dam": "Deokyhe",
+    "dam_sire": "More Than Ready",
+    "origin": "AUS / 3",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PPG",
+    "last_updated": "2026-04-20T11:35:14.752296"
+  },
+  "K544": {
+    "sire": "Headwater",
+    "dam": "Ay Jay Charli",
+    "dam_sire": "Pride Of Dubai",
+    "origin": "AUS / 3",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PPG",
+    "last_updated": "2026-04-20T11:35:19.354510"
+  },
+  "K549": {
+    "sire": "Shalaa",
+    "dam": "Fashion Sniptz",
+    "dam_sire": "Snitzel",
+    "origin": "AUS / 4",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PP",
+    "last_updated": "2026-04-20T11:35:25.437309"
+  },
+  "K552": {
+    "sire": "Capitalist",
+    "dam": "Sister Sledge",
+    "dam_sire": "Uncle Mo",
+    "origin": "AUS / 3",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PPG",
+    "last_updated": "2026-04-20T11:35:31.414551"
+  },
+  "L037": {
+    "sire": "Love Conquers All",
+    "dam": "Credit Card Miss",
+    "dam_sire": "Testa Rossa",
+    "origin": "AUS / 4",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PPG",
+    "last_updated": "2026-04-20T11:35:34.873631"
+  },
+  "L044": {
+    "sire": "Deep Field",
+    "dam": "Something Silver",
+    "dam_sire": "Medaglia d'Oro",
+    "origin": "AUS / 3",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PPG",
+    "last_updated": "2026-04-20T11:35:38.464966"
+  },
+  "L066": {
+    "sire": "Super Seth",
+    "dam": "Racing Nadine",
+    "dam_sire": "Bernardini",
+    "origin": "NZ / 3",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PPG",
+    "last_updated": "2026-04-20T11:35:41.902312"
+  },
+  "L076": {
+    "sire": "Headwater",
+    "dam": "Hollywell",
+    "dam_sire": "Refuse To Bend",
+    "origin": "AUS / 4",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PP",
+    "last_updated": "2026-04-20T11:35:45.336155"
+  },
+  "L095": {
+    "sire": "Swiss Ace",
+    "dam": "Pantomime",
+    "dam_sire": "Pins",
+    "origin": "NZ / 4",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PP",
+    "last_updated": "2026-04-20T11:35:48.872379"
+  },
+  "L099": {
+    "sire": "Ardrossan",
+    "dam": "La Donna",
+    "dam_sire": "Per Incanto",
+    "origin": "NZ / 3",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PPG",
+    "last_updated": "2026-04-20T11:35:52.438922"
+  },
+  "L105": {
+    "sire": "Wrote",
+    "dam": "Wild Rock",
+    "dam_sire": "Fastnet Rock",
+    "origin": "NZ / 3",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PPG",
+    "last_updated": "2026-04-20T11:35:56.055777"
+  },
+  "L108": {
+    "sire": "Saxon Warrior",
+    "dam": "Archangel Gabriel",
+    "dam_sire": "Arch",
+    "origin": "IRE / 4",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PP",
+    "last_updated": "2026-04-20T11:35:59.522669"
+  },
+  "L117": {
+    "sire": "I Am Invincible",
+    "dam": "Booker",
+    "dam_sire": "Written Tycoon",
+    "origin": "AUS / 4",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PP",
+    "last_updated": "2026-04-20T11:36:03.341999"
+  },
+  "L124": {
+    "sire": "Trapeze Artist",
+    "dam": "Satellites",
+    "dam_sire": "Pierro",
+    "origin": "AUS / 4",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PP",
+    "last_updated": "2026-04-20T11:36:06.760345"
+  },
+  "L138": {
+    "sire": "Almanzor",
+    "dam": "La Adelita",
+    "dam_sire": "High Chaparral",
+    "origin": "NZ / 3",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PPG",
+    "last_updated": "2026-04-20T11:36:09.984182"
+  },
+  "L140": {
+    "sire": "Hellbent",
+    "dam": "Balady",
+    "dam_sire": "Zamindar",
+    "origin": "AUS / 4",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PPG",
+    "last_updated": "2026-04-20T11:36:13.552046"
+  },
+  "L148": {
+    "sire": "Night Of Thunder",
+    "dam": "Timepiece",
+    "dam_sire": "Zamindar",
+    "origin": "GB / 4",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PP",
+    "last_updated": "2026-04-20T11:36:16.982507"
+  },
+  "L159": {
+    "sire": "Hanseatic",
+    "dam": "Ragazze",
+    "dam_sire": "Snitzel",
+    "origin": "AUS / 3",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PPG",
+    "last_updated": "2026-04-20T11:36:20.446931"
+  },
+  "L175": {
+    "sire": "Anders",
+    "dam": "Sorcha Rose",
+    "dam_sire": "Stravinsky",
+    "origin": "AUS / 3",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PPG",
+    "last_updated": "2026-04-20T11:36:24.050700"
+  },
+  "L181": {
+    "sire": "Shalaa",
+    "dam": "Heavenly Mum",
+    "dam_sire": "Sebring",
+    "origin": "AUS / 3",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PPG",
+    "last_updated": "2026-04-20T11:36:27.347787"
+  },
+  "L187": {
+    "sire": "Ghaiyyath",
+    "dam": "Sailing",
+    "dam_sire": "Lope de Vega",
+    "origin": "GB / 4",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PP",
+    "last_updated": "2026-04-20T11:36:30.960905"
+  },
+  "L189": {
+    "sire": "Starspangledbanner",
+    "dam": "Margarita",
+    "dam_sire": "Marju",
+    "origin": "IRE / 4",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PP",
+    "last_updated": "2026-04-20T11:36:36.302173"
+  },
+  "L211": {
+    "sire": "Tagaloa",
+    "dam": "Miss Stunning",
+    "dam_sire": "Verrazano",
+    "origin": "AUS / 3",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PPG",
+    "last_updated": "2026-04-20T11:36:39.764698"
+  },
+  "L252": {
+    "sire": "Encryption",
+    "dam": "Moojeh",
+    "dam_sire": "More Than Ready",
+    "origin": "AUS / 3",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PPG",
+    "last_updated": "2026-04-20T11:36:43.001367"
+  },
+  "L256": {
+    "sire": "Kermadec",
+    "dam": "Zombie Queen",
+    "dam_sire": "Good Journey",
+    "origin": "AUS / 3",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PPG",
+    "last_updated": "2026-04-20T11:36:46.613963"
+  },
+  "L275": {
+    "sire": "Merchant Navy",
+    "dam": "Ennerdale",
+    "dam_sire": "Singspiel",
+    "origin": "AUS / 3",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PPG",
+    "last_updated": "2026-04-20T11:36:50.181267"
+  },
+  "H066": {
+    "sire": "Wootton Bassett",
+    "dam": "Loyale",
+    "dam_sire": "Turtle Bowl",
+    "origin": "FR / 7",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PP",
+    "last_updated": "2026-04-22T23:22:31.168818"
+  },
+  "H068": {
+    "sire": "Exceed And Excel",
+    "dam": "Vicennalia",
+    "dam_sire": "More Than Ready",
+    "origin": "AUS / 6",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PP",
+    "last_updated": "2026-04-22T23:22:39.026165"
+  },
+  "H108": {
+    "sire": "Satono Aladdin",
+    "dam": "Lemonade",
+    "dam_sire": "Bertolini",
+    "origin": "NZ / 6",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PPG",
+    "last_updated": "2026-04-22T23:22:44.843800"
+  },
+  "H203": {
+    "sire": "Per Incanto",
+    "dam": "Spritz",
+    "dam_sire": "Thorn Park",
+    "origin": "NZ / 6",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PPG",
+    "last_updated": "2026-04-22T23:22:51.717133"
+  },
+  "H241": {
+    "sire": "Toronado",
+    "dam": "Esteemed Elegance",
+    "dam_sire": "Sir Percy",
+    "origin": "AUS / 6",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PPG",
+    "last_updated": "2026-04-22T23:22:57.533638"
+  },
+  "H407": {
+    "sire": "Divine Prophet",
+    "dam": "The Fairy's Kiss",
+    "dam_sire": "Elusive Quality",
+    "origin": "AUS / 6",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PPG",
+    "last_updated": "2026-04-22T23:23:03.616671"
+  },
+  "H454": {
+    "sire": "All Too Hard",
+    "dam": "Nubian",
+    "dam_sire": "More Than Ready",
+    "origin": "AUS / 6",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PP",
+    "last_updated": "2026-04-22T23:23:10.414854"
+  },
+  "J020": {
+    "sire": "Fiorente",
+    "dam": "Socarada",
+    "dam_sire": "Strada",
+    "origin": "AUS / 6",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PP",
+    "last_updated": "2026-04-22T23:23:15.540765"
+  },
+  "J042": {
+    "sire": "Brazen Beau",
+    "dam": "Intendment",
+    "dam_sire": "Strategic",
+    "origin": "AUS / 5",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PPG",
+    "last_updated": "2026-04-22T23:23:20.904250"
+  },
+  "J043": {
+    "sire": "Charm Spirit",
+    "dam": "The Pearler",
+    "dam_sire": "Volksraad",
+    "origin": "NZ / 5",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PPG",
+    "last_updated": "2026-04-22T23:23:26.438872"
+  },
+  "J116": {
+    "sire": "Deep Field",
+    "dam": "Falqueen",
+    "dam_sire": "Falbrav",
+    "origin": "AUS / 5",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PPG",
+    "last_updated": "2026-04-22T23:23:32.091171"
+  },
+  "J135": {
+    "sire": "Ilovethiscity",
+    "dam": "Cyndiana Star",
+    "dam_sire": "Johannesburg",
+    "origin": "AUS / 6",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PP",
+    "last_updated": "2026-04-22T23:23:41.039378"
+  },
+  "J137": {
+    "sire": "Sacred Falls",
+    "dam": "La Praline",
+    "dam_sire": "Anabaa",
+    "origin": "NZ / 6",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PP",
+    "last_updated": "2026-04-22T23:23:46.067791"
+  },
+  "J162": {
+    "sire": "Tivaci",
+    "dam": "Sorellina",
+    "dam_sire": "Pins",
+    "origin": "NZ / 5",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PPG",
+    "last_updated": "2026-04-22T23:23:55.055690"
+  },
+  "J169": {
+    "sire": "Not A Single Doubt",
+    "dam": "Courtesan",
+    "dam_sire": "Mastercraftsman",
+    "origin": "AUS / 5",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PP",
+    "last_updated": "2026-04-22T23:24:00.622602"
+  },
+  "J187": {
+    "sire": "Toronado",
+    "dam": "Vadirima",
+    "dam_sire": "Selkirk",
+    "origin": "FR / 6",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PPG",
+    "last_updated": "2026-04-22T23:24:06.183564"
+  },
+  "J191": {
+    "sire": "Acclamation",
+    "dam": "Cravin Raven",
+    "dam_sire": "Raven's Pass",
+    "origin": "IRE / 5",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PP",
+    "last_updated": "2026-04-22T23:24:11.202317"
+  },
+  "J294": {
+    "sire": "Phoenix Of Spain",
+    "dam": "Freedom March",
+    "dam_sire": "Oasis Dream",
+    "origin": "IRE / 5",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PP",
+    "last_updated": "2026-04-22T23:24:16.675206"
+  },
+  "J298": {
+    "sire": "Hard Spun",
+    "dam": "Patti O'Rahy",
+    "dam_sire": "Rahy",
+    "origin": "USA / 6",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PP",
+    "last_updated": "2026-04-22T23:24:21.839557"
+  },
+  "J304": {
+    "sire": "Snitzel",
+    "dam": "Prairie Star",
+    "dam_sire": "High Chaparral",
+    "origin": "AUS / 5",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PP",
+    "last_updated": "2026-04-22T23:24:27.337534"
+  },
+  "J308": {
+    "sire": "Capitalist",
+    "dam": "Mountain Laurel",
+    "dam_sire": "Starcraft",
+    "origin": "AUS / 4",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PPG",
+    "last_updated": "2026-04-22T23:24:32.872329"
+  },
+  "J323": {
+    "sire": "Vancouver",
+    "dam": "Longing",
+    "dam_sire": "Lonhro",
+    "origin": "AUS / 5",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PPG",
+    "last_updated": "2026-04-22T23:24:38.262117"
+  },
+  "J325": {
+    "sire": "Havana Gold",
+    "dam": "Gladiatrix",
+    "dam_sire": "Compton Place",
+    "origin": "GB / 5",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PPG",
+    "last_updated": "2026-04-22T23:24:43.475304"
+  },
+  "J332": {
+    "sire": "Rubick",
+    "dam": "Dream Genie",
+    "dam_sire": "Rip Van Winkle",
+    "origin": "AUS / 5",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PP",
+    "last_updated": "2026-04-22T23:24:48.530300"
+  },
+  "J346": {
+    "sire": "Capitalist",
+    "dam": "We Can Dance",
+    "dam_sire": "Shinzig",
+    "origin": "AUS / 5",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PPG",
+    "last_updated": "2026-04-22T23:24:53.867260"
+  },
+  "J359": {
+    "sire": "Zoustar",
+    "dam": "Volcada",
+    "dam_sire": "Stravinsky",
+    "origin": "AUS / 5",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PPG",
+    "last_updated": "2026-04-22T23:24:59.519442"
+  },
+  "J371": {
+    "sire": "Capitalist",
+    "dam": "Meri Rani",
+    "dam_sire": "Stratum",
+    "origin": "AUS / 4",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PPG",
+    "last_updated": "2026-04-22T23:25:04.936734"
+  },
+  "J401": {
+    "sire": "Showtime",
+    "dam": "Hediard",
+    "dam_sire": "Bernardini",
+    "origin": "AUS / 5",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PP",
+    "last_updated": "2026-04-22T23:25:10.166921"
+  },
+  "J402": {
+    "sire": "Capitalist",
+    "dam": "Mossbeat",
+    "dam_sire": "Mossman",
+    "origin": "AUS / 5",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PP",
+    "last_updated": "2026-04-22T23:25:15.227351"
+  },
+  "J423": {
+    "sire": "Deep Field",
+    "dam": "Onemorezeta",
+    "dam_sire": "Onemorenomore",
+    "origin": "AUS / 5",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "ISG",
+    "last_updated": "2026-04-22T23:25:20.660203"
+  },
+  "J431": {
+    "sire": "Harry Angel",
+    "dam": "Romneya",
+    "dam_sire": "Red Ransom",
+    "origin": "AUS / 5",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PP",
+    "last_updated": "2026-04-22T23:25:26.159582"
+  },
+  "J441": {
+    "sire": "Justify",
+    "dam": "So You Merge",
+    "dam_sire": "So You Think",
+    "origin": "AUS / 5",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PPG",
+    "last_updated": "2026-04-22T23:25:31.631994"
+  },
+  "J445": {
+    "sire": "Shamexpress",
+    "dam": "Starguru",
+    "dam_sire": "Ishiguru",
+    "origin": "NZ / 5",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PP",
+    "last_updated": "2026-04-22T23:25:36.651936"
+  },
+  "J465": {
+    "sire": "Cable Bay",
+    "dam": "Ahhhh",
+    "dam_sire": "Lonhro",
+    "origin": "AUS / 5",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PP",
+    "last_updated": "2026-04-22T23:25:41.900005"
+  },
+  "J468": {
+    "sire": "Russian Revolution",
+    "dam": "I Am Gypsy",
+    "dam_sire": "I Am Invincible",
+    "origin": "AUS / 5",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PP",
+    "last_updated": "2026-04-22T23:25:47.283714"
+  },
+  "J509": {
+    "sire": "Phoenix Of Spain",
+    "dam": "Clarinda",
+    "dam_sire": "Montjeu",
+    "origin": "IRE / 5",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PP",
+    "last_updated": "2026-04-22T23:25:58.769676"
+  },
+  "J519": {
+    "sire": "Overshare",
+    "dam": "Madame Bookworm",
+    "dam_sire": "Publishing",
+    "origin": "AUS / 5",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PPG",
+    "last_updated": "2026-04-22T23:26:03.797371"
+  },
+  "J539": {
+    "sire": "Stratosphere",
+    "dam": "Digger's Girl",
+    "dam_sire": "Needs Further",
+    "origin": "AUS / 5",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PP",
+    "last_updated": "2026-04-22T23:26:09.573381"
+  },
+  "J545": {
+    "sire": "Capitalist",
+    "dam": "Muchas Coronas",
+    "dam_sire": "Onemorenomore",
+    "origin": "AUS / 4",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PPG",
+    "last_updated": "2026-04-22T23:26:15.016589"
+  },
+  "K017": {
+    "sire": "I Am Invincible",
+    "dam": "Royal Missile",
+    "dam_sire": "Smart Missile",
+    "origin": "AUS / 5",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PP",
+    "last_updated": "2026-04-22T23:26:20.472261"
+  },
+  "K056": {
+    "sire": "Capitalist",
+    "dam": "Madame Cactus",
+    "dam_sire": "Cactus Ridge",
+    "origin": "AUS / 5",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PP",
+    "last_updated": "2026-04-22T23:26:24.922512"
+  },
+  "K073": {
+    "sire": "Microphone",
+    "dam": "Embellished",
+    "dam_sire": "Bellamy Road",
+    "origin": "AUS / 4",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PPG",
+    "last_updated": "2026-04-22T23:26:29.371202"
+  },
+  "K093": {
+    "sire": "Fastnet Rock",
+    "dam": "Wedding Veil",
+    "dam_sire": "Dubawi",
+    "origin": "AUS / 5",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PP",
+    "last_updated": "2026-04-22T23:26:33.773107"
+  },
+  "K103": {
+    "sire": "Reward For Effort",
+    "dam": "Cannubi",
+    "dam_sire": "Savabeel",
+    "origin": "AUS / 4",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PPG",
+    "last_updated": "2026-04-22T23:26:37.982295"
+  },
+  "K118": {
+    "sire": "U S Navy Flag",
+    "dam": "Rebel Rocker",
+    "dam_sire": "Fastnet Rock",
+    "origin": "NZ / 5",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PPG",
+    "last_updated": "2026-04-22T23:26:42.442990"
+  },
+  "K175": {
+    "sire": "Street Boss",
+    "dam": "Notre Dame",
+    "dam_sire": "Exceed And Excel",
+    "origin": "AUS / 5",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PP",
+    "last_updated": "2026-04-22T23:26:46.583959"
+  },
+  "K253": {
+    "sire": "Masar",
+    "dam": "Grand Depart",
+    "dam_sire": "Royal Applause",
+    "origin": "GB / 4",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PP",
+    "last_updated": "2026-04-22T23:26:51.479307"
+  },
+  "K310": {
+    "sire": "Mikki Isle",
+    "dam": "Rose Campion",
+    "dam_sire": "Starcraft",
+    "origin": "AUS / 5",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PP",
+    "last_updated": "2026-04-22T23:26:56.413660"
+  },
+  "K316": {
+    "sire": "All Too Hard",
+    "dam": "Givem Hell",
+    "dam_sire": "Commands",
+    "origin": "AUS / 4",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PPG",
+    "last_updated": "2026-04-22T23:27:01.186347"
+  },
+  "K331": {
+    "sire": "Star Turn",
+    "dam": "Hyannis Port",
+    "dam_sire": "Redoute's Choice",
+    "origin": "AUS / 3",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PPG",
+    "last_updated": "2026-04-22T23:27:05.556920"
+  },
+  "K337": {
+    "sire": "Zousain",
+    "dam": "Assertive Eagle",
+    "dam_sire": "Danewin",
+    "origin": "AUS / 3",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PPG",
+    "last_updated": "2026-04-22T23:27:10.075441"
+  },
+  "K395": {
+    "sire": "Super Seth",
+    "dam": "Miracle Miss",
+    "dam_sire": "O'Reilly",
+    "origin": "NZ / 4",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PPG",
+    "last_updated": "2026-04-22T23:27:16.365267"
+  },
+  "K407": {
+    "sire": "Capitalist",
+    "dam": "Miss Gai Flyer",
+    "dam_sire": "Flying Spur",
+    "origin": "AUS / 4",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PP",
+    "last_updated": "2026-04-22T23:27:20.841389"
+  },
+  "K429": {
+    "sire": "Alabama Express",
+    "dam": "Superbellaa",
+    "dam_sire": "Super One",
+    "origin": "AUS / 3",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PPG",
+    "last_updated": "2026-04-22T23:27:27.506702"
+  },
+  "K455": {
+    "sire": "Toronado",
+    "dam": "In Vero We Trust",
+    "dam_sire": "Anodin",
+    "origin": "FR / 4",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "ISG",
+    "last_updated": "2026-04-22T23:27:32.321579"
+  },
+  "K494": {
+    "sire": "Belardo",
+    "dam": "Colleraine",
+    "dam_sire": "Sakhee's Secret",
+    "origin": "NZ / 4",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PP",
+    "last_updated": "2026-04-22T23:27:36.893356"
+  },
+  "K512": {
+    "sire": "Cable Bay",
+    "dam": "Rich And Rare",
+    "dam_sire": "Starspangledbanner",
+    "origin": "AUS / 4",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PP",
+    "last_updated": "2026-04-22T23:27:41.353666"
+  },
+  "K515": {
+    "sire": "Merchant Navy",
+    "dam": "Stormy Publisher",
+    "dam_sire": "Bernstein",
+    "origin": "AUS / 4",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PP",
+    "last_updated": "2026-04-22T23:27:47.565285"
+  },
+  "K529": {
+    "sire": "Starspangledbanner",
+    "dam": "Our Secret Sister",
+    "dam_sire": "Toorak Toff",
+    "origin": "AUS / 4",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PPG",
+    "last_updated": "2026-04-22T23:27:52.260818"
+  },
+  "K536": {
+    "sire": "Starspangledbanner",
+    "dam": "Deira Surprise",
+    "dam_sire": "Slade Power",
+    "origin": "IRE / 4",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PPG",
+    "last_updated": "2026-04-22T23:27:56.971798"
+  },
+  "K553": {
+    "sire": "D'Argento",
+    "dam": "Sarawak",
+    "dam_sire": "Hussonet",
+    "origin": "AUS / 3",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PPG",
+    "last_updated": "2026-04-22T23:28:01.916448"
+  },
+  "L007": {
+    "sire": "Shalaa",
+    "dam": "Lyuba",
+    "dam_sire": "Turffontein",
+    "origin": "AUS / 3",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PPG",
+    "last_updated": "2026-04-22T23:28:07.304074"
+  },
+  "L033": {
+    "sire": "Pierata",
+    "dam": "Plastered",
+    "dam_sire": "Wilburn",
+    "origin": "AUS / 4",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PP",
+    "last_updated": "2026-04-22T23:28:10.776039"
+  },
+  "L039": {
+    "sire": "Shooting To Win",
+    "dam": "Reggie",
+    "dam_sire": "Germano",
+    "origin": "AUS / 4",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PPG",
+    "last_updated": "2026-04-22T23:28:14.364017"
+  },
+  "L052": {
+    "sire": "Capitalist",
+    "dam": "Maroon Bay",
+    "dam_sire": "Exceed And Excel",
+    "origin": "AUS / 3",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PP",
+    "last_updated": "2026-04-22T23:28:17.846439"
+  },
+  "L068": {
+    "sire": "Time Test",
+    "dam": "Night Nurse",
+    "dam_sire": "Tavistock",
+    "origin": "NZ / 4",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PPG",
+    "last_updated": "2026-04-22T23:28:21.547308"
+  },
+  "L077": {
+    "sire": "Lonhro",
+    "dam": "Imoto",
+    "dam_sire": "Bianconi",
+    "origin": "AUS / 4",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PP",
+    "last_updated": "2026-04-22T23:28:25.069839"
+  },
+  "L112": {
+    "sire": "Tamayuz",
+    "dam": "My Brunette",
+    "dam_sire": "Arcano",
+    "origin": "IRE / 4",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PP",
+    "last_updated": "2026-04-22T23:28:29.076093"
+  },
+  "L119": {
+    "sire": "I Am Invincible",
+    "dam": "Tilia Rose",
+    "dam_sire": "Written Tycoon",
+    "origin": "AUS / 4",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PP",
+    "last_updated": "2026-04-22T23:28:32.760201"
+  },
+  "L141": {
+    "sire": "Russian Camelot",
+    "dam": "Lenience",
+    "dam_sire": "Oasis Dream",
+    "origin": "AUS / 3",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PPG",
+    "last_updated": "2026-04-22T23:28:36.256994"
+  },
+  "L144": {
+    "sire": "Toronado",
+    "dam": "Enchanted Dawn",
+    "dam_sire": "War Front",
+    "origin": "AUS / 3",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PPG",
+    "last_updated": "2026-04-22T23:28:40.290888"
+  },
+  "L170": {
+    "sire": "Night Of Thunder",
+    "dam": "Good Vibes",
+    "dam_sire": "Due Diligence",
+    "origin": "AUS / 4",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PP",
+    "last_updated": "2026-04-22T23:28:44.294131"
+  },
+  "L172": {
+    "sire": "So You Think",
+    "dam": "Respin",
+    "dam_sire": "Power",
+    "origin": "NZ / 4",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PP",
+    "last_updated": "2026-04-22T23:28:47.963273"
+  },
+  "L214": {
+    "sire": "Magna Grecia",
+    "dam": "Theatric",
+    "dam_sire": "Casino Prince",
+    "origin": "AUS / 4",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PP",
+    "last_updated": "2026-04-22T23:28:51.686234"
+  },
+  "L222": {
+    "sire": "Ten Sovereigns",
+    "dam": "Petit Leon",
+    "dam_sire": "Shamexpress",
+    "origin": "NZ / 4",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PP",
+    "last_updated": "2026-04-22T23:28:55.220736"
+  },
+  "L328": {
+    "sire": "Tassort",
+    "dam": "Usena",
+    "dam_sire": "Sebring",
+    "origin": "AUS / 3",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PPG",
+    "last_updated": "2026-04-22T23:28:59.030298"
+  },
+  "H175": {
+    "sire": "Zoustar",
+    "dam": "Pearl Star",
+    "dam_sire": "Star Witness",
+    "origin": "AUS / 6",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PP",
+    "last_updated": "2026-04-26T23:24:17.638312"
+  },
+  "H216": {
+    "sire": "Havana Grey",
+    "dam": "Starboard Watch",
+    "dam_sire": "Harbour Watch",
+    "origin": "GB / 6",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PPG",
+    "last_updated": "2026-04-26T23:24:23.910570"
+  },
+  "H321": {
+    "sire": "Deep Field",
+    "dam": "Waitomo Toka",
+    "dam_sire": "Fastnet Rock",
+    "origin": "AUS / 6",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PPG",
+    "last_updated": "2026-04-26T23:24:30.069096"
+  },
+  "H354": {
+    "sire": "Unusual Suspect",
+    "dam": "Delgatie Pearl",
+    "dam_sire": "Perfectly Ready",
+    "origin": "NZ / 6",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PPG",
+    "last_updated": "2026-04-26T23:24:36.573095"
+  },
+  "H408": {
+    "sire": "Epaulette",
+    "dam": "Woodstock Hussey",
+    "dam_sire": "Hussonet",
+    "origin": "AUS / 6",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PPG",
+    "last_updated": "2026-04-26T23:24:43.050796"
+  },
+  "H439": {
+    "sire": "Shooting To Win",
+    "dam": "La Comedienne",
+    "dam_sire": "Commands",
+    "origin": "AUS / 5",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PPG",
+    "last_updated": "2026-04-26T23:24:49.513789"
+  },
+  "H451": {
+    "sire": "Lord Kanaloa",
+    "dam": "Sacred Sight",
+    "dam_sire": "Fastnet Rock",
+    "origin": "JPN / 7",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PP",
+    "last_updated": "2026-04-26T23:24:56.020652"
+  },
+  "J053": {
+    "sire": "Heroic Valour",
+    "dam": "Marma Got Style",
+    "dam_sire": "Wicked Style",
+    "origin": "AUS / 6",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PP",
+    "last_updated": "2026-04-26T23:25:02.552580"
+  },
+  "J114": {
+    "sire": "Capitalist",
+    "dam": "Sebrina",
+    "dam_sire": "Sebring",
+    "origin": "AUS / 5",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PPG",
+    "last_updated": "2026-04-26T23:25:08.448270"
+  },
+  "J180": {
+    "sire": "Per Incanto",
+    "dam": "Miss Bondi",
+    "dam_sire": "O'Reilly",
+    "origin": "NZ / 5",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PPG",
+    "last_updated": "2026-04-26T23:25:14.089459"
+  },
+  "J277": {
+    "sire": "Rubick",
+    "dam": "Black Tulip",
+    "dam_sire": "Lonhro",
+    "origin": "AUS / 5",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PPG",
+    "last_updated": "2026-04-26T23:25:19.680428"
+  },
+  "J437": {
+    "sire": "Toronado",
+    "dam": "Liberty Made",
+    "dam_sire": "Statue Of Liberty",
+    "origin": "AUS / 5",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PP",
+    "last_updated": "2026-04-26T23:25:25.579089"
+  },
+  "J442": {
+    "sire": "Mendelssohn",
+    "dam": "Kitty Leroy",
+    "dam_sire": "I Am Invincible",
+    "origin": "AUS / 5",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PPG",
+    "last_updated": "2026-04-26T23:25:31.121877"
+  },
+  "J443": {
+    "sire": "Pride Of Dubai",
+    "dam": "Sherbet Bomb",
+    "dam_sire": "Snitzel",
+    "origin": "AUS / 4",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PPG",
+    "last_updated": "2026-04-26T23:25:37.284880"
+  },
+  "K005": {
+    "sire": "Kermadec",
+    "dam": "Our Squeezer",
+    "dam_sire": "Redoute's Choice",
+    "origin": "AUS / 5",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PPG",
+    "last_updated": "2026-04-26T23:25:42.002956"
+  },
+  "K031": {
+    "sire": "Shamus Award",
+    "dam": "Sacred Walk",
+    "dam_sire": "Pins",
+    "origin": "AUS / 4",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PPG",
+    "last_updated": "2026-04-26T23:25:46.528780"
+  },
+  "K058": {
+    "sire": "Grunt",
+    "dam": "Kovello",
+    "dam_sire": "Helmet",
+    "origin": "AUS / 4",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PP",
+    "last_updated": "2026-04-26T23:25:51.232237"
+  },
+  "K105": {
+    "sire": "Territories",
+    "dam": "St Gallen",
+    "dam_sire": "Commands",
+    "origin": "NZ / 4",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PPG",
+    "last_updated": "2026-04-26T23:25:55.923854"
+  },
+  "K114": {
+    "sire": "Press Statement",
+    "dam": "Giovanna Bella",
+    "dam_sire": "Iffraaj",
+    "origin": "NZ / 4",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PPG",
+    "last_updated": "2026-04-26T23:26:00.895047"
+  },
+  "K122": {
+    "sire": "Zoustar",
+    "dam": "Princess Of Queens",
+    "dam_sire": "Magnus",
+    "origin": "AUS / 4",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PPG",
+    "last_updated": "2026-04-26T23:26:05.731543"
+  },
+  "K130": {
+    "sire": "Rubick",
+    "dam": "Dancer's Rose",
+    "dam_sire": "Dehere",
+    "origin": "AUS / 5",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PP",
+    "last_updated": "2026-04-26T23:26:10.473525"
+  },
+  "K157": {
+    "sire": "Nyquist",
+    "dam": "Do The Dance",
+    "dam_sire": "Discreet Cat",
+    "origin": "USA / 4",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PPG",
+    "last_updated": "2026-04-26T23:26:15.549550"
+  },
+  "K201": {
+    "sire": "No Nay Never",
+    "dam": "Muirin",
+    "dam_sire": "Born To Sea",
+    "origin": "IRE / 4",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PP",
+    "last_updated": "2026-04-26T23:26:19.965687"
+  },
+  "K246": {
+    "sire": "Toronado",
+    "dam": "Devil In Her Heart",
+    "dam_sire": "Star Witness",
+    "origin": "AUS / 4",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PPG",
+    "last_updated": "2026-04-26T23:26:24.713175"
+  },
+  "K255": {
+    "sire": "Oasis Dream",
+    "dam": "Mujadil Lachy",
+    "dam_sire": "Kyllachy",
+    "origin": "IRE / 5",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PP",
+    "last_updated": "2026-04-26T23:26:29.212568"
+  },
+  "K277": {
+    "sire": "Shamus Award",
+    "dam": "Belleluia",
+    "dam_sire": "Bel Esprit",
+    "origin": "AUS / 4",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PPG",
+    "last_updated": "2026-04-26T23:26:34.277950"
+  },
+  "K286": {
+    "sire": "Belardo",
+    "dam": "Cape South",
+    "dam_sire": "Cape Cross",
+    "origin": "NZ / 4",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PP",
+    "last_updated": "2026-04-26T23:26:38.865326"
+  },
+  "K296": {
+    "sire": "Hellbent",
+    "dam": "My Dear Friend",
+    "dam_sire": "General Nediym",
+    "origin": "AUS / 4",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PPG",
+    "last_updated": "2026-04-26T23:26:44.275908"
+  },
+  "K307": {
+    "sire": "Tivaci",
+    "dam": "Without Flaw",
+    "dam_sire": "Sacred Falls",
+    "origin": "NZ / 4",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PPG",
+    "last_updated": "2026-04-26T23:26:49.680359"
+  },
+  "K341": {
+    "sire": "Impending",
+    "dam": "Oratia",
+    "dam_sire": "Redoute's Choice",
+    "origin": "AUS / 4",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PPG",
+    "last_updated": "2026-04-26T23:26:56.844232"
+  },
+  "K369": {
+    "sire": "Snitzel",
+    "dam": "Dee Nine Elle",
+    "dam_sire": "Duporth",
+    "origin": "AUS / 4",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PP",
+    "last_updated": "2026-04-26T23:27:01.348218"
+  },
+  "K392": {
+    "sire": "Sooboog",
+    "dam": "Rhythm Beat",
+    "dam_sire": "Pentire",
+    "origin": "AUS / 4",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PPG",
+    "last_updated": "2026-04-26T23:27:06.178830"
+  },
+  "K438": {
+    "sire": "Redwood",
+    "dam": "La Parfaite",
+    "dam_sire": "Dehere",
+    "origin": "NZ / 4",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PPG",
+    "last_updated": "2026-04-26T23:27:10.763750"
+  },
+  "K477": {
+    "sire": "Too Darn Hot",
+    "dam": "River Jewel",
+    "dam_sire": "Snitzel",
+    "origin": "AUS / 4",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PP",
+    "last_updated": "2026-04-26T23:27:15.482876"
+  },
+  "K498": {
+    "sire": "Ocean Park",
+    "dam": "Shopaholic",
+    "dam_sire": "Pins",
+    "origin": "NZ / 3",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PPG",
+    "last_updated": "2026-04-26T23:27:20.364141"
+  },
+  "K526": {
+    "sire": "Pride Of Dubai",
+    "dam": "Anatola",
+    "dam_sire": "More Than Ready",
+    "origin": "AUS / 4",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PPG",
+    "last_updated": "2026-04-26T23:27:24.802998"
+  },
+  "K570": {
+    "sire": "Darci Brahma",
+    "dam": "Surreptitiously",
+    "dam_sire": "Machiavellian",
+    "origin": "NZ / 4",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PPG",
+    "last_updated": "2026-04-26T23:27:29.807404"
+  },
+  "K585": {
+    "sire": "Zousain",
+    "dam": "Divine City",
+    "dam_sire": "Ferocity",
+    "origin": "AUS / 3",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PPG",
+    "last_updated": "2026-04-26T23:27:34.640133"
+  },
+  "K902": {
+    "sire": "Massaat",
+    "dam": "Icky Woo",
+    "dam_sire": "Mark Of Esteem",
+    "origin": "GB / 6",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "VIS",
+    "last_updated": "2026-04-26T23:27:39.372307"
+  },
+  "K907": {
+    "sire": "Lord Kanaloa",
+    "dam": "Ciliege",
+    "dam_sire": "Sakura Bakushin O",
+    "origin": "JPN / 7",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "VIS",
+    "last_updated": "2026-04-26T23:27:44.057218"
+  },
+  "K910": {
+    "sire": "Palace Malice",
+    "dam": "India Mantuana",
+    "dam_sire": "Wilburn",
+    "origin": "JPN / 5",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "VIS",
+    "last_updated": "2026-04-26T23:27:48.297821"
+  },
+  "L014": {
+    "sire": "Per Incanto",
+    "dam": "Saoirse",
+    "dam_sire": "Iffraaj",
+    "origin": "NZ / 3",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PPG",
+    "last_updated": "2026-04-26T23:27:52.123584"
+  },
+  "L021": {
+    "sire": "Earthlight",
+    "dam": "Syzygy Blossom",
+    "dam_sire": "Testa Rossa",
+    "origin": "AUS / 3",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PPG",
+    "last_updated": "2026-04-26T23:27:58.961502"
+  },
+  "L024": {
+    "sire": "Harry Angel",
+    "dam": "Psychedelic",
+    "dam_sire": "Domesday",
+    "origin": "AUS / 3",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PPG",
+    "last_updated": "2026-04-26T23:28:02.706755"
+  },
+  "L028": {
+    "sire": "City Light",
+    "dam": "Adana",
+    "dam_sire": "Le Havre",
+    "origin": "IRE / 4",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PP",
+    "last_updated": "2026-04-26T23:28:06.475099"
+  },
+  "L031": {
+    "sire": "Capitalist",
+    "dam": "Ajaayeb",
+    "dam_sire": "Snitzel",
+    "origin": "AUS / 4",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PP",
+    "last_updated": "2026-04-26T23:28:10.387362"
+  },
+  "L036": {
+    "sire": "Frosted",
+    "dam": "Gina Lola",
+    "dam_sire": "Not A Single Doubt",
+    "origin": "AUS / 3",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PPG",
+    "last_updated": "2026-04-26T23:28:14.407939"
+  },
+  "L075": {
+    "sire": "Encryption",
+    "dam": "Lobola",
+    "dam_sire": "Anabaa",
+    "origin": "AUS / 4",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PP",
+    "last_updated": "2026-04-26T23:28:17.994239"
+  },
+  "L080": {
+    "sire": "Tivaci",
+    "dam": "Sheezababe",
+    "dam_sire": "Zabeel",
+    "origin": "NZ / 4",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PP",
+    "last_updated": "2026-04-26T23:28:21.734417"
+  },
+  "L085": {
+    "sire": "Headwater",
+    "dam": "Wicked",
+    "dam_sire": "Bernardini",
+    "origin": "AUS / 3",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PPG",
+    "last_updated": "2026-04-26T23:28:25.367899"
+  },
+  "L097": {
+    "sire": "The Autumn Sun",
+    "dam": "Stormy Victoria",
+    "dam_sire": "Stormy River",
+    "origin": "AUS / 4",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PP",
+    "last_updated": "2026-04-26T23:28:29.260991"
+  },
+  "L116": {
+    "sire": "Dundeel",
+    "dam": "Simply Carina",
+    "dam_sire": "El Prado",
+    "origin": "AUS / 4",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PP",
+    "last_updated": "2026-04-26T23:28:33.291982"
+  },
+  "L121": {
+    "sire": "Rich Enuff",
+    "dam": "Esthermac",
+    "dam_sire": "Brief Truce",
+    "origin": "AUS / 4",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PP",
+    "last_updated": "2026-04-26T23:28:36.906271"
+  },
+  "L125": {
+    "sire": "Blue Point",
+    "dam": "Bahamas",
+    "dam_sire": "Teofilo",
+    "origin": "AUS / 3",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PPG",
+    "last_updated": "2026-04-26T23:28:40.328859"
+  },
+  "L128": {
+    "sire": "Hellbent",
+    "dam": "Elusive Affair",
+    "dam_sire": "Rothesay",
+    "origin": "AUS / 4",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PPG",
+    "last_updated": "2026-04-26T23:28:44.181082"
+  },
+  "L129": {
+    "sire": "Lucky Vega",
+    "dam": "Absolute Pleasure",
+    "dam_sire": "Trade Fair",
+    "origin": "AUS / 3",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PPG",
+    "last_updated": "2026-04-26T23:28:47.896829"
+  },
+  "L133": {
+    "sire": "Darci Brahma",
+    "dam": "Dentelle",
+    "dam_sire": "Swiss Ace",
+    "origin": "NZ / 4",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PP",
+    "last_updated": "2026-04-26T23:28:52.491424"
+  },
+  "L134": {
+    "sire": "Embellish",
+    "dam": "Opulent",
+    "dam_sire": "Keeper",
+    "origin": "NZ / 4",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PP",
+    "last_updated": "2026-04-26T23:28:56.346100"
+  },
+  "L167": {
+    "sire": "Dundeel",
+    "dam": "Elegant Composure",
+    "dam_sire": "Bradbury's Luck",
+    "origin": "AUS / 4",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PP",
+    "last_updated": "2026-04-26T23:29:01.081044"
+  },
+  "L168": {
+    "sire": "Frosted",
+    "dam": "Pleiades",
+    "dam_sire": "Redoute's Choice",
+    "origin": "AUS / 4",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PP",
+    "last_updated": "2026-04-26T23:29:06.790240"
+  },
+  "L171": {
+    "sire": "Proisir",
+    "dam": "Mariota",
+    "dam_sire": "O'Reilly",
+    "origin": "NZ / 4",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PP",
+    "last_updated": "2026-04-26T23:29:10.465072"
+  },
+  "L178": {
+    "sire": "Churchill",
+    "dam": "Good Oh",
+    "dam_sire": "Duporth",
+    "origin": "AUS / 3",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PPG",
+    "last_updated": "2026-04-26T23:29:14.142705"
+  },
+  "L186": {
+    "sire": "Elzaam",
+    "dam": "Live Stream",
+    "dam_sire": "Awtaad",
+    "origin": "IRE / 3",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PP",
+    "last_updated": "2026-04-26T23:29:17.790085"
+  },
+  "L194": {
+    "sire": "Gimmethegreenlight",
+    "dam": "Esteemal",
+    "dam_sire": "Captain Al",
+    "origin": "SAF / 3",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PPG",
+    "last_updated": "2026-04-26T23:29:22.101986"
+  },
+  "L203": {
+    "sire": "Hello Youmzain",
+    "dam": "Mianina",
+    "dam_sire": "Ocean Park",
+    "origin": "NZ / 3",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PPG",
+    "last_updated": "2026-04-26T23:29:26.208120"
+  },
+  "L212": {
+    "sire": "Written By",
+    "dam": "Rocknavar",
+    "dam_sire": "Fastnet Rock",
+    "origin": "AUS / 3",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PPG",
+    "last_updated": "2026-04-26T23:29:30.310952"
+  },
+  "L226": {
+    "sire": "Bivouac",
+    "dam": "Folk Song",
+    "dam_sire": "Street Cry",
+    "origin": "AUS / 3",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PPG",
+    "last_updated": "2026-04-26T23:29:34.092772"
+  },
+  "L255": {
+    "sire": "Harry Angel",
+    "dam": "Jacinta",
+    "dam_sire": "Commands",
+    "origin": "AUS / 3",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PPG",
+    "last_updated": "2026-04-26T23:29:38.194880"
+  },
+  "L265": {
+    "sire": "Zousain",
+    "dam": "The Messina Nymph",
+    "dam_sire": "Commands",
+    "origin": "AUS / 3",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PPG",
+    "last_updated": "2026-04-26T23:29:42.355467"
+  },
+  "L266": {
+    "sire": "Zoustar",
+    "dam": "Atlantic Emerald",
+    "dam_sire": "Galileo",
+    "origin": "AUS / 3",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PPG",
+    "last_updated": "2026-04-26T23:29:46.336178"
+  },
+  "L273": {
+    "sire": "Farnan",
+    "dam": "Precious Sophia",
+    "dam_sire": "Cecconi",
+    "origin": "AUS / 3",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PPG",
+    "last_updated": "2026-04-26T23:29:51.208752"
+  },
+  "L331": {
+    "sire": "Toronado",
+    "dam": "Reward For Glory",
+    "dam_sire": "Reward For Effort",
+    "origin": "AUS / 3",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PPG",
+    "last_updated": "2026-04-26T23:29:55.255516"
+  },
+  "L913": {
+    "sire": "Sea The Stars",
+    "dam": "Sosia",
+    "dam_sire": "Shamardal",
+    "origin": "IRE / 5",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "VIS",
+    "last_updated": "2026-04-26T23:29:59.034334"
+  },
+  "L917": {
+    "sire": "Wootton Bassett",
+    "dam": "Ishvana",
+    "dam_sire": "Holy Roman Emperor",
+    "origin": "IRE / 4",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "VIS",
+    "last_updated": "2026-04-26T23:30:03.219893"
+  },
+  "L918": {
+    "sire": "Maurice",
+    "dam": "Blumenblatt",
+    "dam_sire": "Admire Vega",
+    "origin": "JPN / 5",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "VIS",
+    "last_updated": "2026-04-26T23:30:15.274811"
+  },
+  "L919": {
+    "sire": "Duramente",
+    "dam": "Mask Off",
+    "dam_sire": "Deep Impact",
+    "origin": "JPN / 4",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "VIS",
+    "last_updated": "2026-04-26T23:30:18.935915"
+  },
+  "L920": {
+    "sire": "Shamardal",
+    "dam": "Emirates Queen",
+    "dam_sire": "Street Cry",
+    "origin": "IRE / 8",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "VIS",
+    "last_updated": "2026-04-26T23:30:22.849145"
+  },
+  "L922": {
+    "sire": "Epiphaneia",
+    "dam": "Barefoot Lady",
+    "dam_sire": "Footstepsinthesand",
+    "origin": "JPN / 4",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "VIS",
+    "last_updated": "2026-04-26T23:30:26.492452"
+  },
+  "L924": {
+    "sire": "Kizuna",
+    "dam": "Admire Sabrina",
+    "dam_sire": "Symboli Kris S",
+    "origin": "JPN / 5",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "VIS",
+    "last_updated": "2026-04-26T23:30:30.269955"
+  },
+  "H134": {
+    "sire": "Havana Grey",
+    "dam": "Fair Maiden",
+    "dam_sire": "Carnegie",
+    "origin": "GB / 6",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PP",
+    "last_updated": "2026-04-29T23:23:52.318056"
+  },
+  "H137": {
+    "sire": "Mondialiste",
+    "dam": "Storming Sioux",
+    "dam_sire": "Storming Home",
+    "origin": "GB / 7",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PP",
+    "last_updated": "2026-04-29T23:24:01.794475"
+  },
+  "H213": {
+    "sire": "Daiwa Major",
+    "dam": "Sweet Lady",
+    "dam_sire": "Encosta de Lago",
+    "origin": "JPN / 6",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PPG",
+    "last_updated": "2026-04-29T23:24:07.146575"
+  },
+  "H296": {
+    "sire": "Ilovethiscity",
+    "dam": "Maraudamiss",
+    "dam_sire": "Clangalang",
+    "origin": "AUS / 6",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PP",
+    "last_updated": "2026-04-29T23:24:13.065382"
+  },
+  "H382": {
+    "sire": "Burgundy",
+    "dam": "Salsa",
+    "dam_sire": "O'Reilly",
+    "origin": "NZ / 6",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PPG",
+    "last_updated": "2026-04-29T23:24:18.393374"
+  },
+  "H438": {
+    "sire": "Satono Aladdin",
+    "dam": "Gardenier",
+    "dam_sire": "Rip Van Winkle",
+    "origin": "NZ / 5",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PPG",
+    "last_updated": "2026-04-29T23:24:32.571180"
+  },
+  "J082": {
+    "sire": "Shamus Award",
+    "dam": "Rocket Baby",
+    "dam_sire": "Danzero",
+    "origin": "AUS / 6",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PP",
+    "last_updated": "2026-04-29T23:24:37.249987"
+  },
+  "J181": {
+    "sire": "Power",
+    "dam": "Queen Istona",
+    "dam_sire": "Chateau Istana",
+    "origin": "AUS / 5",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PPG",
+    "last_updated": "2026-04-29T23:24:41.846429"
+  },
+  "J225": {
+    "sire": "Starspangledbanner",
+    "dam": "Casino Card",
+    "dam_sire": "Casino Prince",
+    "origin": "AUS / 5",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PPG",
+    "last_updated": "2026-04-29T23:24:46.745482"
+  },
+  "J247": {
+    "sire": "Satono Aladdin",
+    "dam": "Fairfield Flame",
+    "dam_sire": "Oasis Dream",
+    "origin": "NZ / 6",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PP",
+    "last_updated": "2026-04-29T23:24:51.732949"
+  },
+  "J253": {
+    "sire": "Complacent",
+    "dam": "Thunderchine",
+    "dam_sire": "Thunder Gulch",
+    "origin": "NZ / 5",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PPG",
+    "last_updated": "2026-04-29T23:24:56.782035"
+  },
+  "J316": {
+    "sire": "Shamus Award",
+    "dam": "Miss Ethics",
+    "dam_sire": "Count Dubois",
+    "origin": "AUS / 5",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PPG",
+    "last_updated": "2026-04-29T23:25:02.028476"
+  },
+  "J331": {
+    "sire": "Pierro",
+    "dam": "Aonair",
+    "dam_sire": "Fastnet Rock",
+    "origin": "AUS / 6",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PP",
+    "last_updated": "2026-04-29T23:25:06.899412"
+  },
+  "J375": {
+    "sire": "Deep Field",
+    "dam": "Feeling Positive",
+    "dam_sire": "Not A Single Doubt",
+    "origin": "AUS / 5",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PPG",
+    "last_updated": "2026-04-29T23:25:11.983024"
+  },
+  "J426": {
+    "sire": "Dundeel",
+    "dam": "Whispering Brook",
+    "dam_sire": "Hinchinbrook",
+    "origin": "AUS / 5",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "ISG",
+    "last_updated": "2026-04-29T23:25:16.849128"
+  },
+  "J463": {
+    "sire": "Starspangledbanner",
+    "dam": "Victoria's Angel",
+    "dam_sire": "Dark Angel",
+    "origin": "GB / 5",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "ISG",
+    "last_updated": "2026-04-29T23:25:21.770639"
+  },
+  "K027": {
+    "sire": "Justify",
+    "dam": "Montana Flight",
+    "dam_sire": "Flying Spur",
+    "origin": "AUS / 4",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PPG",
+    "last_updated": "2026-04-29T23:25:25.971275"
+  },
+  "K055": {
+    "sire": "Akeed Mofeed",
+    "dam": "Annenberg",
+    "dam_sire": "Artie Schiller",
+    "origin": "AUS / 5",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PP",
+    "last_updated": "2026-04-29T23:25:30.254683"
+  },
+  "K059": {
+    "sire": "Lope de Vega",
+    "dam": "Happy Odyssey",
+    "dam_sire": "Camacho",
+    "origin": "AUS / 5",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PP",
+    "last_updated": "2026-04-29T23:25:34.448693"
+  },
+  "K160": {
+    "sire": "Galileo",
+    "dam": "Different League",
+    "dam_sire": "Dabirsim",
+    "origin": "IRE / 5",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PP",
+    "last_updated": "2026-05-01T23:26:34.271672"
+  },
+  "K176": {
+    "sire": "The Autumn Sun",
+    "dam": "Miss Marielle",
+    "dam_sire": "Encosta de Lago",
+    "origin": "AUS / 5",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PP",
+    "last_updated": "2026-05-01T23:26:40.175504"
+  },
+  "K208": {
+    "sire": "What A Winter",
+    "dam": "Lady In Black",
+    "dam_sire": "Dynasty",
+    "origin": "SAF / 5",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PP",
+    "last_updated": "2026-05-01T23:26:45.471015"
+  },
+  "K271": {
+    "sire": "Deep Field",
+    "dam": "Ma Can Do It",
+    "dam_sire": "Majesticperfection",
+    "origin": "AUS / 4",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PPG",
+    "last_updated": "2026-05-01T23:26:52.505194"
+  },
+  "K283": {
+    "sire": "Written By",
+    "dam": "Sudden Wealth",
+    "dam_sire": "Time Thief",
+    "origin": "AUS / 4",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PPG",
+    "last_updated": "2026-05-01T23:26:58.301567"
+  },
+  "K342": {
+    "sire": "Nicconi",
+    "dam": "Bedizened",
+    "dam_sire": "Commands",
+    "origin": "AUS / 4",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PPG",
+    "last_updated": "2026-05-01T23:27:02.551528"
+  },
+  "K344": {
+    "sire": "Ribchester",
+    "dam": "Snitz Of Time",
+    "dam_sire": "Snitzel",
+    "origin": "NZ / 4",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PPG",
+    "last_updated": "2026-05-01T23:27:08.100581"
+  },
+  "K394": {
+    "sire": "Starspangledbanner",
+    "dam": "Miss Delima",
+    "dam_sire": "Swiss Ace",
+    "origin": "AUS / 3",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PPG",
+    "last_updated": "2026-05-01T23:27:12.969506"
+  },
+  "K396": {
+    "sire": "Ace High",
+    "dam": "Smokin' Valentina",
+    "dam_sire": "Encosta de Lago",
+    "origin": "NZ / 4",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PP",
+    "last_updated": "2026-05-01T23:27:18.567484"
+  },
+  "K421": {
+    "sire": "Tivaci",
+    "dam": "Tears Of An Angel",
+    "dam_sire": "Echoes Of Heaven",
+    "origin": "NZ / 4",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PPG",
+    "last_updated": "2026-05-01T23:27:24.022835"
+  },
+  "K451": {
+    "sire": "Mehmas",
+    "dam": "Heavenly River",
+    "dam_sire": "Stormy River",
+    "origin": "IRE / 4",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "ISG",
+    "last_updated": "2026-05-01T23:27:29.837070"
+  },
+  "K532": {
+    "sire": "Toronado",
+    "dam": "Social Glow",
+    "dam_sire": "Aghaadir",
+    "origin": "AUS / 4",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PPG",
+    "last_updated": "2026-05-01T23:27:35.731311"
+  },
+  "K573": {
+    "sire": "Vespa",
+    "dam": "Crocea",
+    "dam_sire": "Lonhro",
+    "origin": "NZ / 4",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PPG",
+    "last_updated": "2026-05-01T23:27:40.684423"
+  },
+  "L008": {
+    "sire": "Showtime",
+    "dam": "Akoonah",
+    "dam_sire": "Ready's Image",
+    "origin": "AUS / 3",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PPG",
+    "last_updated": "2026-05-01T23:27:45.203032"
+  },
+  "L020": {
+    "sire": "All Too Hard",
+    "dam": "Gentle Persuasion",
+    "dam_sire": "More Than Ready",
+    "origin": "AUS / 3",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PPG",
+    "last_updated": "2026-05-01T23:27:49.772663"
+  },
+  "L074": {
+    "sire": "Brave Smash",
+    "dam": "Voodoo Lady",
+    "dam_sire": "Pins",
+    "origin": "AUS / 3",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PP",
+    "last_updated": "2026-05-01T23:27:54.217041"
+  },
+  "L079": {
+    "sire": "Ocean Park",
+    "dam": "Shanzam",
+    "dam_sire": "High Chaparral",
+    "origin": "NZ / 4",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PP",
+    "last_updated": "2026-05-01T23:27:58.584666"
+  },
+  "L132": {
+    "sire": "Street Boss",
+    "dam": "Dance Card",
+    "dam_sire": "Exceed And Excel",
+    "origin": "AUS / 3",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PPG",
+    "last_updated": "2026-05-01T23:28:02.322276"
+  },
+  "L136": {
+    "sire": "Ace High",
+    "dam": "Smokin' Valentina",
+    "dam_sire": "Encosta de Lago",
+    "origin": "NZ / 3",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PPG",
+    "last_updated": "2026-05-01T23:28:06.732883"
+  },
+  "L150": {
+    "sire": "Brave Smash",
+    "dam": "Niji",
+    "dam_sire": "Commands",
+    "origin": "AUS / 4",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PP",
+    "last_updated": "2026-05-01T23:28:11.121893"
+  },
+  "L152": {
+    "sire": "I Am Invincible",
+    "dam": "Heatherly",
+    "dam_sire": "Lonhro",
+    "origin": "AUS / 4",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PP",
+    "last_updated": "2026-05-01T23:28:14.499434"
+  },
+  "L196": {
+    "sire": "Spirit Of Boom",
+    "dam": "Viaductress",
+    "dam_sire": "Sharkbite",
+    "origin": "NZ / 3",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PP",
+    "last_updated": "2026-05-01T23:28:17.763493"
+  },
+  "H215": {
+    "sire": "Sioux Nation",
+    "dam": "Cynthia Calhoun",
+    "dam_sire": "Exceed And Excel",
+    "origin": "IRE / 6",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PP",
+    "last_updated": "2026-05-04T00:05:18.656152"
+  },
+  "H334": {
+    "sire": "Acclamation",
+    "dam": "Up In Time",
+    "dam_sire": "Noverre",
+    "origin": "IRE / 6",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PP",
+    "last_updated": "2026-05-04T00:05:25.252459"
+  },
+  "H388": {
+    "sire": "Wrote",
+    "dam": "Peggy Hookham",
+    "dam_sire": "Joyeux Danseur",
+    "origin": "NZ / 6",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PPG",
+    "last_updated": "2026-05-04T00:05:30.919301"
+  },
+  "H418": {
+    "sire": "Zoustar",
+    "dam": "Total Attraction",
+    "dam_sire": "Nadeem",
+    "origin": "AUS / 5",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PPG",
+    "last_updated": "2026-05-04T00:05:36.938043"
+  },
+  "H475": {
+    "sire": "Tavistock",
+    "dam": "Triaction",
+    "dam_sire": "Elusive City",
+    "origin": "NZ / 6",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "ISG",
+    "last_updated": "2026-05-04T00:05:48.055899"
+  },
+  "H487": {
+    "sire": "Per Incanto",
+    "dam": "Amanjena",
+    "dam_sire": "Smart Missile",
+    "origin": "NZ / 6",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "ISG",
+    "last_updated": "2026-05-04T00:05:54.553980"
+  },
+  "J099": {
+    "sire": "Swiss Ace",
+    "dam": "Inara Belle",
+    "dam_sire": "Elusive Quality",
+    "origin": "NZ / 5",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PPG",
+    "last_updated": "2026-05-04T00:06:00.071116"
+  },
+  "J152": {
+    "sire": "So You Think",
+    "dam": "Secret Copy",
+    "dam_sire": "Snitzel",
+    "origin": "AUS / 5",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PPG",
+    "last_updated": "2026-05-04T00:06:05.970046"
+  },
+  "J276": {
+    "sire": "Reliable Man",
+    "dam": "Abbey Tralae",
+    "dam_sire": "Traditionally",
+    "origin": "NZ / 5",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PPG",
+    "last_updated": "2026-05-04T00:06:12.414237"
+  },
+  "J452": {
+    "sire": "Microphone",
+    "dam": "Astardia",
+    "dam_sire": "Starcraft",
+    "origin": "NZ / 4",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PPG",
+    "last_updated": "2026-05-04T00:06:18.584357"
+  },
+  "J454": {
+    "sire": "Shocking",
+    "dam": "Out Of The Barn",
+    "dam_sire": "Sakhee's Secret",
+    "origin": "NZ / 5",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PPG",
+    "last_updated": "2026-05-04T00:06:24.922177"
+  },
+  "J514": {
+    "sire": "Akeed Mofeed",
+    "dam": "New Sensation",
+    "dam_sire": "Dolphin Street",
+    "origin": "AUS / 5",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PPG",
+    "last_updated": "2026-05-04T00:06:30.807547"
+  },
+  "K012": {
+    "sire": "Justify",
+    "dam": "Wedding Vow",
+    "dam_sire": "Galileo",
+    "origin": "USA / 5",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PP",
+    "last_updated": "2026-05-04T00:06:44.887602"
+  },
+  "K134": {
+    "sire": "All Too Hard",
+    "dam": "Computer",
+    "dam_sire": "Street Cry",
+    "origin": "AUS / 4",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PPG",
+    "last_updated": "2026-05-04T00:06:50.034817"
+  },
+  "K150": {
+    "sire": "The Autumn Sun",
+    "dam": "Griante",
+    "dam_sire": "Good Journey",
+    "origin": "AUS / 4",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PPG",
+    "last_updated": "2026-05-04T00:06:54.943396"
+  },
+  "K166": {
+    "sire": "Starspangledbanner",
+    "dam": "Sunbird",
+    "dam_sire": "Echo Of Light",
+    "origin": "IRE / 4",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PPG",
+    "last_updated": "2026-05-04T00:06:59.695137"
+  },
+  "K181": {
+    "sire": "Capitalist",
+    "dam": "Rare Insight",
+    "dam_sire": "O'Reilly",
+    "origin": "AUS / 4",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PPG",
+    "last_updated": "2026-05-04T00:07:04.853014"
+  },
+  "K254": {
+    "sire": "Mohaather",
+    "dam": "Alaata",
+    "dam_sire": "Smart Strike",
+    "origin": "IRE / 4",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PP",
+    "last_updated": "2026-05-04T00:07:09.878413"
+  },
+  "K275": {
+    "sire": "Royal Meeting",
+    "dam": "Around The Clock",
+    "dam_sire": "Galileo",
+    "origin": "AUS / 4",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PPG",
+    "last_updated": "2026-05-04T00:07:15.298982"
+  },
+  "K282": {
+    "sire": "Territories",
+    "dam": "Flattery",
+    "dam_sire": "Shamardal",
+    "origin": "AUS / 4",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PPG",
+    "last_updated": "2026-05-04T00:07:20.161905"
+  },
+  "K313": {
+    "sire": "Showtime",
+    "dam": "Smurf Cody",
+    "dam_sire": "Animal Kingdom",
+    "origin": "AUS / 4",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PP",
+    "last_updated": "2026-05-04T00:07:25.149474"
+  },
+  "K457": {
+    "sire": "Deep Field",
+    "dam": "The Soloist",
+    "dam_sire": "Smart Missile",
+    "origin": "AUS / 4",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "ISG",
+    "last_updated": "2026-05-04T00:07:30.277366"
+  },
+  "K478": {
+    "sire": "Toronado",
+    "dam": "Seagrove",
+    "dam_sire": "Exceed And Excel",
+    "origin": "AUS / 4",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PP",
+    "last_updated": "2026-05-04T00:07:35.048065"
+  },
+  "K545": {
+    "sire": "Nicconi",
+    "dam": "Whymelo",
+    "dam_sire": "I Am Invincible",
+    "origin": "NZ / 4",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PPG",
+    "last_updated": "2026-05-04T00:07:40.015900"
+  },
+  "L016": {
+    "sire": "Toronado",
+    "dam": "Margiela",
+    "dam_sire": "Redoute's Choice",
+    "origin": "AUS / 4",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PPG",
+    "last_updated": "2026-05-04T00:07:43.865231"
+  },
+  "L030": {
+    "sire": "Ten Sovereigns",
+    "dam": "Snapraeceps",
+    "dam_sire": "Canford Cliffs",
+    "origin": "IRE / 4",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PP",
+    "last_updated": "2026-05-04T00:07:48.182142"
+  },
+  "L081": {
+    "sire": "Too Darn Hot",
+    "dam": "Sexy Siren",
+    "dam_sire": "Excites",
+    "origin": "AUS / 4",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PP",
+    "last_updated": "2026-05-04T00:07:51.897678"
+  },
+  "L092": {
+    "sire": "Castelvecchio",
+    "dam": "Sister Phenomenon",
+    "dam_sire": "Rock Of Gibraltar",
+    "origin": "AUS / 4",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PP",
+    "last_updated": "2026-05-04T00:07:56.099573"
+  },
+  "L100": {
+    "sire": "Calyx",
+    "dam": "Charlee Bear",
+    "dam_sire": "Choisir",
+    "origin": "AUS / 3",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PPG",
+    "last_updated": "2026-05-04T00:08:00.057297"
+  },
+  "L158": {
+    "sire": "Good Journey",
+    "dam": "Sovereign Miss",
+    "dam_sire": "Made Of Gold",
+    "origin": "AUS / 3",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PPG",
+    "last_updated": "2026-05-04T00:08:04.335072"
+  },
+  "L165": {
+    "sire": "Toronado",
+    "dam": "Forever The Chill",
+    "dam_sire": "Choisir",
+    "origin": "AUS / 3",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PPG",
+    "last_updated": "2026-05-04T00:08:08.310955"
+  },
+  "L202": {
+    "sire": "Hellbent",
+    "dam": "Fibbers",
+    "dam_sire": "Savabeel",
+    "origin": "NZ / 3",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PPG",
+    "last_updated": "2026-05-04T00:08:15.481522"
+  },
+  "L216": {
+    "sire": "Ocean Park",
+    "dam": "Podravina",
+    "dam_sire": "Bel Esprit",
+    "origin": "NZ / 3",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PPG",
+    "last_updated": "2026-05-04T00:08:19.289851"
+  },
+  "L220": {
+    "sire": "Pariah",
+    "dam": "Vergisson",
+    "dam_sire": "Nom du Jeu",
+    "origin": "AUS / 3",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PP",
+    "last_updated": "2026-05-04T00:08:23.267288"
+  },
+  "L293": {
+    "sire": "Hellbent",
+    "dam": "Champalou",
+    "dam_sire": "Encosta de Lago",
+    "origin": "AUS / 3",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PPG",
+    "last_updated": "2026-05-04T00:08:31.114336"
+  },
+  "L298": {
+    "sire": "Written By",
+    "dam": "Idol",
+    "dam_sire": "Fastnet Rock",
+    "origin": "AUS / 3",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PPG",
+    "last_updated": "2026-05-04T00:08:35.468283"
+  },
+  "L396": {
+    "sire": "Grunt",
+    "dam": "Pickpocket",
+    "dam_sire": "High Chaparral",
+    "origin": "AUS / 4",
+    "color": "Unknown",
+    "sex": "Unknown",
+    "import_type": "PP",
+    "last_updated": "2026-05-04T00:08:39.936911"
   }
 }

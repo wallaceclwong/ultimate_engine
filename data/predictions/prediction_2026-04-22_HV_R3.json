@@ -1,0 +1,37 @@
+{
+  "race_id": "2026-04-22_HV_R3",
+  "gemini_model": "ensemble_lgb_xgb_cat",
+  "confidence_score": 0.1928,
+  "is_best_bet": false,
+  "recommended_bet": "NO BET",
+  "probabilities": {
+    "1": 0.07940985976986845,
+    "2": 0.00966446127964346,
+    "3": 0.02517150886529217,
+    "4": 0.20355772276960837,
+    "5": 0.04309541317667288,
+    "6": 0.25929978757104655,
+    "7": 0.029822767766738867,
+    "8": 0.03630289802405635,
+    "9": 0.060324782715142786,
+    "10": 0.009318333196911619,
+    "11": 0.04137566690383541,
+    "12": 0.20265679796118302
+  },
+  "kelly_stakes": {},
+  "market_odds": {
+    "1": 8.6,
+    "2": 33.0,
+    "3": 16.0,
+    "4": 4.8,
+    "5": 13.0,
+    "6": 4.6,
+    "7": 14.0,
+    "8": 15.0,
+    "9": 10.0,
+    "10": 37.0,
+    "11": 15.0,
+    "12": 5.5
+  },
+  "analysis_markdown": "## Race Analysis: Class 4 1650m Turf (Good)\n\n### Top Pick\n- **#6 STAR ELEGANCE** (Rank 1, Odds 4.6, Fair 3.9, Edge +19.3%)\n\n### Bet Signal\n- **\u26d4 NO BET** (edge=+19.3%, odds=4.6)\n\n### Key Stats\n- Field Size: 12\n- Track: HV A\n- Going: Good"
+}

@@ -1,0 +1,3 @@
+LESSON LEARNT RETROSPECTIVE FOR MULTISUPERSTAR on 2026-05-03:
+Our model highly tipped this horse but it failed (finished 9).
+Analysis: Despite a statistical edge, the wide draw (#14) proved costly on yielding ground, where horses typically struggle to maintain position without early speed or inside rail advantage. The jockey's low performance metric (0.092) likely compounded this tactical disadvantage, as off-pace runners from wide barriers rarely secure efficient running lines on soft turf. Our model may have overestimated the horse's ability to overcome both a tough post and yielding conditions, which historically penalise deep closers more than the raw odds suggested.

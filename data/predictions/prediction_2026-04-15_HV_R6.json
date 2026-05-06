@@ -1,0 +1,37 @@
+{
+  "race_id": "2026-04-15_HV_R6",
+  "gemini_model": "ensemble_lgb_xgb_cat",
+  "confidence_score": -0.2268,
+  "is_best_bet": false,
+  "recommended_bet": "NO BET",
+  "probabilities": {
+    "1": 0.07162617745642516,
+    "2": 0.0717488660403847,
+    "3": 0.12171664988700252,
+    "4": 0.06726046867013001,
+    "5": 0.05333663242934188,
+    "6": 0.024955923669954888,
+    "7": 0.01712469355966077,
+    "8": 0.23431430185728302,
+    "9": 0.16521434193552867,
+    "10": 0.0088648843862762,
+    "11": 0.15525956272349228,
+    "12": 0.008577497384519838
+  },
+  "kelly_stakes": {},
+  "market_odds": {
+    "1": 10.0,
+    "2": 10.0,
+    "3": 6.1,
+    "4": 11.0,
+    "5": 15.0,
+    "6": 35.0,
+    "7": 48.0,
+    "8": 3.3,
+    "9": 5.0,
+    "10": 92.0,
+    "11": 4.7,
+    "12": 115.0
+  },
+  "analysis_markdown": "## Race Analysis: Class 4 1200m Turf (Good)\n\n### Top Pick\n- **#8 QUARTZ LEGEND** (Rank 1, Odds 3.3, Fair 4.3, Edge -22.7%)\n\n### Bet Signal\n- **\u26d4 NO BET** (edge=-22.7%, odds=3.3)\n\n### Key Stats\n- Field Size: 12\n- Track: HV A\n- Going: Good"
+}

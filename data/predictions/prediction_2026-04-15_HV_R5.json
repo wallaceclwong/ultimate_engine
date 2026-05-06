@@ -1,0 +1,35 @@
+{
+  "race_id": "2026-04-15_HV_R5",
+  "gemini_model": "ensemble_lgb_xgb_cat",
+  "confidence_score": -0.097,
+  "is_best_bet": false,
+  "recommended_bet": "NO BET",
+  "probabilities": {
+    "1": 0.07962931551395515,
+    "2": 0.0843325456194567,
+    "3": 0.08849755851899296,
+    "4": 0.08575028249731151,
+    "5": 0.08835091434199084,
+    "6": 0.08233136512954435,
+    "7": 0.05462890652372626,
+    "8": 0.01110831703851222,
+    "9": 0.05660470634267561,
+    "10": 0.3113841758947372,
+    "11": 0.0573819125790971
+  },
+  "kelly_stakes": {},
+  "market_odds": {
+    "1": 10.0,
+    "2": 10.0,
+    "3": 10.0,
+    "4": 10.0,
+    "5": 10.0,
+    "6": 10.0,
+    "7": 18.0,
+    "8": 102.0,
+    "9": 22.0,
+    "10": 2.9,
+    "11": 21.0
+  },
+  "analysis_markdown": "## Race Analysis: Class 3 1650m Turf (Good)\n\n### Top Pick\n- **#10 WIN METHOD** (Rank 1, Odds 2.9, Fair 3.2, Edge -9.7%)\n\n### Bet Signal\n- **\u26d4 NO BET** (edge=-9.7%, odds=2.9)\n\n### Key Stats\n- Field Size: 11\n- Track: HV A\n- Going: Good"
+}

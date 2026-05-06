@@ -30,17 +30,15 @@ class LiveAuditService:
             
         movement = state.movements[horse_no]
         
-        # 2. Check if movement qualifies for a 'War Room' audit (>7% shortening)
-        # RELIEF ADJUSTMENT: Lowered from 10% to 7% to increase frequency
-        if movement.movement_pct > -0.07:
-            logger.info(f"Movement ({movement.movement_pct:+.1%}) below relief threshold (7%) for audit.")
+        # 2. Check if movement qualifies for a 'War Room' audit (>3% shortening)
+        # RELIEF ADJUSTMENT: Lowered from 5% to 3% to increase frequency
+        if movement.movement_pct > -0.03:
+            logger.info(f"Movement ({movement.movement_pct:+.1%}) below relief threshold (3%) for audit.")
             return None
             
         logger.info(f"🔥 SMART MONEY ALERT: {horse_no} shortened {movement.movement_pct:+.1%}. Triggering DeepSeek-R1...")
         
-        # 3. Prepare data for ConsensusAgent (We need the full race_data)
-        # For simplicity in this service, we assume race_data is passed or loaded
-        # Here we mock the load - in production, this would come from the prediction results
+        # 3. Prepare data for ConsensusAgent
         race_data = self._load_race_data(date_str, venue, race_no)
         if race_data is None:
             logger.error("Could not load race data for audit.")
@@ -52,14 +50,12 @@ class LiveAuditService:
             'trend': movement.trend
         }
         
-        # Reload pedigree cache to pick up any recent scrapes
         consensus_agent.reload_pedigree()
-        
         verdict, reasoning = await consensus_agent.get_consensus(race_data, horse_no, market_context)
         
-        # 5. Append to central log for user visibility
+        # 5. Append to central log
         try:
-            log_path = Path("final_predictions.log")
+            log_path = Path(__file__).parent.parent / "final_predictions.log"
             with open(log_path, "a", encoding="utf-8") as f:
                 f.write(f"\n[LIVE AUDIT] {date_str} {venue} R{race_no} | Horse #{horse_no}\n")
                 f.write(f"Movement: {movement.initial_odds} -> {movement.current_odds} ({movement.movement_pct:+.1%})\n")
@@ -69,38 +65,57 @@ class LiveAuditService:
         except Exception as e:
             logger.error(f"Failed to append live brief to log: {e}")
 
-        # 6. Filtering: ONLY notify for high-conviction S/A grades
-        is_high_conviction = "Grade [S]" in reasoning or "Grade [A]" in reasoning
+        # 6. Filtering & Notification (RELAXED)
+        is_elite = "Grade [S]" in reasoning or "Grade [A]" in reasoning
+        is_moderate = "Grade [B]" in reasoning
+        is_speculative = "Grade [C]" in reasoning
         
-        if is_high_conviction and verdict == "CONFIRMED":
-            logger.info(f"🏆 HIGH CONVICTION SIGNAL: {verdict} - {reasoning}")
+        if (is_elite or is_moderate or is_speculative) and verdict in ["CONFIRMED", "CAUTION"]:
+            if is_elite:
+                label = "🏆 HIGH CONVICTION"
+            elif is_moderate:
+                label = "⚠️ MODERATE CONVICTION"
+            else:
+                label = "🔍 SPECULATIVE SIGNAL"
+                
+            logger.info(f"{label} SIGNAL: {verdict} - {reasoning}")
             
             # Send Telegram Alert
-            header = f"🚨 *LIVE SMART MONEY ALERT: {race_id}*"
+            header = f"🚨 *{label} ALERT: {race_id}*"
             body = (
                 f"\n🎯 *Target:* Horse #{horse_no}"
-                f"\n📉 *Odds:* {movement.initial_odds} → {movement.current_odds} ({movement.movement_pct:+.1%})"
+                f"\n📉 *Market:* {movement.initial_odds} → {movement.current_odds} ({movement.movement_pct:+.1%})"
+                f"\n📍 *Source:* {state.timestamp.strftime('%H:%M')} baseline"
                 f"\n\n🧠 *Lunar Leap Verdict:* {verdict}\n{reasoning}"
             )
             await telegram_service.send_message(f"{header}\n{body}")
         else:
-            logger.info(f"Audit complete but filtered (Grade/Verdict too low): {verdict} - {reasoning}")
+            logger.info(f"Audit complete but filtered (Grade/Verdict too low or not confirmed): {verdict} - {reasoning}")
             
         return verdict, reasoning
 
     def _load_race_data(self, date_str, venue, race_no):
-        """Loads the horse data for the race from prediction cache."""
+        """Loads the horse data for the race from prediction cache using absolute paths."""
         try:
-            # Construct filename for the processed features
-            # e.g. features_20260408_HV_R2.parquet
-            date_compact = date_str.replace("-", "")
-            file_path = Path("data") / "processed" / f"features_{date_compact}_{venue}_R{race_no}.parquet"
+            # Use absolute path to avoid CWD issues
+            base_data_dir = Path(__file__).parent.parent.absolute() / "data" / "processed"
             
-            if file_path.exists():
-                return pd.read_parquet(file_path)
-            else:
-                logger.error(f"Processed features file not found: {file_path}")
-                return None
+            # Try multiple date formats and naming conventions
+            date_compact = date_str.replace("-", "")
+            possible_files = [
+                f"features_{date_str}_{venue}_R{race_no}.parquet",
+                f"features_{date_compact}_{venue}_R{race_no}.parquet",
+                f"features_{date_compact}_{venue}_R{race_no:02d}.parquet",
+            ]
+            
+            for filename in possible_files:
+                path = base_data_dir / filename
+                if path.exists():
+                    logger.info(f"  [OK] Loading race data from: {path.name}")
+                    return pd.read_parquet(path)
+            
+            logger.error(f"Processed features file not found in {base_data_dir}. Tried: {possible_files}")
+            return None
         except Exception as e:
             logger.error(f"Error loading race data: {e}")
             return None

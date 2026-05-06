@@ -87,13 +87,16 @@ class ConsensusAgent:
         field_context = []
         for _, h in race_data.iterrows():
             field_context.append({
-                "no": h["horse_no"],
-                "name": h["horse_name"],
-                "odds": round(h["win_odds"], 1),
-                "draw": h["draw"],
-                "rank": h["rank"],
-                "fair_odds": round(h.get("fair_odds", 10.0), 1),
-                "value_mult": round(h.get("value_mult", 1.0), 2)
+                "no":              h["horse_no"],
+                "name":            h["horse_name"],
+                "odds":            round(h["win_odds"], 1),
+                "draw":            h["draw"],
+                "rank":            h["rank"],
+                "fair_odds":       round(h.get("fair_odds", 10.0), 1),
+                "value_mult":      round(h.get("value_mult", 1.0), 2),
+                "gear":            h.get("gear", ""),               # e.g. "Blinkers, Tongue Tie"
+                "wt_allowance":    int(h.get("weight_allowance", 0)),  # e.g. -3 for apprentice claim
+                "location":        h.get("training_location", "HK"), # "HK" or "CTC"
             })
 
         # 3. Market Momentum Context

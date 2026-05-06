@@ -1,0 +1,3 @@
+LESSON LEARNT RETROSPECTIVE FOR TOMODACHI KOKOROE on 2026-04-26:
+Our model highly tipped this horse but it failed (finished 7).
+Analysis: Despite a favourable inside draw (#1), the horse's low historical jockey performance metric (0.066) likely hindered its ability to capitalise on the tactical advantage of the rail, especially on a 'Good' track where front-runners often dominate. The high statistical EV (2.21) failed to account for the horse's poor gate speed or tendency to settle too far back, leaving it trapped behind rivals from the inside position. Ultimately, the model overvalued the odds and win probability without adjusting for the tactical disadvantage of a one-dimensional running style on a surface that rewarded early position.

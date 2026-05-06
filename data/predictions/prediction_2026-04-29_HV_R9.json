@@ -1,0 +1,39 @@
+{
+  "race_id": "2026-04-29_HV_R9",
+  "gemini_model": "deepseek-chat",
+  "confidence_score": 0.75,
+  "is_best_bet": true,
+  "recommended_bet": "WIN 8",
+  "probabilities": {
+    "1": 0.1,
+    "2": 0.08,
+    "3": 0.12,
+    "4": 0.02,
+    "5": 0.1,
+    "6": 0.08,
+    "7": 0.06,
+    "8": 0.18,
+    "9": 0.08,
+    "10": 0.05,
+    "11": 0.05,
+    "12": 0.08
+  },
+  "kelly_stakes": {},
+  "market_odds": {
+    "1": 5.7,
+    "2": 10.0,
+    "3": 5.0,
+    "4": 34.0,
+    "5": 8.9,
+    "6": 16.0,
+    "7": 26.0,
+    "8": 3.9,
+    "9": 24.0,
+    "10": 23.0,
+    "11": 21.0,
+    "12": 44.0,
+    "13": 59.0,
+    "14": 12.0
+  },
+  "analysis_markdown": "**Race Analysis: Class 3 1650m Turf (Soft Track)**\n\n**Weather Impact:** High rain probability (86%) indicates a soft track, favoring horses with proven wet-track ability. \n\n**Top Contender: #8 SPICY GOLD (Odds 3.9)** – Despite modest recent form, SPICY GOLD has the lowest win odds, suggesting market confidence. Draw 5 is favorable, and jockey M Chadwick has a good record on soft ground. The horse has shown ability to handle weight (122 lbs) and may improve on a softer surface. \n\n**Key Rivals:** \n- #3 CORLEONE (Odds 5.0) – Consistent form with three wins in last six, but draw 8 and top weight (132 lbs) are concerns on soft track. \n- #1 SOLID WIN (Odds 5.7) – Recent win two starts back, but draw 9 and high weight (135 lbs) may hinder. \n- #5 FANTASTIC FUN (Odds 8.9) – Recent win and good jockey E Brown, but weight 124 lbs and draw 6 are neutral. \n\n**Forgiveness Tags:** #7 CALIFORNIA MOXIE (draw 11) and #9 STORMI (draw 12) have wide draws, making them less likely. #12 WITHALLMYFAITH (draw 3) has consistent placing but low odds (44.0) suggest limited upside. \n\n**Betting Strategy:** SPICY GOLD offers value as a win bet given soft track conditions and favorable draw. Quinella with CORLEONE or SOLID WIN for coverage."
+}

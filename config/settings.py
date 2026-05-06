@@ -7,29 +7,27 @@ load_dotenv()
 class Config:
     BASE_DIR = Path(__file__).resolve().parent.parent
 
-    # ── DeepSeek AI (replaces Google Gemini / Vertex AI) ──────────────────────
+    # ── Intelligence Layer (DeepSeek-R1) ──────────────────────────────────
     DEEPSEEK_API_KEY   = os.getenv("DEEPSEEK_API_KEY", "")
     DEEPSEEK_BASE_URL  = os.getenv("DEEPSEEK_BASE_URL", "https://api.deepseek.com")
-    DEEPSEEK_MODEL     = os.getenv("DEEPSEEK_MODEL", "deepseek-chat")      # fast, structured output
-    DEEPSEEK_MODEL_R1  = os.getenv("DEEPSEEK_MODEL_R1", "deepseek-reasoner")  # heavy reasoning tasks
+    DEEPSEEK_MODEL     = os.getenv("DEEPSEEK_MODEL", "deepseek-chat")      
+    DEEPSEEK_MODEL_R1  = os.getenv("DEEPSEEK_MODEL_R1", "deepseek-reasoner")
 
-    # ── Legacy AI aliases (Google AI disabled, mapped to DeepSeek) ──────────────
-    GEMINI_MODEL          = DEEPSEEK_MODEL   # maps old references → DeepSeek
-    GEMINI_MODEL_FALLBACK = DEEPSEEK_MODEL   # same
-    SHADOW_MODEL          = ""               # disabled
-    USE_VERTEX_AI         = False            # Vertex AI disabled
+    # Mapping legacy aliases to DeepSeek
+    GEMINI_MODEL       = DEEPSEEK_MODEL   
+    USE_VERTEX_AI      = False            # GCP AI DISABLED
 
-    # ── GCP Cloud Services (non-AI: Firestore, GCS, FCM) ─────────────────────
-    # Google AI is OFF, but GCP infrastructure services remain active.
+    # ── GCP Infrastructure (Low-Cost Mirroring Only) ─────────────────────────
+    # We maintain Firestore/GCS for durable off-site backup.
     GCP_LOCATION         = os.getenv("GCP_REGION", "asia-east1")
     PROJECT_ID           = os.getenv("GCP_PROJECT_ID", "ultimate-engine-2026")
-    MODEL_PROJECT_ID     = PROJECT_ID  # alias
     GCS_BUCKET_NAME      = os.getenv("GCS_BUCKET_NAME", "ultimate-engine-2026-vault")
     FIRESTORE_DATABASE   = os.getenv("FIRESTORE_DATABASE", "(default)")
     GOOGLE_APPLICATION_CREDENTIALS = os.getenv(
         "GOOGLE_APPLICATION_CREDENTIALS",
         str(Path(__file__).resolve().parent / "ultimate-engine-sa-key.json")
     )
+
     
     # --- Betting Account (User must fill these in .env) ---
     HKJC_ACCOUNT = os.getenv("HKJC_ACCOUNT", "YOUR_ACCOUNT_ID")

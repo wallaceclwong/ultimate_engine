@@ -1,0 +1,3 @@
+LESSON LEARNT RETROSPECTIVE FOR GIOVANNI on 2026-04-26:
+Our model highly tipped this horse but it failed (finished 5).
+Analysis: The model overestimated GIOVANNI's value by failing to account for the significant disadvantage of draw 8 on a good track, where inside positions typically dominate. With a low-rated jockey (0.08) unable to overcome the wide post, the horse was forced to race wide throughout, compromising its tactical position. Despite the high EV, the horse’s finishing 5th reflects a realistic outcome when poor draw and jockey quality outweigh statistical probability on a fast surface.

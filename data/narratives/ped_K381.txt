@@ -1,0 +1,6 @@
+PEDIGREE FOR HORSE ID K381:
+Sire: Time Test
+Dam: Naive
+Origin: GB / 4
+Color: Unknown
+Import Type: PP

@@ -1,0 +1,3 @@
+LESSON LEARNT RETROSPECTIVE FOR SUGAR SUGAR on 2026-04-26:
+Our model highly tipped this horse but it failed (finished 9).
+Analysis: Despite a promising value signal from the odds and draw 5, the horse’s jockey held a historical win rate of just 9%, which likely contributed to a lack of aggressive tactical execution from an inside gate. On a good track, pace pressure often negates the advantage of a middle draw, and this runner may have been forced wide or failed to find a clear running line when the race quickened. The model’s high EV relied on inflated win probability from static inputs, but underestimated the impact of subpar rider performance and crowd positioning on race day dynamics.

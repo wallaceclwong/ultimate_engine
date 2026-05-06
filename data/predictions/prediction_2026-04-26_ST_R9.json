@@ -1,0 +1,37 @@
+{
+  "race_id": "2026-04-26_ST_R9",
+  "gemini_model": "deepseek-chat",
+  "confidence_score": 0.75,
+  "is_best_bet": true,
+  "recommended_bet": "WIN 8",
+  "probabilities": {
+    "1": 0.1,
+    "2": 0.15,
+    "3": 0.12,
+    "4": 0.08,
+    "5": 0.1,
+    "6": 0.05,
+    "7": 0.05,
+    "8": 0.35
+  },
+  "kelly_stakes": {
+    "8": 110.0
+  },
+  "market_odds": {
+    "1": 5.7,
+    "2": 10.0,
+    "3": 5.0,
+    "4": 34.0,
+    "5": 8.9,
+    "6": 16.0,
+    "7": 26.0,
+    "8": 3.9,
+    "9": 24.0,
+    "10": 23.0,
+    "11": 21.0,
+    "12": 44.0,
+    "13": 59.0,
+    "14": 12.0
+  },
+  "analysis_markdown": "**Race Analysis: Class 4, 2000m Turf**\n\n**Key Contenders:**\n- **#8 NUMBERS** (Draw 4, Jockey K C Leung, Trainer F C Lor): Recent form is excellent with two wins and a second in last five starts. Draw 4 is ideal for 2000m, and the horse has shown versatility. Odds of 3.9 (win) offer value. Strong chance to win.\n- **#2 ROMANTIC WARRIOR** (Draw 5, Jockey J McDonald, Trainer C S Shum): Consistent performer with four wins in last six starts. However, faces tougher competition here and may be overbet at 10.0 odds.\n- **#3 ROYAL CHAMPION** (Draw 1, Jockey O Murphy, Trainer K Burke): First run in HK but draws well. Trainer/jockey combo is strong. Could be a factor.\n- **#1 MASQUERADE BALL** (Draw 6, Jockey C Lemaire): First run, but Lemaire is a top jockey. Unknown quantity.\n\n**Weather & Track:** Good track condition, no rain expected. No bias.\n\n**Betting Strategy:** #8 NUMBERS is the best bet with strong recent form and favorable draw. Consider WIN bet. For place, #2 and #3 are also solid.\n\n**Confidence:** 0.75 - High confidence in #8's chances."
+}

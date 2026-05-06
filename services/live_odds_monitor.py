@@ -54,7 +54,7 @@ class LiveOddsMonitor:
     """
     
     def __init__(self, odds_dir: Path = None):
-        self.odds_dir = odds_dir or Path("data/odds")
+        self.odds_dir = odds_dir or Path(__file__).parent.parent / "data" / "odds"
         self.race_states: Dict[str, RaceOddsState] = {}
         
         # Thresholds
@@ -93,6 +93,49 @@ class LiveOddsMonitor:
         except Exception as e:
             logger.error(f"Error loading odds: {e}")
             return None
+
+    def load_baseline_odds(self, date_str: str, venue: str, race_no: int) -> Optional[RaceOddsState]:
+        """Load the EARLIEST odds snapshot OR prediction odds for a race as a baseline."""
+        date_compact = date_str.replace('-', '')
+        pattern = f"snapshot_{date_compact}_R{race_no}_*.json"
+        # Sort by creation time ascending to get the EARLIEST one
+        files = sorted(self.odds_dir.glob(pattern), key=lambda x: x.stat().st_mtime)
+        
+        if files:
+            try:
+                with open(files[0], 'r') as f:
+                    data = json.load(f)
+                logger.info(f"  [OK] Baseline loaded from earliest snapshot: {files[0].name}")
+                return RaceOddsState(
+                    race_id=f"{date_str}_{venue}_R{race_no}",
+                    venue=venue,
+                    race_no=race_no,
+                    timestamp=datetime.fromtimestamp(files[0].stat().st_mtime),
+                    win_odds=data.get('win_odds', {}),
+                    place_odds=data.get('place_odds', {})
+                )
+            except Exception as e:
+                logger.warning(f"Failed to load earliest snapshot: {e}")
+            
+        # Fallback to prediction odds (Noon odds)
+        pred_file = Path(__file__).parent.parent / "data" / "predictions" / f"prediction_{date_str}_{venue}_R{race_no}.json"
+        if pred_file.exists():
+            try:
+                with open(pred_file, "r", encoding="utf-8") as f:
+                    data = json.load(f)
+                logger.info(f"  [OK] Baseline fallback: Using Noon prediction odds for {date_str} R{race_no}")
+                return RaceOddsState(
+                    race_id=f"{date_str}_{venue}_R{race_no}",
+                    venue=venue,
+                    race_no=race_no,
+                    timestamp=datetime.fromtimestamp(pred_file.stat().st_mtime),
+                    win_odds=data.get('market_odds', {}),
+                    place_odds={}
+                )
+            except Exception as e:
+                logger.warning(f"Failed to load prediction baseline: {e}")
+            
+        return None
     
     def calculate_movements(self, current: RaceOddsState, baseline: RaceOddsState) -> Dict[str, OddsMovement]:
         """Calculate odds movements from baseline to current"""
@@ -133,11 +176,18 @@ class LiveOddsMonitor:
         if not current:
             return None
         
-        # Check if we have a previous state
+        # Check if we have a previous state OR need to load from disk baseline
+        if race_id not in self.race_states:
+            # First load for this session - try to establish a historical baseline
+            baseline = self.load_baseline_odds(date_str, venue, race_no)
+            if baseline:
+                self.race_states[race_id] = baseline
+                logger.info(f"  [MONITOR] Established baseline for {race_id} (Initial Odds: {len(baseline.win_odds)} horses)")
+
         if race_id in self.race_states:
             previous = self.race_states[race_id]
             
-            # Calculate movements from previous state
+            # Calculate movements from baseline to current
             current.movements = self.calculate_movements(current, previous)
             
             # Identify late money horses
@@ -151,7 +201,8 @@ class LiveOddsMonitor:
             total = len(current.movements)
             current.market_confidence = stable_count / total if total > 0 else 0.5
         else:
-            # First load - no movements yet
+            # No baseline found anywhere - movements will be empty until next update
+            logger.warning(f"  [MONITOR] No baseline found for {race_id}. Movement tracking will start on next snapshot.")
             current.market_confidence = 0.5
         
         # Store state

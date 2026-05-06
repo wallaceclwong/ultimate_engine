@@ -1,0 +1,3 @@
+LESSON LEARNT RETROSPECTIVE FOR PRESIDENT PEGASUS on 2026-05-03:
+Our model highly tipped this horse but it failed (finished 4).
+Analysis: The inside draw (#1) on yielding ground often becomes a disadvantage as the rail path deepens, tiring horses early, which likely compromised PRESIDENT PEGASUS’s closing kick. Additionally, the jockey’s poor win rate (0.08) suggests an inability to navigate the soft conditions or capitalize on a pace scenario that would favor a 39/1 longshot. Despite the high EV, the model underestimated how track condition biases and rider proficiency can negate value in longshots, especially from a disadvantageous post.

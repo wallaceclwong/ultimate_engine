@@ -1,0 +1,40 @@
+{
+  "race_id": "2026-04-19_ST_R3",
+  "gemini_model": "deepseek-chat",
+  "confidence_score": 0.65,
+  "is_best_bet": true,
+  "recommended_bet": "WIN 1",
+  "probabilities": {
+    "1": 0.25,
+    "2": 0.18,
+    "3": 0.12,
+    "4": 0.04,
+    "5": 0.03,
+    "6": 0.03,
+    "7": 0.02,
+    "8": 0.05,
+    "9": 0.02,
+    "10": 0.01,
+    "11": 0.08,
+    "12": 0.02,
+    "13": 0.08,
+    "14": 0.07
+  },
+  "kelly_stakes": {},
+  "market_odds": {
+    "1": 6.0,
+    "2": 5.9,
+    "3": 4.2,
+    "4": 10.0,
+    "5": 9.3,
+    "6": 18.0,
+    "7": 18.0,
+    "8": 7.9,
+    "9": 15.0,
+    "10": 119.0,
+    "11": 27.0,
+    "12": 17.0,
+    "13": 27.0
+  },
+  "analysis_markdown": "# Hong Kong Horse Racing Analysis - Class 4, 1000m Turf\n\n## Race Overview\n- **Distance**: 1000m (short sprint)\n- **Track**: Turf (Good condition forecast)\n- **Class**: Class 4 (competitive mid-level race)\n- **Weather**: 27.5°C, 25% rain probability - ideal racing conditions\n\n## Key Factors Considered\n\n### 1. **Recent Form Analysis**\n- **RUN RUN SUNRISE (1)**: Exceptional recent form with 2-1-2-10 in last 4 starts. The '10' finish appears to be an outlier given previous strong performances. Shows consistency at this level.\n- **TOURBILLON GOLFER (2)**: Solid form with 3-6-9-3-11-2. Recent 2nd place finish indicates good current form.\n- **ALSONSO (3)**: Inconsistent but capable with 6-2-13-14-10-5. The '2' finish shows potential when conditions suit.\n- **ZOUPER FELLOW (11)**: Consistent performer with 1-4-7-6-7-7. Recent win shows ability to find the line.\n\n### 2. **Weight Analysis**\n- **RUN RUN SUNRISE (1)**: 135lb - Carrying top weight but has proven ability under this burden\n- **Lightweights**: HEROIC MASTER (13) at 118lb and HAPPY ACTION (14) at 116lb get significant weight relief\n- **Weight vs Form**: RUN RUN SUNRISE has shown ability to carry weight effectively\n\n### 3. **Draw Analysis (1000m Turf)**\n- **Middle Draws Advantageous**: Draws 5-9 typically optimal for 1000m at Sha Tin\n- **RUN RUN SUNRISE (1)**: Draw 12 is challenging but manageable for a front-runner\n- **TOURBILLON GOLFER (2)**: Draw 8 is excellent position\n- **ALSONSO (3)**: Draw 5 is ideal\n\n### 4. **Jockey & Trainer Combinations**\n- **RUN RUN SUNRISE (1)**: C L Chau (solid local jockey) + F C Lor (experienced trainer)\n- **TOURBILLON GOLFER (2)**: H Y Yuen + P F Yiu (consistent local combination)\n- **ONESHOT (8)**: K Teetan (top jockey) + W K Mo combination\n- **PERFECT TRIUMPH (10)**: J Moreira (champion jockey) + C Fownes (top trainer)\n\n### 5. **Market Odds Analysis**\n- **RUN RUN SUNRISE (1)**: 6.0 - Market respects recent form\n- **TOURBILLON GOLFER (2)**: 5.9 - Slight favorite, reflecting consistent performances\n- **ALSONSO (3)**: 4.2 - Strong favorite based on market confidence\n- **Value Opportunities**: HEROIC MASTER (13) at 27.0 offers good each-way value\n\n### 6. **Weather & Track Conditions**\n- **Good track forecast**: No wet track specialists needed\n- **Moderate temperature**: 27.5°C optimal for horse performance\n- **Low rain probability**: Consistent racing surface expected\n\n## Top Contenders Analysis\n\n### **Primary Selection: RUN RUN SUNRISE (1)**\n- **Strengths**: Best recent form in the field, proven winner, handles weight well\n- **Concerns**: Wide draw (12) for 1000m, top weight burden\n- **Race Strategy**: Likely to go forward from wide gate, use early speed to find position\n\n### **Main Danger: TOURBILLON GOLFER (2)**\n- **Strengths**: Excellent draw (8), consistent performer, good recent 2nd\n- **Race Strategy**: Should get perfect trail from good gate\n\n### **Value Chance: ALSONSO (3)**\n- **Strengths**: Ideal draw (5), capable of strong finish, market favorite\n- **Concerns**: Inconsistent performances\n\n### **Lightweight Chance: HEROIC MASTER (13)**\n- **Strengths**: Significant weight advantage (118lb), good draw (1)\n- **Race Strategy**: Can use inside gate to save ground\n\n## Betting Recommendation\n**WIN 1** - RUN RUN SUNRISE offers the best combination of:\n1. Proven winning form at this level\n2. Ability to carry weight effectively\n3. Competitive market odds (6.0)\n4. Strong jockey-trainer combination\n\nWhile the wide draw presents a challenge, the horse's early speed should allow it to cross and find a forward position. The 25% win probability reflects both the horse's strengths and the competitive nature of this Class 4 event.\n\n## Risk Factors\n1. Wide draw for RUN RUN SUNRISE requires perfect ride\n2. Competitive field with multiple winning chances\n3. Several horses with light weights could improve significantly\n\n## Confidence Level: 65%\nModerate confidence based on strong form lines but acknowledging the competitive nature of Class 4 racing and the draw challenge for our selection."
+}

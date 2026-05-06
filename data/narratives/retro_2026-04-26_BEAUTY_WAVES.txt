@@ -1,0 +1,3 @@
+LESSON LEARNT RETROSPECTIVE FOR BEAUTY WAVES on 2026-04-26:
+Our model highly tipped this horse but it failed (finished 8).
+Analysis: The model overestimated BEAUTY WAVES' chances because it failed to weight the jockey's poor recent form (0.076) heavily enough, especially from an inside draw (5) where tactical speed is critical. On a Good track, horses with slow early paces often get trapped behind the speed, making it impossible to close—exactly what happened as #8 faded to 8th. This highlights that high-value odds models can be undermined by jockey-tactical mismatches, particularly when the rider lacks the ability to overcome a midfield draw on fast ground.

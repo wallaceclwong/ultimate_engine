@@ -1,0 +1,3 @@
+LESSON LEARNT RETROSPECTIVE FOR RUBYLOT on 2026-04-26:
+Our model highly tipped this horse but it failed (finished 6).
+Analysis: Despite the favourable good track and inside draw, the extremely low jockey performance metric (0.127) likely contributed to a lack of tactical aggression, leaving RUBYLOT unable to secure a prominent position from stall 3. The 74.0 odds suggest the market correctly assessed the horse’s inability to sustain pace on good ground, as the model’s high EV over-relied on improbable variance rather than realistic finishing power. In future, we must cross-reference longshot value with jockey form and early-speed potential, as single-digit win probabilities rarely materialise when tactical execution is weak.

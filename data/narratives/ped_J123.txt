@@ -1,0 +1,6 @@
+PEDIGREE FOR HORSE ID J123:
+Sire: Starspangledbanner
+Dam: Marechale
+Origin: FR / 5
+Color: Unknown
+Import Type: PPG

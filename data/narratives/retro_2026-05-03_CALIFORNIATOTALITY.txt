@@ -1,0 +1,3 @@
+LESSON LEARNT RETROSPECTIVE FOR CALIFORNIATOTALITY on 2026-05-03:
+Our model highly tipped this horse but it failed (finished 10).
+Analysis: Despite the high EV from odds, the model failed to account for the jockey’s poor historical performance on yielding ground (jockey stat 0.037), which severely compromised the horse’s ability to stay competitive in the softened footing. Additionally, starting from draw 9 on a yielding track often forces a wide trip and extra energy expenditure, making it especially punitive for long-priced outsiders. The resulting 10th-place finish suggests the statistical edge was illusory, as track condition and post position dynamics outweighed the pure odds-based value.

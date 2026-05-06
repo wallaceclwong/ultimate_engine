@@ -1,0 +1,3 @@
+LESSON LEARNT RETROSPECTIVE FOR LUCKY SWEYNESSE on 2026-04-26:
+Our model highly tipped this horse but it failed (finished 11).
+Analysis: The jockey's low historical win rate (0.063) suggests limited ability to execute a winning ride, despite the statistical model factoring it into a positive EV. Additionally, draw 4 on good ground may have forced LUCKY SWEYNESSE into a wide or congested early position, compromising its tactical speed against a field that pressed the pace. This combination of rider ineffectiveness and an unfavorable tactical setup on a firm surface likely outweighed the model's odds-based value, resulting in an 11th-place finish.

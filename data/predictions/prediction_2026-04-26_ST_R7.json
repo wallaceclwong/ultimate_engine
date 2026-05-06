@@ -1,0 +1,34 @@
+{
+  "race_id": "2026-04-26_ST_R7",
+  "gemini_model": "deepseek-chat",
+  "confidence_score": 0.75,
+  "is_best_bet": true,
+  "recommended_bet": "WIN 10",
+  "probabilities": {
+    "1": 0.02,
+    "2": 0.08,
+    "3": 0.04,
+    "4": 0.1,
+    "5": 0.12,
+    "6": 0.03,
+    "7": 0.08,
+    "8": 0.01,
+    "9": 0.05,
+    "10": 0.25,
+    "11": 0.05,
+    "12": 0.03,
+    "13": 0.06,
+    "14": 0.08
+  },
+  "kelly_stakes": {},
+  "market_odds": {
+    "1": 1.0,
+    "2": 83.0,
+    "3": 146.0,
+    "4": 150.0,
+    "5": 135.0,
+    "6": 145.0,
+    "7": 131.0
+  },
+  "analysis_markdown": "**Race Analysis: Class 4 1600m Turf**\n\n**Top Selection: #10 INVINCIBLE IBIS**\n- **Recent Form:** 1-2-6-1-1-1 (last 6 runs) – dominant, with four wins in last five starts. Consistent and in peak form.\n- **Jockey:** J McDonald (top-tier rider) – strong booking.\n- **Trainer:** M Newnham – solid stable.\n- **Draw:** 5 (midfield, good position).\n- **Weight:** 126 lbs (standard for class).\n- **Weather:** Good track (no rain) – suits all runners.\n- **Odds:** Not provided for #10, but likely short due to form.\n\n**Key Contenders:**\n- **#5 MY WISH** (H Bowman): Consistent, recent 2nd, 1st. Draw 10 (wide but manageable).\n- **#4 LUCKY SWEYNESSE** (K C Leung): Recent 1st, 3rd, 2nd. Draw 4 (good).\n- **#2 VOYAGE BUBBLE** (C L Chau): Inconsistent but has placed in 4 of last 6. Draw 12 (wide).\n- **#14 LITTLE PARADISE** (Z Purton): Three consecutive wins before last run (3rd). Draw 2 (ideal).\n\n**Outsiders:**\n- **#8 STRAUSS** (J Moreira): Debut – unknown, but jockey booking suggests potential.\n- **#1 JANTAR MANTAR** (Y Kawada): Only one run (13th) – poor form.\n\n**Betting Strategy:**\n- **WIN on #10 INVINCIBLE IBIS** – best value given form and jockey.\n- **PLACE on #5 MY WISH** or **#14 LITTLE PARADISE** for safety.\n\n**Confidence:** 0.75 – strong form lines, but racing always has variables."
+}

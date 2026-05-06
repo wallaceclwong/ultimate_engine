@@ -1,0 +1,39 @@
+{
+  "race_id": "2026-04-26_ST_R6",
+  "gemini_model": "deepseek-chat",
+  "confidence_score": 0.75,
+  "is_best_bet": true,
+  "recommended_bet": "WIN 5",
+  "probabilities": {
+    "1": 0.08,
+    "2": 0.03,
+    "3": 0.06,
+    "4": 0.15,
+    "5": 0.2,
+    "6": 0.1,
+    "7": 0.02,
+    "8": 0.12,
+    "9": 0.04,
+    "10": 0.05,
+    "11": 0.02,
+    "12": 0.03,
+    "13": 0.07,
+    "14": 0.03
+  },
+  "kelly_stakes": {},
+  "market_odds": {
+    "1": 3.9,
+    "2": 17.0,
+    "3": 42.0,
+    "4": 4.5,
+    "5": 11.0,
+    "6": 19.0,
+    "7": 27.0,
+    "8": 4.9,
+    "9": 81.0,
+    "10": 45.0,
+    "11": 12.0,
+    "12": 6.1
+  },
+  "analysis_markdown": "## Race Analysis: Class 3 1200m Turf\n\n**Weather & Track:** Good track, no rain, moderate temps. No bias expected.\n\n**Key Contenders:**\n- **#5 COOL BOY (Z Purton, J Richards):** Dominant form with 3 consecutive wins before a 4th last start. Draw 13 is a concern but Purton can overcome. Best horse in race.\n- **#4 GENEVA (H Bowman, D J Hall):** Consistent, placed in 5 of last 6. Draw 9 okay. Strong each-way chance.\n- **#8 PEGAS (E Brown, Y S Tsui):** Recent win, good odds. Draw 8 fine.\n- **#6 LIFELINE EXPRESS (A Atzeni, J Size):** Consistent, placed in recent runs. Draw 2 ideal.\n- **#1 CHATEAUNEUF (J McDonald, D A Hayes):** Poor recent form but classy jockey. Could bounce back.\n\n**Selection:** COOL BOY (#5) is the standout on form despite wide draw. Purton's skill and recent dominance make him the top pick. GENEVA (#4) is the main danger.\n\n**Bet Recommendation:** WIN on #5 COOL BOY."
+}

@@ -1,0 +1,6 @@
+PEDIGREE FOR HORSE ID H456:
+Sire: Deep Field
+Dam: Twist Tops
+Origin: AUS / 6
+Color: Unknown
+Import Type: PP

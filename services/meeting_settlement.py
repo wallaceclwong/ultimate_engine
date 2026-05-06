@@ -97,12 +97,31 @@ class MeetingSettlement:
                 "updated_at": datetime.now().isoformat()
             }
             
+            # --- LOCAL AUDIT LOG (BigQuery Replacement) ---
+            audit_file = Path("data/bankroll_audit.json")
+            audit_history = []
+            if audit_file.exists():
+                try:
+                    with open(audit_file, "r", encoding="utf-8") as f:
+                        audit_history = json.load(f)
+                except: audit_history = []
+            
+            # Upsert logic for local audit
+            audit_history = [entry for entry in audit_history if entry.get("meeting_date") != date_str or entry.get("venue") != venue]
+            audit_history.append(report_data)
+            
+            with open(audit_file, "w", encoding="utf-8") as f:
+                json.dump(audit_history, f, indent=2)
+            logger.info(f"✅ Local audit log updated: {audit_file}")
+
+            # --- HYBRID MIRROR (Low-Cost) ---
             report_id = f"{date_str}_{venue}"
             self.firestore.upsert("meeting_reports", report_id, report_data)
-            logger.info(f"✅ Settlement synced to Firestore: {report_id}")
+            logger.info(f"✅ Cloud mirror synced to Firestore: {report_id}")
         except Exception as e:
-            logger.error(f"Failed to sync settlement to Firestore: {e}")
+            logger.error(f"Failed to settle meeting: {e}")
             return False
+
 
         # 5. Auto-recalibrate RL biases using latest results
         try:

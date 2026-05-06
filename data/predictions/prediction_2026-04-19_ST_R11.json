@@ -1,0 +1,38 @@
+{
+  "race_id": "2026-04-19_ST_R11",
+  "gemini_model": "deepseek-chat",
+  "confidence_score": 0.65,
+  "is_best_bet": true,
+  "recommended_bet": "WIN 3",
+  "probabilities": {
+    "1": 0.04,
+    "2": 0.08,
+    "3": 0.22,
+    "4": 0.12,
+    "5": 0.07,
+    "6": 0.11,
+    "7": 0.09,
+    "8": 0.06,
+    "9": 0.02,
+    "10": 0.05,
+    "11": 0.02,
+    "12": 0.03,
+    "13": 0.04,
+    "14": 0.05
+  },
+  "kelly_stakes": {},
+  "market_odds": {
+    "1": 16.0,
+    "2": 15.0,
+    "3": 5.0,
+    "4": 11.0,
+    "5": 8.9,
+    "6": 6.6,
+    "7": 4.3,
+    "8": 10.0,
+    "9": 18.0,
+    "10": 13.0,
+    "11": 12.0
+  },
+  "analysis_markdown": "# Race Analysis: Class 2, 1800m Turf\n\n## Race Context Assessment\n- **Distance**: 1800m on turf favors horses with stamina and tactical speed\n- **Track Condition**: Forecast \"Good\" with low rain probability (25%) - consistent conditions expected\n- **Class**: Class 2 features competitive horses with proven ability\n\n## Key Contenders Analysis\n\n### **WINNING WING (3)** - **TOP SELECTION**\n**Form**: 3-1-5-2-1-1 - Exceptional recent form with 3 wins from last 4 starts\n**Strengths**:\n- Best recent form in the field with multiple wins\n- Carrying competitive weight of 131lbs\n- Draw 11 allows for tactical positioning\n**Concerns**: Outside draw may require early effort\n**Market Support**: Odds of 5.0 reflect strong market confidence\n\n### **PATCH OF COSMO (4)**\n**Form**: 4-3-9-1-1-6 - Two recent wins show capability\n**Strengths**:\n- Zac Purton aboard (top jockey)\n- Good draw (4) for economical run\n- Light weight of 127lbs advantageous\n**Concerns**: Inconsistent form with 9th and 6th placings\n\n### **GENTLEMEN LEGACY (6)**\n**Form**: 1-1-3-3-10-4 - Dual winner with consistent placings\n**Strengths**:\n- Hugh Bowman (elite jockey)\n- Good draw (5)\n- Light weight of 125lbs\n**Concerns**: Recent 10th and 4th suggest possible regression\n\n### **NEW FOREST (7)**\n**Form**: 9-11-8-1-1-4 - Back-to-back wins followed by credible 4th\n**Strengths**:\n- Winning form at this level\n- Richard Kingscote capable jockey\n**Concerns**: Draw 9 not ideal, weight 125lbs reasonable\n\n## Secondary Contenders\n\n### **STUNNING PEACH (2)**\n**Form**: 9-1-1-9-2-11 - Dual winner but inconsistent\n**Strengths**: Light weight (131lbs), proven winning ability\n**Concerns**: Wide draw (12), erratic form pattern\n\n### **AWESOME FLUKE (5)**\n**Form**: 4-6-1-11-6-2 - Capable winner but inconsistent\n**Strengths**: Good draw (6), competitive weight (126lbs)\n**Concerns**: Needs to bounce back from recent poor runs\n\n## Weather & Track Analysis\n- **Rain Probability**: 25% - Low chance of track condition change\n- **Temperature**: 27.5°C - Moderate, no heat stress concerns\n- **Track Forecast**: \"Good\" - Consistent conditions expected\n- **Impact**: No significant weather advantages/disadvantages for any horse\n\n## Market Analysis\n- **WINNING WING (3)** at 5.0 offers value given superior form\n- **NEW FOREST (7)** at 4.3 is market favorite but recent 4th raises questions\n- **GENTLEMEN LEGACY (6)** at 6.6 represents good each-way value\n\n## Draw Analysis\n- **Favorable Draws**: 3, 4, 5, 6 (inside/middle positions)\n- **Challenging Draws**: 11, 12, 13, 14 (wide gates requiring early effort)\n\n## Weight Assessment\n- **Light Weights Advantage**: Horses 8-14 carrying 120lbs or less\n- **Competitive Range**: 125-135lbs typical for Class 2\n- No significant weight disadvantages identified\n\n## Final Assessment\n**WINNING WING (3)** presents the most compelling case:\n1. **Superior Form**: Best recent record in the field\n2. **Competitive Weight**: 131lbs within optimal range\n3. **Proven Class**: Multiple wins at this level\n4. **Market Confidence**: Second favorite reflects strong support\n\n**Risk Factors**:\n- Draw 11 requires tactical ride\n- Faces strong competition from horses 4, 6, and 7\n\n**Recommended Bet**: WIN 3 at expected odds of 5.0 offers value relative to winning probability of 22%.\n\n**Confidence Level**: 0.65 - Strong contender in competitive race with multiple winning chances."
+}

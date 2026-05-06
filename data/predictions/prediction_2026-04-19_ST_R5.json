@@ -1,0 +1,41 @@
+{
+  "race_id": "2026-04-19_ST_R5",
+  "gemini_model": "deepseek-chat",
+  "confidence_score": 0.65,
+  "is_best_bet": true,
+  "recommended_bet": "WIN 3",
+  "probabilities": {
+    "1": 0.02,
+    "2": 0.01,
+    "3": 0.28,
+    "4": 0.03,
+    "5": 0.12,
+    "6": 0.08,
+    "7": 0.04,
+    "8": 0.01,
+    "9": 0.15,
+    "10": 0.02,
+    "11": 0.09,
+    "12": 0.06,
+    "13": 0.02,
+    "14": 0.07
+  },
+  "kelly_stakes": {},
+  "market_odds": {
+    "1": 3.8,
+    "2": 79.0,
+    "3": 10.0,
+    "4": 19.0,
+    "5": 70.0,
+    "6": 12.0,
+    "7": 4.5,
+    "8": 7.6,
+    "9": 30.0,
+    "10": 24.0,
+    "11": 42.0,
+    "12": 7.5,
+    "13": 70.0,
+    "14": 9.8
+  },
+  "analysis_markdown": "# Race Analysis: Class 4, 1600m Turf\n\n## Race Context Assessment\n- **Distance**: 1600m (mile) on turf - tests stamina and tactical positioning\n- **Track Condition**: Forecasted as \"Good\" with only 25% rain probability - minimal weather impact expected\n- **Class**: Class 4 - competitive field with horses seeking to move up or maintain form\n\n## Key Contenders Analysis\n\n### **MEGA MASTERMIND (3)** - **TOP SELECTION**\n- **Recent Form**: Outstanding - 1,3,6,8,7 (win followed by strong placings)\n- **Weight**: 130.0 lbs - favorable weight for this class\n- **Draw**: 6 - excellent middle draw for tactical options\n- **Jockey**: B Avdulla - experienced international rider\n- **Market Odds**: 10.0 - represents excellent value for form horse\n- **Analysis**: Clear standout based on recent performances. The win followed by consistent placings shows this horse is in peak form and handles the 1600m distance well. The middle draw allows for multiple tactical options.\n\n### **AMAZING DUCK (9)** - **MAIN DANGER**\n- **Recent Form**: Consistent - 5,2,6,2,3,13 (multiple placings)\n- **Weight**: 122.0 lbs - lightest weight among contenders\n- **Draw**: 9 - reasonable draw\n- **Jockey**: H Y Yuen - competent local rider\n- **Market Odds**: 30.0 - good each-way value\n- **Analysis**: Excellent consistency with multiple placings. The light weight (122.0 lbs) is a significant advantage. Recent 13th place appears to be an aberration given otherwise strong form.\n\n### **FLYING BOOM (5)** - **CONTENDER**\n- **Recent Form**: Solid - 3,1,6,4,9,5 (win and multiple placings)\n- **Weight**: 127.0 lbs - reasonable weight\n- **Draw**: 12 - wide draw is a concern\n- **Jockey**: M F Poon - capable rider\n- **Market Odds**: 70.0 - appears undervalued\n- **Analysis**: Proven winner with recent victory. The wide draw (12) is the main concern, but if the horse can find cover early, could be dangerous at big odds.\n\n### **ABSOLUTE HONOUR (11)** - **VALUE CHANCE**\n- **Recent Form**: Competitive - 4,7,2,3,8,9 (multiple placings)\n- **Weight**: 121.0 lbs - very light weight\n- **Draw**: 1 - perfect inside draw\n- **Jockey**: Z Purton - Hong Kong's premier jockey\n- **Market Odds**: 42.0 - excellent value with Purton aboard\n- **Analysis**: The combination of light weight (121.0 lbs), inside draw (1), and Zac Purton riding makes this horse exceptional value. Recent form is competitive with multiple placings.\n\n## Secondary Contenders\n- **PRESTIGE RICKY (6)**: 3,9,5,3,12 - inconsistent but capable on best form\n- **INCANTO STAR (12)**: 9,10,2,3,8,7 - shows ability but needs to improve consistency\n- **MATSU VICTOR (14)**: 9,12,6,9,8,7 - moderate form but light weight (116.0 lbs) is advantage\n\n## Lower Chances\n- **FLUORESCENCE (1)**: Poor recent form (12,14,11)\n- **FAMILY KNIGHT (2)**: Consistently poor performances\n- **CLEANSWEEPER (4)**: Only one recent run (8th) - insufficient data\n- **GRAND TURBO (7)**: Very poor recent form (13,12)\n- **LEAPING STAR (8)**: Consistently poor performances\n- **MULTISUPERSTAR (10)**: Inconsistent with poor recent runs\n- **HONORARY (13)**: Moderate form but faces stronger competition\n\n## Betting Strategy\n**Primary Bet**: WIN 3 (MEGA MASTERMIND) - Best form in race, favorable draw, reasonable odds\n**Value Options**:\n- Each-way on 9 (AMAZING DUCK) at 30.0\n- Each-way on 11 (ABSOLUTE HONOUR) at 42.0 with Purton riding\n**Exotics**: Consider quinella 3-9 and 3-11\n\n## Risk Factors\n1. Wide draws for horses 4, 5, 8, 13 could impact their chances\n2. Some horses have limited recent runs (4, 7) making form assessment difficult\n3. Competitive Class 4 field means any horse could improve\n\n## Final Assessment\nMEGA MASTERMIND (3) stands out as the most likely winner based on superior recent form and favorable conditions. AMAZING DUCK (9) and ABSOLUTE HONOUR (11) represent excellent value alternatives. The good track condition forecast minimizes weather-related uncertainties."
+}

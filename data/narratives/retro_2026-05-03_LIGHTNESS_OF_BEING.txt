@@ -1,0 +1,3 @@
+LESSON LEARNT RETROSPECTIVE FOR LIGHTNESS OF BEING on 2026-05-03:
+Our model highly tipped this horse but it failed (finished 7).
+Analysis: The model overestimated the horse's ability to handle the yielding track, as LIGHTNESS OF BEING's pedigree and previous form likely favoured firmer ground—a common blind spot in statistical systems that fail to properly weight surface condition shifts. Additionally, the jockey’s win rate of 6.5% suggests limited skill in navigating soft going, compounding the disadvantage from a mid-field draw (6) that offered no tactical edge. Despite the attractive 98.0 odds and high EV, the combination of a heavy track and a low-percentage rider made the horse a false positive in the model’s value assessment.

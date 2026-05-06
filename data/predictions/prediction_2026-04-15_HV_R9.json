@@ -1,0 +1,37 @@
+{
+  "race_id": "2026-04-15_HV_R9",
+  "gemini_model": "ensemble_lgb_xgb_cat",
+  "confidence_score": -0.3023,
+  "is_best_bet": false,
+  "recommended_bet": "NO BET",
+  "probabilities": {
+    "1": 0.08114760241691364,
+    "2": 0.02797433258499344,
+    "3": 0.11127895707621135,
+    "4": 0.08714190651676722,
+    "5": 0.07259713865268505,
+    "6": 0.05716384352200093,
+    "7": 0.08396291992693439,
+    "8": 0.02603805823358717,
+    "9": 0.17631454927581258,
+    "10": 0.01824364082704876,
+    "11": 0.008958567188211775,
+    "12": 0.24917848377883361
+  },
+  "kelly_stakes": {},
+  "market_odds": {
+    "1": 10.0,
+    "2": 38.0,
+    "3": 7.3,
+    "4": 8.9,
+    "5": 10.0,
+    "6": 16.0,
+    "7": 10.0,
+    "8": 43.0,
+    "9": 5.2,
+    "10": 50.0,
+    "11": 143.0,
+    "12": 2.8
+  },
+  "analysis_markdown": "## Race Analysis: Class 3 1200m Turf (Good)\n\n### Top Pick\n- **#12 SOMELOVEFROMABOVE** (Rank 1, Odds 2.8, Fair 4.0, Edge -30.2%)\n\n### Bet Signal\n- **\u26d4 NO BET** (edge=-30.2%, odds=2.8)\n\n### Key Stats\n- Field Size: 12\n- Track: HV A\n- Going: Good"
+}

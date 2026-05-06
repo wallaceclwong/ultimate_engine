@@ -1,0 +1,35 @@
+{
+  "race_id": "2026-05-03_ST_R8",
+  "gemini_model": "ensemble_lgb_xgb_cat",
+  "confidence_score": -0.5508,
+  "is_best_bet": false,
+  "recommended_bet": "NO BET",
+  "probabilities": {
+    "1": 0.08268757820365462,
+    "2": 0.11994365648177578,
+    "3": 0.06533338789611987,
+    "4": 0.051735430671236766,
+    "5": 0.04465868280273767,
+    "6": 0.0866512729077874,
+    "7": 0.058332039192576485,
+    "8": 0.2364449516445172,
+    "9": 0.12542389744270846,
+    "10": 0.06439193384265557,
+    "11": 0.06439716891423002
+  },
+  "kelly_stakes": {},
+  "market_odds": {
+    "1": 13.0,
+    "2": 6.1,
+    "3": 24.0,
+    "4": 46.0,
+    "5": 57.0,
+    "6": 12.0,
+    "7": 32.0,
+    "8": 1.9,
+    "9": 5.2,
+    "10": 23.0,
+    "11": 24.0
+  },
+  "analysis_markdown": "## Race Analysis: Class 2 1600m Turf (Yielding)\n\n### Top Pick\n- **#8 SKY JEWELLERY** (Rank 1, Odds 1.9, Fair 4.2, Edge -55.1%)\n\n### Bet Signal\n- **\u26d4 NO BET** (edge=-55.1%, odds=1.9)\n\n### Key Stats\n- Field Size: 11\n- Track: ST A\n- Going: Yielding"
+}

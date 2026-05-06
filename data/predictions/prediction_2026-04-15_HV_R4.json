@@ -1,0 +1,37 @@
+{
+  "race_id": "2026-04-15_HV_R4",
+  "gemini_model": "ensemble_lgb_xgb_cat",
+  "confidence_score": -0.0096,
+  "is_best_bet": false,
+  "recommended_bet": "NO BET",
+  "probabilities": {
+    "1": 0.06757622046406216,
+    "2": 0.04030406767469609,
+    "3": 0.3301459174062839,
+    "4": 0.1807196652645562,
+    "5": 0.022367047645892493,
+    "6": 0.022653714193590437,
+    "7": 0.035325227773620196,
+    "8": 0.011859663112894192,
+    "9": 0.08094574428686646,
+    "10": 0.08645709973479149,
+    "11": 0.10986800915887049,
+    "12": 0.011777623283875908
+  },
+  "kelly_stakes": {},
+  "market_odds": {
+    "1": 10.0,
+    "2": 22.0,
+    "3": 3.0,
+    "4": 5.0,
+    "5": 46.0,
+    "6": 47.0,
+    "7": 25.0,
+    "8": 72.0,
+    "9": 11.0,
+    "10": 11.0,
+    "11": 7.9,
+    "12": 85.0
+  },
+  "analysis_markdown": "## Race Analysis: Class 4 1800m Turf (Good)\n\n### Top Pick\n- **#3 NOBLE PURSUIT** (Rank 1, Odds 3.0, Fair 3.0, Edge -1.0%)\n\n### Bet Signal\n- **\u26d4 NO BET** (edge=-1.0%, odds=3.0)\n\n### Key Stats\n- Field Size: 12\n- Track: HV A\n- Going: Good"
+}

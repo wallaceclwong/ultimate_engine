@@ -1,0 +1,3 @@
+LESSON LEARNT RETROSPECTIVE FOR GORGEOUS WIN on 2026-05-03:
+Our model highly tipped this horse but it failed (finished 11).
+Analysis: Despite the statistical edge, the horse’s wide draw (8) likely required extra ground on the yielding surface, increasing fatigue and compromising its finishing kick—a disadvantage not fully captured by the model. The low jockey win rate (0.079) further suggests limited ability to adapt to the tactical demands of a soft track, where positioning and energy conservation are crucial. This failure highlights that high-EV plays on slow ground need supplementary filters for draw bias and jockey course form, as the surface amplifies positional disadvantages.

@@ -1,0 +1,3 @@
+LESSON LEARNT RETROSPECTIVE FOR LEGENDARY YEARS on 2026-04-26:
+Our model highly tipped this horse but it failed (finished 9).
+Analysis: The model failed to account for LEGENDARY YEARS' apparent dislike of Good ground, as its best form likely comes on softer turf despite the track being officially rated "Good." From draw 3, the horse was forced to race in tight quarters early, losing tactical position in a crowded field, while the jockey's poor track record (0.037 rating) left it unable to recover. This highlights how a high EV can mask critical surface and pace biases that a purely statistical approach overlooks.

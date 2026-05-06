@@ -1,12 +1,28 @@
 {
-  "audited_races": [
-    "9",
-    "10",
-    "11"
-  ],
+  "audited_races": [],
+  "audited_horses": {},
   "learned_today": true,
-  "last_reset_date": "2026-04-12",
-  "last_scrape_R9": 1775981896.124211,
-  "last_scrape_R10": 1775984088.810218,
-  "last_scrape_R11": 1775986033.632304
+  "last_reset_date": "2026-05-03",
+  "proactive_R1": true,
+  "last_scrape_R1": 1777783366.160495,
+  "proactive_R2": true,
+  "last_scrape_R2": 1777785331.260716,
+  "proactive_R3": true,
+  "last_scrape_R3": 1777787044.304877,
+  "proactive_R4": true,
+  "last_scrape_R4": 1777788843.149585,
+  "proactive_R5": true,
+  "last_scrape_R5": 1777792075.278396,
+  "proactive_R6": true,
+  "last_scrape_R6": 1777794014.087108,
+  "proactive_R7": true,
+  "last_scrape_R7": 1777795679.176678,
+  "last_scrape_R8": 1777797612.256955,
+  "final_verdict_R8": true,
+  "last_scrape_R9": 1777799424.184725,
+  "final_verdict_R9": true,
+  "last_scrape_R10": 1777801539.425744,
+  "final_verdict_R10": true,
+  "last_scrape_R11": 1777803477.528844,
+  "final_verdict_R11": true
 }

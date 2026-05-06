@@ -9,14 +9,13 @@ from datetime import datetime
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from config.settings import Config
-from services.bigquery_service import BigQueryService
-
 class BettingEvaluator:
+
     def __init__(self):
         self.results_dir = Path("data/results")
         self.predictions_dir = Path("data/predictions")
         self.unit_stake = 10.0  # Default $10 unit stake for calculations
-        self.bigquery = BigQueryService()
+        self.unit_stake = 10.0  # Default $10 unit stake for calculations
 
     def evaluate_day(self, date_str: str, venue: str) -> List[Dict]:
         """Evaluates all predictions for a specific race day and returns structured data."""

@@ -1,0 +1,35 @@
+{
+  "race_id": "2026-04-15_HV_R8",
+  "gemini_model": "ensemble_lgb_xgb_cat",
+  "confidence_score": 0.2521,
+  "is_best_bet": false,
+  "recommended_bet": "NO BET",
+  "probabilities": {
+    "1": 0.05337493875242734,
+    "2": 0.09605518485985208,
+    "3": 0.014408913627141291,
+    "4": 0.03749627682601606,
+    "5": 0.12618740449444488,
+    "6": 0.030457135047909853,
+    "7": 0.02871106886007722,
+    "8": 0.4039052608567401,
+    "9": 0.04179582068569608,
+    "10": 0.05805977897868242,
+    "11": 0.10954821701101282
+  },
+  "kelly_stakes": {},
+  "market_odds": {
+    "1": 10.0,
+    "2": 7.8,
+    "3": 26.0,
+    "4": 15.0,
+    "5": 6.3,
+    "6": 19.0,
+    "7": 18.0,
+    "8": 3.1,
+    "9": 15.0,
+    "10": 10.0,
+    "11": 7.7
+  },
+  "analysis_markdown": "## Race Analysis: Class 3 1650m Turf (Good)\n\n### Top Pick\n- **#8 ARMOR GOLDEN EAGLE** (Rank 1, Odds 3.1, Fair 2.5, Edge +25.2%)\n\n### Bet Signal\n- **\u26d4 NO BET** (edge=+25.2%, odds=3.1)\n\n### Key Stats\n- Field Size: 11\n- Track: HV A\n- Going: Good"
+}

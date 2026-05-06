@@ -1,0 +1,41 @@
+{
+  "race_id": "2026-04-19_ST_R1",
+  "gemini_model": "deepseek-chat",
+  "confidence_score": 0.65,
+  "is_best_bet": true,
+  "recommended_bet": "WIN 1",
+  "probabilities": {
+    "1": 0.28,
+    "2": 0.09,
+    "3": 0.04,
+    "4": 0.12,
+    "5": 0.03,
+    "6": 0.04,
+    "7": 0.02,
+    "8": 0.11,
+    "9": 0.08,
+    "10": 0.05,
+    "11": 0.06,
+    "12": 0.03,
+    "13": 0.03,
+    "14": 0.02
+  },
+  "kelly_stakes": {},
+  "market_odds": {
+    "1": 1.7,
+    "2": 25.0,
+    "3": 53.0,
+    "4": 8.2,
+    "5": 23.0,
+    "6": 17.0,
+    "7": 73.0,
+    "8": 27.0,
+    "9": 8.4,
+    "10": 43.0,
+    "11": 37.0,
+    "12": 25.0,
+    "13": 52.0,
+    "14": 14.0
+  },
+  "analysis_markdown": "# Hong Kong Horse Racing Analysis - Class 5, 1800m All Weather Track\n\n## Race Context Analysis\n- **Distance**: 1800m on All Weather Track - favors horses with stamina and consistent pace\n- **Class 5**: Lower grade race where form fluctuations are common\n- **Weather**: Good track conditions forecasted (25% rain probability, 27.5°C) - no wet track specialists needed\n\n## Key Contender Analysis\n\n### **#1 FOREMOST TEDDY (Top Selection)**\n- **Recent Form**: 11-5-7-1-1-9 - Shows excellent recent form with back-to-back wins\n- **Draw Advantage**: Barrier 1 - Perfect draw for AWT 1800m, can settle in ideal position\n- **Weight**: 135lbs - Carrying top weight but has proven ability under this burden\n- **Jockey/Trainer**: P N Wong/C S Shum - Local combination with good AWT record\n- **Market Support**: Odds of 1.7 indicate strong market confidence\n- **Key Factor**: Recent wins at this distance class demonstrate current peak form\n\n### **#4 FIREFOOT (Main Danger)**\n- **Recent Form**: 4-8-3-3-8-7 - Consistent performer with multiple placings\n- **Jockey**: K Teetan - Top jockey with excellent AWT statistics\n- **Weight**: 134lbs - Favorable weight relative to ability\n- **Draw**: Barrier 5 - Good middle draw for tactical options\n\n### **#8 SUPER HONG KONG (Value Chance)**\n- **Recent Form**: 10-1-2-6-1-8 - Two wins in last six starts shows winning capability\n- **Weight**: 131lbs - Lightest of the main contenders\n- **Jockey**: R Kingscote - International jockey with strong finishing ability\n\n### **#9 HAPPYDEARHAPPYDEER (Place Chance)**\n- **Recent Form**: 11-9-7-13-2-2 - Improving form with recent placings\n- **Weight**: 128lbs - Significant weight advantage\n- **Trainer**: A S Cruz - Experienced trainer with good long-distance record\n\n## Market Analysis\n- **#1 FOREMOST TEDDY** is clear favorite at 1.7 odds, suggesting strong confidence\n- **#9 HAPPYDEARHAPPYDEER** offers value at 8.4 win odds given recent improvement\n- **#4 FIREFOOT** at 8.2 represents fair value for consistent performer\n\n## Draw Analysis\n- **Advantageous Draws**: 1, 2, 3, 4 (inside gates on AWT)\n- **Disadvantageous**: 12, 13, 14 (wide draws on 1800m start)\n\n## Weight Analysis\n- All horses within reasonable weight range (115-135lbs)\n- **#14 ALL EYES ON ME** carries only 115lbs - significant advantage but poor form\n- Top weights (#1, #2, #3) have proven ability to carry these weights\n\n## Form Pattern Recognition\n1. **Peak Performers**: #1 (recent wins), #8 (multiple wins)\n2. **Consistent Placers**: #4 (multiple 3rd places), #11 (consistent top-4 finishes)\n3. **Improving Types**: #9 (recent placings), #2 (win then poor run)\n4. **Out of Form**: #5, #7, #13, #14 show inconsistent or declining form\n\n## Final Assessment\n**#1 FOREMOST TEDDY** is selected as the best bet due to:\n1. Proven winning form at this level\n2. Perfect barrier draw (1) for AWT 1800m\n3. Strong market support indicating stable confidence\n4. Recent back-to-back wins showing peak condition\n\n**Recommended Bet**: WIN 1 at expected odds of 1.7\n**Alternative Value**: PLACE 9 at 2.3 offers good place value\n\n**Confidence Level**: 0.65 - Good confidence given clear form advantage but acknowledging Class 5 unpredictability"
+}

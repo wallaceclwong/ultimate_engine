@@ -1,0 +1,6 @@
+PEDIGREE FOR HORSE ID H392:
+Sire: Cluster
+Dam: Grand City
+Origin: AUS / 6
+Color: Unknown
+Import Type: PP

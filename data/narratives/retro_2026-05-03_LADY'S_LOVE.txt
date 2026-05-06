@@ -1,0 +1,3 @@
+LESSON LEARNT RETROSPECTIVE FOR LADY'S LOVE on 2026-05-03:
+Our model highly tipped this horse but it failed (finished 13).
+Analysis: Despite the model’s high expected value, the Yielding track likely compromised this horse’s natural speed, as soft ground often blunts the closing kick of a longshot with a low-probability jockey (0.0376 win rate). Additionally, the wide draw (9) may have forced an extra early effort on the sticky surface, leaving insufficient stamina for the stretch. The negative impact of track condition on tactical execution—rather than raw odds—should be weighted more heavily for extreme longshots like LADY’S LOVE.

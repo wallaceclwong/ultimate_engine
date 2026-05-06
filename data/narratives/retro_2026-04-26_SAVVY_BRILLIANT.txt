@@ -1,0 +1,3 @@
+LESSON LEARNT RETROSPECTIVE FOR SAVVY BRILLIANT on 2026-04-26:
+Our model highly tipped this horse but it failed (finished 7).
+Analysis: Despite a favourable inside draw (1) and a good track condition, Savvy Brilliant's low early pace rating (jockey stat 0.079) suggests the horse struggled to capitalise on the rail position, getting trapped behind slower breakers. On Good ground, the inside bias often requires speed to hold a prominent spot, but the model overestimated the tactical benefit of the draw without factoring in the horse's lack of gate acceleration. The 15% win probability likely inflated the value, as the actual running line showed the field's overall tempo negated any positional advantage.

@@ -1,0 +1,37 @@
+{
+  "race_id": "2026-04-15_HV_R2",
+  "gemini_model": "ensemble_lgb_xgb_cat",
+  "confidence_score": -0.2144,
+  "is_best_bet": false,
+  "recommended_bet": "NO BET",
+  "probabilities": {
+    "1": 0.07370461220380742,
+    "2": 0.0620500191518969,
+    "3": 0.016370865913583776,
+    "4": 0.027758487014315093,
+    "5": 0.012605553585546703,
+    "6": 0.22738088470641027,
+    "7": 0.09133015854975128,
+    "8": 0.043830342533508156,
+    "9": 0.2805666693911038,
+    "10": 0.05999637962238903,
+    "11": 0.09300060293697014,
+    "12": 0.011405424390717428
+  },
+  "kelly_stakes": {},
+  "market_odds": {
+    "1": 10.0,
+    "2": 10.0,
+    "3": 22.0,
+    "4": 20.0,
+    "5": 32.0,
+    "6": 4.3,
+    "7": 9.1,
+    "8": 12.0,
+    "9": 2.8,
+    "10": 11.0,
+    "11": 8.9,
+    "12": 35.0
+  },
+  "analysis_markdown": "## Race Analysis: Class 5 1650m Turf (Good)\n\n### Top Pick\n- **#9 DRAGON SUNRISE** (Rank 1, Odds 2.8, Fair 3.6, Edge -21.4%)\n\n### Bet Signal\n- **\u26d4 NO BET** (edge=-21.4%, odds=2.8)\n\n### Key Stats\n- Field Size: 12\n- Track: HV A\n- Going: Good"
+}

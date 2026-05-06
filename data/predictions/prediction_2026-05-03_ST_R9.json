@@ -1,0 +1,35 @@
+{
+  "race_id": "2026-05-03_ST_R9",
+  "gemini_model": "ensemble_lgb_xgb_cat",
+  "confidence_score": -0.1491,
+  "is_best_bet": false,
+  "recommended_bet": "NO BET",
+  "probabilities": {
+    "1": 0.15752040665523062,
+    "2": 0.04459307122927005,
+    "3": 0.11816891614961585,
+    "4": 0.07262279183522767,
+    "5": 0.05237236044914918,
+    "6": 0.050654123993577535,
+    "7": 0.06041207867927378,
+    "8": 0.19338440703032989,
+    "9": 0.13294003133170437,
+    "10": 0.07945566955616026,
+    "11": 0.037876143090460904
+  },
+  "kelly_stakes": {},
+  "market_odds": {
+    "1": 4.8,
+    "2": 21.0,
+    "3": 7.0,
+    "4": 10.0,
+    "5": 17.0,
+    "6": 16.0,
+    "7": 12.0,
+    "8": 4.4,
+    "9": 6.5,
+    "10": 10.0,
+    "11": 23.0
+  },
+  "analysis_markdown": "## Race Analysis: Class 3 2000m Turf (Yielding)\n\n### Top Pick\n- **#8 ENTHUSIUM** (Rank 1, Odds 4.4, Fair 5.2, Edge -14.9%)\n\n### Bet Signal\n- **\u26d4 NO BET** (edge=-14.9%, odds=4.4)\n\n### Key Stats\n- Field Size: 11\n- Track: ST A\n- Going: Yielding"
+}

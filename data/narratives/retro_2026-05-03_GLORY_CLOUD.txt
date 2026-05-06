@@ -1,0 +1,4 @@
+LESSON LEARNT RETROSPECTIVE FOR GLORY CLOUD on 2026-05-03:
+Our model highly tipped this horse but it failed (finished 11).
+Analysis: **Lesson Learnt:**  
+The model overestimated GLORY CLOUD's value on yielding ground, likely ignoring that wide draws (9) on such going often force extra distance and energy expenditure, which severely handicap longshots with low jockey win rates (0.09). A 54.0 odds horse typically lacks the tactical speed to overcome a wide trip in soft conditions, making any statistical edge from betting market inefficiency vanish. Future predictions for similar longshots must adjust for draw in conjunction with track condition, as yielding amplifies positional disadvantages and nullifies low-probability EV calculations.

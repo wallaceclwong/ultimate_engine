@@ -1,0 +1,39 @@
+{
+  "race_id": "2026-04-19_ST_R2",
+  "gemini_model": "deepseek-chat",
+  "confidence_score": 0.65,
+  "is_best_bet": true,
+  "recommended_bet": "WIN 8",
+  "probabilities": {
+    "1": 0.08,
+    "2": 0.02,
+    "3": 0.04,
+    "4": 0.07,
+    "5": 0.09,
+    "6": 0.11,
+    "7": 0.06,
+    "8": 0.18,
+    "9": 0.05,
+    "10": 0.04,
+    "11": 0.15,
+    "12": 0.11
+  },
+  "kelly_stakes": {},
+  "market_odds": {
+    "1": 5.5,
+    "2": 10.0,
+    "3": 13.0,
+    "4": 40.0,
+    "5": 5.3,
+    "6": 12.0,
+    "7": 32.0,
+    "8": 4.2,
+    "9": 31.0,
+    "10": 26.0,
+    "11": 15.0,
+    "12": 11.0,
+    "13": 29.0,
+    "14": 24.0
+  },
+  "analysis_markdown": "# Hong Kong Horse Racing Analysis - Class 5, 1200m All Weather Track\n\n## Race Context Analysis\n- **Distance & Track**: 1200m on All Weather Track (AWT) - favors consistent performers and horses with tactical speed\n- **Class 5**: Lower grade race where form can be inconsistent, but recent performance patterns are crucial\n- **Weather**: Good conditions forecasted (25% rain probability, 27.5°C) - no wet track specialists needed\n\n## Key Contenders Analysis\n\n### **TRIUMPHANT WARRIOR (8)** - **TOP SELECTION**\n- **Recent Form**: 6-4-5-5-7-3 - Extremely consistent performer in Class 5\n- **Weight Advantage**: 126lbs - lightest weight among serious contenders\n- **Draw**: Barrier 8 - good middle draw for AWT 1200m\n- **Market Support**: 4.2 win odds (2nd favorite) - strong market confidence\n- **Pattern**: Shows 'Forgiveable Losses' - recent 7th and 6th placings likely due to racing wide or poor draws\n- **Jockey/Trainer**: P N Wong/J Richards combo has solid record in Class 5\n\n### **MODEST GENTLEMAN (11)** - **MAIN DANGER**\n- **Recent Form**: 6-3-2-6-3-6 - Consistent top-6 finishes\n- **Weight**: 117lbs - significant weight advantage (lightest in field)\n- **Draw**: Barrier 3 - excellent inside draw for AWT\n- **Pattern**: 'Flying Finisher' type - often makes late ground\n- **Concern**: Needs to overcome wide draws from recent runs\n\n### **ISLAND BREEZES (6)** - **VALUE CONTENDER**\n- **Recent Form**: 9-12-6-3-2-4 - Strong upward trend\n- **Weight**: 130lbs - reasonable weight\n- **Draw**: Barrier 10 - wide but manageable on AWT\n- **Pattern**: Improving with each run, last two starts: 2nd and 4th\n\n### **SONIC BOOM (12)** - **PLACE CHANCE**\n- **Recent Form**: 7-7-8-3-3-7 - Two recent 3rd placings show capability\n- **Weight**: 116lbs - very light weight\n- **Draw**: Barrier 6 - good middle draw\n- **Market**: 11.0 win odds offers value\n\n## Secondary Contenders\n\n### **GLORY CLOUD (1)**\n- **Recent Form**: 9-9-6-10-1-2 - Won two starts back, 2nd last start\n- **Concerns**: Wide draw (9), inconsistent form\n\n### **SUPERB GUY (5)**\n- **Recent Form**: 5-9-10-10-9-3 - Recent 3rd shows improvement\n- **Concerns**: Very wide draw (12) on AWT\n\n### **COLOURFUL WINNER (4)**\n- **Recent Form**: 2-4-10-7-11-2 - Capable but inconsistent\n- **Weight**: 133lbs - reasonable\n\n## Elimination Analysis\n\n### **LIKELY OUTSIDERS**:\n- **RUNJEET (2)**: 7-9-10-10-11-11 - Poor recent form\n- **WIN SPEED (3)**: 11-3-3-8-13-9 - Too inconsistent\n- **NOBLE DELUXE (7)**: 3-12-13-1-10-5 - Won 3 starts back but poor since\n- **VIVA CHALEUR (9)**: 1-13-4-10-8-3 - Won 5 starts back, poor since\n- **CHEER FOR SOUTH (10)**: 7-6-9-12-9-2 - Only one recent placing\n\n## Betting Strategy\n\n**Primary Bet**: WIN 8 (TRIUMPHANT WARRIOR)\n- Best combination of consistency, weight advantage, and market support\n- Should get perfect trail from barrier 8\n- Light weight of 126lbs ideal for AWT\n\n**Value Alternatives**:\n- Place bet on 11 (MODEST GENTLEMAN) at 5.4\n- Quinella 8-11 offers good value\n\n## Probability Justification\nProbabilities are weighted toward:\n1. Recent consistency (last 3-4 starts)\n2. Weight advantage (lighter horses favored on AWT)\n3. Draw suitability for 1200m AWT\n4. Market confidence (odds reflect public/trainer confidence)\n5. Upward form trends\n\nTotal probability sum: 1.00 (verified)\n\n**Confidence Score**: 0.65 - Moderate confidence due to Class 5 unpredictability, but strong data supports selection."
+}

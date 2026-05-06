@@ -1,0 +1,32 @@
+{
+  "race_id": "2026-04-19_ST_R7",
+  "gemini_model": "deepseek-chat",
+  "confidence_score": 0.65,
+  "is_best_bet": true,
+  "recommended_bet": "WIN 10",
+  "probabilities": {
+    "1": 0.08,
+    "2": 0.02,
+    "3": 0.04,
+    "4": 0.06,
+    "5": 0.07,
+    "6": 0.01,
+    "7": 0.05,
+    "8": 0.06,
+    "9": 0.09,
+    "10": 0.35,
+    "11": 0.02,
+    "12": 0.15
+  },
+  "kelly_stakes": {},
+  "market_odds": {
+    "1": 1.0,
+    "2": 83.0,
+    "3": 146.0,
+    "4": 150.0,
+    "5": 135.0,
+    "6": 145.0,
+    "7": 131.0
+  },
+  "analysis_markdown": "# Race Analysis: Class 4, 1200m All Weather Track\n\n## Race Context Assessment\n- **Distance & Track**: 1200m on All Weather Track (AWT) favors horses with early speed and tactical positioning. The AWT surface tends to be consistent regardless of weather.\n- **Weather Impact**: Forecast shows low rain probability (25%) and moderate temperature (27.5°C). Track condition expected to be \"Good\" with minimal weather-related variables affecting performance. No wet track specialists need prioritization.\n- **Class Level**: Class 4 race with competitive but inconsistent form across entries.\n\n## Key Horse Analysis\n\n### **Top Contender: #10 JUICY DRAGON (35% win probability)**\n- **Recent Form**: Exceptional last 6 runs: 2-1-4-5-3-5. Shows consistent competitiveness with a win and multiple placings.\n- **Weight Advantage**: Carries only 126lbs - the second lightest weight in the field, providing significant advantage over higher-weighted rivals.\n- **Jockey**: A. Atzeni is a capable international rider with good AWT experience.\n- **Draw**: Barrier 8 is reasonable for 1200m AWT, allowing tactical options.\n- **Market Indicator**: Not listed in provided odds, suggesting potential value if overlooked by public.\n\n### **Secondary Contenders**\n\n**#12 CONRAD THE GREAT (15%)**\n- **Weight**: Lightest in field at 119lbs - massive weight advantage.\n- **Form**: Recent 2-2-5 shows competitive ability despite later fade in runs 9-12-12.\n- **Draw**: Barrier 12 is challenging but weight advantage may compensate.\n- **Jockey**: R. Kingscote is competent international rider.\n\n**#1 ARMOUR WAR EAGLE (8%)**\n- **Form**: 9-6-2-2-3-4 shows improving trend with recent placings.\n- **Draw**: Barrier 1 is excellent for AWT 1200m - can lead or box seat.\n- **Jockey**: K. Teetan is top local rider with strong AWT record.\n- **Weight**: 135lbs is standard but higher than key rivals.\n\n**#9 ONE MAN SHOW (9%)**\n- **Form**: 5-5-3-2-5-11 shows consistency with minor placings.\n- **Draw**: Barrier 7 is workable.\n- **Jockey/Trainer**: M.F. Poon/F.C. Lor combination has moderate success.\n\n### **Mid-Tier Horses**\n- **#5 TARGET AUDIENCE (7%)**: J. Moreira riding for C. Fownes - strong combination. Light weight 132lbs. Form 5-8-6-6 needs improvement but jockey factor significant.\n- **#4 NEVER TOO SOON (6%)**: B. Avdulla riding for D.J. Hall. Form 9-4-4-6-6-8 shows some competitiveness.\n- **#8 LIGHT YEARS GLORY (6%)**: H. Bowman riding - world-class jockey. Form 4-7-2-4-12-6 inconsistent but Bowman factor elevates chances.\n- **#7 FLOWING RICHES (5%)**: Consistent 3-3-3-5-9-8 form but drawn wide in barrier 10.\n- **#3 GIANT LEAP (4%)**: Has shown ability with 2nd placing but generally inconsistent form.\n\n### **Longshots**\n- **#2 IGOT (2%)**: Poor recent form 9-11-11 and wide draw 11.\n- **#6 EVERSTAR (1%)**: Consistently poor form 13-13-10-7-6-14.\n- **#11 REGROWTH WINNER (2%)**: Poor form 12-13-10-12 and inexperienced with only 4 runs.\n\n## Betting Recommendation\n**WIN #10 JUICY DRAGON** is the **BEST BET** based on:\n1. Superior recent form with win and multiple placings\n2. Significant weight advantage (126lbs vs field average ~130lbs)\n3. Consistent performance pattern suggesting peak readiness\n4. Favorable conditions with stable weather forecast\n\n## Risk Factors\n- Limited sectional/time data available for precise pace analysis\n- Some horses have incomplete last 6 runs data\n- No trial or synergy data to supplement analysis\n- Market odds incomplete (only shows 1-7), creating uncertainty about public perception\n\n## Confidence Rationale\nConfidence score of 0.65 reflects:\n- Strong form advantage for #10\n- Clear weight differentiation favoring lighter horses\n- Consistent weather conditions minimizing variables\n- Mitigated by missing data points (sectionals, trials, full odds)\n\n*Note: Probabilities sum to 1.0 as required, with #10 JUICY DRAGON receiving highest allocation based on form-weight combination.*"
+}

@@ -100,9 +100,8 @@ class WeatherNextClient:
     pass
 
 from services.notification_service import NotificationService
-from services.bigquery_service import BigQueryService
-from services.storage_service import StorageService
 from services.stewards_analyzer import get_stewards_analyzer
+
 from services.live_odds_monitor import get_live_odds_monitor
 from services.ensemble_predictor import get_ensemble_predictor
 from services.race_pace_analyzer import get_race_pace_analyzer
@@ -134,8 +133,8 @@ class PredictionEngine:
             fractional_kelly=Config.KELLY_FRACTION
         )
         self.notifications = NotificationService()
-        self.bigquery = BigQueryService()     # no-op stub
-        self.storage = StorageService()       # no-op stub
+        self.notifications = NotificationService()
+
 
         from services.rl_optimizer import RLOptimizer
         self.optimizer = RLOptimizer()
@@ -453,7 +452,17 @@ class PredictionEngine:
             # Restore original fraction
             self.kelly.fractional_kelly = original_fraction
             prediction_dict["market_odds"] = win_odds
-            
+
+            # EDGE GATE: Override is_best_bet from AI output — it must be backed
+            # by a real Kelly stake (>=HK$10) to prevent noise alerts on every race.
+            has_real_kelly = any(
+                v >= 10 for v in prediction_dict.get("kelly_stakes", {}).values()
+            )
+            prediction_dict["is_best_bet"] = (
+                has_real_kelly
+                and prediction_dict.get("confidence_score", 0) >= Config.MIN_CONFIDENCE
+            )
+
             # Create Prediction object
             prediction = Prediction(
                 race_id=f"{date_str}_{venue}_R{race_no}",
@@ -462,23 +471,43 @@ class PredictionEngine:
             )
 
             self._save_prediction(prediction)
-            
-            # Send Push Notification for High Confidence / High EV bets
-            has_stakes = any(v > 0 for v in prediction.kelly_stakes.values())
-            if prediction.confidence_score >= 0.8 or has_stakes:
-                # Identify the top horse ID
-                top_horse_id = "Multiple"
-                if prediction.kelly_stakes:
-                    top_horse_id = max(prediction.kelly_stakes, key=prediction.kelly_stakes.get)
-                
-                # We don't have EV stored in the simple dict, so we use the stake as a proxy for 'value' here
-                max_stake = max(prediction.kelly_stakes.values()) if prediction.kelly_stakes else 0.0
-                
-                self.notifications.send_bet_alert(
-                    race_id=prediction.race_id,
-                    horse_name=f"Horse {top_horse_id}",
-                    confidence=prediction.confidence_score,
-                    ev=max_stake # Using stake as a proxy since EV isn't in this schema
+
+            # ── Per-race briefing — fires for EVERY race ──────────────────
+            racecard_horses = racecard.get("horses", [])
+            name_lookup = {
+                str(h.get("saddle_number", "")): h.get("horse_name", "") or h.get("horse", "")
+                for h in racecard_horses
+            }
+            sorted_picks = sorted(prediction.probabilities.items(), key=lambda x: x[1], reverse=True)[:3]
+            top_picks = []
+            for h_no, prob in sorted_picks:
+                h_name = name_lookup.get(str(h_no), f"Horse #{h_no}")
+                stake  = prediction.kelly_stakes.get(h_no, 0.0)
+                odds   = (prediction.market_odds or {}).get(h_no, 0.0)
+                top_picks.append((h_no, h_name, prob, stake, odds))
+
+            await self.notifications.send_race_briefing(
+                race_id         = prediction.race_id,
+                race_no         = race_no,
+                distance        = racecard.get("distance", 0),
+                going           = racecard.get("track_condition", "Good"),
+                top_picks       = top_picks,
+                confidence      = prediction.confidence_score,
+                recommended_bet = prediction.recommended_bet,
+                is_best_bet     = prediction.is_best_bet,
+            )
+
+            # ── Elite alert — only when a real Kelly stake exists ──────────
+            has_real_stakes = any(v >= 10 for v in prediction.kelly_stakes.values())
+            if has_real_stakes:
+                top_horse_id = max(prediction.kelly_stakes, key=prediction.kelly_stakes.get)
+                max_stake    = prediction.kelly_stakes[top_horse_id]
+                h_name       = name_lookup.get(str(top_horse_id), f"Horse {top_horse_id}")
+                await self.notifications.send_bet_alert(
+                    race_id    = prediction.race_id,
+                    horse_name = h_name,
+                    confidence = prediction.confidence_score,
+                    ev         = max_stake,
                 )
 
             # ELITE FEATURE: Double-Model Consensus Strategy
@@ -689,9 +718,22 @@ Overall Report: {results.get('stewards_report', 'None available')}
 ### PEDIGREE INTELLIGENCE (Heritage & Track Suitability)
 {json.dumps(data.get('pedigree_intel', {}), indent=2)}
 
-AI Instruction: 
+AI Instruction:
 1. Correlate rainfall probability with track condition stability and heat stress probability with horse weight/fitness performance.
 2. Cross-reference Weather Intelligence with Pedigree Intelligence. If P(Rain) is high, prioritize horses with 'wet_track_index' > 0.75.
+
+### EQUIPMENT & TACTICAL FLAGS (High-Signal Soft Data)
+For each horse in HORSE ENTRIES, you MUST explicitly consider:
+- **gear**: Equipment codes such as Blinkers, Blinkers Off, Tongue Tie, Cross Blinkers, Cheek Pieces.
+  - 'Blinkers' or 'Cross Blinkers' ADDED: Trainer intervention — often signals improvement attempt.
+  - 'Blinkers Off' (BO): Trainer removing headgear — can signal a change in running style, assess carefully.
+  - 'Tongue Tie' (TT): Common, less significant unless combined with other gear changes.
+- **weight_allowance**: Negative values (e.g. -3) indicate an apprentice jockey's weight claim.
+  - A -3lb or -5lb claim is a REAL physical advantage in a tight weight race — adjust your probability upward slightly.
+  - However, weigh apprentice inexperience vs. the weight benefit for competitive races.
+- **training_location**: 'CTC' (Conghua Training Centre) horses have had different preparation.
+  - First-up CTC horses are often fresh but may lack race-day sharpness.
+  - CTC horses returning for a second or third run after CTC prep can be underestimated by the market.
 
 ### SYSTEM BIASES (Historical Error Correction)
 Your past performance shows specific biases. Adjust your reasoning accordingly:
@@ -702,17 +744,19 @@ Your past performance shows specific biases. Adjust your reasoning accordingly:
 ### HISTORICAL CONTEXT (Past Performance Analysis)
 Analyze the horses' recent forms (last_6_runs), their sectional positions (sectional_pos) in this race (if available as a recap), and how they handled weights (act_weight).
 
-Detected Patterns: 
+Detected Patterns:
 1. 'Flying Finishers': Horses that gained significant ground in the final sectional.
 2. 'Pace Victims': Horses that led but faded due to fast early pace.
 3. 'Forgiveable Losses': Use Stewards' Reports to identify horses that were hampered, raced wide, or had legitimate excuses for losing.
 4. 'Trial Stars': Use Barrier Trial data to identify horses showing peak fitness in recent trials.
+5. 'Gear Switchers': Flag any horse with a gear change (especially blinkers on/off) as a tactical signal from the trainer.
+6. 'Apprentice Edge': Flag any horse with a weight_allowance <= -3 in a weight-sensitive race.
 
 ### OUTPUT REQUIREMENTS
 Provide a JSON object following this structure:
 {{
-  "confidence_score": (float between 0.0 and 1.0),
-  "is_best_bet": (boolean),
+  "confidence_score": (see calibration rubric below),
+  "is_best_bet": (boolean — set true ONLY if confidence_score >= 0.55),
   "recommended_bet": (string, MUST include horse number, e.g., "WIN 5", "PLACE 2", "QUINELLA 1-4"),
   "probabilities": {{
     "1": 0.15,
@@ -722,9 +766,29 @@ Provide a JSON object following this structure:
   "analysis_markdown": (A detailed markdown analysis justifying your choice)
 }}
 
+### CONFIDENCE SCORE CALIBRATION RUBRIC
+You MUST use the FULL 0.0–1.0 scale. Do NOT cluster scores between 0.60–0.80 for every race.
+Your historical outputs show near-uniform confidence (65–75%) regardless of race difficulty — this is uncalibrated and useless for filtering.
+
+Use this rubric strictly:
+- **0.10–0.25** → Wide-open race. Form is ambiguous, field is competitive, no horse has a clear edge. You are essentially guessing.
+- **0.25–0.40** → Mild signal. One horse has slightly better form or value but the edge is small. Many viable rivals.
+- **0.40–0.55** → Moderate conviction. Clear top pick on form, but odds or going create uncertainty. Reasonable bet.
+- **0.55–0.70** → Strong conviction. Top pick has dominant recent form, proven class advantage, AND market odds offer value.
+- **0.70–0.85** → Very high conviction. Multiple independent signals align: form, draw, jockey, trainer, gear, going all point to one horse. Rare.
+- **0.85–1.00** → Reserve for exceptional cases only (e.g. a dominant favourite in a weak field with perfect conditions).
+
+CALIBRATION CHECKS — before outputting, verify:
+1. If the field has 12+ runners with similar form, score MUST be below 0.45.
+2. If the going is Soft/Wet and top pick has no wet-track form, deduct 0.10–0.15.
+3. If top pick's market odds are below 3.0 (heavy favourite), score MAY be higher but is already priced in — be careful.
+4. If you cannot identify a clear #1 and #2 with a meaningful probability gap (>5pp), score MUST be below 0.40.
+5. Do NOT give the same confidence score two races in a row — each race is independent.
+
 CRITICAL: You MUST provide a win probability for EACH of these horse numbers: {horse_nos_str}. The sum of all probabilities MUST be 1.0.
 """
         return prompt
+
 
     async def _generate_ensemble_prediction(self, date_str: str, venue: str, race_no: int, prompt: str, data: Dict) -> Optional[Prediction]:
         """Generate prediction using ensemble of multiple models"""
@@ -812,6 +876,15 @@ CRITICAL: You MUST provide a win probability for EACH of these horse numbers: {h
             win_odds = data.get("odds", {}).get("win_odds", {})
             kelly = KellyCriterion(bankroll=self.bankroll_manager.get_current_bankroll())
             prediction_dict["kelly_stakes"] = kelly.calculate_race_stakes(probs, win_odds, racecard)
+
+            # EDGE GATE: Override is_best_bet — must be backed by a real Kelly stake
+            has_real_kelly = any(
+                v >= 10 for v in prediction_dict["kelly_stakes"].values()
+            )
+            prediction_dict["is_best_bet"] = (
+                has_real_kelly
+                and prediction_dict.get("confidence_score", 0) >= Config.MIN_CONFIDENCE
+            )
             
             # Create Prediction object
             prediction = Prediction(

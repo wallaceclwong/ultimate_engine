@@ -1,0 +1,37 @@
+{
+  "race_id": "2026-04-29_HV_R6",
+  "gemini_model": "deepseek-chat",
+  "confidence_score": 0.75,
+  "is_best_bet": true,
+  "recommended_bet": "WIN 8",
+  "probabilities": {
+    "1": 0.1,
+    "2": 0.05,
+    "3": 0.08,
+    "4": 0.06,
+    "5": 0.02,
+    "6": 0.07,
+    "7": 0.08,
+    "8": 0.18,
+    "9": 0.04,
+    "10": 0.12,
+    "11": 0.1,
+    "12": 0.1
+  },
+  "kelly_stakes": {},
+  "market_odds": {
+    "1": 3.9,
+    "2": 17.0,
+    "3": 42.0,
+    "4": 4.5,
+    "5": 11.0,
+    "6": 19.0,
+    "7": 27.0,
+    "8": 4.9,
+    "9": 81.0,
+    "10": 45.0,
+    "11": 12.0,
+    "12": 6.1
+  },
+  "analysis_markdown": "## Race Analysis: Class 4 - 1650m Turf (Soft)\n\n### Key Factors\n- **Weather**: 86% rain probability, track forecast Soft. Favors horses with wet track ability.\n- **Draw**: Inside draws (1-4) preferred on soft turf; wide draws (10-12) disadvantaged.\n\n### Top Contenders\n1. **#8 GENERAL REDWOOD (Win Odds 4.9)**: Recent win (1st last start) and draws barrier 9, but jockey Y L Chung has good form. Light weight 130lbs. Strong finisher.\n2. **#10 VIVACIOUS WIN (Odds 45)**: Consistent performer with recent 2nd, 4th, 2nd, 2nd. Draw 6 is decent. Light weight 123lbs. Value bet.\n3. **#1 MIGHTY STEED (Odds 3.9)**: Top jockey Purton, but wide draw 12 and heavy weight 135lbs. May struggle on soft track.\n4. **#11 EXCELLENT BOY (Odds 12)**: Recent 2nd, draw 5, light weight 121lbs. Could improve.\n\n### Selection\n**WIN #8 GENERAL REDWOOD** – Last start winner, proven form, and likely to handle soft conditions. Odds 4.9 offer value.\n\n### Probabilities\n- #8: 18% (top pick)\n- #10: 12% (value)\n- #1: 10% (class but draw)\n- Others: lower due to form/draw/weight issues."
+}

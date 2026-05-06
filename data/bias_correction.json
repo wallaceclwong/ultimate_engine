@@ -1,0 +1,25 @@
+{
+  "metadata": {
+    "total_samples": 40,
+    "overall_accuracy": 0.93,
+    "avg_brier_score": 0.0703,
+    "last_optimized": "2026-04-20 11:40"
+  },
+  "adjustments": {
+    "synergy_weight_multiplier": 1.0,
+    "sectional_weight_multiplier": 1.0,
+    "confidence_bias": 0.0
+  },
+  "contextual": {
+    "HV_M4": {
+      "synergy_weight_multiplier": 1.0,
+      "sectional_weight_multiplier": 1.0,
+      "confidence_bias": 0.0
+    },
+    "ST_M4": {
+      "synergy_weight_multiplier": 0.79,
+      "sectional_weight_multiplier": 1.21,
+      "confidence_bias": 0.0
+    }
+  }
+}

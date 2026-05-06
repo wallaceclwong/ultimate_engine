@@ -1,0 +1,3 @@
+GOLDEN RULE META-STRATEGY (Synthesized 2026-04-16):
+**GOLDEN RULE META-STRATEGY:**
+In your model, a horse's static statistics (draw, jockey rating, past form) are secondary to its projected dynamic, tactical position given the day's specific conditions. On a firm "Good" track, heavily penalize any runner whose probable running style is in conflict with its barrier draw—either expending excessive energy from wide gates or becoming trapped in traffic from low draws in a contested pace. Treat the jockey’s metric not as a standalone rating but as a multiplier for their ability to navigate this specific, predicted tactical disadvantage. Value is an illusion if the horse cannot secure a favorable, economical trip.

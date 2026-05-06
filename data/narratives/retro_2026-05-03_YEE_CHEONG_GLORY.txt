@@ -1,0 +1,3 @@
+LESSON LEARNT RETROSPECTIVE FOR YEE CHEONG GLORY on 2026-05-03:
+Our model highly tipped this horse but it failed (finished 5).
+Analysis: **Lesson Learnt:** The model undervalued the disadvantage of a wide draw (12) on a yielding track, where horses often struggle to find a clear path and expend extra energy early. Despite the high EV from long odds, the low jockey performance metric (0.077) suggests the rider may have been ill-suited to adapt the horse's running style to the softening ground. The 5th-place finish indicates the horse had some ability but lacked the tactical speed to overcome positional bias, a factor the statistical approach failed to weigh appropriately.

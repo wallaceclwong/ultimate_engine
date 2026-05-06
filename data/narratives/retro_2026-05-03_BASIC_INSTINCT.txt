@@ -1,0 +1,3 @@
+LESSON LEARNT RETROSPECTIVE FOR BASIC INSTINCT on 2026-05-03:
+Our model highly tipped this horse but it failed (finished 6).
+Analysis: Despite the statistical value, the horse's draw 2 on yielding ground likely hindered its ability to find optimal footing early, as inside positions often become bogged down on soft tracks. The jockey’s poor historical performance (0.037 win rate) further compounded the tactical disadvantage, lacking the speed or positioning to overcome the slow surface. This failure highlights that extreme longshots with low jockey quality and unfavorable draws on yielding tracks are rarely worth the implied EV, no matter how high the odds.

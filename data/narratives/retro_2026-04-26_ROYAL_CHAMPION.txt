@@ -1,0 +1,3 @@
+LESSON LEARNT RETROSPECTIVE FOR ROYAL CHAMPION on 2026-04-26:
+Our model highly tipped this horse but it failed (finished 4).
+Analysis: Our model overestimated the value of Royal Champion’s inside draw (1) on Good ground, which often disadvantages closers if the pace is slow or congested—likely why he finished 4th rather than challenging for the win. The jockey’s low win rate (4.65%) suggests he lacked the tactical finesse to overcome the rail bias or find clear running at the crucial moment. Ultimately, a 31/1 longshot’s expected win probability of 0.05 was too optimistic for a horse that needed perfect trip conditions that did not materialize.
