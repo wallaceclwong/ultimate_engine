@@ -484,6 +484,8 @@ async def run_live_war_room(venue):
                 print(f"[WARN] Schedule parse error for R{r_no} ({j_time}): {e}")
         
         # 2. Check for Post-Race Learning (23:15 HKT)
+        # Reload state from disk so we catch if cron --learn already ran
+        state = load_scheduler_state()
         if now.hour == 23 and now.minute >= 15 and not state.get("learned_today"):
             success = await run_learn(venue)
             if success:
@@ -593,12 +595,16 @@ async def main():
             print("Skipping Live War Room: Not a local race day.")
             
     elif mode == "--learn":
-        fxt = get_today_fixture()
-        if fxt:
-            await run_learn(fxt['venue'])
+        state = load_scheduler_state()
+        if state.get("learned_today"):
+            print("[LEARN] Already completed today (learned_today=True). Skipping duplicate run.")
         else:
-            # Fallback for non-race days if forced
-            await run_learn("ST")
+            fxt = get_today_fixture()
+            venue_l = fxt['venue'] if fxt else "ST"
+            success = await run_learn(venue_l)
+            if success:
+                state["learned_today"] = True
+                save_scheduler_state(state)
             
     elif mode == "--odds":
         fxt = get_today_fixture()
