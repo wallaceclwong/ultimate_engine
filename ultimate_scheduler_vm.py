@@ -484,8 +484,7 @@ async def run_live_war_room(venue):
                 print(f"[WARN] Schedule parse error for R{r_no} ({j_time}): {e}")
         
         # 2. Check for Post-Race Learning (23:15 HKT)
-        # Reload state from disk so we catch if cron --learn already ran
-        state = load_scheduler_state()
+        # state is already disk-fresh from load_scheduler_state() above (line 457)
         if now.hour == 23 and now.minute >= 15 and not state.get("learned_today"):
             success = await run_learn(venue)
             if success:
