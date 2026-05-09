@@ -113,7 +113,7 @@ async def heal_scheduler():
     try:
         # Start detached
         subprocess.Popen(
-            [py_path, script_path, "--live"],
+            [py_path, "-u", script_path, "--live"],
             cwd=str(BASE_DIR),
             creationflags=creation_flags
         )
