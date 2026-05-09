@@ -33,9 +33,15 @@ def find_meeting(date_str):
     """Find fixture for a given date."""
     fixtures = load_fixtures(date_str)
     target_dt = datetime.strptime(date_str, "%Y-%m-%d")
-    target_fmt = target_dt.strftime("%d/%m/%Y")
+    # Try both zero-padded and non-zero-padded formats
+    possible = {
+        target_dt.strftime("%d/%m/%Y"),   # 09/05/2026
+        target_dt.strftime("%-d/%m/%Y") if hasattr(target_dt, 'strftime') else "",  # 9/05/2026 (Linux)
+        f"{target_dt.day}/{target_dt.month:02d}/{target_dt.year}",   # 9/05/2026
+        f"{target_dt.day:02d}/{target_dt.month:02d}/{target_dt.year}",  # 09/05/2026
+    }
     for f in fixtures:
-        if f["date"] == target_fmt:
+        if f["date"] in possible:
             return f["venue"]
     return None
 
