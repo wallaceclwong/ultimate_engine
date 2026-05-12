@@ -13,7 +13,7 @@ import pytz
 HKT = pytz.timezone('Asia/Hong_Kong')
 BASE_DIR = Path(__file__).resolve().parent.parent
 LOG_FILE = BASE_DIR / "logs" / "automation.log"
-FIXTURES_FILE = BASE_DIR / "data" / "fixtures_2026.json"
+FIXTURES_FILE = BASE_DIR / "data" / "fixtures_season.json"
 STATE_FILE = BASE_DIR / "logs" / "heartbeat_state.json"
 THRESHOLD_DISK = 90  # Percent
 THRESHOLD_RAM = 95   # Percent
@@ -192,9 +192,26 @@ def auto_clean_workspace():
     
     return count
 
+def auto_pull():
+    """Silently pull latest code/fixtures from origin/main."""
+    try:
+        result = subprocess.run(
+            ["git", "pull", "--ff-only", "origin", "main"],
+            cwd=str(BASE_DIR), capture_output=True, text=True, timeout=30
+        )
+        if result.returncode == 0 and "Already up to date" not in result.stdout:
+            print(f"  [PULL] Updated: {result.stdout.strip().splitlines()[-1]}")
+        return result.returncode == 0
+    except Exception as e:
+        print(f"  [PULL] Failed: {e}")
+        return False
+
 async def run_heartbeat():
     now_hkt = datetime.now(HKT)
     print(f"--- Starting Lunar Heartbeat (HKT: {now_hkt.strftime('%H:%M')}) ---")
+    
+    # 0. Auto-pull latest code/fixtures
+    auto_pull()
     
     # 1. Connectivity Check
     if not await check_connectivity():

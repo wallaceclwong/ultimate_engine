@@ -70,6 +70,7 @@ def load_scheduler_state():
                 # Reset if it's a new day
                 if state.get("last_reset_date") != today:
                     print(f"[SYSTEM] New day detected ({today}): Resetting scheduler state.")
+                    save_scheduler_state(default_state)
                     return default_state
                 return state
             except: pass
@@ -452,6 +453,12 @@ async def run_live_war_room(venue):
         today_iso = now.strftime("%Y-%m-%d")
         today_compact = today_iso.replace("-", "")
         hkt_now = now.strftime("%H:%M")
+        
+        # EXIT CLEANLY if we've crossed into a new non-race day
+        if not get_today_fixture():
+            print(f"[{now}] War Room shutting down: no longer a race day.")
+            await telegram_service.send_message("🌙 *War Room*: Race day complete. Shutting down.")
+            break
         
         # REFRESH STATE: Re-read state in every loop iteration to ensure shared sync
         state = load_scheduler_state()
