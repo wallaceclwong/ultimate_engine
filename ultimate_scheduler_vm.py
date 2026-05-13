@@ -243,24 +243,43 @@ async def run_async_command(cmd, log_prefix="SYSTEM"):
     stdout, stderr = await process.communicate()
     return process.returncode, stdout.decode().strip(), stderr.decode().strip()
 
-async def run_scrape():
-    """Triggers the noon scraping of racecards."""
-    print(f"[{datetime.now(HKT)}] --- STARTING NOON SCRAPE ---")
-    script = BASE_DIR / "scripts" / "smart_racecard_fetcher.py"
-    cmd = [PYTHON_EXEC, str(script)]
+async def run_analytical(venue: str):
+    """Triggers analytical data ingestion for all races."""
+    print(f"[{datetime.now(HKT)}] --- STARTING ANALYTICAL DATA INGEST ({venue}) ---")
+    script = BASE_DIR / "services" / "analytical_ingest.py"
+    today_iso = datetime.now(HKT).strftime("%Y-%m-%d")
     
-    returncode, stdout, stderr = await run_async_command(cmd, "SCRAPE")
+    # Fetch analytical data for all races (1-11)
+    success_count = 0
+    for race_no in range(1, 12):
+        retcode, stdout, stderr = await run_async_command(
+            [PYTHON_EXEC, str(script), "--date", today_iso, "--venue", venue, "--race", str(race_no)],
+            "ANALYTICAL"
+        )
+        if retcode == 0:
+            success_count += 1
     
-    if returncode == 0:
-        await telegram_service.send_message("✅ *Lunar Heartbeat*: Noon racecard & odds scraped successfully.")
-    else:
-        await telegram_service.send_message(f"⚠️ *Lunar Alert*: Scrape failed!\n{stderr[:100]}")
+    print(f"[ANALYTICAL] {success_count}/11 races processed")
 
+async def run_weather(venue: str):
+    """Triggers weather intelligence generation."""
+    print(f"[{datetime.now(HKT)}] --- STARTING WEATHER INTEL ({venue}) ---")
+    script = BASE_DIR / "services" / "generate_weather_intel.py"
+    today_iso = datetime.now(HKT).strftime("%Y-%m-%d")
+    
+    retcode, stdout, stderr = await run_async_command(
+        [PYTHON_EXEC, str(script), "--date", today_iso, "--venue", venue],
+        "WEATHER"
+    )
+    
+    if retcode == 0:
+        print(f"[WEATHER] Intelligence generated successfully")
+    else:
+        print(f"[WEATHER] Failed to generate intelligence")
 
 async def run_odds_refresh(venue: str):
     """
-    Scrapes current morning odds for all races, then patches kelly_stakes
-    in the existing prediction files without re-running the AI.
+    Updates win/place odds in the existing prediction files without re-running the AI.
     Intended to run at ~09:30 HKT after HKJC publishes morning prices.
     """
     from services.odds_ingest import OddsIngest
@@ -589,6 +608,25 @@ async def main():
     elif mode == "--predict":
         fxt = get_today_fixture()
         if fxt:
+            # Data availability check before predictions
+            today_iso = datetime.now(HKT).strftime("%Y-%m-%d")
+            date_compact = today_iso.replace("-", "")
+            
+            # Check odds data
+            odds_dir = BASE_DIR / "data" / "odds"
+            odds_files = list(odds_dir.glob(f"snapshot_*_R*.json")) if odds_dir.exists() else []
+            
+            # Check analytical data
+            analytical_dir = BASE_DIR / "data" / "analytical"
+            analytical_files = list(analytical_dir.glob(f"analytical_{today_iso}_*.json")) if analytical_dir.exists() else []
+            
+            print(f"[PREDICT CHECK] Odds files: {len(odds_files)}, Analytical files: {len(analytical_files)}")
+            
+            if len(odds_files) < 3:
+                print("[PREDICT] WARNING: Insufficient odds data. Predictions may be degraded.")
+            if len(analytical_files) < 3:
+                print("[PREDICT] WARNING: Insufficient analytical data. Predictions may be degraded.")
+            
             await run_predict(fxt['venue'])
         else:
             print("Skipping predictions: Not a local race day.")
@@ -618,6 +656,20 @@ async def main():
             await run_odds_refresh(fxt["venue"])
         else:
             print("Skipping odds refresh: Not a local race day.")
+
+    elif mode == "--analytical":
+        fxt = get_today_fixture()
+        if fxt:
+            await run_analytical(fxt["venue"])
+        else:
+            print("Skipping analytical ingest: Not a local race day.")
+
+    elif mode == "--weather":
+        fxt = get_today_fixture()
+        if fxt:
+            await run_weather(fxt["venue"])
+        else:
+            print("Skipping weather intel: Not a local race day.")
 
     elif mode == "--restday":
         fxt = get_today_fixture()

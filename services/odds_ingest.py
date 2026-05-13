@@ -27,10 +27,33 @@ class OddsIngest:
 
         print(f"Navigating to {url}...")
         try:
-            await page.goto(url, wait_until="load", timeout=30000)
+            await page.goto(url, wait_until="domcontentloaded", timeout=60000)
             
-            # Wait for content to load 
-            await page.wait_for_selector(f'#wpleg_WIN_{race_no}_1', timeout=30000)
+            # Wait for content to load - try multiple selectors with fallback
+            selectors_to_try = [
+                f'#wpleg_WIN_{race_no}_1',
+                f'.winOdds_{race_no}',
+                'table.win-odds',
+                '[data-type="win-odds"]'
+            ]
+            
+            selector_found = False
+            for selector in selectors_to_try:
+                try:
+                    await page.wait_for_selector(selector, timeout=15000)
+                    print(f"Found odds with selector: {selector}")
+                    selector_found = True
+                    break
+                except:
+                    continue
+            
+            if not selector_found:
+                # Fallback: wait for any table with odds-like content
+                try:
+                    await page.wait_for_selector('table', timeout=10000)
+                    print("Using fallback: found table element")
+                except:
+                    print("Warning: Could not find odds table, proceeding anyway")
             
             print(f"Extracting odds for Race {race_no}...")
             
@@ -40,19 +63,49 @@ class OddsIngest:
             # Max 14 horses usually in HKJC
             for horse_num in range(1, 15): 
                 try:
-                    # Win Odds
-                    win_elem = await page.query_selector(f'#odds_WIN_{race_no}_{horse_num} a')
-                    if win_elem:
-                        val = (await win_elem.inner_text()).strip()
-                        if val and val != '-' and val != '':
-                            win_odds[str(horse_num)] = float(val)
+                    # Win Odds - try multiple selector patterns
+                    win_selectors = [
+                        f'#odds_WIN_{race_no}_{horse_num} a',
+                        f'#win_{race_no}_{horse_num}',
+                        f'[data-horse="{horse_num}"] .win-odds',
+                        f'.horse-{horse_num} .win'
+                    ]
+                    
+                    for sel in win_selectors:
+                        try:
+                            win_elem = await page.query_selector(sel)
+                            if win_elem:
+                                val = (await win_elem.inner_text()).strip()
+                                if val and val != '-' and val != '' and val != 'SCR':
+                                    try:
+                                        win_odds[str(horse_num)] = float(val)
+                                        break
+                                    except:
+                                        continue
+                        except:
+                            continue
 
-                    # Place Odds
-                    place_elem = await page.query_selector(f'#odds_PLA_{race_no}_{horse_num} a')
-                    if place_elem:
-                        val = (await place_elem.inner_text()).strip()
-                        if val and val != '-' and val != '':
-                            place_odds[str(horse_num)] = float(val)
+                    # Place Odds - try multiple selector patterns
+                    place_selectors = [
+                        f'#odds_PLA_{race_no}_{horse_num} a',
+                        f'#pla_{race_no}_{horse_num}',
+                        f'[data-horse="{horse_num}"] .place-odds',
+                        f'.horse-{horse_num} .place'
+                    ]
+                    
+                    for sel in place_selectors:
+                        try:
+                            place_elem = await page.query_selector(sel)
+                            if place_elem:
+                                val = (await place_elem.inner_text()).strip()
+                                if val and val != '-' and val != '' and val != 'SCR':
+                                    try:
+                                        place_odds[str(horse_num)] = float(val)
+                                        break
+                                    except:
+                                        continue
+                        except:
+                            continue
                 except Exception as e:
                     continue
 
