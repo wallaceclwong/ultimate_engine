@@ -207,11 +207,24 @@ def predict_race(date_str, venue, race_num):
     df_race["ensemble_score"] = (norm(lgb_scores) + norm(xgb_scores) + norm(cat_scores)) / 3.0
     df_race["rank"] = df_race["ensemble_score"].rank(ascending=False, method="first").astype(int)
     
-    # ── Final Probability Calibration (Softmax) ──
-    TEMPERATURE = 0.3  # calibrated via backtest on 2025 races (was 0.6)
+    # ── Final Probability Calibration (Softmax + Market Blend) ──
+    # Temperature controls peakiness: lower = more confident on top pick
+    # 0.55 is less aggressive than old 0.3 (which was overconfident)
+    TEMPERATURE = 0.55
+    MARKET_BLEND = 0.30  # 30% market implied, 70% model
+    
     scores = df_race["ensemble_score"].values
     exp_scores = np.exp((scores - np.max(scores)) / TEMPERATURE)
-    df_race["pred_prob"] = exp_scores / exp_scores.sum()
+    model_probs = exp_scores / exp_scores.sum()
+    
+    # Bayesian blend: anchor model output to market implied probabilities
+    # This prevents the model from straying too far from market wisdom
+    # while still allowing model edge to surface
+    market_probs = df_race["implied_prob_norm"].values
+    blended_probs = (1 - MARKET_BLEND) * model_probs + MARKET_BLEND * market_probs
+    blended_probs = blended_probs / blended_probs.sum()  # renormalize
+    
+    df_race["pred_prob"] = blended_probs
     
     df_race["fair_odds"] = 1.0 / df_race["pred_prob"]
     df_race["ev"] = df_race["pred_prob"] * df_race["win_odds"]
@@ -263,13 +276,22 @@ def predict_race(date_str, venue, race_num):
     is_wet_track = any(w in track_condition_raw for w in WET_KEYWORDS)
 
     # ── Skip Threshold ────────────────────────────────────────────────────────
-    # edge > 15% (was 5%), odds > 4.0 (was 6.0), rank-1
-    # Wet tracks: raise threshold to 25% (less model confidence)
-    edge_threshold = 0.25 if is_wet_track else 0.15
+    # Best bet requires:
+    #   1. Meaningful edge over market (20% dry, 30% wet)
+    #   2. Odds between 3.0 and 20.0 (avoid false favourites and longshots)
+    #   3. Rank-1 pick
+    #   4. Probability gap: top pick must be >5pp above second pick
+    edge_threshold = 0.30 if is_wet_track else 0.20
+    
+    # Probability separation check
+    sorted_probs = sorted(probabilities.values(), reverse=True)
+    prob_gap = (sorted_probs[0] - sorted_probs[1]) if len(sorted_probs) >= 2 else 0
+    
     is_best_bet = (
         capped_edge > edge_threshold
-        and float(top_pick["win_odds"]) > 4.0
+        and 3.0 < float(top_pick["win_odds"]) < 20.0
         and int(top_pick["rank"]) == 1
+        and prob_gap > 0.05
     )
 
     prediction_json = {
