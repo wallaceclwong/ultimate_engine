@@ -31,7 +31,7 @@ df_inc = df_inc.sort_values('date', ascending=False)
 
 if CACHE_FILE.exists():
     try:
-        with open(CACHE_FILE, 'r') as f:
+        with open(CACHE_FILE, 'r', encoding="utf-8") as f:
             sentiment_cache = json.load(f)
     except (json.JSONDecodeError, OSError):
         sentiment_cache = {}
@@ -72,6 +72,15 @@ def get_ai_score(horse_name, incidents):
         return 1.0, f'API Error: {str(e)}'
 
 # --- Main Processing ---
+def _atomic_write(path, data):
+    tmp = path.with_suffix(path.suffix + ".tmp")
+    with open(tmp, "w", encoding="utf-8") as f:
+        json.dump(data, f, indent=2)
+        f.flush()
+        os.fsync(f.fileno())
+    os.replace(tmp, path)
+
+
 def process(year=2025, max_calls=150):
     logger.info(f"--- AI Analyst (V5: DeepSeek-V3 JSON Mode) ---")
 
@@ -133,12 +142,10 @@ def process(year=2025, max_calls=150):
 
         if new_scores >= max_calls: break
         if new_scores % 5 == 0:
-            with open(CACHE_FILE, 'w') as f:
-                json.dump(sentiment_cache, f, indent=2)
+            _atomic_write(CACHE_FILE, sentiment_cache)
             time.sleep(0.5)
 
-    with open(CACHE_FILE, 'w') as f:
-        json.dump(sentiment_cache, f, indent=2)
+    _atomic_write(CACHE_FILE, sentiment_cache)
     print(f'\n--- DONE ---')
     print(f'Added {new_scores} new scores. Total: {len(sentiment_cache)}')
 

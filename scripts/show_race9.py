@@ -5,8 +5,10 @@ from pathlib import Path
 DATA = Path(__file__).resolve().parent.parent / "data"
 RES  = DATA / "results"
 
-rc  = json.load(open(DATA / "racecard_20260426_R9.json", encoding="utf-8"))
-res = json.load(open(RES  / "results_2026-04-26_ST_R9.json", encoding="utf-8"))
+with open(DATA / "racecard_20260426_R9.json", "r", encoding="utf-8") as f:
+    rc = json.load(f)
+with open(RES / "results_2026-04-26_ST_R9.json", "r", encoding="utf-8") as f:
+    res = json.load(f)
 
 res_map = {str(h["horse_no"]): h for h in res.get("results", [])}
 

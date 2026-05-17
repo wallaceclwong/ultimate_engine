@@ -114,8 +114,12 @@ async def main():
         if not os.path.exists('data'):
             os.makedirs('data')
             
-        with open('data/fixtures_season.json', 'w') as f:
+        tmp = 'data/fixtures_season.json.tmp'
+        with open(tmp, 'w', encoding="utf-8") as f:
             json.dump(fixtures, f, indent=2)
+            f.flush()
+            os.fsync(f.fileno())
+        os.replace(tmp, 'data/fixtures_season.json')
         print("\nStored results in data/fixtures_season.json")
     else:
         print("\nNo fixtures found. Please check connectivity.")

@@ -57,7 +57,7 @@ class ConsensusAgent:
     def _load_pedigree(self):
         if PEDIGREE_FILE.exists():
             try:
-                with open(PEDIGREE_FILE, 'r') as f:
+                with open(PEDIGREE_FILE, 'r', encoding="utf-8") as f:
                     self.pedigree_cache = json.load(f)
             except (json.JSONDecodeError, OSError):
                 self.pedigree_cache = {}

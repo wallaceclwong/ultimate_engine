@@ -33,7 +33,7 @@ def get_last_disk_alert():
     """Reads the last disk alert time from state file."""
     try:
         if STATE_FILE.exists():
-            with open(STATE_FILE, "r") as f:
+            with open(STATE_FILE, "r", encoding="utf-8") as f:
                 state = json.load(f)
                 dt_str = state.get("last_disk_alert")
                 if dt_str:
@@ -46,12 +46,12 @@ def save_disk_alert_time(dt):
     try:
         state = {}
         if STATE_FILE.exists():
-            with open(STATE_FILE, "r") as f:
+            with open(STATE_FILE, "r", encoding="utf-8") as f:
                 state = json.load(f)
         state["last_disk_alert"] = dt.isoformat()
         os.makedirs(STATE_FILE.parent, exist_ok=True)
         tmp = STATE_FILE.with_suffix(".tmp")
-        with open(tmp, "w") as f:
+        with open(tmp, "w", encoding="utf-8") as f:
             json.dump(state, f)
             f.flush()
             os.fsync(f.fileno())
@@ -73,7 +73,7 @@ def get_today_fixture():
     ]
     
     try:
-        with open(FIXTURES_FILE, "r") as f:
+        with open(FIXTURES_FILE, "r", encoding="utf-8") as f:
             fixtures = json.load(f)
             for fxt in fixtures:
                 if fxt["date"] in possible_dates:

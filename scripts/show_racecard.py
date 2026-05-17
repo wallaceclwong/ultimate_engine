@@ -24,8 +24,13 @@ for r in range(1, 12):
         continue
 
     found += 1
-    rc  = json.load(open(rc_f, encoding="utf-8"))
-    res = json.load(open(res_f, encoding="utf-8")) if res_f.exists() else {}
+    with open(rc_f, "r", encoding="utf-8") as f:
+        rc = json.load(f)
+    if res_f.exists():
+        with open(res_f, "r", encoding="utf-8") as f:
+            res = json.load(f)
+    else:
+        res = {}
 
     res_map = {}
     for h in res.get("results", []):

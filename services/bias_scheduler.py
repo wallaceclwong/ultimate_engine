@@ -97,8 +97,12 @@ class BiasScheduler:
                 'min_races_threshold': self.config.min_races_threshold
             }
             
-            with open(self.config_file, 'w') as f:
+            tmp = self.config_file.with_suffix(self.config_file.suffix + ".tmp")
+            with open(tmp, 'w', encoding="utf-8") as f:
                 json.dump(data, f, indent=2)
+                f.flush()
+                os.fsync(f.fileno())
+            os.replace(tmp, self.config_file)
             
             logger.info(f"Saved scheduler config to {self.config_file}")
             

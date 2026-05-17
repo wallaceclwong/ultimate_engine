@@ -101,7 +101,7 @@ def load_scheduler_state():
     today = datetime.now(HKT).strftime("%Y-%m-%d")
     default_state = {"audited_races": [], "audited_horses": {}, "learned_today": False, "last_reset_date": today}
     if STATE_FILE.exists():
-        with open(STATE_FILE, "r") as f:
+        with open(STATE_FILE, "r", encoding="utf-8") as f:
             try:
                 state = json.load(f)
                 # Ensure new key exists
@@ -121,7 +121,7 @@ def save_scheduler_state(state):
     """Atomically write scheduler state — write to temp then os.replace."""
     os.makedirs(STATE_FILE.parent, exist_ok=True)
     tmp = STATE_FILE.with_suffix(".tmp")
-    with open(tmp, "w") as f:
+    with open(tmp, "w", encoding="utf-8") as f:
         json.dump(state, f, indent=2)
         f.flush()
         os.fsync(f.fileno())
@@ -135,7 +135,7 @@ def get_dynamic_schedule():
         rc_file = BASE_DIR / "data" / f"racecard_{today_compact}_R{r}.json"
         if rc_file.exists():
             try:
-                with open(rc_file, "r") as f:
+                with open(rc_file, "r", encoding="utf-8") as f:
                     data = json.load(f)
                     jt = data.get("jump_time")
                     if jt:
@@ -167,7 +167,7 @@ def get_today_fixture():
         f"{d:02d}/{m}/{y}"
     ]
 
-    with open(FIXTURES_FILE, "r") as f:
+    with open(FIXTURES_FILE, "r", encoding="utf-8") as f:
         fixtures = json.load(f)
         for fxt in fixtures:
             if fxt["date"] in possible_dates:
@@ -650,7 +650,7 @@ async def main():
         else:
             # Find next race day
             now = datetime.now(HKT)
-            with open(FIXTURES_FILE, "r") as f:
+            with open(FIXTURES_FILE, "r", encoding="utf-8") as f:
                 fixtures = json.load(f)
             next_fxt = None
             for fx in fixtures:

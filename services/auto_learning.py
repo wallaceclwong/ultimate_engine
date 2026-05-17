@@ -49,9 +49,9 @@ class AutoLearning:
             return
         
         try:
-            with open(pred_file, "r") as f:
+            with open(pred_file, "r", encoding="utf-8") as f:
                 pred = json.load(f)
-            with open(result_file, "r") as f:
+            with open(result_file, "r", encoding="utf-8") as f:
                 result = json.load(f)
             
             # Calculate prediction accuracy
@@ -126,7 +126,7 @@ class AutoLearning:
         
         # Append to log file
         self.learning_log.parent.mkdir(parents=True, exist_ok=True)
-        with open(self.learning_log, "a") as f:
+        with open(self.learning_log, "a", encoding="utf-8") as f:
             f.write(json.dumps(log_entry) + "\n")
     
     def _trigger_recalibration(self, race_id: str):

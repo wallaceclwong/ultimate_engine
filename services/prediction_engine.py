@@ -14,13 +14,9 @@ from config.settings import Config
 from models.schemas import Prediction
 from services.firestore_service import FirestoreService
 from services.data_validation import validate_racecard
-# Stubs for missing services (Temporary for verification)
-class SynergyService:
-    def get_synergy(self, j, t): return {}
-class StewardAnalyser:
-    def get_hidden_form(self, b): return []
-class PedigreeService:
-    async def get_enriched_pedigree(self, h): return {}
+from services.notification_service import NotificationService
+from services.live_odds_monitor import get_live_odds_monitor
+
 class KellyCriterion:
     def __init__(self, bankroll: float = 10000.0, fractional_kelly: float = 0.1):
         self.bankroll = bankroll
@@ -97,13 +93,6 @@ class KellyCriterion:
             total_exposure += stake
 
         return stakes
-class WeatherNextClient:
-    pass
-
-from services.notification_service import NotificationService
-from services.stewards_analyzer import get_stewards_analyzer
-
-from services.live_odds_monitor import get_live_odds_monitor
 from services.ensemble_predictor import get_ensemble_predictor
 from services.race_pace_analyzer import get_race_pace_analyzer
 
@@ -120,11 +109,8 @@ class PredictionEngine:
         self.data_dir = self.base_dir / "data"
         self.predictions_dir = self.data_dir / "predictions"
         self.predictions_dir.mkdir(parents=True, exist_ok=True)
-        self.firestore = FirestoreService()   # no-op stub
-        self.synergy = SynergyService()
-        self.steward = StewardAnalyser()
-        self.weathernext = WeatherNextClient()
-        self.pedigree = PedigreeService()
+        self.firestore = FirestoreService()
+        self.notifications = NotificationService()
 
         from services.bankroll_manager import BankrollManager
         self.bankroll_manager = BankrollManager()
@@ -133,8 +119,12 @@ class PredictionEngine:
             bankroll=self.bankroll_manager.get_current_bankroll(),
             fractional_kelly=Config.KELLY_FRACTION
         )
-        self.notifications = NotificationService()
-        self.notifications = NotificationService()
+
+        from services.rl_optimizer import RLOptimizer
+        self.optimizer = RLOptimizer()
+
+        from services.deep_dive_agent import DeepDiveAgent
+        self.deep_dive_agent = DeepDiveAgent()
 
 
         from services.rl_optimizer import RLOptimizer
@@ -250,46 +240,7 @@ class PredictionEngine:
             with open(analytical_path, "r", encoding="utf-8") as f:
                 data["analytical"] = json.load(f)
 
-        # 5. Load Synergy Data
-        synergy_data = {}
-        for h in data["racecard"].get("horses", []):
-            jockey = h.get("jockey")
-            trainer = h.get("trainer")
-            if jockey and trainer:
-                stats = self.synergy.get_synergy(jockey, trainer)
-                if stats:
-                    synergy_key = f"{jockey} + {trainer}"
-                    synergy_data[synergy_key] = stats
-        
-        data["synergy"] = synergy_data
-
-        # 2. Pedigree Intelligence
-        pedigree_intel = {}
-        for horse_data in data["racecard"].get("horses", []):
-            horse_id = horse_data.get("horse_id") # Assuming horse_id is available in racecard horse data
-            if horse_id:
-                try:
-                    # We do this sequentially for now, could be parallelized
-                    intel = await self.pedigree.get_enriched_pedigree(horse_id)
-                    if intel:
-                        pedigree_intel[horse_id] = intel
-                except Exception as e:
-                    print(f"Warning: Could not get pedigree for horse {horse_id}: {e}")
-                    continue
-        data["pedigree_intel"] = pedigree_intel
-
-        # 3. Load Hidden Form Tags
-        hidden_form_data = {}
-        for h in data["racecard"].get("horses", []):
-            brand_id = h.get("brand_id")
-            if brand_id:
-                tags = self.steward.get_hidden_form(brand_id)
-                if tags:
-                    hidden_form_data[brand_id] = tags
-        
-        data["hidden_form"] = hidden_form_data
-
-        # 7. Load Weather Intelligence
+        # 5. Load Weather Intelligence
         weather_intel = {}
         intel_path = Path(f"data/weather/intel_{venue}_{date_str}.json")
         if intel_path.exists():
@@ -520,35 +471,6 @@ class PredictionEngine:
                     ev         = max_stake,
                 )
 
-            # ELITE FEATURE: Double-Model Consensus Strategy
-            # Runs Gemini 2.5 Pro and Gemini 2.0 Flash in parallel. Beta only if they agree.
-            if Config.SHADOW_MODEL and Config.SHADOW_MODEL != self.model_id:
-                try:
-                    shadow_probs = self._run_shadow_prediction(
-                        prompt, response_schema, data,
-                        date_str, venue, race_no
-                    )
-                    
-                    # Validate model agreement before finalizing stakes
-                    if shadow_probs and prediction_dict.get("kelly_stakes"):
-                        main_probs = prediction_dict.get("probabilities", {})
-                        disagreement = self._check_model_disagreement(main_probs, shadow_probs)
-                        
-                        if disagreement:
-                            logger.warning(f"❌ CONSENSUS FAILED for {date_str}_{venue}_R{race_no}: {disagreement}")
-                            logger.warning("Clearing stakes due to model disagreement.")
-                            prediction_dict["kelly_stakes"] = {}
-                            prediction_dict["model_agreement"] = False
-                        else:
-                            logger.info(f"✅ CONSENSUS PASSED for {date_str}_{venue}_R{race_no}")
-                            prediction_dict["model_agreement"] = True
-                    
-                except Exception as e:
-                    logger.error(f"[SHADOW] Shadow prediction failed: {e}")
-                    # If shadow fails, we default to conservative: clear stakes
-                    prediction_dict["kelly_stakes"] = {}
-                    prediction_dict["model_agreement"] = False
-
             # Create Prediction object
             prediction = Prediction(
                 race_id=f"{date_str}_{venue}_R{race_no}",
@@ -580,78 +502,6 @@ class PredictionEngine:
         except Exception as e:
             print(f"Error generating prediction: {e}")
             return None
-
-    def _run_shadow_prediction(self, prompt, response_schema, data, date_str, venue, race_no):
-        """
-        DEPRECATED: Shadow prediction previously ran a second Gemini model for A/B consensus.
-        Google AI (Gemini/Vertex) has been removed. SHADOW_MODEL is disabled (empty string).
-        This method is unreachable in normal operation but kept to avoid NameErrors.
-        """
-        raise NotImplementedError(
-            "[SHADOW] Shadow prediction is disabled \u2014 Google AI removed. "
-            "Config.SHADOW_MODEL is empty so this path should never be called."
-        )
-
-        shadow_dict = json.loads(shadow_resp.text)
-
-        # Calculate Kelly for shadow too
-        win_odds = data.get("odds", {}).get("win_odds", {})
-        shadow_probs = shadow_dict.get("probabilities", {})
-        
-        # CRITICAL FIX: Normalize shadow probabilities
-        total_prob = sum(shadow_probs.values()) if shadow_probs else 0.0
-        if total_prob > 0:
-            shadow_probs = {h: p / total_prob for h, p in shadow_probs.items()}
-            shadow_dict["probabilities"] = shadow_probs
-
-        self.kelly.bankroll = self.bankroll_manager.get_current_bankroll()
-        shadow_dict["kelly_stakes"] = self.kelly.calculate_race_stakes(shadow_probs, win_odds)
-        shadow_dict["market_odds"] = win_odds
-
-        shadow_pred = Prediction(
-            race_id=f"{date_str}_{venue}_R{race_no}",
-            gemini_model=shadow_id,
-            **shadow_dict
-        )
-
-        # Save shadow prediction with _shadow suffix
-        shadow_file = self.predictions_dir / f"prediction_{date_str}_{venue}_R{race_no}_shadow.json"
-        with open(shadow_file, "w", encoding="utf-8") as f:
-            f.write(shadow_pred.model_dump_json(indent=2))
-        print(f"[SHADOW] Shadow prediction saved to {shadow_file}")
-        
-        # Return shadow probabilities for agreement check
-        return shadow_probs
-
-        # Sync shadow to Firestore under separate collection
-        try:
-            self.firestore.upsert(
-                "predictions_shadow",
-                f"{date_str}_{venue}_R{race_no}",
-                shadow_pred
-            )
-        except Exception as e:
-            print(f"[SHADOW] Firestore sync failed: {e}")
-
-    def _check_model_disagreement(self, main_probs: Dict, shadow_probs: Dict) -> str:
-        """Check if main and shadow models disagree significantly on top picks."""
-        if not main_probs or not shadow_probs:
-            return ""
-        
-        # Find top 2 picks from each model
-        main_top = sorted(main_probs.items(), key=lambda x: x[1], reverse=True)[:2]
-        shadow_top = sorted(shadow_probs.items(), key=lambda x: x[1], reverse=True)[:2]
-        
-        # Check if top picks differ significantly
-        for horse, main_prob in main_top:
-            shadow_prob = shadow_probs.get(horse, 0)
-            prob_diff = abs(main_prob - shadow_prob)
-            
-            if prob_diff > Config.SHADOW_AGREEMENT_THRESHOLD:
-                return f"Horse {horse}: Main={main_prob:.2%}, Shadow={shadow_prob:.2%} (diff={prob_diff:.2%})"
-        
-        return ""  # Models agree
-
     def _construct_prompt(self, data: Dict[str, Any]) -> str:
         racecard = data.get("racecard", {})
         results = data.get("results", {})
@@ -938,29 +788,8 @@ CRITICAL: You MUST provide a win probability for EACH of these horse numbers: {h
             f.write(prediction.model_dump_json(indent=2))
         print(f"Prediction saved to {filename}")
         
-        # Cloud Sync (GCS Vault)
-        try:
-            self.storage.upload_prediction(prediction.race_id, str(filename))
-        except Exception as e:
-            print(f"[WARNING] GCS sync failed: {e}")
-
         # Cloud Sync (Firestore)
         self.firestore.upsert(Config.COL_PREDICTIONS, prediction.race_id, prediction)
-        
-        # Cloud Sync (BigQuery)
-        try:
-            # Extract basic metrics for BQ analytics
-            bq_data = {
-                "race_id": prediction.race_id,
-                "date": prediction.race_id.split("_")[0],
-                "confidence_score": float(prediction.confidence_score),
-                "recommended_bet": str(prediction.recommended_bet),
-                "is_best_bet": bool(prediction.is_best_bet),
-                "created_at": datetime.now().isoformat()
-            }
-            self.bigquery.upsert_prediction(bq_data)
-        except Exception as e:
-            print(f"[WARNING] BigQuery sync failed: {e}")
 
     # Removed legacy internal Kelly logic in favor of services.kelly_criterion
 

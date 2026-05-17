@@ -47,7 +47,8 @@ print(SEP)
 print("\n[ 1 ] FIXTURE CHECK")
 fx_path = DATA / "fixtures_2026.json"
 if fx_path.exists():
-    fixtures = json.load(open(fx_path, encoding="utf-8"))
+    with open(fx_path, "r", encoding="utf-8") as f:
+        fixtures = json.load(f)
     d, m, y = now.day, now.month, now.year
     possible = [f"{d}/{m:02d}/{y}", f"{d:02d}/{m:02d}/{y}", f"{d}/{m}/{y}", f"{d:02d}/{m}/{y}"]
     fxt = next((f for f in fixtures if f["date"] in possible), None)
@@ -70,7 +71,8 @@ chk(len(pred_files) == 9, f"AI Preds  (local) : {len(pred_files)}/9")
 print("\n[ 3 ] SCHEDULER STATE")
 state_path = DATA / "scheduler_state.json"
 if state_path.exists():
-    state = json.load(open(state_path))
+    with open(state_path, "r", encoding="utf-8") as f:
+        state = json.load(f)
     chk(state.get("last_reset_date") == DATE,
         f"Reset date        : {state.get('last_reset_date')} (expected {DATE})")
     chk(not state.get("learned_today", False),
@@ -160,7 +162,8 @@ for r in range(1, 10):
     j_time = "?"
     if rc.exists():
         try:
-            rcd = json.load(open(rc, encoding="utf-8"))
+            with open(rc, "r", encoding="utf-8") as f:
+                rcd = json.load(f)
             j_time = rcd.get("jump_time", rcd.get("race_time", rcd.get("time", "?"))).strip()
         except Exception:
             pass
