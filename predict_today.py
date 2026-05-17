@@ -25,8 +25,6 @@ BASE_DIR      = Path(__file__).parent.absolute()
 if str(BASE_DIR) not in sys.path:
     sys.path.append(str(BASE_DIR))
 
-from consensus_agent import consensus_agent
-from telegram_service import telegram_service
 MODEL_DIR     = BASE_DIR / "models"
 DATA_DIR      = BASE_DIR / "data"
 MATRIX_FILE   = BASE_DIR / "final_feature_matrix.parquet"
@@ -43,6 +41,13 @@ RACE_TIME_BY_DIST = {
     2000: 121.70,
 }
 RACE_TIME_DEFAULT = 70.0  # Fallback if distance not in table
+
+def _safe_horse_no(val):
+    """Coerce horse number to string safely, handling int/float/str."""
+    try:
+        return str(int(float(val)))
+    except (ValueError, TypeError):
+        return str(val)
 
 def load_latest_odds(date_comp, race_num):
     odds_dir = DATA_DIR / "odds"
@@ -98,38 +103,6 @@ t_stats = df_full.sort_values("date").groupby("trainer").tail(1)[["trainer", "tr
 H_COLS = ["horse_id", "sec_pos_1", "sec_pos_2", "sec_pos_pre"]
 H_COLS_EXIST = [c for c in H_COLS if c in df_full.columns]
 h_stats = df_full.sort_values("date").groupby("horse_id").tail(1)[H_COLS_EXIST]
-
-async def send_bet_card(race_num, date_str, venue, top_pick, top_pick_edge, probabilities, market_odds):
-    """
-    Sends a structured Telegram bet recommendation card for a single race.
-    Only called when is_best_bet=True.
-    """
-    horse_no   = str(int(top_pick['horse_no']))
-    horse_name = top_pick['horse_name']
-    odds       = float(top_pick['win_odds'])
-    fair       = float(top_pick['fair_odds'])
-    rank       = int(top_pick['rank'])
-    field_size = int(top_pick['field_size'])
-
-    # Top 3 ranked horses for context
-    top3_lines = []
-    sorted_probs = sorted(probabilities.items(), key=lambda x: x[1], reverse=True)[:3]
-    for i, (h, p) in enumerate(sorted_probs, 1):
-        mo = market_odds.get(h, 0)
-        top3_lines.append(f"  {i}. #{h} | odds={mo:.1f} | prob={p:.1%}")
-    top3_str = "\n".join(top3_lines)
-
-    msg = (
-        f"\U0001f3c7 *BET SIGNAL: {venue} R{race_num}*\n"
-        f"\U0001f3af *Pick:* #{horse_no} {horse_name}\n"
-        f"\U0001f4b0 *Odds:* {odds:.1f} | Fair: {fair:.1f} | Edge: {top_pick_edge:+.1%}\n"
-        f"\U0001f4ca *Rank:* {rank}/{field_size} horses\n\n"
-        f"*Top 3 Ranked:*\n{top3_str}\n\n"
-        f"\u23f1 *Race:* {date_str} {venue} R{race_num}\n"
-        f"\u26a0\ufe0f _Always verify odds before placing bet._"
-    )
-    await telegram_service.send_message(msg)
-
 
 def predict_race(date_str, venue, race_num):
     date_comp = date_str.replace("-", "")
@@ -259,13 +232,13 @@ def predict_race(date_str, venue, race_num):
     market_odds = {}
     
     for _, row in df_race.iterrows():
-        horse_no = str(int(row["horse_no"]))
+        horse_no = _safe_horse_no(row["horse_no"])
         probabilities[horse_no] = float(row["pred_prob"])
         market_odds[horse_no] = float(row["win_odds"])
     
     # Get top pick — must be rank-1, not just first row (which is horse #1 by saddle)
     top_pick = df_race.sort_values("rank").iloc[0]
-    recommended_bet = f"WIN {int(top_pick['horse_no'])}"
+    recommended_bet = f"WIN {_safe_horse_no(top_pick['horse_no'])}"
     
     # ── Confidence = Value Edge of the top pick ──────────────────────────────
     # Positive = model sees genuine value vs market; negative = market is right
@@ -304,7 +277,7 @@ def predict_race(date_str, venue, race_num):
             f"{rc.get('distance', 1200)}m {rc.get('track_type', 'Turf')} "
             f"({rc.get('track_condition', 'Good')})\n\n"
             f"### Top Pick\n"
-            f"- **#{int(top_pick['horse_no'])} {top_pick['horse_name']}** "
+            f"- **#{_safe_horse_no(top_pick['horse_no'])} {top_pick['horse_name']}** "
             f"(Rank {top_pick['rank']}, Odds {top_pick['win_odds']:.1f}, "
             f"Fair {top_pick['fair_odds']:.1f}, Edge {top_pick_edge:+.1%})\n\n"
             f"### Bet Signal\n"
@@ -369,7 +342,7 @@ async def main():
         print("  (Showing top ranked horses per race for reference only)")
         for r_df in full_results:
             top = r_df.iloc[0]
-            print(f"  R{int(top['race'])}: #{int(top['horse_no'])} {top['horse_name']} "
+            print(f"  R{int(top['race'])}: #{_safe_horse_no(top['horse_no'])} {top['horse_name']} "
                   f"| odds={top['win_odds']:.1f} | fair={top['fair_odds']:.1f} "
                   f"| edge={top['value_edge']:+.1%} | ⛔ SKIP")
         return
@@ -382,8 +355,8 @@ async def main():
     bets_sent = []
 
     for _, tip in tips.iterrows():
-        tier_icon = "\U0001f525" if tip["tier"] == "PRIMARY" else "\U0001f4a5"
-        print(f"\n[Audit] {tier_icon} {tip['tier']} | R{tip['race']} | {tip['horse_name']} (#{tip['horse_no']})")
+        tier_icon = "[PRIMARY]" if tip["tier"] == "PRIMARY" else "[SECONDARY]"
+        print(f"\n[Audit] {tier_icon} {tip['tier']} | R{tip['race']} | {tip['horse_name']} (#{tip['horse_no']})")  
         print(f"      Rank: {tip['rank']} | Odds: {tip['win_odds']:.1f} | Fair: {tip['fair_odds']:.1f} | Edge: {tip['value_edge']:+.1%}")
 
         race_data = next(r for r in full_results if (r["race"] == tip["race"]).all())
@@ -404,19 +377,14 @@ async def main():
         print(f"      REASON: {reasoning}")
         print("-" * 40)
 
-    # ── Daily Summary Card ──
+    # ── Summary: print locally only — War Room Verdicts are the sole Telegram channel ──
     if bets_sent:
-        lines = [f"  R{r}: #{name} @ {odds:.1f} (edge {edge:+.1%})" for r, name, odds, edge in bets_sent]
-        await telegram_service.send_message(
-            f"\U0001f4cb *Daily Bet Sheet: {date_target} {venue_target}*\n"
-            + "\n".join(lines)
-            + f"\n\n*Total picks: {len(bets_sent)}/{len(full_results)} races*"
-        )
+        print(f"\n[PREDICT] Daily Bet Sheet: {date_target} {venue_target}")
+        for r, name, odds, edge in bets_sent:
+            print(f"  R{r}: #{name} @ {odds:.1f} (edge {edge:+.1%})")
+        print(f"  Total picks: {len(bets_sent)}/{len(full_results)} races")
     else:
-        await telegram_service.send_message(
-            f"\u26d4 *{date_target} {venue_target}* — No value bets today.\n"
-            f"All {len(full_results)} races below edge/odds threshold."
-        )
+        print(f"[PREDICT] No value bets found for {date_target} {venue_target}. All {len(full_results)} races below threshold.")
 
     print("="*60)
 

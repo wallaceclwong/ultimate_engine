@@ -14,22 +14,32 @@ DOTENV_FILE = BASE_DIR / ".env"
 PEDIGREE_FILE = DATA_DIR / "pedigree_cache.json"
 load_dotenv(DOTENV_FILE)
 
-# ─── DeepSeek Reasoning Client ───────────────────────────────────────────────
-# Note: Use the project's standard API key
-client = AsyncOpenAI(api_key=os.getenv('DEEPSEEK_API_KEY'), base_url='https://api.deepseek.com')
+# ─── Lazy DeepSeek client (initialized on first use to avoid import-time
+#     failures when .env is missing or load order changes) ─────────────────────
+_client = None
+
+def _get_client():
+    global _client
+    if _client is None:
+        api_key = os.getenv('DEEPSEEK_API_KEY')
+        if not api_key:
+            raise RuntimeError("DEEPSEEK_API_KEY not set in environment")
+        _client = AsyncOpenAI(api_key=api_key, base_url='https://api.deepseek.com')
+    return _client
 
 class ConsensusAgent:
     """
     Expert Reasoning 'War Room' that audits statistical picks using multi-agent simulation.
     """
     def __init__(self):
-        self.model = "deepseek-reasoner" # Using R1 (Reasoner)
+        self.model = "deepseek-reasoner"
         self.pedigree_cache = {}
         self._load_pedigree()
 
     async def check_health(self):
         """Verifies API connectivity with a minimal prompt."""
         try:
+            client = _get_client()
             resp = await client.chat.completions.create(
                 model=self.model,
                 messages=[{"role": "user", "content": "ping"}],
@@ -52,8 +62,16 @@ class ConsensusAgent:
             except:
                 self.pedigree_cache = {}
 
+    def _has_content(self, result: str) -> bool:
+        """Check if a memory search returned meaningful content (not just headers/empty)."""
+        if not result or not result.strip():
+            return False
+        # Accept any result with reasonable content (at least one line beyond headers)
+        lines = [l for l in result.splitlines() if l.strip()]
+        return len(lines) >= 2
+
     @retry(
-        stop=stop_after_attempt(3), 
+        stop=stop_after_attempt(3),
         wait=wait_exponential(multiplier=1, min=4, max=10),
         retry=retry_if_exception_type((APIError, APITimeoutError))
     )
@@ -63,16 +81,16 @@ class ConsensusAgent:
         Supports optional live market_context for late-money detection.
         """
         # Find the horse being tipped
-        # Tip horse number could be int or string, ensure comparison works
         df_target = race_data[race_data["horse_no"].astype(str) == str(tip_horse_no)]
-        if df_target.empty: return "VETO", "Horse not found in race data."
-        
+        if df_target.empty:
+            return "VETO", "Horse not found in race data."
+
         target = df_target.iloc[0].to_dict()
         horse_id = target.get("horse_id", "Unknown")
-        
+
         # 1. Gather Pedigree Context
         pedigree = self.pedigree_cache.get(horse_id, {"sire": "Unknown", "dam": "Unknown"})
-        
+
         # If unknown, try to look up parenthetically if ID was passed as string
         if pedigree["sire"] == "Unknown" and "(" in str(target.get("horse", "")):
              match = re.search(r'\(([A-Z0-9]+)\)', target["horse"])
@@ -80,9 +98,6 @@ class ConsensusAgent:
                  h_id = match.group(1)
                  pedigree = self.pedigree_cache.get(h_id, {"sire": "Unknown", "dam": "Unknown"})
 
-        # Final check: If still unknown, DeepSeek will flag it, but the nightly scraper 
-        # will have caught most of them.
-        
         # 2. Gather Field Context (Top 14 + Context)
         field_context = []
         for _, h in race_data.iterrows():
@@ -94,9 +109,9 @@ class ConsensusAgent:
                 "rank":            h["rank"],
                 "fair_odds":       round(h.get("fair_odds", 10.0), 1),
                 "value_mult":      round(h.get("value_mult", 1.0), 2),
-                "gear":            h.get("gear", ""),               # e.g. "Blinkers, Tongue Tie"
-                "wt_allowance":    int(h.get("weight_allowance", 0)),  # e.g. -3 for apprentice claim
-                "location":        h.get("training_location", "HK"), # "HK" or "CTC"
+                "gear":            h.get("gear", ""),
+                "wt_allowance":    int(h.get("weight_allowance", 0)),
+                "location":        h.get("training_location", "HK"),
             })
 
         # 3. Market Momentum Context
@@ -106,37 +121,39 @@ class ConsensusAgent:
             trend = market_context.get('trend', 'stable')
             market_str = f"LATE MONEY TREND: {trend.upper()} ({movement:+.1%})."
 
-        # 4. Historical Context (Multi-Dimensional Vector Memory)
+        # 4. Historical Context — 5 parallel async memory searches
         from services.memory_service import memory_service
         memory_str = "No specific historical intelligence found in Palace."
         try:
-            # Query 1: Horse Performance history
-            res_bio = memory_service.search(f"{target['horse_name']} performance history")
-            
-            # Query 2: Trainer/Jockey Synergy
             trainer_name = target.get('trainer', 'Unknown')
             jockey_name = target.get('jockey', 'Unknown')
-            res_synergy = memory_service.search(f"{trainer_name} and {jockey_name} combination Hong Kong ROI")
-            
-            # Query 3: Surface & Conditions (Track Intelligence)
             venue = target.get('venue', 'HV')
             dist = target.get('distance', 1200)
-            res_track = memory_service.search(f"{venue} {dist}m track characteristics and bias")
-            
-            # Query 4: Lesson Learnt Retrospective
-            res_retro = memory_service.search(f"{target['horse_name']} LESSON LEARNT retrospective failed prediction")
-            
-            # Query 5: Pedigree Characteristics
-            res_ped = memory_service.search(f"PEDIGREE for horse {horse_id} sired by {pedigree['sire']}")
+            horse_name = target['horse_name']
 
-            # Aggregate context
+            results = await asyncio.gather(
+                memory_service.search_async(f"{horse_name} performance history"),
+                memory_service.search_async(f"{trainer_name} and {jockey_name} combination Hong Kong ROI"),
+                memory_service.search_async(f"{venue} {dist}m track characteristics and bias"),
+                memory_service.search_async(f"{horse_name} LESSON LEARNT retrospective failed prediction"),
+                memory_service.search_async(f"PEDIGREE for horse {horse_id} sired by {pedigree['sire']}"),
+                return_exceptions=True
+            )
+
             mem_bits = []
-            if "Results for" in res_bio: mem_bits.append(f"--- Horse Bio ---\n{res_bio}")
-            if "Results for" in res_synergy: mem_bits.append(f"--- Synergy Intel ---\n{res_synergy}")
-            if "Results for" in res_track: mem_bits.append(f"--- Track Intel ---\n{res_track}")
-            if "Results for" in res_retro: mem_bits.append(f"--- FAIL RETROSPECTIVE ---\n{res_retro}")
-            if "Results for" in res_ped: mem_bits.append(f"--- PEDIGREE INTEL ---\n{res_ped}")
-            
+            labels = [
+                "--- Horse Bio ---",
+                "--- Synergy Intel ---",
+                "--- Track Intel ---",
+                "--- FAIL RETROSPECTIVE ---",
+                "--- PEDIGREE INTEL ---",
+            ]
+            for i, (label, result) in enumerate(zip(labels, results)):
+                if isinstance(result, Exception):
+                    print(f"[MEMORY WARN] Search {i} failed: {result}")
+                elif self._has_content(result):
+                    mem_bits.append(f"{label}\n{result}")
+
             if mem_bits:
                 memory_str = "\n".join(mem_bits)
         except Exception as e:
@@ -182,6 +199,7 @@ Respond with a JSON block followed by a brief 'Expert Note'.
 """
 
         try:
+            client = _get_client()
             resp = await client.chat.completions.create(
                 model=self.model,
                 messages=[
@@ -190,13 +208,13 @@ Respond with a JSON block followed by a brief 'Expert Note'.
                 ],
                 timeout=55
             )
-            
+
             full_content = resp.choices[0].message.content
-            
+
             # --- Robust EXTRACTION LOGIC ---
             # 1. Remove <think> tags if present
             clean_content = re.sub(r'<think>.*?</think>', '', full_content, flags=re.DOTALL)
-            
+
             # 2. Try to find markdown JSON block
             json_block_match = re.search(r'```json\s*(\{.*?\})\s*```', clean_content, re.DOTALL)
             if json_block_match:
@@ -215,10 +233,9 @@ Respond with a JSON block followed by a brief 'Expert Note'.
                     f"NOTE: {result.get('expert_note')}"
                 )
             else:
-                # Log the raw content for debugging if extraction fails
                 print(f"[DEBUG] Extraction failed. Raw: {full_content[:300]}...")
                 return "CAUTION", "DeepSeek-R1: Failed to parse strategic JSON."
-                
+
         except Exception as e:
             return "ERROR", f"War Room Audit failed: {str(e)}"
 

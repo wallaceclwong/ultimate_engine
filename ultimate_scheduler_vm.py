@@ -19,10 +19,14 @@ PYTHON_EXEC = sys.executable  # Cross-platform (Windows/Linux)
 STATE_FILE = BASE_DIR / "data" / "scheduler_state.json"
 LOCK_FILE = BASE_DIR / "ultimate_scheduler.lock"
 
+# Cache for get_today_fixture() to avoid re-reading JSON every 60s
+_today_fixture_cache = None
+_today_fixture_cache_date = None
+
 def acquire_lock():
     """Single-instance guard for --live mode.
     - Kills any non-venv Python duplicates immediately.
-    - Yields to an existing venv instance (lowest PID wins).
+    - Yields to an existing LIVE venv instance (lowest PID wins).
     """
     import psutil
     current_pid = os.getpid()
@@ -38,13 +42,22 @@ def acquire_lock():
         try:
             if proc.info['pid'] in (current_pid, parent_pid):
                 continue
+            exe = (proc.info.get('exe') or '').lower()
+            # Only consider actual Python processes (skip PowerShell, WMI, etc.)
+            if 'python' not in exe:
+                continue
             cmd = " ".join(proc.info['cmdline'] or [])
             if 'ultimate_scheduler_vm' not in cmd or '--live' not in cmd:
                 continue
-            exe = (proc.info.get('exe') or '').lower()
+            # Verify process is truly alive
+            if not psutil.pid_exists(proc.info['pid']):
+                continue
             if exe != venv_py:
-                proc.kill()
-                print(f"[FIX] Killed non-venv war room duplicate PID {proc.info['pid']} ({exe})")
+                try:
+                    proc.kill()
+                    print(f"[FIX] Killed non-venv war room duplicate PID {proc.info['pid']} ({exe})")
+                except (psutil.NoSuchProcess, psutil.AccessDenied):
+                    pass
             else:
                 venv_rivals.append(proc.info['pid'])
         except (psutil.NoSuchProcess, psutil.AccessDenied):
@@ -98,28 +111,39 @@ def get_dynamic_schedule():
     return schedule
 
 def get_today_fixture():
-    """Checks if today is a race day based on the season fixtures."""
+    """Checks if today is a race day based on the season fixtures.
+    Results are cached per calendar day to avoid re-parsing JSON every 60s."""
+    global _today_fixture_cache, _today_fixture_cache_date
+
     if not FIXTURES_FILE.exists():
         print(f"[ERROR] Fixtures file not found: {FIXTURES_FILE}")
         return None
-        
+
     now = datetime.now(HKT)
+    today_str = now.strftime("%Y-%m-%d")
+    if _today_fixture_cache_date == today_str:
+        return _today_fixture_cache
+
     # Format options to match fixtures like "8/04/2026" or "08/04/2026"
     d, m, y = now.day, now.month, now.year
     possible_dates = [
-        f"{d}/{m:02d}/{y}",   # 8/04/2026
-        f"{d:02d}/{m:02d}/{y}", # 08/04/2026
-        f"{d}/{m}/{y}",       # 8/4/2026
-        f"{d:02d}/{m}/{y}"    # 08/4/2026
+        f"{d}/{m:02d}/{y}",
+        f"{d:02d}/{m:02d}/{y}",
+        f"{d}/{m}/{y}",
+        f"{d:02d}/{m}/{y}"
     ]
-    
+
     with open(FIXTURES_FILE, "r") as f:
         fixtures = json.load(f)
         for fxt in fixtures:
             if fxt["date"] in possible_dates:
                 print(f"[DEBUG] Fixture found: {fxt['venue']} on {fxt['date']}")
+                _today_fixture_cache = fxt
+                _today_fixture_cache_date = today_str
                 return fxt
     print(f"[DEBUG] No fixture match for possible dates: {possible_dates}")
+    _today_fixture_cache = None
+    _today_fixture_cache_date = today_str
     return None
 
 async def run_final_war_room_verdict(r_no, today_iso, venue, j_time):
@@ -129,12 +153,8 @@ async def run_final_war_room_verdict(r_no, today_iso, venue, j_time):
     Otherwise, sends a NO BET alert.
     """
     try:
-        state = load_scheduler_state()
-        final_verdict_key = f"final_verdict_R{r_no}"
-        if state.get(final_verdict_key):
-            return  # Already fired for this race
-
         # ── Load prediction JSON (primary data source) ──────────────────────
+        # (dedup is handled by the caller pre-marking the state before spawning)
         pred_file = BASE_DIR / "data" / "predictions" / f"prediction_{today_iso}_{venue}_R{r_no}.json"
         if not pred_file.exists():
             print(f"[FINAL VERDICT] R{r_no}: prediction file missing, skipping.")
@@ -160,8 +180,6 @@ async def run_final_war_room_verdict(r_no, today_iso, venue, j_time):
 
         if not is_best_bet:
             print(f"[FINAL VERDICT] R{r_no}: NO BET (below threshold).")
-            state[final_verdict_key] = True
-            save_scheduler_state(state)
             await telegram_service.send_message(
                 f"⛔ *WAR ROOM VERDICT: {venue} R{r_no}*\n"
                 f"⏱ *Jump:* {j_time} HKT\n\n"
@@ -216,9 +234,6 @@ async def run_final_war_room_verdict(r_no, today_iso, venue, j_time):
         print(f"[FINAL VERDICT] R{r_no}: #{top_horse} {horse_name} CONFIRMED (edge={edge:+.1%}, odds={odds:.1f}){wet_note}. Firing pre-race audit...")
 
         verdict, reasoning = await consensus_agent.get_consensus(df, top_horse)
-
-        state[final_verdict_key] = True
-        save_scheduler_state(state)
 
         icon = "🏆" if ("Grade [S]" in reasoning or "Grade [A]" in reasoning) else "⚠️"
         await telegram_service.send_message(
@@ -361,9 +376,9 @@ async def run_odds_refresh(venue: str):
             print(f"  [ERROR] R{r_no} patch failed: {e}")
 
     await ingest.browser_mgr.stop()
-    summary = f"📊 *Morning Odds Refresh*: {scraped} races scraped, {patched} predictions updated with live odds."
-    print(f"[ODDS REFRESH] {summary}")
-    await telegram_service.send_message(summary)
+    summary = f"[ODDS REFRESH] {scraped} races scraped, {patched} predictions updated with live odds."
+    print(summary)
+    await telegram_service.send_message(f"*Morning Odds Refresh*: {scraped} races scraped, {patched} predictions updated with live odds.")
 
 async def run_predict(venue):
     """Triggers the pre-race predictions and DeepSeek audit."""
@@ -375,7 +390,7 @@ async def run_predict(venue):
     returncode, stdout, stderr = await run_async_command(cmd, "PREDICT")
     
     if returncode == 0:
-        await telegram_service.send_message(f"🧠 *Lunar Intelligence*: Predictions generated for {venue}.\nCheck logs for full strategic brief.")
+        print(f"[PREDICT] Predictions generated for {venue}. War Room Verdicts will fire at T-15 per race.")
     else:
         await telegram_service.send_message(f"⚠️ *Vultr VM*: Prediction failed!\n{stderr[:100]}")
 
@@ -415,7 +430,7 @@ async def run_learn(venue):
     print(f"[LEARN] Step 4: Mining new intelligence into Palace...")
     try:
         memory_service.mine(str(BASE_DIR / "data"))
-        await telegram_service.send_message("🧠 *Lunar Memory*: Today's results, predictions, and features successfully mined into Palace.")
+        print("[LEARN] MemPalace mining complete.")
     except Exception as e:
         print(f"[MEMORY WARN] Mining failed: {e}")
 
@@ -426,8 +441,7 @@ async def run_learn(venue):
     rc2, out2, err2 = await run_async_command(cmd2, "LEARN-MATRIX")
 
     if rc2 == 0:
-        print(f"[LEARN] SUCCESS: Matrix updated.")
-        await telegram_service.send_message(f"📚 *Lunar Learning*: Today's results ingested and matrix updated for {venue}. Self-learning cycle complete.")
+        print(f"[LEARN] SUCCESS: Matrix updated for {venue}.")
         return True
     else:
         await telegram_service.send_message(f"⚠️ *Lunar Alert*: Learning logic failed!\n{err2[:100]}")
@@ -442,84 +456,125 @@ async def run_live_war_room(venue):
     from services.odds_ingest import OddsIngest
     
     ingest = OddsIngest(headless=True)
-    
-    print(f"[{datetime.now(HKT)}] --- STARTING LIVE WAR ROOM (Venue: {venue}) ---")
-    
-    # Check health of dependencies before starting
-    ds_ok = await consensus_agent.check_health()
-    mem_ok = await check_mempalace()
 
-    if not ds_ok:
-        status_msg = f"🚨 *Lunar Alert*: War Room started but DeepSeek is DOWN ❌\n- MemPalace: {'✅' if mem_ok else '⚠️ degraded (non-critical)'}"
-        await telegram_service.send_message(status_msg)
-    else:
-        mem_note = "✅" if mem_ok else "⚠️ degraded"
-        await telegram_service.send_message(f"📡 *Lunar War Room*: Active for {venue}.\n- DeepSeek: ✅\n- MemPalace: {mem_note}\nWaiting for Smart Money signatures...")
+    try:
+        print(f"[{datetime.now(HKT)}] --- STARTING LIVE WAR ROOM (Venue: {venue}) ---")
 
-    # Load dynamic schedule
-    schedule = get_dynamic_schedule()
-    today_iso = datetime.now(HKT).strftime("%Y-%m-%d")
+        # Check health of dependencies before starting
+        ds_ok = await consensus_agent.check_health()
+        mem_ok = await check_mempalace()
 
-    # Pre-emptively capture baseline for all races to avoid 'market blindness'
-    print(f"[{datetime.now(HKT)}] [WAR ROOM] Capturing initial baseline snapshots for all races...")
-    for r_no in schedule.keys():
-        try:
-            await ingest.capture_snapshot(today_iso, int(r_no), venue)
-        except: pass
+        if not ds_ok:
+            status_msg = f"🚨 *Lunar Alert*: War Room started but DeepSeek is DOWN ❌\n- MemPalace: {'✅' if mem_ok else '⚠️ degraded (non-critical)'}"
+            await telegram_service.send_message(status_msg)
+        else:
+            mem_note = "✅" if mem_ok else "⚠️ degraded"
+            await telegram_service.send_message(f"📡 *Lunar War Room*: Active for {venue}.\n- DeepSeek: ✅\n- MemPalace: {mem_note}\nWaiting for Smart Money signatures...")
 
-    while True:
-        now = datetime.now(HKT)
-        today_iso = now.strftime("%Y-%m-%d")
-        today_compact = today_iso.replace("-", "")
-        hkt_now = now.strftime("%H:%M")
-        
-        # EXIT CLEANLY if we've crossed into a new non-race day
-        if not get_today_fixture():
-            print(f"[{now}] War Room shutting down: no longer a race day.")
-            await telegram_service.send_message("🌙 *War Room*: Race day complete. Shutting down.")
-            break
-        
-        # REFRESH STATE: Re-read state in every loop iteration to ensure shared sync
-        state = load_scheduler_state()
-        
-        for r_no, j_time in schedule.items():
-            if str(r_no) in state["audited_races"]:
-                continue
-            
-            # Simple HKT countdown (e.g. j_time = "13:00")
+        # Load dynamic schedule
+        schedule = get_dynamic_schedule()
+        today_iso = datetime.now(HKT).strftime("%Y-%m-%d")
+
+        # Pre-emptively capture baseline for all races to avoid 'market blindness'
+        print(f"[{datetime.now(HKT)}] [WAR ROOM] Capturing initial baseline snapshots for all races...")
+        for r_no in schedule.keys():
             try:
-                j_dt = datetime.strptime(j_time.strip().replace(" ",""), "%H:%M")
-                now_dt = datetime.strptime(hkt_now, "%H:%M")
-                diff_min = (j_dt - now_dt).total_seconds() / 60
-                
-                # 0. LIVE ODDS INGESTION (Every 3 mins if within T-25)
-                # We use a state check to prevent hammering the browser
-                if 0 <= diff_min <= 25:
-                    last_scrape = state.get(f"last_scrape_R{r_no}", 0)
-                    if (now.timestamp() - last_scrape) > 180: # 3 minutes
-                        print(f"[INGEST] Refreshing live odds for R{r_no}...")
-                        await ingest.capture_snapshot(today_iso, int(r_no), venue)
-                        state[f"last_scrape_R{r_no}"] = now.timestamp()
-                        save_scheduler_state(state)
- 
+                await ingest.capture_snapshot(today_iso, int(r_no), venue)
+            except: pass
 
-                # FINAL WAR ROOM VERDICT: T-20 to T-10 window
-                if 10 <= diff_min <= 20:
-                    asyncio.create_task(run_final_war_room_verdict(r_no, today_iso, venue, j_time))
-            except Exception as e:
-                print(f"[WARN] Schedule parse error for R{r_no} ({j_time}): {e}")
-        
-        # 2. Check for Post-Race Learning (23:15 HKT)
-        # state is already disk-fresh from load_scheduler_state() above (line 457)
-        if now.hour == 23 and now.minute >= 15 and not state.get("learned_today"):
-            success = await run_learn(venue)
-            if success:
-                state["learned_today"] = True
-                save_scheduler_state(state)
-        
-        # Every 60 seconds
-        print(f"[{now.strftime('%H:%M:%S')}] Polling market for anomalies...")
-        await asyncio.sleep(60)
+        while True:
+            now = datetime.now(HKT)
+            today_iso = now.strftime("%Y-%m-%d")
+            today_compact = today_iso.replace("-", "")
+            hkt_now = now.strftime("%H:%M")
+
+            # EXIT CLEANLY if we've crossed into a new non-race day
+            if not get_today_fixture():
+                print(f"[{now}] War Room shutting down: no longer a race day.")
+                await telegram_service.send_message("🌙 *War Room*: Race day complete. Shutting down.")
+                break
+
+            # REFRESH STATE: Re-read state in every loop iteration to ensure shared sync
+            state = load_scheduler_state()
+
+            for r_no, j_time in schedule.items():
+                if str(r_no) in state["audited_races"]:
+                    continue
+
+                # Simple HKT countdown (e.g. j_time = "13:00")
+                try:
+                    j_dt = datetime.strptime(j_time.strip().replace(" ",""), "%H:%M")
+                    now_dt = datetime.strptime(hkt_now, "%H:%M")
+                    diff_min = (j_dt - now_dt).total_seconds() / 60
+
+                    # 0. LIVE ODDS INGESTION (Every 3 mins if within T-25)
+                    # We use a state check to prevent hammering the browser
+                    if 0 <= diff_min <= 25:
+                        last_scrape = state.get(f"last_scrape_R{r_no}", 0)
+                        if (now.timestamp() - last_scrape) > 180: # 3 minutes
+                            print(f"[INGEST] Refreshing live odds for R{r_no}...")
+                            await ingest.capture_snapshot(today_iso, int(r_no), venue)
+                            state[f"last_scrape_R{r_no}"] = now.timestamp()
+                            save_scheduler_state(state)
+
+
+                    # FINAL WAR ROOM VERDICT: T-20 to T-10 window
+                    if 10 <= diff_min <= 20:
+                        final_key = f"final_verdict_R{r_no}"
+                        if not state.get(final_key):
+                            # Pre-mark to prevent duplicate firing from subsequent loop iterations
+                            state[final_key] = True
+                            save_scheduler_state(state)
+                            task = asyncio.create_task(run_final_war_room_verdict(r_no, today_iso, venue, j_time))
+                            task.add_done_callback(
+                                lambda t, r=r_no: print(f"[ERROR] War Room verdict R{r} raised: {t.exception()}")
+                                if t.exception() else None
+                            )
+                except Exception as e:
+                    print(f"[WARN] Schedule parse error for R{r_no} ({j_time}): {e}")
+
+            # 2. Check for Post-Race Learning (23:15 HKT)
+            # state is already disk-fresh from load_scheduler_state() above (line 457)
+            if now.hour == 23 and now.minute >= 15 and not state.get("learned_today"):
+                success = await run_learn(venue)
+                if success:
+                    state["learned_today"] = True
+                    save_scheduler_state(state)
+
+            # Every 60 seconds
+            print(f"[{now.strftime('%H:%M:%S')}] Polling market for anomalies...")
+            await asyncio.sleep(60)
+    finally:
+        print(f"[{datetime.now(HKT)}] Cleaning up browser...")
+        try:
+            await ingest.browser_mgr.stop()
+        except Exception as e:
+            print(f"[WARN] Browser cleanup failed: {e}")
+
+async def run_scrape(venue: str = None):
+    """
+    Triggers the racecard scraper for all races on today's meeting.
+    Called by --noon mode to fetch racecard data before predictions.
+    """
+    fxt = get_today_fixture()
+    if not fxt:
+        print("[SCRAPE] No fixture today, skipping scrape.")
+        return
+    v = venue or fxt["venue"]
+    print(f"[{datetime.now(HKT)}] --- STARTING NOON RACECARD SCRAPE ({v}) ---")
+    today_iso = datetime.now(HKT).strftime("%Y-%m-%d")
+    script = BASE_DIR / "scripts" / "smart_racecard_fetcher.py"
+    if not script.exists():
+        print(f"[SCRAPE] ERROR: smart_racecard_fetcher.py not found at {script}")
+        return
+    retcode, stdout, stderr = await run_async_command(
+        [PYTHON_EXEC, str(script), "--date", today_iso, "--venue", v],
+        "SCRAPE"
+    )
+    if retcode == 0:
+        print(f"[SCRAPE] Racecards fetched successfully for {v}.")
+    else:
+        print(f"[SCRAPE] ERROR: Racecard fetch failed.\n{stderr[:200]}")
 
 async def check_mempalace():
     """Verify connectivity to the MemPalace vector store."""
