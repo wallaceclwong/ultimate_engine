@@ -50,8 +50,12 @@ def save_disk_alert_time(dt):
                 state = json.load(f)
         state["last_disk_alert"] = dt.isoformat()
         os.makedirs(STATE_FILE.parent, exist_ok=True)
-        with open(STATE_FILE, "w") as f:
+        tmp = STATE_FILE.with_suffix(".tmp")
+        with open(tmp, "w") as f:
             json.dump(state, f)
+            f.flush()
+            os.fsync(f.fileno())
+        os.replace(tmp, STATE_FILE)
     except OSError: pass
 
 def get_today_fixture():

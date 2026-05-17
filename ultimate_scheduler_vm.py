@@ -117,9 +117,14 @@ def load_scheduler_state():
     return default_state
 
 def save_scheduler_state(state):
+    """Atomically write scheduler state — write to temp then os.replace."""
     os.makedirs(STATE_FILE.parent, exist_ok=True)
-    with open(STATE_FILE, "w") as f:
+    tmp = STATE_FILE.with_suffix(".tmp")
+    with open(tmp, "w") as f:
         json.dump(state, f, indent=2)
+        f.flush()
+        os.fsync(f.fileno())
+    os.replace(tmp, STATE_FILE)
 
 def get_dynamic_schedule():
     """Reads all racecard files for today to build a jump-time map."""

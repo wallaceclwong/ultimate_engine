@@ -18,12 +18,15 @@ from pathlib import Path
 import lightgbm as lgb
 import xgboost as xgb
 from catboost import CatBoost
+from loguru import logger
 # ─── Config ──────────────────────────────────────────────────────────────────
 BASE_DIR      = Path(__file__).parent.absolute()
 
 # Ensure local imports within ultimate_engine work
 if str(BASE_DIR) not in sys.path:
     sys.path.append(str(BASE_DIR))
+
+from services.data_validation import validate_racecard
 
 MODEL_DIR     = BASE_DIR / "models"
 DATA_DIR      = BASE_DIR / "data"
@@ -114,6 +117,13 @@ def predict_race(date_str, venue, race_num):
 
     with open(rc_file, 'r', encoding='utf-8') as f:
         rc = json.load(f)
+
+    valid, issues = validate_racecard(rc)
+    if not valid:
+        logger.error(f"R{race_num}: racecard validation FAILED — skipping prediction")
+        for issue in issues:
+            logger.error(f"  {issue}")
+        return None
 
     field_size = len(rc.get("horses", []))
     rows = []

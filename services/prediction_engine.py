@@ -13,6 +13,7 @@ sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from config.settings import Config
 from models.schemas import Prediction
 from services.firestore_service import FirestoreService
+from services.data_validation import validate_racecard
 # Stubs for missing services (Temporary for verification)
 class SynergyService:
     def get_synergy(self, j, t): return {}
@@ -231,7 +232,16 @@ class PredictionEngine:
         elif racecard_path.exists():
             with open(racecard_path, "r", encoding="utf-8") as f:
                 data["racecard"] = json.load(f)
-        
+
+        # Validate racecard before feeding into the prediction pipeline
+        if data["racecard"]:
+            valid, issues = validate_racecard(data["racecard"])
+            if not valid:
+                logger.error(f"R{race_no}: racecard validation FAILED — skipping prediction")
+                for issue in issues:
+                    logger.error(f"  {issue}")
+                data["racecard"] = {}  # clear invalid data so callers skip gracefully
+
         if results_path.exists():
             with open(results_path, "r", encoding="utf-8") as f:
                 data["results"] = json.load(f)
