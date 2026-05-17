@@ -348,44 +348,15 @@ async def main():
         return
 
     print("\n" + "="*60)
-    print(f"  STEP 6: AI-NATIVE TRIPLE CONSENSUS AUDITS")
+    print(f"  VALUE BETS FOUND: {len(tips)}")
     print("="*60)
-
-    # Track bets sent for the daily summary
-    bets_sent = []
 
     for _, tip in tips.iterrows():
         tier_icon = "[PRIMARY]" if tip["tier"] == "PRIMARY" else "[SECONDARY]"
-        print(f"\n[Audit] {tier_icon} {tip['tier']} | R{tip['race']} | {tip['horse_name']} (#{tip['horse_no']})")  
+        print(f"\n  {tier_icon} R{int(tip['race'])}: #{_safe_horse_no(tip['horse_no'])} {tip['horse_name']}")
         print(f"      Rank: {tip['rank']} | Odds: {tip['win_odds']:.1f} | Fair: {tip['fair_odds']:.1f} | Edge: {tip['value_edge']:+.1%}")
 
-        race_data = next(r for r in full_results if (r["race"] == tip["race"]).all())
-
-        # ── Store pick for daily summary (Muted individual Telegram alert) ──
-        pred_file = DATA_DIR / "predictions" / f"prediction_{date_target}_{venue_target}_R{int(tip['race'])}.json"
-        try:
-            pred_data = json.loads(pred_file.read_text())
-            bets_sent.append((int(tip['race']), tip['horse_name'], tip['win_odds'], tip['value_edge']))
-        except Exception as e:
-            print(f"[WARN] Could not parse prediction file for R{int(tip['race'])}: {e}")
-
-        # ── DeepSeek-R1 Reasoning Audit (Internal only now) ──
-        verdict, reasoning = await consensus_agent.get_consensus(race_data, tip["horse_no"])
-
-        icon = "[CONFIRMED]" if verdict == "CONFIRMED" else "[CAUTION]" if verdict == "CAUTION" else "[VETO]"
-        print(f"      {icon} CONV: {verdict}")
-        print(f"      REASON: {reasoning}")
-        print("-" * 40)
-
-    # ── Summary: print locally only — War Room Verdicts are the sole Telegram channel ──
-    if bets_sent:
-        print(f"\n[PREDICT] Daily Bet Sheet: {date_target} {venue_target}")
-        for r, name, odds, edge in bets_sent:
-            print(f"  R{r}: #{name} @ {odds:.1f} (edge {edge:+.1%})")
-        print(f"  Total picks: {len(bets_sent)}/{len(full_results)} races")
-    else:
-        print(f"[PREDICT] No value bets found for {date_target} {venue_target}. All {len(full_results)} races below threshold.")
-
+    print(f"\n[PREDICT] Predictions saved to disk. War Room will audit at T-15 per race.")
     print("="*60)
 
 if __name__ == "__main__":
