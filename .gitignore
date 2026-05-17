@@ -22,7 +22,6 @@ data/weather/
 data/bias_correction.json
 data/scheduler_state.json
 data/sire_mapping.json
-data/stewards_red_flags.json
 data/synergy_matrix.json
 data/tuning_dataset.jsonl
 data/pedigree_cache.json

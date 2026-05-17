@@ -1,0 +1,77 @@
+{
+  "description": "Pattern-matching rules for HKJC stewards report red-flag detection. Patterns are case-insensitive regex applied to incident text.",
+  "rules": [
+    {
+      "category": "bled_both_nostrils",
+      "patterns": ["bled from both nostrils", "bled both nostrils"],
+      "severity": "critical",
+      "confidence_reduction": 0.40
+    },
+    {
+      "category": "bled_trachea",
+      "patterns": ["blood in the (?:horse'?s? )?trachea", "substantial amount of blood"],
+      "severity": "critical",
+      "confidence_reduction": 0.30
+    },
+    {
+      "category": "barrier_trial_required",
+      "patterns": ["required to perform satisfactorily in a barrier trial", "barrier trial.*before being allowed to race", "subjected to an official veterinary examination"],
+      "severity": "critical",
+      "confidence_reduction": 0.25
+    },
+    {
+      "category": "respiratory",
+      "patterns": ["respiratory distress", "roarer", "noise.*respiratory", "breathing.*difficult", "throat.*condition"],
+      "severity": "high",
+      "confidence_reduction": 0.20
+    },
+    {
+      "category": "lameness",
+      "patterns": ["lame (?:left|right) (?:fore|hind)", "lame.*leg", "veterinary advice.*lame", "was found to be lame", "lameness"],
+      "severity": "critical",
+      "confidence_reduction": 0.35
+    },
+    {
+      "category": "wide_without_cover",
+      "patterns": ["raced wide without cover", "raced (?:3|4|5|three|four|five) wide without cover", "wide.*no cover", "caught wide.*stages"],
+      "severity": "high",
+      "confidence_reduction": 0.15
+    },
+    {
+      "category": "checked_severely",
+      "patterns": ["severely checked", "badly hampered", "checked.*approaching.*turn", "checked.*home straight", "hampered.*severely"],
+      "severity": "high",
+      "confidence_reduction": 0.15
+    },
+    {
+      "category": "slow_to_begin",
+      "patterns": ["slow to begin", "began awkwardly", "missed the start", "slow(?:ly)? into stride", "began only fairly"],
+      "severity": "moderate",
+      "confidence_reduction": 0.10
+    },
+    {
+      "category": "crowded_start",
+      "patterns": ["crowded (?:at|shortly after) the start", "bumped (?:at|shortly after) the start", "became unbalanced.*start"],
+      "severity": "moderate",
+      "confidence_reduction": 0.08
+    },
+    {
+      "category": "keen_early",
+      "patterns": ["raced keenly", "over-raced", "pulled hard", "refused to settle"],
+      "severity": "low",
+      "confidence_reduction": 0.05
+    },
+    {
+      "category": "failed_to_run_on",
+      "patterns": ["failed to run on", "did not run on", "weakened.*home straight", "gave ground.*home straight", "compounded.*home straight"],
+      "severity": "moderate",
+      "confidence_reduction": 0.12
+    },
+    {
+      "category": "eased_down",
+      "patterns": ["eased down", "was eased.*home straight", "not ridden out", "not persevered with"],
+      "severity": "moderate",
+      "confidence_reduction": 0.12
+    }
+  ]
+}

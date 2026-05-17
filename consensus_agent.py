@@ -67,10 +67,11 @@ class ConsensusAgent:
         wait=wait_exponential(multiplier=1, min=4, max=10),
         retry=retry_if_exception_type((APIError, APITimeoutError))
     )
-    async def get_consensus(self, race_data, tip_horse_no, market_context=None):
+    async def get_consensus(self, race_data, tip_horse_no, market_context=None, stewards_context=None):
         """
         Runs a Multi-Agent 'War Room' Audit on the provided tip.
-        Supports optional live market_context for late-money detection.
+        Supports optional live market_context for late-money detection
+        and stewards_context for historical incident lookups.
         """
         # Find the horse being tipped
         df_target = race_data[race_data["horse_no"].astype(str) == str(tip_horse_no)]
@@ -113,7 +114,23 @@ class ConsensusAgent:
             trend = market_context.get('trend', 'stable')
             market_str = f"LATE MONEY TREND: {trend.upper()} ({movement:+.1%})."
 
-        # 4. Market Momentum Context
+        # 4. Stewards Intelligence (historical incident lookup)
+        stewards_str = "No historical stewards data available."
+        if stewards_context and stewards_context.get("has_history"):
+            incident_lines = []
+            for inc in stewards_context.get("recent_incidents", []):
+                incident_lines.append(
+                    f"  [{inc['date']}] R{inc.get('race_id','?')} — #{inc.get('horse_no','?')} "
+                    f"Finished {inc.get('finish','?')} — {inc['incident']}"
+                )
+            stewards_str = "RECENT STEWARDS INCIDENTS:\n" + "\n".join(incident_lines)
+            flags = stewards_context.get("red_flags", [])
+            if flags:
+                flag_lines = [f"  - {f['category']} (severity: {f['severity']}, race: {f.get('date','?')})" for f in flags]
+                stewards_str += "\n\nRED FLAGS:\n" + "\n".join(flag_lines)
+            stewards_str += f"\n\nOVERALL RISK: {stewards_context.get('risk', 'unknown').upper()}"
+
+        # 5. Prompt
         prompt = f"""
 Act as the 'LUNAR LEAP' STRATEGIC ADVISORY for HKJC.
 Audit the following High-Value Trade using a MULTI-AGENT simulation.
@@ -128,6 +145,9 @@ Audit the following High-Value Trade using a MULTI-AGENT simulation.
 ### MARKET MOMENTUM (Live T-15 Sniff)
 {market_str}
 
+### STEWARDS INTELLIGENCE (Historical Incident Patterns)
+{stewards_str}
+
 ### FIELD CONTEXT
 {json.dumps(field_context[:14], indent=2)}
 
@@ -135,7 +155,8 @@ Audit the following High-Value Trade using a MULTI-AGENT simulation.
 1. **AGENT TACTICIAN**: Analyze the 'Pace' and 'Draw'. Can this horse stay clear or will it be trapped?
 2. **AGENT GENETICIST**: Analyze the Sire/Dam. Is this horse bred for {target.get('distance', 'N/A')}m on {target.get('track_type', 'N/A')} conditions today?
 3. **AGENT MARKET-ANALYST**: Analyze the LATE MONEY TREND. Is this 'Smart Money' (informed) or 'Market Noise' (emotional)?
-4. **AGENT VALUE-ORACLE**: Compare Public Odds vs Fair Odds. Is the profit margin worth the risk?
+4. **AGENT STEWARD**: Review historical stewards incidents. Do past red flags (bleeding, lameness, barrier trials, respiratory) indicate elevated risk?
+5. **AGENT VALUE-ORACLE**: Compare Public Odds vs Fair Odds. Is the profit margin worth the risk?
 
 ### OUTPUT FORMAT:
 Respond with a JSON block followed by a brief 'Expert Note'.

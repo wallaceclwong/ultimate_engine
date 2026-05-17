@@ -8,6 +8,8 @@ from pathlib import Path
 import pandas as pd
 from telegram_service import telegram_service
 from consensus_agent import consensus_agent
+from services.live_odds_monitor import get_live_odds_monitor
+from services.stewards_lookup import get_stewards_lookup
 import pytz
 
 # Configuration
@@ -265,7 +267,34 @@ async def run_final_war_room_verdict(r_no, today_iso, venue, j_time):
         wet_note = " | ⚠️ WET TRACK (reduced confidence)" if is_wet else ""
         print(f"[FINAL VERDICT] R{r_no}: #{top_horse} {horse_name} CONFIRMED (edge={edge:+.1%}, odds={odds:.1f}){wet_note}. Firing pre-race audit...")
 
-        verdict, reasoning = await consensus_agent.get_consensus(df, top_horse)
+        # ── Live odds movement (late money detection) ──────────────────────
+        market_context = None
+        try:
+            odds_monitor = get_live_odds_monitor()
+            state = odds_monitor.update_race_state(today_iso, venue, r_no)
+            if state and top_horse in state.movements:
+                m = state.movements[top_horse]
+                market_context = {"movement": m.movement_pct, "trend": m.trend}
+                print(f"[LATE MONEY] #{top_horse}: {m.trend} ({m.movement_pct:+.1%}) "
+                      f"from {m.initial_odds} -> {m.current_odds}")
+        except Exception as e:
+            print(f"[LATE MONEY] Skipped — {e}")
+
+        # ── Stewards historical incident lookup ────────────────────────────
+        stewards_context = None
+        try:
+            stewards_lookup = get_stewards_lookup()
+            stewards_context = stewards_lookup.get_horse_risk_profile(horse_name)
+            if stewards_context.get("has_history"):
+                risk = stewards_context.get("risk", "?")
+                n_inc = len(stewards_context.get("recent_incidents", []))
+                print(f"[STEWARDS] {horse_name}: risk={risk}, {n_inc} recent incidents")
+        except Exception as e:
+            print(f"[STEWARDS] Skipped — {e}")
+
+        verdict, reasoning = await consensus_agent.get_consensus(
+            df, top_horse, market_context, stewards_context
+        )
 
         icon = "🏆" if ("Grade [S]" in reasoning or "Grade [A]" in reasoning) else "⚠️"
         await telegram_service.send_message(
