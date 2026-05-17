@@ -1,3 +1,0 @@
-LESSON LEARNT RETROSPECTIVE FOR HELENE FEELING on 2026-05-03:
-Our model highly tipped this horse but it failed (finished 4).
-Analysis: Despite a favourable inside draw (#2) and high EV, the model likely overestimated the horse’s ability to handle yielding ground, where a moderate early pace and compromised traction often negate positional advantages. The jockey's poor strike rate (0.08) further undermined confidence, as a low-confidence rider may struggle to execute the tactical patience required on a soft surface. Ultimately, the statistical edge was eroded by a combination of track-specific stamina demands and in-race positioning that the model failed to weight correctly.

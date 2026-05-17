@@ -1,6 +1,0 @@
-PEDIGREE FOR HORSE ID J193:
-Sire: Churchill
-Dam: Jira
-Origin: IRE / 5
-Color: Unknown
-Import Type: PP

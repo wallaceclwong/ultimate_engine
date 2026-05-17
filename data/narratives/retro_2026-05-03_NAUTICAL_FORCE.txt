@@ -1,3 +1,0 @@
-LESSON LEARNT RETROSPECTIVE FOR NAUTICAL FORCE on 2026-05-03:
-Our model highly tipped this horse but it failed (finished 4).
-Analysis: The yielding track likely negated Nautical Force's preferred running style, as softer ground often penalizes horses lacking proven form on such surfaces—the model may have overvalued his odds without accounting for this. Additionally, the wide draw (7) in a yielding field often forces a horse to expend extra energy early to secure position, compromising late stamina and explaining the fourth-place finish. Finally, the jockey's modest record (0.104 win rate) suggests limited ability to adapt tactically to the demanding conditions, a factor the statistical model failed to weight adequately.

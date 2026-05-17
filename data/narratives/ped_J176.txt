@@ -1,6 +1,0 @@
-PEDIGREE FOR HORSE ID J176:
-Sire: Deep Field
-Dam: L'Elu
-Origin: AUS / 5
-Color: Unknown
-Import Type: PPG

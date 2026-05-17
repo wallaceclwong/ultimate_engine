@@ -1,3 +1,0 @@
-LESSON LEARNT RETROSPECTIVE FOR NUMBERS on 2026-04-26:
-Our model highly tipped this horse but it failed (finished 7).
-Analysis: The horse's low jockey rating (0.063) likely undermined its ability to execute a winning tactical plan, especially from draw 4 on a Good track where early positioning and pace judgment are critical. Despite favourable odds, the jockey may have struggled to find a clean run or conserve energy, leading to a flat finish. Statistical models often overlook subtle form factors like jockey-tactical synergy, which can outweigh raw probability in these competitive fields.

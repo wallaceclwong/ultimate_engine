@@ -1,3 +1,0 @@
-LESSON LEARNT RETROSPECTIVE FOR CHARMING LEGEND on 2026-05-03:
-Our model highly tipped this horse but it failed (finished 12).
-Analysis: The wide draw (#11) on yielding ground likely forced this longshot to race wide without cover, burning energy early and compromising its finishing kick—a common tactical disadvantage on softer surfaces. Additionally, the jockey's low win rate (0.069) suggests an inability to adapt to the demanding conditions, possibly failing to settle the horse or find a better inside path. This highlights the need to incorporate draw bias and jockey-track condition interaction into the model, as high odds alone cannot compensate for unfavourable tactical and footing factors.

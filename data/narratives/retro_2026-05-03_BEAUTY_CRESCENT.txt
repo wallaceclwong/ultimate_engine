@@ -1,4 +1,0 @@
-LESSON LEARNT RETROSPECTIVE FOR BEAUTY CRESCENT on 2026-05-03:
-Our model highly tipped this horse but it failed (finished 14).
-Analysis: **Lesson Learnt:**  
-BEAUTY CRESCENT’s high EV was inflated by long-odds value, but the model failed to account for how a yielding track neutralizes its preferred running style—drawn wide (4) on soft ground often forces early exertion, compromising stamina. The jockey’s low win rate (0.065) also suggests limited ability to adapt tactics on a demanding surface, which the model’s probability estimate did not sufficiently penalize. Today’s 14th-place finish confirms that extreme odds on yielding ground require deeper scrutiny of horse-specific track handling, not just statistical value.

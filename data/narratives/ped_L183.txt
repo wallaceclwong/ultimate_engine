@@ -1,6 +1,0 @@
-PEDIGREE FOR HORSE ID L183:
-Sire: Toronado
-Dam: Apple Chicha
-Origin: FR / 3
-Color: Unknown
-Import Type: PPG

@@ -1,6 +1,0 @@
-PEDIGREE FOR HORSE ID K250:
-Sire: Zoustar
-Dam: Strata Lady
-Origin: AUS / 4
-Color: Unknown
-Import Type: PPG

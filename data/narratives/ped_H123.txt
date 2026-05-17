@@ -1,6 +1,0 @@
-PEDIGREE FOR HORSE ID H123:
-Sire: Smart Missile
-Dam: Five Card Charlie
-Origin: AUS / 6
-Color: Unknown
-Import Type: PP

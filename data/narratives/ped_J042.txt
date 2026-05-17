@@ -1,6 +1,0 @@
-PEDIGREE FOR HORSE ID J042:
-Sire: Brazen Beau
-Dam: Intendment
-Origin: AUS / 5
-Color: Unknown
-Import Type: PPG

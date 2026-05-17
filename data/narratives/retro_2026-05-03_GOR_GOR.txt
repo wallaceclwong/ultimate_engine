@@ -1,3 +1,0 @@
-LESSON LEARNT RETROSPECTIVE FOR GOR GOR on 2026-05-03:
-Our model highly tipped this horse but it failed (finished 11).
-Analysis: **Lesson Learnt:** The wide draw (11) on a **yielding** surface likely forced Gor Gor (#10) into a wide, energy-sapping trip, negating any theoretical value from the inflated odds. Yielding ground typically amplifies draw bias, favouring inside positions, while this horse's jockey (win rate 6.4%) lacks the tactical edge to overcome such a disadvantage from that gate. The model’s expected win probability of 0.05 correctly identified a longshot, but failed to penalise the track-condition × draw interaction—a key factor that could have reduced the true EV closer to fair value.

@@ -1,6 +1,0 @@
-PEDIGREE FOR HORSE ID L199:
-Sire: Churchill
-Dam: Latest Plan
-Origin: AUS / 3
-Color: Unknown
-Import Type: PPG

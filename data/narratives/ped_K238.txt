@@ -1,6 +1,0 @@
-PEDIGREE FOR HORSE ID K238:
-Sire: Gingerbread Man
-Dam: Sonata
-Origin: AUS / 4
-Color: Unknown
-Import Type: PPG

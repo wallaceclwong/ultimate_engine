@@ -1,6 +1,0 @@
-PEDIGREE FOR HORSE ID J531:
-Sire: Starspangledbanner
-Dam: Wangaala
-Origin: AUS / 6
-Color: Unknown
-Import Type: PP

@@ -1,6 +1,0 @@
-PEDIGREE FOR HORSE ID J345:
-Sire: Capitalist
-Dam: Madame Veuve
-Origin: AUS / 4
-Color: Unknown
-Import Type: PPG

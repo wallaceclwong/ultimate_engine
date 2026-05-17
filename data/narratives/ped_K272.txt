@@ -1,6 +1,0 @@
-PEDIGREE FOR HORSE ID K272:
-Sire: Frosted
-Dam: Infra Dig
-Origin: AUS / 4
-Color: Unknown
-Import Type: PPG

@@ -1,6 +1,0 @@
-PEDIGREE FOR HORSE ID J325:
-Sire: Havana Gold
-Dam: Gladiatrix
-Origin: GB / 5
-Color: Unknown
-Import Type: PPG

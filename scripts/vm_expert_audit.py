@@ -22,7 +22,7 @@ def audit():
     
     # 2. Process Check
     print("\n[PROCESSES] Active Services:")
-    rc, out, err = run_cmd("ps aux | grep -E 'python|docker|mempalace' | grep -v grep")
+    rc, out, err = run_cmd("ps aux | grep -E 'python|docker' | grep -v grep")
     if out:
         for line in out.split('\n')[:5]:
             print(f"  - {line}")
@@ -48,16 +48,7 @@ def audit():
     else:
         print("  [ERROR] Data Directory MISSING!")
 
-    # 4. Expert: MemPalace
-    print("\n[EXPERT] MemPalace Status:")
-    venv_py = "/root/mempalace_venv/bin/python"
-    rc, out, err = run_cmd(f"{venv_py} -m mempalace.cli status")
-    if rc == 0:
-        print(f"  - {out}")
-    else:
-        print(f"  [ERROR] MemPalace check failed: {err}")
-
-    # 5. Expert: DeepSeek Connectivity
+    # 4. Expert: DeepSeek Connectivity
     print("\n[EXPERT] AI Reasoning (DeepSeek) Connectivity:")
     # Simple check for the consensus_agent health via python
     check_code = "import asyncio; from consensus_agent import consensus_agent; print(asyncio.run(consensus_agent.check_health()))"

@@ -1,3 +1,0 @@
-LESSON LEARNT RETROSPECTIVE FOR RIDING TOGETHER on 2026-05-03:
-Our model highly tipped this horse but it failed (finished 4).
-Analysis: Lesson Learnt: The model overestimated the value of RIDING TOGETHER's long odds on yielding ground, where the wide draw (#10) likely forced the horse to race wide and expend extra energy, nullifying any potential edge. Yielding conditions often favour horses with a proven affinity for soft going or a tactical inside run, neither of which this horse had given its low jockey win rate (0.064) and lack of class evidence. The 4th-place finish suggests the statistical edge was eroded by track bias and positional disadvantage, highlighting that high EV based on raw odds alone can be misleading without factoring in draw-treadwork interactions.

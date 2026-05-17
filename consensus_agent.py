@@ -62,14 +62,6 @@ class ConsensusAgent:
             except (json.JSONDecodeError, OSError):
                 self.pedigree_cache = {}
 
-    def _has_content(self, result: str) -> bool:
-        """Check if a memory search returned meaningful content (not just headers/empty)."""
-        if not result or not result.strip():
-            return False
-        # Accept any result with reasonable content (at least one line beyond headers)
-        lines = [l for l in result.splitlines() if l.strip()]
-        return len(lines) >= 2
-
     @retry(
         stop=stop_after_attempt(3),
         wait=wait_exponential(multiplier=1, min=4, max=10),
@@ -121,45 +113,7 @@ class ConsensusAgent:
             trend = market_context.get('trend', 'stable')
             market_str = f"LATE MONEY TREND: {trend.upper()} ({movement:+.1%})."
 
-        # 4. Historical Context — 5 parallel async memory searches
-        from services.memory_service import memory_service
-        memory_str = "No specific historical intelligence found in Palace."
-        try:
-            trainer_name = target.get('trainer', 'Unknown')
-            jockey_name = target.get('jockey', 'Unknown')
-            venue = target.get('venue', 'HV')
-            dist = target.get('distance', 1200)
-            horse_name = target['horse_name']
-
-            results = await asyncio.gather(
-                memory_service.search_async(f"{horse_name} performance history"),
-                memory_service.search_async(f"{trainer_name} and {jockey_name} combination Hong Kong ROI"),
-                memory_service.search_async(f"{venue} {dist}m track characteristics and bias"),
-                memory_service.search_async(f"{horse_name} LESSON LEARNT retrospective failed prediction"),
-                memory_service.search_async(f"PEDIGREE for horse {horse_id} sired by {pedigree['sire']}"),
-                return_exceptions=True
-            )
-
-            mem_bits = []
-            labels = [
-                "--- Horse Bio ---",
-                "--- Synergy Intel ---",
-                "--- Track Intel ---",
-                "--- FAIL RETROSPECTIVE ---",
-                "--- PEDIGREE INTEL ---",
-            ]
-            for i, (label, result) in enumerate(zip(labels, results)):
-                if isinstance(result, Exception):
-                    print(f"[MEMORY WARN] Search {i} failed: {result}")
-                elif self._has_content(result):
-                    mem_bits.append(f"{label}\n{result}")
-
-            if mem_bits:
-                memory_str = "\n".join(mem_bits)
-        except Exception as e:
-            print(f"[MEMORY WARN] Multi-search failed: {e}")
-
-        # 5. The 'War Room' Multi-Agent Prompt
+        # 4. Market Momentum Context
         prompt = f"""
 Act as the 'LUNAR LEAP' STRATEGIC ADVISORY for HKJC.
 Audit the following High-Value Trade using a MULTI-AGENT simulation.
@@ -170,9 +124,6 @@ Audit the following High-Value Trade using a MULTI-AGENT simulation.
 - Lineage: Sire: {pedigree['sire']} | Dam: {pedigree['dam']}
 - Stats: Odds {target['win_odds']:.1f} (Fair: {target.get('fair_odds', 'N/A')}), Mult: {target.get('value_mult', 'N/A')}x
 - Logistics: Draw {target['draw']}, Race {target.get('race', 'N/A')} at {target.get('venue', 'N/A')}
-
-### LUNAR INTELLIGENCE (Historical Memory)
-{memory_str}
 
 ### MARKET MOMENTUM (Live T-15 Sniff)
 {market_str}

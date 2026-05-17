@@ -1,6 +1,0 @@
-PEDIGREE FOR HORSE ID L328:
-Sire: Tassort
-Dam: Usena
-Origin: AUS / 3
-Color: Unknown
-Import Type: PPG

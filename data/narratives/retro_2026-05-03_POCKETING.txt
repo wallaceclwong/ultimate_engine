@@ -1,3 +1,0 @@
-LESSON LEARNT RETROSPECTIVE FOR POCKETING on 2026-05-03:
-Our model highly tipped this horse but it failed (finished 9).
-Analysis: Despite the high EV from odds of 24.0, the model likely underestimated the severe disadvantage of draw 11 on a yielding track, where outside barriers often force a wide trip and extra ground loss. The jockey’s poor recent record (0.1037 win rate) also proved costly, as tactical handling on soft ground requires precise pace judgment—something a struggling jockey may lack. Ultimately, the statistical value was eroded by the combination of an unfavorable post and track condition that magnified the horse’s and rider’s limitations.

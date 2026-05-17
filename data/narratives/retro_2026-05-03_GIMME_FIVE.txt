@@ -1,3 +1,0 @@
-LESSON LEARNT RETROSPECTIVE FOR GIMME FIVE on 2026-05-03:
-Our model highly tipped this horse but it failed (finished 13).
-Analysis: Despite the statistical edge, the model failed to account for the severe impact of a **Yielding** track on a horse with a poor jockey rating (0.076). On soft ground, tactical positioning from draw 6 often requires a strong ride to avoid tiring early, and GIMME FIVE’s low-rated jockey likely couldn’t manage the energy-sapping conditions, leading to the distant 13th-place finish. This reinforces that a high EV derived from odds alone can be nullified when key track-specific handling and jockey ability are not sufficiently weighted.

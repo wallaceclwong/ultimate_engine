@@ -1,6 +1,0 @@
-PEDIGREE FOR HORSE ID J058:
-Sire: Fastnet Rock
-Dam: Moqueen
-Origin: AUS / 5
-Color: Unknown
-Import Type: PPG

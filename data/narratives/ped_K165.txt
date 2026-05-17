@@ -1,6 +1,0 @@
-PEDIGREE FOR HORSE ID K165:
-Sire: Fastnet Rock
-Dam: Orangey Red
-Origin: IRE / 4
-Color: Unknown
-Import Type: PPG

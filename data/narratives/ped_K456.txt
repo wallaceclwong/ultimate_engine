@@ -1,6 +1,0 @@
-PEDIGREE FOR HORSE ID K456:
-Sire: So You Think
-Dam: Andresa
-Origin: AUS / 4
-Color: Unknown
-Import Type: ISG

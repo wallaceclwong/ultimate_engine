@@ -1,6 +1,0 @@
-PEDIGREE FOR HORSE ID J020:
-Sire: Fiorente
-Dam: Socarada
-Origin: AUS / 6
-Color: Unknown
-Import Type: PP

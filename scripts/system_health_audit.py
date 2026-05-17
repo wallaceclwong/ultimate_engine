@@ -46,13 +46,13 @@ async def run_audit():
     except Exception as e:
         log(f"Firestore Sync: FAILED ({e})", "[FAIL]")
 
-    # 3. Memory Warehouse (MemPalace)
-    log("Checking MemPalace Connectivity...")
+    # 3. Pedigree Cache
+    log("Checking Pedigree Cache...")
     try:
         consensus_agent.reload_pedigree()
-        log("MemPalace: ONLINE (Pedigree cache accessible)", "[PASS]")
+        log("Pedigree: ONLINE (cache accessible)", "[PASS]")
     except Exception as e:
-        log(f"MemPalace: ERROR ({e})", "[FAIL]")
+        log(f"Pedigree: ERROR ({e})", "[FAIL]")
 
     # 4. Data Integrity (JSON Predictions)
     log("Checking Data Integrity (Today's Predictions)...")

@@ -1,6 +1,0 @@
-PEDIGREE FOR HORSE ID L124:
-Sire: Trapeze Artist
-Dam: Satellites
-Origin: AUS / 4
-Color: Unknown
-Import Type: PP

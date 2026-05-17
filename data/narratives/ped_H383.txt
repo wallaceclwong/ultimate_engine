@@ -1,6 +1,0 @@
-PEDIGREE FOR HORSE ID H383:
-Sire: Deep Field
-Dam: Certitude
-Origin: AUS / 6
-Color: Unknown
-Import Type: PPG

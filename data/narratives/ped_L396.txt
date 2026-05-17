@@ -1,6 +1,0 @@
-PEDIGREE FOR HORSE ID L396:
-Sire: Grunt
-Dam: Pickpocket
-Origin: AUS / 4
-Color: Unknown
-Import Type: PP

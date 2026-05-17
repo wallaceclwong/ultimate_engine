@@ -1,6 +1,0 @@
-PEDIGREE FOR HORSE ID H321:
-Sire: Deep Field
-Dam: Waitomo Toka
-Origin: AUS / 6
-Color: Unknown
-Import Type: PPG

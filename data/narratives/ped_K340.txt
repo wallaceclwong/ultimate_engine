@@ -1,6 +1,0 @@
-PEDIGREE FOR HORSE ID K340:
-Sire: Hellbent
-Dam: Witless
-Origin: AUS / 4
-Color: Unknown
-Import Type: PPG

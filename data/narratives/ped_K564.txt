@@ -1,6 +1,0 @@
-PEDIGREE FOR HORSE ID K564:
-Sire: Royal Mo
-Dam: Idle Hour
-Origin: SAF / 4
-Color: Unknown
-Import Type: PP

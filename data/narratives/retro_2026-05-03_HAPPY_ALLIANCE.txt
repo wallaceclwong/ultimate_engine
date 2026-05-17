@@ -1,3 +1,0 @@
-LESSON LEARNT RETROSPECTIVE FOR HAPPY ALLIANCE on 2026-05-03:
-Our model highly tipped this horse but it failed (finished 12).
-Analysis: The wide draw (14) likely compromised HAPPY ALLIANCE’s chances on a yielding track, where horses from outside stalls often expend extra energy covering ground early and fail to find a firm footing. Additionally, the jockey’s poor strike rate (0.0686) on such ground may indicate an inability to adapt to the softened surface, undermining any statistical edge the model assumed. Finally, a 143.0 odds runner with a 3% predicted win probability is inherently reliant on a fast pace or track bias that did not materialize, and the yielding condition likely neutralised any speed advantage the model accounted for.

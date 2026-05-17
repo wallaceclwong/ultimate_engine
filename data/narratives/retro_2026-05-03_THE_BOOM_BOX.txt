@@ -1,3 +1,0 @@
-LESSON LEARNT RETROSPECTIVE FOR THE BOOM BOX on 2026-05-03:
-Our model highly tipped this horse but it failed (finished 8).
-Analysis: The wide draw (#14) likely forced an unfavourable early position on the yielding track, where horses breaking wide often lose ground on a tiring surface. Additionally, the jockey's low 0.08 rating suggests limited ability to adapt the horse's stride to the soft going, compromising late speed. Thus, the model overestimated value by not penalising the combined draw and jockey factors on yielding ground.

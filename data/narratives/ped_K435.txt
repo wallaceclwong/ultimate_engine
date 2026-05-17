@@ -1,6 +1,0 @@
-PEDIGREE FOR HORSE ID K435:
-Sire: Ferrando
-Dam: Paxos
-Origin: NZ / 3
-Color: Unknown
-Import Type: PPG

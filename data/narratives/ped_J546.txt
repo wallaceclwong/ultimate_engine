@@ -1,6 +1,0 @@
-PEDIGREE FOR HORSE ID J546:
-Sire: Mendelssohn
-Dam: Joka
-Origin: AUS / 5
-Color: Unknown
-Import Type: PPG

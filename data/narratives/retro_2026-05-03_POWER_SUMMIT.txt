@@ -1,3 +1,0 @@
-LESSON LEARNT RETROSPECTIVE FOR POWER SUMMIT on 2026-05-03:
-Our model highly tipped this horse but it failed (finished 8).
-Analysis: The wide draw (#11) likely forced the horse to race wide on the yielding track, expending extra energy to maintain position, which compromised its finishing kick. Yielding ground often benefits front-runners or horses with proven stamina over longer distances, not closers from a wide gate. Additionally, the jockey's low win rate (7.88%) may reflect a lack of adaptability in such conditions, undermining the model's reliance on raw odds and expected value.

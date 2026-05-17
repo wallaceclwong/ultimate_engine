@@ -1,3 +1,0 @@
-LESSON LEARNT RETROSPECTIVE FOR JOY OF SPRING on 2026-05-03:
-Our model highly tipped this horse but it failed (finished 7).
-Analysis: Despite the high statistical value, JOY OF SPRING likely failed because the yielding track condition impeded its preferred running style—horses with a low jockey win rate (0.09) often struggle to adapt to ground that demands extra stamina and tactical patience. Draw 6 offered no positional advantage on a surface that penalizes wide or pace-pressing runs, and the horse’s form probably didn’t include a proven ability to handle soft going. The model’s expected win probability ignored the intersection of a poor jockey-track condition fit, leading to an overestimation of true value.

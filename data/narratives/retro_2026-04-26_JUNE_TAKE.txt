@@ -1,3 +1,0 @@
-LESSON LEARNT RETROSPECTIVE FOR JUNE TAKE on 2026-04-26:
-Our model highly tipped this horse but it failed (finished 8).
-Analysis: The model's high EV relied on the long odds of 28.0, but draw 7 on a Good track often disadvantages wide-drawn horses lacking early pace, as the inside rail typically carries better going. Additionally, the jockey's poor recent form (0.19 rating) suggested an inability to overcome positional trouble, leading to an eighth-place finish rather than a contended run. This highlights that statistical value derived solely from odds can mislead when tactical factors like draw bias and jockey quality under specific track conditions are not adequately weighted.

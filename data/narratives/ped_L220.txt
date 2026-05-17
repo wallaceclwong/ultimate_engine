@@ -1,6 +1,0 @@
-PEDIGREE FOR HORSE ID L220:
-Sire: Pariah
-Dam: Vergisson
-Origin: AUS / 3
-Color: Unknown
-Import Type: PP

@@ -1,3 +1,0 @@
-LESSON LEARNT RETROSPECTIVE FOR SUNLIGHT POWER on 2026-04-26:
-Our model highly tipped this horse but it failed (finished 6).
-Analysis: The model overvalued SUNLIGHT POWER's draw 3, which on a good track often leads to being trapped behind horses if not fast enough from the gate, while the jockey's poor record (0.08 win rate) likely contributed to a lack of decisive positioning. Additionally, the high odds of 10.0 suggested the market saw vulnerabilities that the EV calculation ignored, such as the horse's inability to handle the pace on a firm surface. Ultimately, the statistical model failed to account for in-race tactical dynamics and jockey execution, leading to an inflated win probability.

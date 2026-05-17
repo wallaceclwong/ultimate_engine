@@ -1,6 +1,0 @@
-PEDIGREE FOR HORSE ID L232:
-Sire: Toronado
-Dam: Samarmeteors
-Origin: AUS / 3
-Color: Unknown
-Import Type: PPG

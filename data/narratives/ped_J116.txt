@@ -1,6 +1,0 @@
-PEDIGREE FOR HORSE ID J116:
-Sire: Deep Field
-Dam: Falqueen
-Origin: AUS / 5
-Color: Unknown
-Import Type: PPG

@@ -1,6 +1,0 @@
-PEDIGREE FOR HORSE ID L256:
-Sire: Kermadec
-Dam: Zombie Queen
-Origin: AUS / 3
-Color: Unknown
-Import Type: PPG

@@ -1,6 +1,0 @@
-PEDIGREE FOR HORSE ID K293:
-Sire: Denman
-Dam: Shutout
-Origin: AUS / 4
-Color: Unknown
-Import Type: PPG

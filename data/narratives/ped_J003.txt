@@ -1,6 +1,0 @@
-PEDIGREE FOR HORSE ID J003:
-Sire: Sweynesse
-Dam: Coterie
-Origin: NZ / 5
-Color: Unknown
-Import Type: PPG

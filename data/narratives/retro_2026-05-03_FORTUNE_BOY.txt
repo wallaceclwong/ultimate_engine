@@ -1,3 +1,0 @@
-LESSON LEARNT RETROSPECTIVE FOR FORTUNE BOY on 2026-05-03:
-Our model highly tipped this horse but it failed (finished 6).
-Analysis: Despite strong pre-race value metrics, the yielding track likely negated FORTUNE BOY’s tactical advantage, as his closing kick from draw 4 would have been blunted by the slower, energy-sapping surface. The jockey’s low performance index (0.066) further highlighted a possible inability to adjust the horse’s stride or timing on soft ground—a critical flaw when a 10/1 chance needs precise handling to overcome class limitations. This case underscores that EV models must weight jockey-track condition synergy far more heavily, as a poor rider-surface fit can collapse even the most statistically favorable win probabilities.

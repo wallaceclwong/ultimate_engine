@@ -1,3 +1,0 @@
-LESSON LEARNT RETROSPECTIVE FOR PI LEGEND on 2026-05-03:
-Our model highly tipped this horse but it failed (finished 13).
-Analysis: PI LEGEND’s high EV was likely undermined by the yielding track, which contradicted any hidden preference for firmer footing—a factor the model may not have weighted heavily enough. Moreover, the horse’s low jockey win rate (0.09) suggests that at long odds, the tactical execution on a soft surface required finer handling, which was not provided. The combination of a slippery draw (5) and slow going likely forced the runner to race wider or expend excess energy early, leading to the 13th-place fade despite the statistical overlay.

@@ -95,7 +95,6 @@ sched  = BASE / "ultimate_scheduler_vm.py"
 pred_f = BASE / "predict_today.py"
 audit  = BASE / "services" / "live_audit_service.py"
 odds   = BASE / "services" / "live_odds_monitor.py"
-mem    = BASE / "services" / "memory_service.py"
 start  = BASE / "scripts"  / "pc_startup.py"
 
 chk(grep(sched,  "h_no = candidates_nos[0]"),              "scheduler : h_no extracted from candidates_nos")
@@ -107,7 +106,6 @@ chk(grep(pred_f, 'summary["rank"] == 1'),                  "predict   : rank-1 t
 chk(grep(pred_f, "win_odds\"] <= 20"),                     "predict   : odds <=20 cap active")
 chk(grep(audit,  "Path(__file__).parent.parent"),          "audit_svc : absolute features path")
 chk(grep(odds,   "Path(__file__).parent.parent"),          "odds_mon  : absolute odds_dir path")
-chk(grep(mem,    "except ImportError"),                    "mem_svc   : paramiko optional import")
 chk(grep(start,  'encoding="utf-8", errors="replace"'),   "pc_start  : UTF-8 encoding fix")
 
 # ─── 5. VM CONNECTIVITY ─────────────────────────────────────────────

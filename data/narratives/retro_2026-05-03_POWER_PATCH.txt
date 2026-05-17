@@ -1,3 +1,0 @@
-LESSON LEARNT RETROSPECTIVE FOR POWER PATCH on 2026-05-03:
-Our model highly tipped this horse but it failed (finished 10).
-Analysis: The wide draw (#14) on a yielding surface likely forced an early wide trip, costing valuable energy and momentum in the softened going. The jockey's poor historical strike rate (0.063) compounded this, as he couldn't compensate for the positional disadvantage. Ultimately, the model overestimated the horse's ability to overcome unfavorable tactical positioning and track condition bias from the outside gate.

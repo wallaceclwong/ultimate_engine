@@ -1,6 +1,0 @@
-PEDIGREE FOR HORSE ID J253:
-Sire: Complacent
-Dam: Thunderchine
-Origin: NZ / 5
-Color: Unknown
-Import Type: PPG

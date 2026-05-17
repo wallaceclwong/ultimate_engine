@@ -1,3 +1,0 @@
-LESSON LEARNT RETROSPECTIVE FOR BEAUTY GEMINI on 2026-04-26:
-Our model highly tipped this horse but it failed (finished 10).
-Analysis: The model overvalued BEAUTY GEMINI's chance, likely because its expected win probability (0.13) didn't account for the horse’s poor tactical adaptability from barrier 4 on a Good track—a surface that often favours front-runners over closers. With a jockey win rate of just 6.5%, the combination of a moderate draw and an inexperienced pilot in a compact field meant the horse was likely forced wide or held up, losing all momentum. Despite the statistical edge, the subtle track bias towards pace-setters on Good ground nullified the horse’s theoretical value, proving that raw odds and EV can’t override tactical mismatches.

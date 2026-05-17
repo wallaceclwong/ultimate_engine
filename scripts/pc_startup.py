@@ -20,7 +20,6 @@ from pathlib import Path
 
 # Add project root to sys.path
 sys.path.append(str(Path(__file__).resolve().parent.parent))
-from services.memory_service import memory_service
 from telegram_service import telegram_service
 
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
@@ -215,34 +214,12 @@ def start_local_server():
     # log("Local server started in new window.")
 
 
-async def check_mempalace():
-    """Verify connectivity to the MemPalace vector store on the VM."""
-    log("Checking MemPalace connectivity...")
-    try:
-        status = memory_service.get_status()
-        if status and "WING" in status:
-            log("  [OK] MemPalace is online and connected.")
-            return True
-        else:
-            log("  [WARN] MemPalace status empty or invalid. Check VM/Tailscale.")
-            await telegram_service.send_message("⚠️ *Lunar Heartbeat*: MemPalace is reachable but status is invalid.")
-            return False
-    except Exception as e:
-        log(f"  [ERROR] MemPalace connection failed: {e}")
-        await telegram_service.send_message(f"🚨 *Lunar Alarm*: MemPalace connection failed during startup!\n{e}")
-        return False
-
-
 def main():
     log("=" * 50)
     log("HKJC AI — Startup Check")
     log("=" * 50)
 
-    # 1. Check MemPalace Connectivity (Background Sync)
-    import asyncio
-    asyncio.run(check_mempalace())
-
-    # 2. Find upcoming meeting
+    # 1. Find upcoming meeting
     date_str, venue = find_upcoming_meeting()
     if not date_str:
         log("No upcoming meeting within 2 days. Starting server only.")

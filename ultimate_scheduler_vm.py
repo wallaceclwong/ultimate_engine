@@ -8,7 +8,6 @@ from pathlib import Path
 import pandas as pd
 from telegram_service import telegram_service
 from consensus_agent import consensus_agent
-from services.memory_service import memory_service
 import pytz
 
 # Configuration
@@ -450,25 +449,8 @@ async def run_learn(venue):
     else:
         print(f"[ERROR] Pedigree Enrichment failed: {err_p}")
 
-    # 3. Generate Narratives & Retrospectives (MemPalace Context)
-    print(f"[LEARN] Step 3: Generating MemPalace Narratives & Retrospectives...")
-    script_narrator = BASE_DIR / "scripts" / "mempalace_narrator.py"
-    script_retro = BASE_DIR / "scripts" / "generate_retrospectives.py"
-    
-    await run_async_command([PYTHON_EXEC, str(script_narrator)], "NARRATOR")
-    await run_async_command([PYTHON_EXEC, str(script_retro), today_iso, venue], "RETROSPECTIVES")
-
-    # 4. Memory Sync (MemPalace Mining)
-    from services.memory_service import memory_service
-    print(f"[LEARN] Step 4: Mining new intelligence into Palace...")
-    try:
-        memory_service.mine(str(BASE_DIR / "data"))
-        print("[LEARN] MemPalace mining complete.")
-    except Exception as e:
-        print(f"[MEMORY WARN] Mining failed: {e}")
-
-    # 5. Matrix Update (Training Data Append)
-    print(f"[LEARN] Step 5: Updating Master Matrix...")
+    # 3. Matrix Update (Training Data Append)
+    print(f"[LEARN] Step 3: Updating Master Matrix...")
     script_learn = BASE_DIR / "scripts" / "learn_today.py"
     cmd2 = [PYTHON_EXEC, str(script_learn), today_iso, venue]
     rc2, out2, err2 = await run_async_command(cmd2, "LEARN-MATRIX")
@@ -495,14 +477,12 @@ async def run_live_war_room(venue):
 
         # Check health of dependencies before starting
         ds_ok = await consensus_agent.check_health()
-        mem_ok = await check_mempalace()
 
         if not ds_ok:
-            status_msg = f"🚨 *Lunar Alert*: War Room started but DeepSeek is DOWN ❌\n- MemPalace: {'✅' if mem_ok else '⚠️ degraded (non-critical)'}"
+            status_msg = f"🚨 *Lunar Alert*: War Room started but DeepSeek is DOWN ❌"
             await telegram_service.send_message(status_msg)
         else:
-            mem_note = "✅" if mem_ok else "⚠️ degraded"
-            await telegram_service.send_message(f"📡 *Lunar War Room*: Active for {venue}.\n- DeepSeek: ✅\n- MemPalace: {mem_note}\nWaiting for Smart Money signatures...")
+            await telegram_service.send_message(f"📡 *Lunar War Room*: Active for {venue}.\n- DeepSeek: ✅\nWaiting for Smart Money signatures...")
 
         # Load dynamic schedule
         schedule = get_dynamic_schedule()
@@ -610,21 +590,6 @@ async def run_scrape(venue: str = None):
     else:
         print(f"[SCRAPE] ERROR: Racecard fetch failed.\n{stderr[:200]}")
 
-async def check_mempalace():
-    """Verify connectivity to the MemPalace vector store."""
-    print(f"[{datetime.now(HKT)}] [CHECK] Verifying MemPalace connection...")
-    try:
-        status = memory_service.get_status()
-        if status and "WING" in status:
-            print("  [OK] MemPalace is online.")
-            return True
-        else:
-            print("  [WARN] MemPalace unreachable or invalid.")
-            return False
-    except Exception as e:
-        print(f"  [ERROR] MemPalace check failed: {e}")
-        return False
-
 async def check_deepseek():
     """Verify connectivity to the DeepSeek API."""
     print(f"[{datetime.now(HKT)}] [CHECK] Verifying DeepSeek API...")
@@ -684,7 +649,6 @@ async def main():
             print("NO RACE TODAY")
         
         # Comprehensive Health Check
-        await check_mempalace()
         await check_deepseek()
             
     elif mode == "--noon":
@@ -759,15 +723,6 @@ async def main():
             await run_weather(fxt["venue"])
         else:
             print("Skipping weather intel: Not a local race day.")
-
-    elif mode == "--restday":
-        fxt = get_today_fixture()
-        if not fxt:
-            print("NON-RACE DAY DETECTED. Triggering intensive Rest Day Orchestrator...")
-            script_restday = BASE_DIR / "scripts" / "lunar_rest_day.py"
-            await run_async_command([PYTHON_EXEC, str(script_restday)], "RESTDAY")
-        else:
-            print("Today is a Race Day! Skipping deep rest-day optimizations to preserve CPU.")
 
 if __name__ == "__main__":
     mode = sys.argv[1] if len(sys.argv) > 1 else None

@@ -1,6 +1,0 @@
-PEDIGREE FOR HORSE ID H382:
-Sire: Burgundy
-Dam: Salsa
-Origin: NZ / 6
-Color: Unknown
-Import Type: PPG

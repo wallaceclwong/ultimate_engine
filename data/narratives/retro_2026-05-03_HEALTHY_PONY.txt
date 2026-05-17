@@ -1,3 +1,0 @@
-LESSON LEARNT RETROSPECTIVE FOR HEALTHY PONY on 2026-05-03:
-Our model highly tipped this horse but it failed (finished 6).
-Analysis: The yielding track likely undid HEALTHY PONY’s chances, as its previous best runs came on firmer ground—the soft surface would have sapped its acceleration out of the inside draw (#2), forcing it to fight for position early. Furthermore, the jockey’s low in-the-money rate (7.9% wins) suggests a lack of tactical judgment to compensate for the compromised footing, leaving the horse trapped wide or forced to cover extra ground. Our model’s high EV was built on static odds and win probability, but it failed to adjust for the specific disadvantage of a yielding track on a horse whose running style demands good going.

@@ -1,3 +1,0 @@
-LESSON LEARNT RETROSPECTIVE FOR WINNING BUDDIES on 2026-05-03:
-Our model highly tipped this horse but it failed (finished 7).
-Analysis: The wide draw (#13) likely compromised WINNING BUDDIES' chances on a Yielding surface, where inside speed and rail position typically hold an advantage, making it difficult to overcome the traffic. Additionally, the jockey's poor historical performance (0.063 rating) suggests an inability to adapt to the softer going or navigate from a disadvantageous post. While the odds implied value, the model underestimated the compounded negative impact of a wide draw and unfavorable track condition on a low-probability longshot.

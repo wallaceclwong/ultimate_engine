@@ -1,3 +1,0 @@
-LESSON LEARNT RETROSPECTIVE FOR STUNNING PEACH on 2026-05-03:
-Our model highly tipped this horse but it failed (finished 5).
-Analysis: Despite the model’s high expected value (EV 1.53) and odds of 10.0 for STUNNING PEACH, the yielding track likely negated its tactical advantage from draw 3, as soft ground often forces front-runners (typical of low-draw horses) to over-exert early. The jockey’s low historical strike rate (0.065) may have further compounded the issue, reflecting an inability to adjust pace on a surface that demands energy conservation. Additionally, finishing 5th suggests the horse lacked the closing kick required to capitalize on the predicted win probability (0.15) under yielding conditions, where stamina and footing often trump statistical value.

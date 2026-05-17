@@ -1,6 +1,0 @@
-PEDIGREE FOR HORSE ID J390:
-Sire: Time Test
-Dam: Awesome
-Origin: NZ / 5
-Color: Unknown
-Import Type: PPG

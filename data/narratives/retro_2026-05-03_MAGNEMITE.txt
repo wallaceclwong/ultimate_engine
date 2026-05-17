@@ -1,3 +1,0 @@
-LESSON LEARNT RETROSPECTIVE FOR MAGNEMITE on 2026-05-03:
-Our model highly tipped this horse but it failed (finished 8).
-Analysis: Despite a favorable statistical overlay, MAGNEMITE’s failure to handle the yielding ground was likely critical—the soft surface often negates the advantage of off-pace closers with high odds, and the horse may have lacked the necessary stamina or action to perform at this level. Additionally, the wide draw (8) on a yielding track can force a horse to cover extra ground or lose position early, compromising its tactical chance. The model’s win probability (0.03) was too optimistic given these class-specific track biases, which the odds (42.0) already discounted more sharply.

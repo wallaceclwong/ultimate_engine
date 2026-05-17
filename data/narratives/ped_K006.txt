@@ -1,6 +1,0 @@
-PEDIGREE FOR HORSE ID K006:
-Sire: Time Test
-Dam: Needlly
-Origin: NZ / 4
-Color: Unknown
-Import Type: PPG

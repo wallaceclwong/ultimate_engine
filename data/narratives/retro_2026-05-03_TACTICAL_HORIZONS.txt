@@ -1,3 +1,0 @@
-LESSON LEARNT RETROSPECTIVE FOR TACTICAL HORIZONS on 2026-05-03:
-Our model highly tipped this horse but it failed (finished 11).
-Analysis: Our model overvalued TACTICAL HORIZONS’s extreme odds (54.0) without accounting for how a wide draw (#11) on yielding ground heavily disadvantages a longshot—traffic trouble and extra distance are magnified on a tiring surface. The jockey’s low 10.4% win rate further reduced the chance of overcoming that positional deficit, as holding a competitive spot from an outside gate requires strong early judgment. This failure highlights that in yielding conditions, outside draws sharply compress the already tiny win probability of horses like this, making apparent "value" a statistical mirage.

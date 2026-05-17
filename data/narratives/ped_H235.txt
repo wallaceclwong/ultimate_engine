@@ -1,6 +1,0 @@
-PEDIGREE FOR HORSE ID H235:
-Sire: Pariah
-Dam: Watchful Eyes
-Origin: AUS / 6
-Color: Unknown
-Import Type: PPG

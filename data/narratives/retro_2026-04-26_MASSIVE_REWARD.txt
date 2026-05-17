@@ -1,3 +1,0 @@
-LESSON LEARNT RETROSPECTIVE FOR MASSIVE REWARD on 2026-04-26:
-Our model highly tipped this horse but it failed (finished 11).
-Analysis: Despite the high EV and favorable odds, the horse's extremely low jockey rating (0.064) likely contributed to a lack of tactical execution, as a poor rider often fails to secure a good early position or manage pace. From draw 4, a "good" track can favor horses with speed to the rail, but this runner may have been shuffled back or forced wide, losing ground that a stronger jockey would have saved. The key lesson is to weight jockey form and draw-specific running styles more heavily when assessing value plays on firm ground, as raw probability models can overestimate horses with weak rider statistics.
