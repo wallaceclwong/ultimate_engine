@@ -43,7 +43,7 @@ class ContextCachingService:
                     del meetings[date_part]
                     break
                 meetings[date_part].append(f)
-            except: continue
+            except (ValueError, IndexError): continue
 
         context_data = []
         for date_str, m_files in meetings.items():
@@ -52,7 +52,7 @@ class ContextCachingService:
                 try:
                     with open(f, "r", encoding="utf-8") as f_in:
                         meeting_data["races"].append(json.load(f_in))
-                except: continue
+                except (json.JSONDecodeError, OSError): continue
             context_data.append(meeting_data)
 
         # Also add Synergy and Steward data summaries if possible

@@ -42,7 +42,7 @@ def get_winner_odds(res, winner_no):
         if str(h.get('horse_no', '')) == str(winner_no):
             try:
                 return float(h.get('win_odds', 0)) / 10.0
-            except:
+            except (ValueError, TypeError):
                 return 0.0
     return 0.0
 
@@ -57,7 +57,7 @@ for pf in sorted(pred_dir.glob('prediction_2026-04-*.json')):
 
     try:
         pred = json.loads(pf.read_text())
-    except:
+    except json.JSONDecodeError:
         continue
 
     # Skip placeholder-odds races (Apr 26+: all horses at 10.0)
@@ -71,7 +71,7 @@ for pf in sorted(pred_dir.glob('prediction_2026-04-*.json')):
 
     try:
         res = json.loads(rf.read_text())
-    except:
+    except json.JSONDecodeError:
         continue
 
     actual_winner = get_winner(res)

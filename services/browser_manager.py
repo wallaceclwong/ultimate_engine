@@ -48,15 +48,15 @@ class BrowserManager:
     async def stop(self):
         for context in BrowserManager._contexts.values():
             try: await context.close()
-            except: pass
+            except Exception: pass
         BrowserManager._contexts = {}
         if self.browser:
             try: await self.browser.close()
-            except: pass
+            except Exception: pass
             self.browser = None
         if self.playwright:
             try: await self.playwright.stop()
-            except: pass
+            except Exception: pass
             self.playwright = None
 
     async def get_page(self) -> Page:
@@ -82,7 +82,7 @@ class BrowserManager:
                 # Test if still connected
                 page = await context.new_page()
                 return context, page
-            except:
+            except Exception:
                 del BrowserManager._contexts[session_id]
 
         if not self.playwright:

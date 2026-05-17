@@ -104,7 +104,7 @@ class MeetingSettlement:
                 try:
                     with open(audit_file, "r", encoding="utf-8") as f:
                         audit_history = json.load(f)
-                except: audit_history = []
+                except (json.JSONDecodeError, OSError): audit_history = []
             
             # Upsert logic for local audit
             audit_history = [entry for entry in audit_history if entry.get("meeting_date") != date_str or entry.get("venue") != venue]

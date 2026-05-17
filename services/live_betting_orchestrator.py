@@ -115,7 +115,7 @@ class LiveBettingOrchestrator:
                         break # Only trigger once per race
                     
                     last_odds = current_win_odds
-            except: pass
+            except Exception: pass
 
             # 2. Check for Weather Updates (Track Condition)
             # This could be polled less frequently, but we'll check it here for now
@@ -123,7 +123,7 @@ class LiveBettingOrchestrator:
                 try:
                     # In a real scenario, we'd check if the track condition string in data/weather/intel_*.json changed
                     pass
-                except: pass
+                except Exception: pass
 
     async def start_live_watch(self, target_time_str: str = None):
         """

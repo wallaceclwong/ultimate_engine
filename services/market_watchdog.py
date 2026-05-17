@@ -106,7 +106,7 @@ class MarketWatchdog:
             try:
                 with open(alert_file, "r", encoding="utf-8") as f:
                     existing = json.load(f).get("alerts", [])
-            except: pass
+            except (json.JSONDecodeError, OSError): pass
 
         # Combine and deduplicate by horse_no (keep latest)
         combined = {a["horse_no"]: a for a in (existing + alerts)}

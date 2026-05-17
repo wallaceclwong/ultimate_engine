@@ -7,7 +7,7 @@ def test_connectivity():
     # Force UTF-8 for output
     try:
         sys.stdout.reconfigure(encoding='utf-8')
-    except:
+    except Exception:
         pass
     
     print("--- DEEPSEEK CONNECTIVITY TEST (VM) ---")

@@ -71,7 +71,7 @@ for f in sorted(files, key=lambda x: int(str(x).split("_R")[-1].replace(".json",
         stake = kelly[top_h]
         top_o = odds.get(top_h, "?")
         bets.append((race_no, top_h, horse_name, stake, top_o))
-    except:
+    except (json.JSONDecodeError, OSError, KeyError):
         pass
 
 if bets:

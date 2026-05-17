@@ -5,37 +5,24 @@ import pandas as pd
 import numpy as np
 from pathlib import Path
 from openai import OpenAI
+from loguru import logger
 import time
 
-# --- Paths ---
-# Auto-detect VM vs Local
-if Path("/opt/ultimate_engine").exists():
-    BASE_DIR     = Path("/root/ultimate_engine")
-    PROJECT_ROOT = Path("/opt/ultimate_engine")
-else:
-    PROJECT_ROOT = Path(__file__).parent.absolute()
-    BASE_DIR     = PROJECT_ROOT / "ultimate_engine"
+from config.settings import Config
 
-INCIDENTS_FILE= BASE_DIR / 'incidents_data.parquet'
-TRAINING_FILE = BASE_DIR / 'training_data.parquet'
-CACHE_FILE    = BASE_DIR / 'ai_sentiment_cache.json'
-DOTENV_FILE   = BASE_DIR / '.env'
+# --- Paths ---
+BASE_DIR     = Config.BASE_DIR
+INCIDENTS_FILE = BASE_DIR / 'incidents_data.parquet'
+TRAINING_FILE  = BASE_DIR / 'training_data.parquet'
+CACHE_FILE     = BASE_DIR / 'ai_sentiment_cache.json'
 
 # --- Load Environment ---
-def load_key():
-    if not DOTENV_FILE.exists(): return None
-    with open(DOTENV_FILE, 'r') as f:
-        for line in f:
-            if line.startswith('DEEPSEEK_API_KEY='):
-                return line.split('=')[1].strip()
-    return None
-
-api_key = load_key()
+api_key = Config.DEEPSEEK_API_KEY
 if not api_key:
-    print("CRITICAL ERROR: No API Key found in .env")
+    logger.error("CRITICAL ERROR: No DEEPSEEK_API_KEY found in environment")
     exit(1)
 
-client = OpenAI(api_key=api_key, base_url='https://api.deepseek.com')
+client = OpenAI(api_key=api_key, base_url=Config.DEEPSEEK_BASE_URL)
 
 # --- Load Data ---
 df_inc = pd.read_parquet(INCIDENTS_FILE)
@@ -46,7 +33,7 @@ if CACHE_FILE.exists():
     try:
         with open(CACHE_FILE, 'r') as f:
             sentiment_cache = json.load(f)
-    except:
+    except (json.JSONDecodeError, OSError):
         sentiment_cache = {}
 else:
     sentiment_cache = {}
@@ -86,18 +73,18 @@ def get_ai_score(horse_name, incidents):
 
 # --- Main Processing ---
 def process(year=2025, max_calls=150):
-    print(f'\n--- AI Analyst (V5: DeepSeek-V3 JSON Mode) ---')
-    
+    logger.info(f"--- AI Analyst (V5: DeepSeek-V3 JSON Mode) ---")
+
     df_train = pd.read_parquet(TRAINING_FILE)
     df_train['date'] = pd.to_datetime(df_train['date'])
     target_horses = df_train[df_train['date'].dt.year >= year]['horse_name'].unique()
     target_horses = [h for h in target_horses if h and str(h).strip()]
-    
+
     df_inc['horse_name_clean'] = df_inc['horse_name'].str.strip().str.upper()
     processed = 0
     new_scores = 0
 
-    print(f"Total Target Horses: {len(target_horses)}")
+    logger.info(f"Total Target Horses: {len(target_horses)}")
 
     for horse in target_horses:
         horse_key = str(horse).strip().upper()

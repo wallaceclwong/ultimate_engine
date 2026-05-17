@@ -6,6 +6,8 @@ from typing import Optional
 import time
 import sys
 
+from loguru import logger
+
 if sys.platform == 'win32':
     asyncio.set_event_loop_policy(asyncio.WindowsProactorEventLoopPolicy())
 
@@ -28,7 +30,7 @@ class ExecutionEngine:
         Selection: Horse number (e.g., "5")
         Stake: Dollar amount to bet.
         """
-        print(f"\n[EXECUTION] Preparing Bet: Race {race_no}, Selection #{selection}, Stake ${stake}...", flush=True)
+        logger.info(f"Preparing Bet: Race {race_no}, Selection #{selection}, Stake ${stake}...")
         
         context, page = await self.browser_mgr.get_persistent_context(session_id=self.session_id)
         
@@ -36,24 +38,24 @@ class ExecutionEngine:
             # 1. Navigate to betting page
             # Fixed: Navigate to base URL first to avoid redirects, then handle deep navigation
             base_url = "https://bet.hkjc.com/en/racing/wp/"
-            print(f"Navigating to {base_url}...", flush=True)
+            logger.info(f"Navigating to {base_url}...")
             await page.goto(base_url, wait_until="networkidle", timeout=60000)
             await page.bring_to_front()
             
             # Ensure we are on the RACING tab
-            print("Verifying Racing tab...", flush=True)
+            logger.info("Verifying Racing tab...")
             try:
                 # Top header 'RACING' button - wait for it to be visible
                 racing_tab = await page.wait_for_selector(".Header-Menu-Racing", timeout=10000)
                 if racing_tab:
-                    print("Found Racing tab button. Clicking...", flush=True)
+                    logger.info("Found Racing tab button. Clicking...")
                     await racing_tab.click(force=True)
                     await asyncio.sleep(3)
             except Exception as e:
-                print(f"Note: Racing tab click attempt finished: {e}", flush=True)
+                logger.info(f"Racing tab click attempt finished: {e}")
             
             # 2. Handle Login if needed
-            print("Checking login status...", flush=True)
+            logger.info("Checking login status...")
             try:
                 login_acc_selector = "#login-account-input"
                 login_pwd_selector = "#login-password-input"
@@ -63,7 +65,7 @@ class ExecutionEngine:
                 login_input = await page.query_selector(login_acc_selector)
                 
                 if login_input:
-                    print(f"Not logged in. Filling credentials for {Config.HKJC_ACCOUNT[:4]}****...", flush=True)
+                    logger.info(f"Not logged in. Filling credentials for {Config.HKJC_ACCOUNT[:4]}****...")
                     if Config.HKJC_ACCOUNT and Config.HKJC_ACCOUNT != "YOUR_ACCOUNT_ID":
                         # Type credentials (more reliable than fill for some sites)
                         await page.type(login_acc_selector, Config.HKJC_ACCOUNT, delay=50)
@@ -71,7 +73,7 @@ class ExecutionEngine:
                         
                         await page.screenshot(path="data/pre_login_click.png")
                         
-                        print("Submitting login form via Click...", flush=True)
+                        logger.info("Submitting login form via Click...")
                         # Try multiple login button selectors
                         login_selectors = [login_btn_selector, "text='Login'", ".login-btn", "button:has-text('Login')"]
                         clicked = False
@@ -79,33 +81,33 @@ class ExecutionEngine:
                             try:
                                 btn = await page.query_selector(sel)
                                 if btn and await btn.is_visible():
-                                    print(f"Clicking login button: {sel}", flush=True)
+                                    logger.info(f"Clicking login button: {sel}")
                                     await btn.click(force=True)
                                     clicked = True
                                     break
-                            except: pass
+                            except Exception: pass
                         
                         if not clicked:
-                            print("Warning: Could not find Login button. Attempting Enter key as last resort.", flush=True)
+                            logger.warning("Could not find Login button. Attempting Enter key as last resort.")
                             await page.keyboard.press("Enter")
                         
                         # Wait for either navigation or the T&C modal
-                        print("Waiting for login response/modals (8s)...", flush=True)
+                        logger.info("Waiting for login response/modals (8s)...")
                         await asyncio.sleep(8)
                         await page.bring_to_front()
                         
                     else:
-                        print("WARNING: HKJC_ACCOUNT not configured.", flush=True)
+                        logger.warning("HKJC_ACCOUNT not configured.")
                 else:
-                    print("Already logged in.", flush=True)
+                    logger.info("Already logged in.")
                 
                 # Debug screenshot
                 await page.screenshot(path="data/login_state.png")
             except Exception as login_e:
-                print(f"Login check error: {login_e}", flush=True)
+                logger.warning(f"Login check error: {login_e}")
 
             # 2. Wait for Login + Handle T&C
-            print("Waiting for login success (OTP or manual)...", flush=True)
+            logger.info("Waiting for login success (OTP or manual)...")
             logged_in = await self.wait_for_login_success(page)
             if not logged_in:
                 raise Exception("Login verification failed or timed out.")
@@ -114,7 +116,7 @@ class ExecutionEngine:
             await self.handle_tc_modals(page)
             
             # 3. Select Race
-            print(f"Verifying Race {race_no}...", flush=True)
+            logger.info(f"Verifying Race {race_no}...")
             try:
                 # Verified selector: .race-no-item or #raceno_X
                 race_selectors = [
@@ -128,22 +130,22 @@ class ExecutionEngine:
                     try:
                         race_btn = await page.wait_for_selector(sel, timeout=3000)
                         if race_btn: break
-                    except: continue
-                
+                    except Exception: continue
+
                 if race_btn:
-                    print(f"Clicking Race {race_no} button...", flush=True)
+                    logger.info(f"Clicking Race {race_no} button...")
                     await race_btn.click(force=True)
-                    print(f"Race {race_no} selected.", flush=True)
+                    logger.info(f"Race {race_no} selected.")
                     await asyncio.sleep(3)
                 else:
-                    print(f"Warning: Could not find Race {race_no} button. Attempting direct URL navigation.", flush=True)
+                    logger.warning(f"Could not find Race {race_no} button. Attempting direct URL navigation.")
                 
                 await asyncio.sleep(2)
             except Exception as race_e:
-                print(f"Race selection failed: {race_e}", flush=True)
+                logger.error(f"Race selection failed: {race_e}")
             
             # 4. Select Horse
-            print(f"Selecting Horse #{selection} in Race {race_no}...", flush=True)
+            logger.info(f"Selecting Horse #{selection} in Race {race_no}...")
             try:
                 found = False
                 for attempt in range(5):
@@ -151,18 +153,18 @@ class ExecutionEngine:
                     win_checkbox_sel = f"#wpleg_WIN_{race_no}_{selection}"
                     btn = await page.query_selector(win_checkbox_sel)
                     if btn:
-                        print(f"[{attempt}] Found precise Win checkbox: {win_checkbox_sel}", flush=True)
+                        logger.info(f"[{attempt}] Found precise Win checkbox: {win_checkbox_sel}")
                         await btn.click(force=True)
                         found = True
                         break
                     
                     # 2. Search row
-                    print(f"[{attempt}] searching for horse {selection} via text...", flush=True)
+                    logger.info(f"[{attempt}] searching for horse {selection} via text...")
                     rows = await page.query_selector_all("tr")
                     for row in rows:
                         inner = await row.inner_text()
                         if inner.strip().startswith(str(selection)) or f"\t{selection}\t" in inner:
-                            print(f"Found row for Horse {selection}. Clicking...", flush=True)
+                            logger.info(f"Found row for Horse {selection}. Clicking...")
                             bet_box = await row.query_selector("div.bet-checkbox, .checkbox-area, td:nth-child(7)")
                             if bet_box:
                                 await bet_box.click(force=True)
@@ -178,10 +180,10 @@ class ExecutionEngine:
 
                 await asyncio.sleep(2)
             except Exception as horse_e:
-                print(f"Horse selection failed: {horse_e}", flush=True)
+                logger.error(f"Horse selection failed: {horse_e}")
 
             # 5. Set Stake
-            print(f"Setting stake to ${stake}...", flush=True)
+            logger.info(f"Setting stake to ${stake}...")
             try:
                 await asyncio.sleep(3)
                 stake_selectors = [
@@ -203,7 +205,7 @@ class ExecutionEngine:
                         if stake_input and await stake_input.is_visible(): break
                     
                     if stake_input and await stake_input.is_visible():
-                        print(f"Found stake input. Filling ${stake}...", flush=True)
+                        logger.info(f"Found stake input. Filling ${stake}...")
                         await stake_input.click(force=True)
                         await page.keyboard.press("Control+A")
                         await page.keyboard.press("Backspace")
@@ -222,33 +224,33 @@ class ExecutionEngine:
                             if add_btn: break
                     
                     if add_btn and await add_btn.is_visible():
-                        print(f"Clicking Add to Slip (Attempt {attempt})...", flush=True)
+                        logger.info(f"Clicking Add to Slip (Attempt {attempt})...")
                         await add_btn.click(force=True)
                         await asyncio.sleep(3)
                         
                         slip_check = await page.query_selector(".TotalNoOfBets, .bet-count, text='Place Bet', #betslip-container")
                         if slip_check:
-                            print("Success: Add confirmed via slip detection.", flush=True)
+                            logger.success("Add confirmed via slip detection.")
                             break
                     await asyncio.sleep(2)
                 
                 await page.screenshot(path="data/final_slip_check.png")
             except Exception as stake_e:
-                print(f"Stake/Add failed: {stake_e}", flush=True)
+                logger.error(f"Stake/Add failed: {stake_e}")
             
             if self.dry_run:
-                print("\n>>> DRY RUN: Slip prepared. Browser open for confirmation.", flush=True)
+                logger.success("DRY RUN: Slip prepared. Browser open for confirmation.")
             else:
-                print("\n>>> LIVE MODE: (Manual intervention recommended)", flush=True)
+                logger.warning("LIVE MODE: (Manual intervention recommended)")
                 
         except Exception as e:
-            print(f"Error during execution: {e}", flush=True)
+            logger.error(f"Error during execution: {e}")
             await page.screenshot(path="data/execution_error.png")
         finally:
             if self.headless:
                 await context.close()
             else:
-                print("\n[STAGING COMPLETE] Window left open for manual check (600s).", flush=True)
+                logger.info("[STAGING COMPLETE] Window left open for manual check (600s).")
                 await page.bring_to_front()
                 await asyncio.sleep(600)
 
@@ -257,21 +259,21 @@ class ExecutionEngine:
         while (time.time() - start_time) < timeout:
             try:
                 if await page.query_selector(".account-info, #account-balance, .member-info"):
-                    print("Login success detected!", flush=True)
+                    logger.success("Login success detected!")
                     return True
                 
                 otp_indicators = ["text='Verification Code'", "text='SMS OTP'", "#otp_input", ".otp-dialog"]
                 for indicator in otp_indicators:
                     if await page.query_selector(indicator):
-                        print(f"OTP/Verification screen detected ({indicator}). Waiting for user...", flush=True)
+                        logger.info(f"OTP/Verification screen detected ({indicator}). Waiting for user...")
                         await asyncio.sleep(5)
                         break
-            except: pass
+            except Exception: pass
             await asyncio.sleep(2)
         return False
 
     async def handle_tc_modals(self, page):
-        print("Checking for blocking modals...", flush=True)
+        logger.info("Checking for blocking modals...")
         tc_selectors = [
             "#btnProceed", "button:has-text('Proceed')", "button:has-text('Agree')", "button:has-text('Confirm')",
             "text='Proceed'", "text='Agree'", "text='Confirm'", ".btn_agree", "#btn-agree"
@@ -283,12 +285,12 @@ class ExecutionEngine:
                     try:
                         btn = await frame.query_selector(sel)
                         if btn and await btn.is_visible():
-                            print(f"[{attempt}] Found modal button ({sel}). Clicking...", flush=True)
+                            logger.info(f"[{attempt}] Found modal button ({sel}). Clicking...")
                             await btn.click(force=True)
                             await asyncio.sleep(3)
                             found_modal = True
                             break
-                    except: pass
+                    except Exception: pass
                 if found_modal: break
             if not found_modal: break
             await asyncio.sleep(1)

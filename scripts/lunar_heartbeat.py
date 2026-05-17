@@ -38,7 +38,7 @@ def get_last_disk_alert():
                 dt_str = state.get("last_disk_alert")
                 if dt_str:
                     return datetime.fromisoformat(dt_str).replace(tzinfo=HKT)
-    except: pass
+    except (json.JSONDecodeError, OSError): pass
     return None
 
 def save_disk_alert_time(dt):
@@ -52,7 +52,7 @@ def save_disk_alert_time(dt):
         os.makedirs(STATE_FILE.parent, exist_ok=True)
         with open(STATE_FILE, "w") as f:
             json.dump(state, f)
-    except: pass
+    except OSError: pass
 
 def get_today_fixture():
     """Checks if today is a race day based on the season fixtures."""
@@ -74,7 +74,7 @@ def get_today_fixture():
             for fxt in fixtures:
                 if fxt["date"] in possible_dates:
                     return fxt
-    except: pass
+    except (json.JSONDecodeError, OSError): pass
     return None
 
 def is_scheduler_running():
@@ -96,7 +96,7 @@ def clean_stale_lock():
             print(f"  [CLEANUP] Removing orphaned lock file: {lock_file}")
             try:
                 os.remove(lock_file)
-            except: pass
+            except OSError: pass
 
 async def heal_scheduler():
     """Relaunches the scheduler in --live mode."""
@@ -144,7 +144,7 @@ async def check_connectivity():
         import socket
         socket.create_connection(("8.8.8.8", 53), timeout=3)
         return True
-    except:
+    except OSError:
         return False
 
 def kill_zombie_processes():
@@ -179,7 +179,7 @@ def auto_clean_workspace():
         try:
             shutil.rmtree(path)
             count += 1
-        except: pass
+        except OSError: pass
     
     # 2. Clean old logs (> 3 days for auto-clean)
     for log_file in BASE_DIR.glob("*.log"):
@@ -188,7 +188,7 @@ def auto_clean_workspace():
             if (datetime.now() - datetime.fromtimestamp(log_file.stat().st_mtime)).days > 3:
                 os.remove(log_file)
                 count += 1
-        except: pass
+        except OSError: pass
     
     return count
 

@@ -10,6 +10,9 @@ if root_dir not in sys.path:
 
 import json
 from datetime import datetime
+
+from loguru import logger
+
 from services.browser_manager import BrowserManager
 
 class OddsIngest:
@@ -25,7 +28,7 @@ class OddsIngest:
         
         page = await self.browser_mgr.get_page()
 
-        print(f"Navigating to {url}...")
+        logger.info(f"Navigating to {url}...")
         try:
             await page.goto(url, wait_until="domcontentloaded", timeout=60000)
             
@@ -41,21 +44,21 @@ class OddsIngest:
             for selector in selectors_to_try:
                 try:
                     await page.wait_for_selector(selector, timeout=15000)
-                    print(f"Found odds with selector: {selector}")
+                    logger.info(f"Found odds with selector: {selector}")
                     selector_found = True
                     break
-                except:
+                except Exception:
                     continue
             
             if not selector_found:
                 # Fallback: wait for any table with odds-like content
                 try:
                     await page.wait_for_selector('table', timeout=10000)
-                    print("Using fallback: found table element")
-                except:
-                    print("Warning: Could not find odds table, proceeding anyway")
+                    logger.info("Using fallback: found table element")
+                except Exception:
+                    logger.warning("Could not find odds table, proceeding anyway")
             
-            print(f"Extracting odds for Race {race_no}...")
+            logger.info(f"Extracting odds for Race {race_no}...")
             
             win_odds = {}
             place_odds = {}
@@ -80,9 +83,9 @@ class OddsIngest:
                                     try:
                                         win_odds[str(horse_num)] = float(val)
                                         break
-                                    except:
+                                    except ValueError:
                                         continue
-                        except:
+                        except Exception:
                             continue
 
                     # Place Odds - try multiple selector patterns
@@ -102,9 +105,9 @@ class OddsIngest:
                                     try:
                                         place_odds[str(horse_num)] = float(val)
                                         break
-                                    except:
+                                    except ValueError:
                                         continue
-                        except:
+                        except Exception:
                             continue
                 except Exception as e:
                     continue
@@ -121,7 +124,7 @@ class OddsIngest:
             }
 
         except Exception as e:
-            print(f"Error fetching odds: {e}")
+            logger.error(f"Error fetching odds: {e}")
             await self.browser_mgr.stop()
             return None
 
@@ -143,7 +146,7 @@ class OddsIngest:
             with open(filename, "w", encoding="utf-8") as f:
                 json.dump(data, f, indent=2)
                 
-            print(f"Captured snapshot for Race {race_no} to {filename}")
+            logger.success(f"Captured snapshot for Race {race_no} to {filename}")
             return True
         return False
 
@@ -172,7 +175,7 @@ async def main():
         with open(filename, "w", encoding="utf-8") as f:
             json.dump(data, f, indent=2)
             
-        print(f"Success: Odds for Race {args.race} saved to {filename}")
+        logger.success(f"Odds for Race {args.race} saved to {filename}")
 
 if __name__ == "__main__":
     asyncio.run(main())

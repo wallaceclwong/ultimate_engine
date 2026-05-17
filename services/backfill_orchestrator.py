@@ -7,6 +7,8 @@ from pathlib import Path
 from datetime import datetime
 import re
 
+from loguru import logger
+
 # Ensure project root is in path for services imports
 sys.path.append(str(Path(__file__).parent.parent))
 
@@ -35,7 +37,7 @@ class BackfillOrchestrator:
         self.semaphore = asyncio.Semaphore(2)
 
     async def run_overnight_backfill(self, limit_meetings=None):
-        print("Starting Overnight Absolute Legacy Backfill (2018-2026)...")
+        logger.info("Starting Overnight Absolute Legacy Backfill (2018-2026)...")
         
         fixture_configs = [
             (self.fixtures_2026, "2026"), (self.fixtures_2025, "2025"),
@@ -51,15 +53,15 @@ class BackfillOrchestrator:
                 fixtures_processed = await self.process_fixtures(fixture_file, year, limit=limit_meetings, current_count=processed_count)
                 processed_count += fixtures_processed
                 if limit_meetings and processed_count >= limit_meetings:
-                    print(f"Reached limit of {limit_meetings} meetings. Stopping...")
+                    logger.info(f"Reached limit of {limit_meetings} meetings. Stopping...")
                     break
             self.update_progress("COMPLETED")
         except Exception as e:
-            print(f"Backfill fatal error: {e}")
+            logger.error(f"Backfill fatal error: {e}")
             self.update_progress(f"CRASHED: {e}")
 
     async def process_fixtures(self, fixture_file, year, limit=None, current_count=0):
-        print(f"--- Processing {year} ---")
+        logger.info(f"--- Processing {year} ---")
         with open(fixture_file, "r") as f:
             fixtures = json.load(f)
 
@@ -89,12 +91,12 @@ class BackfillOrchestrator:
             except asyncio.TimeoutError:
                 date_str = fixture.get("date", "Unknown")
                 if attempt < max_retries:
-                    print(f"Warning: Meeting {date_str} timed out (Attempt {attempt+1}/{max_retries+1}). Retrying...")
+                    logger.warning(f"Meeting {date_str} timed out (Attempt {attempt+1}/{max_retries+1}). Retrying...")
                     await asyncio.sleep(10) # Wait a bit before retry
                 else:
-                    print(f"CRITICAL: Meeting {date_str} timed out after 30 minutes. Skipping...")
+                    logger.error(f"CRITICAL: Meeting {date_str} timed out after 30 minutes. Skipping...")
             except Exception as e:
-                print(f"Error processing meeting {fixture.get('date')}: {e}")
+                logger.error(f"Error processing meeting {fixture.get('date')}: {e}")
                 if attempt == max_retries: break
                 await asyncio.sleep(5)
 
@@ -103,7 +105,7 @@ class BackfillOrchestrator:
             date_str = fixture["date"]
             try:
                 dt = datetime.strptime(date_str, "%d/%m/%Y")
-            except:
+            except ValueError:
                 dt = datetime.strptime(date_str, "%Y-%m-%d")
             
             formatted_date = dt.strftime("%Y-%m-%d")
@@ -117,7 +119,7 @@ class BackfillOrchestrator:
 
             # Update progress AS SOON AS WE START so heartbeat is fresh for dashboard
             self.update_progress(f"Starting {formatted_date}")
-            print(f"[{index+1}/{total}] Processing {formatted_date} ({venue})...")
+            logger.info(f"[{index+1}/{total}] Processing {formatted_date} ({venue})...")
             
             async with BrowserManager(headless=True) as mgr:
                 page = await mgr.get_page()
@@ -137,7 +139,7 @@ class BackfillOrchestrator:
                                 res_data = json.load(f)
                                 if res_data.get("results"):
                                     results_found = True
-                        except:
+                        except (json.JSONDecodeError, OSError):
                             pass
                     if not results_found:
                         try:
@@ -156,10 +158,10 @@ class BackfillOrchestrator:
                                 if race_no == 1 or race_no >= 9: break
                                 continue # Skip analytical if result fetch returned nothing but we keep going
                         except asyncio.TimeoutError:
-                            print(f"  Warning: Race {race_no} results fetch timed out.")
+                            logger.warning(f"Race {race_no} results fetch timed out.")
                             continue
                         except Exception as e:
-                            print(f"  Error in Race {race_no} results: {e}")
+                            logger.error(f"Error in Race {race_no} results: {e}")
                             continue
 
                     # 2. Handle Analytical (only if results exist for this race)
@@ -175,9 +177,9 @@ class BackfillOrchestrator:
                                     with open(analytical_path, "w", encoding="utf-8") as f:
                                         json.dump(a_data, f, indent=2)
                             except asyncio.TimeoutError:
-                                print(f"  Warning: Race {race_no} analytical fetch timed out.")
+                                logger.warning(f"Race {race_no} analytical fetch timed out.")
                             except Exception as e:
-                                print(f"  Error in Race {race_no} analytical: {e}")
+                                logger.error(f"Error in Race {race_no} analytical: {e}")
                     
                     self.update_progress(f"{formatted_date} R{race_no}")
             
@@ -196,7 +198,7 @@ class BackfillOrchestrator:
                     with open(f_path, "r") as f:
                         data = json.load(f)
                         total += len(data)
-                except:
+                except (json.JSONDecodeError, OSError):
                     pass
         return total
 
@@ -241,7 +243,7 @@ class BackfillOrchestrator:
                 os.makedirs(p_file.parent, exist_ok=True)
                 with open(p_file, "w", encoding="utf-8") as f:
                     f.write(content)
-            except:
+            except OSError:
                 pass
 
         # Write Heartbeat for Dashboard
@@ -255,7 +257,7 @@ class BackfillOrchestrator:
                     "eta": eta_str,
                     "timestamp": datetime.now().timestamp()
                 }, f)
-        except:
+        except OSError:
             pass
 
 if __name__ == "__main__":

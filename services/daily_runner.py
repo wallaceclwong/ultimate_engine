@@ -18,7 +18,7 @@ def load_fixtures(date_str=None):
     if date_str:
         try:
             year = datetime.strptime(date_str, "%Y-%m-%d").year
-        except:
+        except ValueError:
             pass
     if year:
         year_fixture = base_dir / f"fixtures_{year}.json"

@@ -94,7 +94,7 @@ class LiveSettlement:
                 for fxt in fixtures:
                     if fxt["date"] == today_hkt:
                         return fxt["venue"]
-        except:
+        except (json.JSONDecodeError, OSError):
             pass
         return None
 

@@ -58,9 +58,9 @@ class HorseProfileService:
                     dam = await page.locator("td:has-text('Dam') + td + td").text_content(timeout=5000)
                     await browser.close()
                     return {"sire": sire.strip(), "dam": dam.strip()}
-                except:
+                except Exception:
                     pass
-                
+
                 await browser.close()
                 return {"sire": "Linkage Error", "dam": "Linkage Error"}
 

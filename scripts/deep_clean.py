@@ -36,7 +36,7 @@ def clean_old_files(base_dir, days=30, dry_run=False):
                 reclaimed_bytes += size
                 if not dry_run:
                     try: f.unlink()
-                    except: pass
+                    except OSError: pass
     
     # 2. Scan root of data directory for racecards
     print(f"  Scanning root of data directory for racecards...")
@@ -47,7 +47,7 @@ def clean_old_files(base_dir, days=30, dry_run=False):
             reclaimed_bytes += size
             if not dry_run:
                 try: f.unlink()
-                except: pass
+                except OSError: pass
 
     return reclaimed_bytes
 
@@ -77,7 +77,7 @@ def clean_agent_artifacts(dry_run=False):
                         reclaimed_bytes += size
                         if not dry_run:
                             try: p.unlink()
-                            except: pass
+                            except OSError: pass
     except Exception as e:
         print(f"  Warning: Could not fully scan agent directory: {e}")
 

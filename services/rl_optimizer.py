@@ -48,7 +48,7 @@ class RLOptimizer:
             month = datetime.strptime(date_str, "%Y-%m-%d").month
             context_key = f"{venue}_M{month}"
             return self.bias_data.get("contextual", {}).get(context_key, self.bias_data.get("adjustments", self.defaults))
-        except:
+        except (ValueError, KeyError, TypeError):
             return self.bias_data.get("adjustments", self.defaults)
 
 
@@ -164,9 +164,9 @@ class RLOptimizer:
                 context_key = f"{venue}_M{month}"
                 if context_key not in groups: groups[context_key] = []
                 groups[context_key].append(f)
-            except:
+            except (ValueError, IndexError):
                 continue
-        
+
         if not groups:
             logger.warning("No valid contexts found in file set.")
             return

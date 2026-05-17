@@ -1,16 +1,38 @@
 from pathlib import Path
 import os
+import sys
 from dotenv import load_dotenv
 
 load_dotenv()
 
 class Config:
+    # ── Path Resolution ──────────────────────────────────────────────────
     BASE_DIR = Path(__file__).resolve().parent.parent
+    DATA_DIR = BASE_DIR / "data"
+    CONFIG_DIR = BASE_DIR / "config"
+    SCRIPTS_DIR = BASE_DIR / "scripts"
+    SERVICES_DIR = BASE_DIR / "services"
+
+    # Auto-detect deployment target
+    IS_VM = Path("/opt/ultimate_engine").exists()
+    IS_WINDOWS = sys.platform == "win32"
+    PYTHON_EXEC = sys.executable
+
+    # ── Key Data Files ───────────────────────────────────────────────────
+    FIXTURES_FILE      = DATA_DIR / "fixtures_season.json"
+    STATE_FILE         = DATA_DIR / "scheduler_state.json"
+    PEDIGREE_FILE      = DATA_DIR / "pedigree_cache.json"
+    ODDS_DIR           = DATA_DIR / "odds"
+    RESULTS_DIR        = DATA_DIR / "results"
+    PREDICTIONS_DIR    = DATA_DIR / "predictions"
+    ANALYTICAL_DIR     = DATA_DIR / "analytical"
+    PROCESSED_DIR      = DATA_DIR / "processed"
+    LOCK_FILE          = BASE_DIR / "ultimate_scheduler.lock"
 
     # ── Intelligence Layer (DeepSeek-R1) ──────────────────────────────────
     DEEPSEEK_API_KEY   = os.getenv("DEEPSEEK_API_KEY", "")
     DEEPSEEK_BASE_URL  = os.getenv("DEEPSEEK_BASE_URL", "https://api.deepseek.com")
-    DEEPSEEK_MODEL     = os.getenv("DEEPSEEK_MODEL", "deepseek-chat")      
+    DEEPSEEK_MODEL     = os.getenv("DEEPSEEK_MODEL", "deepseek-chat")
     DEEPSEEK_MODEL_R1  = os.getenv("DEEPSEEK_MODEL_R1", "deepseek-reasoner")
 
     # Mapping legacy aliases to DeepSeek

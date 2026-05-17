@@ -23,7 +23,7 @@ class PedigreeScraper:
             try:
                 with open(self.cache_file, "r", encoding="utf-8") as f:
                     return json.load(f)
-            except:
+            except (json.JSONDecodeError, OSError):
                 return {}
         return {}
 
@@ -155,7 +155,7 @@ def get_unique_horse_ids():
                         elif h.get("horse"):
                             match = re.search(r'\(([A-Z0-9]+)\)', h["horse"])
                             if match: ids.add(match.group(1))
-            except: pass
+            except (json.JSONDecodeError, OSError): pass
 
     # 2. From results (for historical backfill)
     results_dir = Path("data/results")
@@ -169,7 +169,7 @@ def get_unique_horse_ids():
                         elif h.get("horse"):
                             match = re.search(r'\(([A-Z0-9]+)\)', h["horse"])
                             if match: ids.add(match.group(1))
-            except: pass
+            except (json.JSONDecodeError, OSError): pass
     
     return sorted(list(ids))
 

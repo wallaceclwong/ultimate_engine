@@ -59,7 +59,7 @@ class ConsensusAgent:
             try:
                 with open(PEDIGREE_FILE, 'r') as f:
                     self.pedigree_cache = json.load(f)
-            except:
+            except (json.JSONDecodeError, OSError):
                 self.pedigree_cache = {}
 
     def _has_content(self, result: str) -> bool:

@@ -46,7 +46,7 @@ class ResultsIngest:
                 return True
 
         except Exception as e:
-            print(f"Race tab click failed: {e}")
+            logger.warning(f"Race tab click failed: {e}")
         return False
 
     async def fetch_results(self, date_str, venue="ST", race_no=1, page=None):
@@ -56,7 +56,7 @@ class ResultsIngest:
         dt = datetime.strptime(date_str, "%Y-%m-%d")
         
         if dt.date() > datetime.now().date():
-            print(f"Skipping results: {date_str} is in the future.")
+            logger.warning(f"Skipping results: {date_str} is in the future.")
             return None
 
         formatted_date = dt.strftime("%Y/%m/%d")
@@ -67,7 +67,7 @@ class ResultsIngest:
             page = await self.browser_mgr.get_page()
             own_page = True
         
-        print(f"Fetching Results: {url}")
+        logger.info(f"Fetching Results: {url}")
         try:
             # OPTIMIZATION: Check if we are already on the meeting page
             current_url = page.url
@@ -76,22 +76,22 @@ class ResultsIngest:
             
             needs_nav = True
             if target_date_param in current_url and target_course_param in current_url:
-                print(f"Already on meeting page for {formatted_date} {venue}. Skipping full navigation...")
+                logger.info(f"Already on meeting page for {formatted_date} {venue}. Skipping full navigation...")
                 needs_nav = False
             
             force_tab_click = not needs_nav
             if needs_nav:
-                print(f"Navigating to {url}...")
+                logger.info(f"Navigating to {url}...")
                 try:
                     await page.goto(url, wait_until="domcontentloaded", timeout=60000)
                 except Exception as e:
-                    print(f"Warning: Navigation timed out ({str(e)[:80]}), proceeding to parse...")
+                    logger.warning(f"Navigation timed out ({str(e)[:80]}), proceeding to parse...")
             
             # Check if page has the right date
             page_content = await page.content()
             page_date_pattern = dt.strftime("%d/%m/%Y")
             if page_date_pattern not in page_content:
-                print(f"Warning: Expected date {page_date_pattern} not found on page.")
+                logger.warning(f"Expected date {page_date_pattern} not found on page.")
 
             results = []
             dividends = {"WIN": [], "PLACE": [], "QUINELLA": [], "QUINELLA PLACE": []}
@@ -107,18 +107,18 @@ class ResultsIngest:
                 
                 await page.wait_for_selector("div.performance, table.performance", timeout=8000)
                 table_found = True
-                print("Waiting 1s for rendering...")
+                logger.debug("Waiting 1s for rendering...")
                 await page.wait_for_timeout(1000)
             except Exception:
-                print("Clicking race selection to trigger load...")
+                logger.info("Clicking race selection to trigger load...")
                 clicked = await self._click_race_tab(page, race_no)
                 if clicked:
                     try:
                         await page.wait_for_selector("div.performance, table.performance", timeout=12000)
                         table_found = True
-                        print("Performance table loaded after race tab click.")
+                        logger.info("Performance table loaded after race tab click.")
                     except Exception:
-                        print("Performance table still not found after race tab click.")
+                        logger.warning("Performance table still not found after race tab click.")
 
             # 1. Scrape Results Table — try multiple selectors
             row_selectors = [
@@ -149,12 +149,12 @@ class ResultsIngest:
                             "finish_time": (await cols[10].inner_text()).strip() if len(cols) > 10 else "",
                             "win_odds": (await cols[11].inner_text()).strip() if len(cols) > 11 else ""
                         })
-                    except:
+                    except Exception:
                         continue
 
             # Retry once on empty results
             if not results and table_found:
-                print("Empty results on first parse — waiting 3s and retrying...")
+                logger.warning("Empty results on first parse — waiting 3s and retrying...")
                 await page.wait_for_timeout(3000)
                 for sel in row_selectors:
                     rows = await page.query_selector_all(sel)
@@ -177,7 +177,7 @@ class ResultsIngest:
                                 "finish_time": (await cols[10].inner_text()).strip() if len(cols) > 10 else "",
                                 "win_odds": (await cols[11].inner_text()).strip() if len(cols) > 11 else ""
                             })
-                        except:
+                        except Exception:
                             continue
 
             # 2. Scrape Dividends - Parse from text content
@@ -254,7 +254,7 @@ class ResultsIngest:
                                     "incident": (await c[3].inner_text()).strip()
                                 })
 
-            print(f"Scraped {len(results)} results for {date_str}_{venue}_R{race_no}.")
+            logger.success(f"Scraped {len(results)} results for {date_str}_{venue}_R{race_no}.")
             if own_page:
                 await page.close()
             return {
@@ -266,11 +266,11 @@ class ResultsIngest:
             }
 
         except Exception as e:
-            print(f"Error fetching results: {e}")
+            logger.error(f"Error fetching results: {e}")
             if own_page:
                 try:
                     await page.close()
-                except:
+                except Exception:
                     pass
             return None
 
@@ -283,17 +283,17 @@ async def main():
     args = parser.parse_args()
 
     ingest = ResultsIngest()
-    print(f"Fetching results for {args.date} {args.venue} R{args.race}...")
+    logger.info(f"Fetching results for {args.date} {args.venue} R{args.race}...")
     data = await ingest.fetch_results(args.date, venue=args.venue, race_no=args.race)
     if data:
-        print(f"Success: {data['race_id']} — {len(data['results'])} horses")
+        logger.success(f"Success: {data['race_id']} — {len(data['results'])} horses")
         os.makedirs("data/results", exist_ok=True)
         filename = f"data/results/results_{data['race_id']}.json"
         with open(filename, "w", encoding="utf-8") as f:
             json.dump(data, f, indent=2)
-        print(f"Results saved to {filename}")
+        logger.success(f"Results saved to {filename}")
     else:
-        print("Failed to fetch results.")
+        logger.error("Failed to fetch results.")
 
 if __name__ == "__main__":
     asyncio.run(main())

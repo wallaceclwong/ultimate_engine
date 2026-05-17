@@ -50,7 +50,7 @@ async def generate_batch_jsonl(output_file: str, start_year: int = 2018, end_yea
                         "venue": venue,
                         "race": int(race_no_str)
                     })
-        except:
+        except (ValueError, IndexError):
             continue
 
     print(f"Found {len(target_races)} races needing predictions.")

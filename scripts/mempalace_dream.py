@@ -89,7 +89,7 @@ async def run_dream_state():
     for f in retro_files:
         try:
             f.unlink()
-        except:
+        except OSError:
             pass
             
     print(f"Dream State complete. Created {new_rules} Golden Rules.")

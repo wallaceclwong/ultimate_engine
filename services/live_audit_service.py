@@ -65,32 +65,25 @@ class LiveAuditService:
         except Exception as e:
             logger.error(f"Failed to append live brief to log: {e}")
 
-        # 6. Filtering & Notification (RELAXED)
+        # 6. Filtering — log smart money signals locally only.
+        # War Room Verdict (fired by ultimate_scheduler_vm.py at T-15) is the ONLY Telegram alert.
         is_elite = "Grade [S]" in reasoning or "Grade [A]" in reasoning
         is_moderate = "Grade [B]" in reasoning
         is_speculative = "Grade [C]" in reasoning
-        
+
         if (is_elite or is_moderate or is_speculative) and verdict in ["CONFIRMED", "CAUTION"]:
             if is_elite:
-                label = "🏆 HIGH CONVICTION"
+                label = "HIGH CONVICTION"
             elif is_moderate:
-                label = "⚠️ MODERATE CONVICTION"
+                label = "MODERATE CONVICTION"
             else:
-                label = "🔍 SPECULATIVE SIGNAL"
-                
-            logger.info(f"{label} SIGNAL: {verdict} - {reasoning}")
-            
-            # Send Telegram Alert
-            header = f"🚨 *{label} ALERT: {race_id}*"
-            body = (
-                f"\n🎯 *Target:* Horse #{horse_no}"
-                f"\n📉 *Market:* {movement.initial_odds} → {movement.current_odds} ({movement.movement_pct:+.1%})"
-                f"\n📍 *Source:* {state.timestamp.strftime('%H:%M')} baseline"
-                f"\n\n🧠 *Lunar Leap Verdict:* {verdict}\n{reasoning}"
+                label = "SPECULATIVE SIGNAL"
+            logger.info(
+                f"[SMART MONEY {label}] {race_id} #{horse_no}: {verdict} | "
+                f"Move: {movement.initial_odds} → {movement.current_odds} ({movement.movement_pct:+.1%})"
             )
-            await telegram_service.send_message(f"{header}\n{body}")
         else:
-            logger.info(f"Audit complete but filtered (Grade/Verdict too low or not confirmed): {verdict} - {reasoning}")
+            logger.info(f"[LIVE AUDIT] Filtered (Grade/Verdict below threshold): {verdict}")
             
         return verdict, reasoning
 

@@ -32,7 +32,7 @@ def acquire_lock():
     current_pid = os.getpid()
     try:
         parent_pid = psutil.Process(current_pid).ppid()
-    except:
+    except (psutil.NoSuchProcess, psutil.AccessDenied):
         parent_pid = -1
 
     venv_py = str(BASE_DIR / ".venv" / "Scripts" / "python.exe").lower()
@@ -86,7 +86,8 @@ def load_scheduler_state():
                     save_scheduler_state(default_state)
                     return default_state
                 return state
-            except: pass
+            except (json.JSONDecodeError, KeyError):
+                pass
     return default_state
 
 def save_scheduler_state(state):
@@ -107,7 +108,8 @@ def get_dynamic_schedule():
                     jt = data.get("jump_time")
                     if jt:
                         schedule[r] = jt
-            except: pass
+            except (json.JSONDecodeError, KeyError, OSError):
+                pass
     return schedule
 
 def get_today_fixture():
@@ -330,7 +332,7 @@ async def run_odds_refresh(venue: str):
                 if d.get("win_odds"):
                     win_odds = {str(k): float(v) for k, v in d["win_odds"].items()}
                     break
-            except:
+            except (json.JSONDecodeError, OSError):
                 pass
 
         if not win_odds:
@@ -480,7 +482,8 @@ async def run_live_war_room(venue):
         for r_no in schedule.keys():
             try:
                 await ingest.capture_snapshot(today_iso, int(r_no), venue)
-            except: pass
+            except Exception:
+                pass
 
         while True:
             now = datetime.now(HKT)

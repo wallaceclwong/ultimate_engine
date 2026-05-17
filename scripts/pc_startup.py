@@ -79,7 +79,7 @@ def is_already_processed(date_str, venue):
         # Real odds always have variation across the field.
         all_dummy = len(set(round(v, 1) for v in odds.values())) == 1
         return not all_dummy
-    except:
+    except (json.JSONDecodeError, OSError):
         return False
 
 
@@ -127,7 +127,7 @@ def odds_snapshots_exist(date_str):
             d = _json.loads(snap.read_text(encoding="utf-8"))
             if d.get("win_odds"):  # non-empty win_odds dict
                 valid += 1
-        except:
+        except (json.JSONDecodeError, OSError):
             pass
     return valid >= 5
 
@@ -178,7 +178,7 @@ def sync_odds_to_vm(date_str):
                 run_cmd(["scp", "-o", "ConnectTimeout=10", str(f),
                          f"{VM_HOST}:{VM_PATH}/data/odds/{f.name}"])
                 synced += 1
-        except:
+        except Exception:
             pass
     log(f"Synced {synced}/{len(files)} odds snapshots to VM.")
 

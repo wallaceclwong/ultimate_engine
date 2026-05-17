@@ -31,7 +31,7 @@ class AutoOrchestrator:
         }
         try:
             self.firestore.upsert("system_status", "orchestrator", hb)
-        except: pass
+        except Exception: pass
 
     def run_task(self, command, cwd=None):
         """Runs a subprocess and waits for completion."""

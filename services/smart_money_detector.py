@@ -122,7 +122,7 @@ class SmartMoneyDetector:
             try:
                 with open(filename, "r", encoding="utf-8") as f:
                     existing_alerts = json.load(f).get("alerts", [])
-            except:
+            except (json.JSONDecodeError, OSError):
                 pass
 
         new_dicts = [

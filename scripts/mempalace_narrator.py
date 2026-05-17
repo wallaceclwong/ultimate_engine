@@ -36,7 +36,7 @@ Detailed Context:
                     out_path = NARR_DIR / f"pred_{race_id}_{horse.replace(' ', '_')}.txt"
                     out_path.write_text(narrative, encoding='utf-8')
                     count += 1
-        except:
+        except (json.JSONDecodeError, OSError, KeyError):
             continue
 
     # 2. Process Race Results (Historical Performance)
@@ -71,7 +71,7 @@ Detailed Context:
                     out_path = NARR_DIR / f"res_{date}_{name.replace(' ', '_')}.txt"
                     out_path.write_text(narrative, encoding='utf-8')
                     count += 1
-        except:
+        except (json.JSONDecodeError, OSError):
             continue
 
     # 3. Process Pedigree (Genetic Intelligence)
@@ -146,7 +146,7 @@ Detailed Context:
                     out_path = NARR_DIR / f"rc_{date}_{slug}.txt"
                     out_path.write_text(narrative, encoding='utf-8')
                     count += 1
-        except:
+        except (json.JSONDecodeError, OSError, KeyError):
             continue
 
     print(f"Narrator complete. Generated {count} semantic files in {NARR_DIR}")

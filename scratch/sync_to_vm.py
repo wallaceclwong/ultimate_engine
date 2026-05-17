@@ -62,7 +62,7 @@ def sync():
             sftp.put(str(local_path), temp_path)
             try:
                 sftp.remove(remote_path)
-            except: pass
+            except Exception: pass
             sftp.rename(temp_path, remote_path)
 
         # 4. Final Verification

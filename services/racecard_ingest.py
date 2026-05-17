@@ -7,6 +7,8 @@ from datetime import datetime
 from pathlib import Path
 from typing import Optional, Dict, Any, List
 
+from loguru import logger
+
 # Add project root to path
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
@@ -48,7 +50,7 @@ class RacecardIngest:
             own_page = True
             
         try:
-            print(f"[RACECARD] Navigating to {url}...")
+            logger.info(f"Navigating to {url}...")
             await page.goto(url, wait_until="domcontentloaded", timeout=90000)
             
             # Wait for any of the known table selectors
@@ -57,12 +59,12 @@ class RacecardIngest:
             for sel in table_selectors:
                 try:
                     await page.wait_for_selector(sel, timeout=10000)
-                    print(f"[RACECARD] Found horse table with selector: {sel}")
+                    logger.info(f"Found horse table with selector: {sel}")
                     table_found = True
                     break
-                except:
+                except Exception:
                     continue
-            
+
             if not table_found:
                 # New HKJC website structure: need to click "SETUP MY STARTER LIST" button
                 # Find button containing "SETUP" or "STARTER"
@@ -71,19 +73,19 @@ class RacecardIngest:
                     for btn in buttons:
                         btn_text = await btn.inner_text()
                         if 'SETUP' in btn_text and 'STARTER' in btn_text:
-                            print("[RACECARD] Found SETUP MY STARTER LIST button, clicking...")
+                            logger.info("Found SETUP MY STARTER LIST button, clicking...")
                             await btn.click()
                             await page.wait_for_timeout(3000)
                             break
                 except Exception as e:
-                    print(f"[RACECARD] Setup button click failed: {e}")
+                    logger.warning(f"Setup button click failed: {e}")
                 
                 # Check again for tables after click
                 tables = await page.query_selector_all("table")
                 for t in tables:
                     text = await t.inner_text()
                     if "Horse No." in text and "Jockey" in text:
-                        print("[RACECARD] Found horse table after setup button click.")
+                        logger.info("Found horse table after setup button click.")
                         table_found = True
                         break
             
@@ -120,9 +122,9 @@ class RacecardIngest:
                 header_el = await page.query_selector("div.f_fs13")
                 if header_el:
                     race_header_text = (await header_el.inner_text()).strip()
-                    print(f"[RACECARD] Race header: {race_header_text!r}")
+                    logger.info(f"Race header: {race_header_text!r}")
             except Exception as e:
-                print(f"[RACECARD] Could not extract race header element: {e}")
+                logger.warning(f"Could not extract race header element: {e}")
 
             # --- Parse Distance from header (e.g. '1200M') or fall back to body text ---
             dist_match = re.search(r'(\d{3,5})M', race_header_text or content_text, re.IGNORECASE)
@@ -190,9 +192,9 @@ class RacecardIngest:
 
             if track_condition == "Unknown":
                 track_condition = "Good"   # final safe default
-                print("[RACECARD] Going not detected; defaulting to 'Good'.")
+                logger.warning("Going not detected; defaulting to 'Good'.")
             else:
-                print(f"[RACECARD] Track condition: {track_condition}")
+                logger.info(f"Track condition: {track_condition}")
 
             # --- Parse Jump Time ---
             jump_time = "13:00"
@@ -320,12 +322,12 @@ class RacecardIngest:
 
                 try:
                     weight = float(h['weight'])
-                except:
+                except (ValueError, TypeError):
                     weight = 133.0
 
                 try:
                     draw = int(h['draw'])
-                except:
+                except (ValueError, TypeError):
                     draw = 0
 
                 entry = HorseEntry(
@@ -345,7 +347,7 @@ class RacecardIngest:
                 horses.append(entry)
 
             if not horses:
-                print(f"[ERROR] No horses found for R{race_no}.")
+                logger.error(f"No horses found for R{race_no}.")
                 if own_page: await page.close()
                 return None
 
@@ -364,19 +366,19 @@ class RacecardIngest:
                 horses=horses
             )
             
-            print(f"[RACECARD] Successfully scraped {len(horses)} horses for {race_id}")
+            logger.success(f"Scraped {len(horses)} horses for {race_id}")
             if own_page:
                 await page.close()
             return card
             
         except Exception as e:
-            print(f"[RACECARD] Extraction ERROR: {e}")
+            logger.error(f"Extraction ERROR: {e}")
             if page:
                 try:
                     debug_path = f"tmp/racecard_error_R{race_no}.png"
                     await page.screenshot(path=debug_path)
-                    print(f"[RACECARD] Saved debug screenshot to {debug_path}")
-                except: pass
+                    logger.info(f"Saved debug screenshot to {debug_path}")
+                except Exception: pass
             if own_page:
                 await page.close()
             return None
@@ -397,9 +399,9 @@ async def main():
         filename = f"data/racecard_{date_clean}_R{args.race}.json"
         with open(filename, "w", encoding="utf-8") as f:
             f.write(card.model_dump_json(indent=2))
-        print(f"Racecard saved to {filename}")
+        logger.success(f"Racecard saved to {filename}")
     else:
-        print("Scrape FAILED.")
+        logger.error("Scrape FAILED.")
     
     await ingest.browser_mgr.stop()
 

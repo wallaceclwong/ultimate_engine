@@ -71,7 +71,7 @@ async def run_batch():
                 with open(f, 'r', encoding='utf-8') as j:
                     data = json.load(j)
                     tasks.append((rid, data.get('stewards_report', '')))
-            except: continue
+            except (json.JSONDecodeError, OSError): continue
             
     if not tasks:
         print('No missing races found. Coverage is 100%.')

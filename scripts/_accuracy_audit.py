@@ -178,7 +178,7 @@ for r in genuine:
         try:
             rc = json.loads(rc_path.read_text(encoding="utf-8"))
             going = rc.get("track_condition", "Unknown")
-        except:
+        except (json.JSONDecodeError, OSError):
             pass
     r["going"] = going
 
