@@ -22,6 +22,22 @@ class ResultsIngest:
         self.headless = headless
         self.browser_mgr = browser_mgr or BrowserManager(headless=headless)
 
+    async def _parse_horse_row(self, cols) -> dict:
+        """Extract horse result data from a row's <td> elements."""
+        return {
+            "plc": (await cols[0].inner_text()).strip(),
+            "horse_no": (await cols[1].inner_text()).strip(),
+            "horse": (await cols[2].inner_text()).strip(),
+            "jockey": (await cols[3].inner_text()).strip(),
+            "trainer": (await cols[4].inner_text()).strip(),
+            "actual_wt": (await cols[5].inner_text()).strip(),
+            "declar_wt": (await cols[6].inner_text()).strip(),
+            "draw": (await cols[7].inner_text()).strip(),
+            "lbw": (await cols[8].inner_text()).strip(),
+            "finish_time": (await cols[10].inner_text()).strip() if len(cols) > 10 else "",
+            "win_odds": (await cols[11].inner_text()).strip() if len(cols) > 11 else ""
+        }
+
     async def _click_race_tab(self, page, race_no: int) -> bool:
         """
         Clicks the race number tab on the HKJC results page.
@@ -136,19 +152,7 @@ class ResultsIngest:
                 cols = await row.query_selector_all("td")
                 if len(cols) >= 10:
                     try:
-                        results.append({
-                            "plc": (await cols[0].inner_text()).strip(),
-                            "horse_no": (await cols[1].inner_text()).strip(),
-                            "horse": (await cols[2].inner_text()).strip(),
-                            "jockey": (await cols[3].inner_text()).strip(),
-                            "trainer": (await cols[4].inner_text()).strip(),
-                            "actual_wt": (await cols[5].inner_text()).strip(),
-                            "declar_wt": (await cols[6].inner_text()).strip(),
-                            "draw": (await cols[7].inner_text()).strip(),
-                            "lbw": (await cols[8].inner_text()).strip(),
-                            "finish_time": (await cols[10].inner_text()).strip() if len(cols) > 10 else "",
-                            "win_odds": (await cols[11].inner_text()).strip() if len(cols) > 11 else ""
-                        })
+                        results.append(await self._parse_horse_row(cols))
                     except Exception:
                         continue
 
@@ -164,19 +168,7 @@ class ResultsIngest:
                     cols = await row.query_selector_all("td")
                     if len(cols) >= 10:
                         try:
-                            results.append({
-                                "plc": (await cols[0].inner_text()).strip(),
-                                "horse_no": (await cols[1].inner_text()).strip(),
-                                "horse": (await cols[2].inner_text()).strip(),
-                                "jockey": (await cols[3].inner_text()).strip(),
-                                "trainer": (await cols[4].inner_text()).strip(),
-                                "actual_wt": (await cols[5].inner_text()).strip(),
-                                "declar_wt": (await cols[6].inner_text()).strip(),
-                                "draw": (await cols[7].inner_text()).strip(),
-                                "lbw": (await cols[8].inner_text()).strip(),
-                                "finish_time": (await cols[10].inner_text()).strip() if len(cols) > 10 else "",
-                                "win_odds": (await cols[11].inner_text()).strip() if len(cols) > 11 else ""
-                            })
+                            results.append(await self._parse_horse_row(cols))
                         except Exception:
                             continue
 

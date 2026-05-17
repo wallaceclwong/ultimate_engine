@@ -15,6 +15,70 @@ sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from models.schemas import RaceCard, HorseEntry
 from services.browser_manager import BrowserManager
 
+# JavaScript injected into the HKJC racecard page to extract horse data from
+# the DOM.  Separate from the Python logic so the JS can be read and updated
+# independently when the HKJC layout changes.
+_RACECARD_EXTRACTION_JS = r"""() => {
+    const results = [];
+    const tables = Array.from(document.querySelectorAll('table.starter, table.table_bd.racecard, #racecardlist table'));
+
+    for (const table of tables) {
+        const rows = Array.from(table.querySelectorAll('tr'));
+        let headerFound = false;
+        let mapping = { saddle: 0, last_6: 1, horse: 3, weight: 4, jockey: 5, draw: 6, trainer: 7, gear: -1 };
+
+        for (const row of rows) {
+            const cells = Array.from(row.querySelectorAll('td, th'));
+            const cellTexts = cells.map(c => c.innerText.trim());
+
+            if (!headerFound && cellTexts.includes('Horse No.') && cellTexts.includes('Jockey')) {
+                headerFound = true;
+                mapping.saddle = cellTexts.indexOf('Horse No.');
+                mapping.horse  = cellTexts.indexOf('Horse');
+                mapping.weight = cellTexts.indexOf('Wt.');
+                mapping.jockey = cellTexts.indexOf('Jockey');
+                mapping.draw   = cellTexts.indexOf('Draw');
+                mapping.trainer = cellTexts.indexOf('Trainer');
+                mapping.last_6 = cellTexts.indexOf('Last 6 Runs');
+                const gearIdx = cellTexts.findIndex(t => t === 'Gear' || t === 'Equipment');
+                if (gearIdx !== -1) mapping.gear = gearIdx;
+                continue;
+            }
+
+            if (headerFound && cellTexts.length >= 8) {
+                const saddle = cellTexts[mapping.saddle];
+                if (!saddle || !/^\d+$/.test(saddle)) continue;
+
+                const horse = cellTexts[mapping.horse] ? cellTexts[mapping.horse].split('\n')[0].trim() : "";
+                if (!horse || horse === 'Horse') continue;
+
+                let gearText = mapping.gear >= 0 ? (cellTexts[mapping.gear] || "") : "";
+                if (!gearText && mapping.gear >= 0) {
+                    const gearCell = cells[mapping.gear];
+                    if (gearCell) {
+                        const imgs = gearCell.querySelectorAll('img[alt]');
+                        gearText = Array.from(imgs).map(i => i.alt.trim()).filter(Boolean).join(",");
+                    }
+                }
+
+                results.push({
+                    saddle:  saddle,
+                    horse:   horse,
+                    last_6:  cellTexts[mapping.last_6] || "",
+                    weight:  cellTexts[mapping.weight] || "",
+                    jockey:  cellTexts[mapping.jockey] || "",
+                    draw:    cellTexts[mapping.draw] || "",
+                    trainer: cellTexts[mapping.trainer] || "",
+                    gear:    gearText,
+                });
+            }
+        }
+        if (results.length > 0) break;
+    }
+    return results;
+}"""
+
+
 class RacecardIngest:
     def __init__(self, headless=True, browser_mgr=None):
         self.headless = headless
@@ -203,71 +267,7 @@ class RacecardIngest:
                 jump_time = time_match.group(1).strip()
 
             # --- Precise HKJC Layout Extraction ---
-            horses_data = await page.evaluate(r'''() => {
-                const results = [];
-                // Target the main racecard table specifically
-                const tables = Array.from(document.querySelectorAll('table.starter, table.table_bd.racecard, #racecardlist table'));
-                
-                for (const table of tables) {
-                    const rows = Array.from(table.querySelectorAll('tr'));
-                    let headerFound = false;
-                    let mapping = { saddle: 0, last_6: 1, horse: 3, weight: 4, jockey: 5, draw: 6, trainer: 7, gear: -1 };
-
-                    for (const row of rows) {
-                        const cells = Array.from(row.querySelectorAll('td, th'));
-                        const cellTexts = cells.map(c => c.innerText.trim());
-                        
-                        // Identify Header Row
-                        if (!headerFound && cellTexts.includes('Horse No.') && cellTexts.includes('Jockey')) {
-                            headerFound = true;
-                            mapping.saddle = cellTexts.indexOf('Horse No.');
-                            mapping.horse  = cellTexts.indexOf('Horse');
-                            mapping.weight = cellTexts.indexOf('Wt.');
-                            mapping.jockey = cellTexts.indexOf('Jockey');
-                            mapping.draw   = cellTexts.indexOf('Draw');
-                            mapping.trainer = cellTexts.indexOf('Trainer');
-                            mapping.last_6 = cellTexts.indexOf('Last 6 Runs');
-                            // Gear column header varies: "Gear", "Equipment", "Rtg."
-                            const gearIdx = cellTexts.findIndex(t => t === 'Gear' || t === 'Equipment');
-                            if (gearIdx !== -1) mapping.gear = gearIdx;
-                            continue;
-                        }
-
-                        // Process Data Rows
-                        if (headerFound && cellTexts.length >= 8) {
-                            const saddle = cellTexts[mapping.saddle];
-                            if (!saddle || !/^\d+$/.test(saddle)) continue;
-
-                            const horse = cellTexts[mapping.horse] ? cellTexts[mapping.horse].split('\n')[0].trim() : "";
-                            if (!horse || horse === 'Horse') continue;
-
-                            // Gear: grab text content; also try to read img alt tags for icon-only cells
-                            let gearText = mapping.gear >= 0 ? (cellTexts[mapping.gear] || "") : "";
-                            if (!gearText && mapping.gear >= 0) {
-                                // Fallback: read alt attributes from gear icons
-                                const gearCell = cells[mapping.gear];
-                                if (gearCell) {
-                                    const imgs = gearCell.querySelectorAll('img[alt]');
-                                    gearText = Array.from(imgs).map(i => i.alt.trim()).filter(Boolean).join(",");
-                                }
-                            }
-
-                            results.push({
-                                saddle:  saddle,
-                                horse:   horse,
-                                last_6:  cellTexts[mapping.last_6] || "",
-                                weight:  cellTexts[mapping.weight] || "",
-                                jockey:  cellTexts[mapping.jockey] || "",
-                                draw:    cellTexts[mapping.draw] || "",
-                                trainer: cellTexts[mapping.trainer] || "",
-                                gear:    gearText,
-                            });
-                        }
-                    }
-                    if (results.length > 0) break; // Found the main table
-                }
-                return results;
-            }''')
+            horses_data = await page.evaluate(_RACECARD_EXTRACTION_JS)
 
             # Known HKJC gear codes and their meanings (for AI prompt context)
             GEAR_CODES = {

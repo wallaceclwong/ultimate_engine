@@ -15,7 +15,7 @@ import pytz
 HKT = pytz.timezone('Asia/Hong_Kong')
 BASE_DIR = Path(__file__).parent.absolute()
 FIXTURES_FILE = BASE_DIR / "data" / "fixtures_season.json"
-PYTHON_EXEC = sys.executable  # Cross-platform (Windows/Linux)
+PYTHON_EXEC = sys.executable
 STATE_FILE = BASE_DIR / "data" / "scheduler_state.json"
 LOCK_FILE = BASE_DIR / "ultimate_scheduler.lock"
 
@@ -23,11 +23,20 @@ LOCK_FILE = BASE_DIR / "ultimate_scheduler.lock"
 _today_fixture_cache = None
 _today_fixture_cache_date = None
 
+# Held open for the lifetime of --live mode; released on process exit
+_lock_fd = None
+
+
 def acquire_lock():
-    """Single-instance guard for --live mode.
-    - Kills any non-venv Python duplicates immediately.
-    - Yields to an existing LIVE venv instance (lowest PID wins).
+    """Single-instance guard for --live mode using atomic file locking.
+
+    Uses O_CREAT|O_EXCL for an atomic creation test — if the lock file
+    already exists, we check whether the owning PID is still alive.
+    Stale locks (dead PIDs) are removed and retried.
+
+    Also kills any non-venv Python duplicates as a safety net.
     """
+    global _lock_fd
     import psutil
     current_pid = os.getpid()
     try:
@@ -35,21 +44,18 @@ def acquire_lock():
     except (psutil.NoSuchProcess, psutil.AccessDenied):
         parent_pid = -1
 
+    # ── Kill non-venv dupes (safety net) ──────────────────────────────
     venv_py = str(BASE_DIR / ".venv" / "Scripts" / "python.exe").lower()
-    venv_rivals = []
-
     for proc in psutil.process_iter(['pid', 'cmdline', 'exe']):
         try:
             if proc.info['pid'] in (current_pid, parent_pid):
                 continue
             exe = (proc.info.get('exe') or '').lower()
-            # Only consider actual Python processes (skip PowerShell, WMI, etc.)
             if 'python' not in exe:
                 continue
             cmd = " ".join(proc.info['cmdline'] or [])
             if 'ultimate_scheduler_vm' not in cmd or '--live' not in cmd:
                 continue
-            # Verify process is truly alive
             if not psutil.pid_exists(proc.info['pid']):
                 continue
             if exe != venv_py:
@@ -58,16 +64,36 @@ def acquire_lock():
                     print(f"[FIX] Killed non-venv war room duplicate PID {proc.info['pid']} ({exe})")
                 except (psutil.NoSuchProcess, psutil.AccessDenied):
                     pass
-            else:
-                venv_rivals.append(proc.info['pid'])
         except (psutil.NoSuchProcess, psutil.AccessDenied):
             continue
 
-    if venv_rivals and min(venv_rivals) < current_pid:
-        print(f"[EXIT] Venv war room already running (PID {min(venv_rivals)}). Duplicate suppressed.")
-        sys.exit(0)
+    # ── Atomic lock file acquisition ──────────────────────────────────
+    while True:
+        try:
+            _lock_fd = os.open(str(LOCK_FILE), os.O_CREAT | os.O_EXCL | os.O_WRONLY)
+            os.write(_lock_fd, str(current_pid).encode())
+            os.fsync(_lock_fd)
+            return  # lock acquired
+        except FileExistsError:
+            pass
 
-    LOCK_FILE.write_text(str(current_pid))
+        # Lock file exists — check if the owner is still alive
+        try:
+            stale_pid = int(LOCK_FILE.read_text().strip())
+        except (ValueError, OSError):
+            stale_pid = None
+
+        if stale_pid and not psutil.pid_exists(stale_pid):
+            # Stale lock — remove and retry
+            try:
+                LOCK_FILE.unlink()
+            except OSError:
+                pass
+            continue
+
+        # Another live instance holds the lock
+        print(f"[EXIT] War room already running (PID {stale_pid}). Duplicate suppressed.")
+        sys.exit(0)
     return True
 
 def load_scheduler_state():
