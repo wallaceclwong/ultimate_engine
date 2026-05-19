@@ -114,7 +114,13 @@ def main():
 
         # 0. Weather Intelligence
         print(f"\n--- [1/3] Generating Weather Intelligence for {venue} ---")
-        run_ingestion(str(services_dir / "generate_weather_intel.py"), date_str, venue, 1)
+        weather_cmd = [sys.executable, str(services_dir / "generate_weather_intel.py"), "--date", date_str, "--venue", venue]
+        print(f"Running: {' '.join(weather_cmd)}")
+        weather_result = subprocess.run(weather_cmd, capture_output=True, text=True, timeout=180)
+        if weather_result.returncode != 0:
+            print(f"[WARN] Weather intel exited {weather_result.returncode}: {weather_result.stderr[:200]}")
+        else:
+            print(weather_result.stdout.strip()[:300])
 
         # 1. Racecard ingestion (All races)
         print(f"\n--- [2/3] Ingesting Racecards ({len(races_to_run)} races) ---")

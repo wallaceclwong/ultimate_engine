@@ -16,6 +16,7 @@ from services.firestore_service import FirestoreService
 from services.data_validation import validate_racecard
 from services.notification_service import NotificationService
 from services.live_odds_monitor import get_live_odds_monitor
+from services.stewards_analyzer import get_stewards_analyzer
 
 class KellyCriterion:
     def __init__(self, bankroll: float = 10000.0, fractional_kelly: float = 0.1):
