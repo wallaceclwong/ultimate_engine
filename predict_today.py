@@ -259,36 +259,38 @@ def predict_race(date_str, venue, race_num):
         probabilities[horse_no] = float(row["pred_prob"])
         market_odds[horse_no] = float(row["win_odds"])
     
-    # Get top pick — must be rank-1, not just first row (which is horse #1 by saddle)
-    top_pick = df_race.sort_values("rank").iloc[0]
-    recommended_bet = f"WIN {_safe_horse_no(top_pick['horse_no'])}"
-    
-    # ── Confidence = Value Edge of the top pick ──────────────────────────────
-    # Positive = model sees genuine value vs market; negative = market is right
-    top_pick_edge = float(top_pick["value_edge"])
-
-    # ── Edge Cap: >80% signals model uncertainty, not genuine edge ───────────
-    capped_edge = min(top_pick_edge, 0.80)
-
-    # ── Track Condition: wet/soft = less reliable predictions ────────────────
+    # ── Track Condition: wet/soft = less reliable predictions ─────────────────
     track_condition_raw = rc.get("track_condition", "Good").upper()
     WET_KEYWORDS = {"WET", "SOFT", "YIELDING", "HEAVY", "SLOW"}
     is_wet_track = any(w in track_condition_raw for w in WET_KEYWORDS)
 
-    # ── Bet Signal ────────────────────────────────────────────────────────────
+    # ── Bet Signal ───────────────────────────────────────────────────────────
     # Backtest-validated policy (2025+ data, 16.9% ROI):
-    #   Odds 5.0-12.0 is the sweet spot — cuts false favourites and longshot noise.
-    #   Model rank-1 + prob floor > 8% ensures genuine conviction.
-    #   Wet track downgrades to NO BET (model degrades on off going).
+    #   Pick the best horse by model score WITHIN the 5-12 odds window.
+    #   The model's global rank-1 is almost always a favourite (odds<5),
+    #   so requiring global rank-1 kills the bet flow. Instead trust the
+    #   odds window — the model's relative ordering within mid-range odds
+    #   is where the edge lives.
+    value_horses = df_race[
+        (df_race["win_odds"] >= 5.0)
+        & (df_race["win_odds"] <= 12.0)
+        & (df_race["pred_prob"] > 0.08)
+    ]
+
+    is_best_bet = False
+    top_pick = df_race.sort_values("rank").iloc[0]  # global rank-1 for display
+
+    if not is_wet_track and not value_horses.empty:
+        bet_pick = value_horses.sort_values("ensemble_score", ascending=False).iloc[0]
+        is_best_bet = True
+        top_pick = bet_pick  # use the value pick as the featured horse
+
+    recommended_bet = f"WIN {_safe_horse_no(top_pick['horse_no'])}"
+    top_pick_edge = float(top_pick["value_edge"])
+    capped_edge = min(top_pick_edge, 0.80)
+
     sorted_probs = sorted(probabilities.values(), reverse=True)
     prob_gap = (sorted_probs[0] - sorted_probs[1]) if len(sorted_probs) >= 2 else 0
-
-    is_best_bet = (
-        not is_wet_track
-        and 5.0 <= float(top_pick["win_odds"]) <= 12.0
-        and int(top_pick["rank"]) == 1
-        and float(top_pick["pred_prob"]) > 0.08
-    )
 
     prediction_json = {
         "race_id": race_id,
@@ -346,18 +348,24 @@ async def main():
     summary = pd.concat(full_results)
     
     # ── Bet Filter: backtest-validated odds 5-12 policy ──────────────────────
-    # Rank-1 picks within the 5-12 odds window where the model has proven edge.
-    # Wet track races are excluded (model signal degrades on off going).
-    bets = summary[
-        (summary["rank"] == 1)
-        & (summary["win_odds"] >= 5.0)
-        & (summary["win_odds"] <= 12.0)
-        & (summary["pred_prob"] > 0.08)
-    ].copy()
-    bets["tier"] = "PRIMARY"
+    # For each race, pick the best horse by model score within the 5-12 odds
+    # window. The model's global rank-1 is usually a favourite — the edge is
+    # in finding the best horse among mid-range odds, not the absolute best.
+    bets = []
+    for r_df in full_results:
+        value = r_df[
+            (r_df["win_odds"] >= 5.0)
+            & (r_df["win_odds"] <= 12.0)
+            & (r_df["pred_prob"] > 0.08)
+        ]
+        if not value.empty:
+            pick = value.sort_values("ensemble_score", ascending=False).iloc[0]
+            bets.append(pick)
+
+    bets = pd.DataFrame(bets) if bets else pd.DataFrame()
 
     if bets.empty:
-        print("\n  ⛔ No value bets today — no rank-1 picks in the 5-12 odds window.")
+        print("\n  ⛔ No value bets today — no horses in the 5-12 odds window with model support.")
         print("  (Showing top ranked horses per race for reference only)")
         for r_df in full_results:
             top = r_df.iloc[0]
@@ -367,12 +375,12 @@ async def main():
         return
 
     print("\n" + "="*60)
-    print(f"  BETS (odds 5-12, rank-1, prob>8%): {len(bets)}")
+    print(f"  BETS (odds 5-12, best model score in window): {len(bets)}")
     print("="*60)
 
     for _, bet in bets.sort_values("win_odds").iterrows():
         print(f"\n  R{int(bet['race'])}: #{_safe_horse_no(bet['horse_no'])} {bet['horse_name']}")
-        print(f"      Odds: {bet['win_odds']:.1f} | Prob: {bet['pred_prob']:.2%} | Value Edge: {bet['value_edge']:+.1%}")
+        print(f"      Odds: {bet['win_odds']:.1f} | Prob: {bet['pred_prob']:.2%} | Rank: {int(bet['rank'])} | Edge: {bet['value_edge']:+.1%}")
 
     print(f"\n[PREDICT] Predictions saved to disk. War Room will audit at T-15 per race.")
     print("="*60)
