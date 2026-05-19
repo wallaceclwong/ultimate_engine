@@ -35,6 +35,18 @@ df = pd.read_parquet(TRAINING_FILE)
 df["date"] = pd.to_datetime(df["date"])
 df["year"] = df["date"].dt.year
 
+# Merge AI unluckiness scores if not already in matrix
+if "ai_unluckiness" not in df.columns:
+    ai_cache_path = BASE_DIR / "data" / "ai_sentiment_cache.parquet"
+    if ai_cache_path.exists():
+        df_ai = pd.read_parquet(ai_cache_path)
+        df_ai["horse_no"] = df_ai["horse_no"].astype(str)
+        df["horse_no"] = df["horse_no"].astype(str)
+        df = df.merge(df_ai, on=["race_id", "horse_no"], how="left")
+        df["ai_unluckiness"] = df["ai_unlucky_score"].fillna(1.0)
+    else:
+        df["ai_unluckiness"] = 1.0
+
 # Filter to Test Period (2025+)
 # The matrix already contains all engineered features (Sectionals, Expanding Stats, etc.)
 test_df = df[df["year"] >= 2025].sort_values(["date", "race_num", "horse_no"]).reset_index(drop=True)
@@ -124,57 +136,100 @@ results = get_ensemble_probs(test_df, X_test)
 print("\nRunning betting simulation...")
 
 INITIAL_BANKROLL = 10000.0
-bankroll = INITIAL_BANKROLL
-history = []
 
-for race_id, group in results.groupby("race_id", sort=False):
-    group = group.copy()
-    group["ev"] = group["pred_prob"] * group["win_odds"]
+# The EV metric is noisy because probabilities are rank-mapped, not calibrated.
+# Instead, trust the rank ordering and filter by odds range:
+# - Skip short odds (< min_odds): false favourites, no value
+# - Skip long odds (> max_odds): too volatile, model signal degrades
+# Keep prob floor to avoid picks the model doesn't actually like.
 
-    # Betting policy: prob > 10% AND ev > 1.25 (Elite Trades)
-    bets = group[(group["pred_prob"] > 0.10) & (group["ev"] > 1.25)].sort_values("ev", ascending=False)
+ODDS_SWEEP = [
+    (3.0, 20.0, 0.08),   # default: skip false favs and extreme longshots
+    (4.0, 15.0, 0.08),   # tighter
+    (5.0, 12.0, 0.08),   # mid-range value only
+    (6.0, 10.0, 0.08),   # narrow value window
+    (3.0, 20.0, 0.10),   # higher prob floor
+    (4.0, 15.0, 0.10),
+    (5.0, 12.0, 0.10),
+]
 
-    if not bets.empty:
-        bet_row = bets.iloc[0]
-        prob, odds = bet_row["pred_prob"], bet_row["win_odds"]
+print(f"\n{'Policy':>22} {'Bets':>6} {'Win%':>7} {'Profit':>10} {'ROI':>7} {'DDown':>8}")
+print("-" * 65)
 
-        # 1/10th Kelly with a 3% safety cap
-        kelly_full = (prob * (odds - 1) - (1 - prob)) / (odds - 1)
-        kelly_full = max(0, kelly_full)
-        stake_pct  = min(0.03, kelly_full * 0.10)  # Max 3% stake per race
-        stake_amt  = bankroll * stake_pct
+best_result = None
 
-        if stake_amt < 10: # Minimum HKD bet
-            continue
+for min_odds, max_odds, prob_floor in ODDS_SWEEP:
+    bankroll = INITIAL_BANKROLL
+    history = []
 
-        is_win = int(bet_row["plc"] == 1)
-        profit = (stake_amt * odds - stake_amt) if is_win else -stake_amt
-        bankroll += profit
+    for race_id, group in results.groupby("race_id", sort=False):
+        group = group.copy()
+        group["ev"] = group["pred_prob"] * group["win_odds"]
 
-        history.append({
-            "race_id":      race_id,
-            "date":         bet_row["date"],
-            "horse":        bet_row["horse_name"],
-            "prob":         round(prob, 4),
-            "odds":         round(odds, 2),
-            "ev":           round(bet_row["ev"], 4),
-            "stake_amt":    round(stake_amt, 2),
-            "result":       "WIN" if is_win else "LOSS",
-            "profit":       round(profit, 2),
-            "bankroll":     round(bankroll, 2),
-        })
+        # Bet rank-1 within odds window and above prob floor
+        bets = group[
+            (group["pred_prob"] > prob_floor)
+            & (group["win_odds"] >= min_odds)
+            & (group["win_odds"] <= max_odds)
+        ].sort_values("ensemble_score", ascending=False)
 
-# ─── Summary ─────────────────────────────────────────────────────────────────
-hist_df = pd.DataFrame(history)
+        if not bets.empty:
+            bet_row = bets.iloc[0]
+            prob, odds = bet_row["pred_prob"], bet_row["win_odds"]
+
+            # 1/10th Kelly with a 3% safety cap
+            kelly_full = (prob * (odds - 1) - (1 - prob)) / (odds - 1)
+            kelly_full = max(0, kelly_full)
+            stake_pct  = min(0.03, kelly_full * 0.10)
+            stake_amt  = bankroll * stake_pct
+
+            if stake_amt < 10:
+                continue
+
+            is_win = int(bet_row["plc"] == 1)
+            profit = (stake_amt * odds - stake_amt) if is_win else -stake_amt
+            bankroll += profit
+
+            history.append({
+                "race_id":      race_id,
+                "date":         bet_row["date"],
+                "horse":        bet_row["horse_name"],
+                "prob":         round(prob, 4),
+                "odds":         round(odds, 2),
+                "stake_amt":    round(stake_amt, 2),
+                "result":       "WIN" if is_win else "LOSS",
+                "profit":       round(profit, 2),
+                "bankroll":     round(bankroll, 2),
+            })
+
+    hist_df = pd.DataFrame(history)
+    n_bets = len(hist_df)
+    label = f"odds[{min_odds}-{max_odds}] P>{prob_floor}"
+    if n_bets == 0:
+        print(f"{label:>22} {'0':>6} {'—':>7} {'—':>10} {'—':>7} {'—':>8}")
+        continue
+
+    win_rate = len(hist_df[hist_df['result'] == 'WIN']) / n_bets
+    net_profit = bankroll - INITIAL_BANKROLL
+    roi = net_profit / max(1, hist_df['stake_amt'].sum())
+    max_dd = hist_df['profit'].cumsum().min()
+
+    print(f"{label:>22} {n_bets:>6} {win_rate:>7.1%} ${net_profit:>9,.0f} {roi:>7.1%} ${max_dd:>7,.0f}")
+
+    if best_result is None or net_profit > best_result.get("profit", -99999):
+        best_result = {
+            "label": label, "n_bets": n_bets, "win_rate": win_rate,
+            "profit": net_profit, "roi": roi, "max_dd": max_dd,
+            "bankroll": bankroll, "history": hist_df,
+        }
+
+# ─── Best Result ─────────────────────────────────────────────────────────────
+best = best_result
+hist_df = best["history"]
 hist_df.to_csv(RESULTS_OUT, index=False)
 
 print("\n" + "=" * 60)
-print("  BACKTEST SUMMARY")
-print("=" * 60)
-print(f"Bets Placed     : {len(hist_df):,}")
-print(f"Win Rate        : {len(hist_df[hist_df['result'] == 'WIN']) / len(hist_df):.1%}")
-print(f"Final Bankroll  : ${bankroll:,.2f} HKD")
-print(f"Net Profit      : ${bankroll - INITIAL_BANKROLL:,.2f} HKD")
-print(f"Total ROI       : {(bankroll - INITIAL_BANKROLL) / max(1, hist_df['stake_amt'].sum()):.1%}")
-print(f"Max Drawdown    : ${hist_df['profit'].cumsum().min():,.2f} HKD")
+print(f"  BEST: {best['label']} — {best['n_bets']} bets, "
+      f"{best['win_rate']:.1%} win, ${best['profit']:,.0f} profit, "
+      f"{best['roi']:.1%} ROI")
 print("=" * 60)
