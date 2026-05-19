@@ -441,6 +441,85 @@ async def run_odds_refresh(venue: str):
     print(summary)
     await telegram_service.send_message(f"*Morning Odds Refresh*: {scraped} races scraped, {patched} predictions updated with live odds.")
 
+
+async def run_preflight(venue: str):
+    """Pre-flight data check before predictions. Returns (ready, issues_list)."""
+    today_iso = datetime.now(HKT).strftime("%Y-%m-%d")
+    today_compact = today_iso.replace("-", "")
+    issues = []
+
+    # 1. Racecards check
+    rc_count = 0
+    for r in range(1, 14):
+        rc_file = BASE_DIR / "data" / f"racecard_{today_compact}_R{r}.json"
+        if rc_file.exists():
+            try:
+                with open(rc_file, "r") as fh:
+                    data = json.load(fh)
+                    if data.get("horses"):
+                        rc_count += 1
+            except Exception:
+                pass
+    if rc_count == 0:
+        issues.append("NO RACECARDS for " + today_iso)
+    elif rc_count < 8:
+        issues.append("(soft) Only " + str(rc_count) + " racecards (expected 9-11)")
+
+    # 2. Odds snapshots check (non-empty win_odds)
+    odds_dir = BASE_DIR / "data" / "odds"
+    odds_ok = 0
+    if odds_dir.exists():
+        for r in range(1, 14):
+            snaps = sorted(
+                odds_dir.glob(f"snapshot_{today_compact}_R{r}_*.json"),
+                key=lambda p: p.stat().st_mtime, reverse=True
+            )
+            for snap in snaps[:3]:
+                try:
+                    d = json.loads(snap.read_text(encoding="utf-8"))
+                    if d.get("win_odds"):
+                        odds_ok += 1
+                        break
+                except Exception:
+                    pass
+    if odds_ok == 0:
+        issues.append("NO ODDS SNAPSHOTS with win_odds - all bets will use placeholder 10.0")
+    elif odds_ok < rc_count:
+        issues.append("(soft) Only " + str(odds_ok) + "/" + str(rc_count) + " races have odds data")
+
+    # 3. Analytical data check
+    analytical_dir = BASE_DIR / "data" / "analytical"
+    analytical_count = 0
+    if analytical_dir.exists():
+        analytical_count = len(list(analytical_dir.glob(f"analytical_{today_iso}_*.json")))
+    if analytical_count == 0:
+        issues.append("(soft) No analytical data - feature quality degraded")
+
+    # 4. Model files check
+    model_files = [
+        BASE_DIR / "models" / "model_lgb.txt",
+        BASE_DIR / "models" / "model_xgb.json",
+        BASE_DIR / "models" / "model_cat.cbm",
+        BASE_DIR / "models" / "model_meta.json",
+    ]
+    missing_models = [m.name for m in model_files if not m.exists()]
+    if missing_models:
+        issues.append("MISSING MODELS: " + ", ".join(missing_models))
+
+    # 5. Feature matrix check
+    matrix = BASE_DIR / "final_feature_matrix.parquet"
+    if not matrix.exists():
+        issues.append("MISSING final_feature_matrix.parquet")
+
+    is_ready = not any(i.startswith("NO ") or i.startswith("MISSING") for i in issues)
+
+    print(f"[PREFLIGHT] {venue} {today_iso}: {'READY' if is_ready else 'NOT READY'} "
+          f"(rc={rc_count}, odds={odds_ok}, analytical={analytical_count})")
+    for issue in issues:
+        print(f"[PREFLIGHT]   {issue}")
+
+    return is_ready, issues
+
 async def run_predict(venue):
     """Triggers the pre-race predictions and DeepSeek audit."""
     print(f"[{datetime.now(HKT)}] --- STARTING PRE-RACE PREDICTIONS ---")
@@ -633,6 +712,20 @@ async def main():
     mode = sys.argv[1] if len(sys.argv) > 1 else None
     
     if mode == "--status":
+        # Auto-update from GitHub before race day
+        try:
+            result = subprocess.run(
+                ["git", "pull", "--ff-only", "origin", "main"],
+                cwd=str(BASE_DIR), capture_output=True, text=True, timeout=30
+            )
+            if result.returncode == 0:
+                if "Already up to date" not in result.stdout:
+                    print(f"[STATUS] Git pull: {result.stdout.strip().splitlines()[-1]}")
+            else:
+                print(f"[STATUS] Git pull failed: {result.stderr.strip()[:100]}")
+        except Exception as e:
+            print(f"[STATUS] Git pull error: {e}")
+
         fxt = get_today_fixture()
         today_str = datetime.now(HKT).strftime("%a %d %b")
         if fxt:
@@ -690,29 +783,26 @@ async def main():
     elif mode == "--predict":
         fxt = get_today_fixture()
         if fxt:
-            # Data availability check before predictions
+            venue = fxt["venue"]
             today_iso = datetime.now(HKT).strftime("%Y-%m-%d")
-            date_compact = today_iso.replace("-", "")
-            
-            # Check odds data
-            odds_dir = BASE_DIR / "data" / "odds"
-            odds_files = list(odds_dir.glob(f"snapshot_*_R*.json")) if odds_dir.exists() else []
-            
-            # Check analytical data
-            analytical_dir = BASE_DIR / "data" / "analytical"
-            analytical_files = list(analytical_dir.glob(f"analytical_{today_iso}_*.json")) if analytical_dir.exists() else []
-            
-            print(f"[PREDICT CHECK] Odds files: {len(odds_files)}, Analytical files: {len(analytical_files)}")
-            
-            if len(odds_files) < 3:
-                print("[PREDICT] WARNING: Insufficient odds data. Predictions may be degraded.")
-            if len(analytical_files) < 3:
-                print("[PREDICT] WARNING: Insufficient analytical data. Predictions may be degraded.")
-            
-            await run_predict(fxt['venue'])
+
+            # Pre-flight data check
+            is_ready, issues = await run_preflight(venue)
+
+            if not is_ready:
+                alert = "PRE-FLIGHT FAILED - " + venue + " " + today_iso + "\n\n" + "\n".join(issues)
+                await telegram_service.send_message(alert)
+                print("[PREDICT] ABORTING: critical pre-flight failures.")
+                return
+
+            if issues:
+                warn = "Pre-Flight Warnings - " + venue + " " + today_iso + "\n\n" + "\n".join(issues)
+                await telegram_service.send_message(warn)
+
+            await run_predict(venue)
         else:
             print("Skipping predictions: Not a local race day.")
-            
+
     elif mode == "--live":
         fxt = get_today_fixture()
         if fxt:
