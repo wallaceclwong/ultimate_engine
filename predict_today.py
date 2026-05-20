@@ -265,16 +265,14 @@ def predict_race(date_str, venue, race_num):
     is_wet_track = any(w in track_condition_raw for w in WET_KEYWORDS)
 
     # ── Bet Signal ───────────────────────────────────────────────────────────
-    # Backtest-validated policy (2025+ data, 16.9% ROI):
-    #   Pick the best horse by model score WITHIN the 5-12 odds window.
-    #   The model's global rank-1 is almost always a favourite (odds<5),
-    #   so requiring global rank-1 kills the bet flow. Instead trust the
-    #   odds window — the model's relative ordering within mid-range odds
-    #   is where the edge lives.
+    # Value window approach: find the best model pick in the 4-15 odds range
+    # where genuine value tends to hide. But only fire if the model sees
+    # positive edge (undervalued by market) with enough conviction.
     value_horses = df_race[
-        (df_race["win_odds"] >= 5.0)
-        & (df_race["win_odds"] <= 12.0)
+        (df_race["win_odds"] >= 4.0)
+        & (df_race["win_odds"] <= 15.0)
         & (df_race["pred_prob"] > 0.08)
+        & (df_race["value_edge"] > 0.15)       # model must see 15%+ edge
     ]
 
     is_best_bet = False
@@ -282,8 +280,10 @@ def predict_race(date_str, venue, race_num):
 
     if not is_wet_track and not value_horses.empty:
         bet_pick = value_horses.sort_values("ensemble_score", ascending=False).iloc[0]
-        is_best_bet = True
-        top_pick = bet_pick  # use the value pick as the featured horse
+        # Extra check: bet pick must be in model's top-4 by probability
+        if int(bet_pick["rank"]) <= 4:
+            is_best_bet = True
+            top_pick = bet_pick  # use the value pick as the featured horse
 
     recommended_bet = f"WIN {_safe_horse_no(top_pick['horse_no'])}"
     top_pick_edge = float(top_pick["value_edge"])
