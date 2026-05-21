@@ -75,20 +75,17 @@ for col in FORCED_NUMERIC:
 # Individual per-horse finish times directly encode position (leakage!).
 # Using the winning time as a race-level feature is legitimate — it represents
 # the overall pace context of that race, not the horse's individual result.
-if "finish_time_secs" in df.columns and "plc" in df.columns:
-    # Get the winner's time for each race (plc == 1)
-    race_times = (
-        df[df["plc"] == 1]
-        .groupby("race_id")["finish_time_secs"]
-        .first()
-        .rename("race_winning_time")
-    )
-    df = df.merge(race_times, on="race_id", how="left")
-    # Use winning time where we have it, keep existing race_sec_sum otherwise
-    has_time = df["race_winning_time"].notna() & (df["race_winning_time"] > 0)
-    df.loc[has_time, "race_sec_sum"] = df.loc[has_time, "race_winning_time"]
-    df.drop(columns=["race_winning_time"], inplace=True)
-    print(f"Populated race_sec_sum (winning time per race) for {has_time.sum():,} rows.")
+RACE_TIME_BY_DIST = {
+    1000: 56.69,
+    1200: 69.08,
+    1400: 82.20,
+    1600: 94.72,
+    1650: 97.00,
+    2000: 121.70,
+}
+RACE_TIME_DEFAULT = 70.0
+df["race_sec_sum"] = df["distance"].map(RACE_TIME_BY_DIST).fillna(RACE_TIME_DEFAULT)
+print(f"Aligned race_sec_sum to distance-based historical medians to eliminate look-ahead leakage.")
 
 
 print("Data types cleaned.")

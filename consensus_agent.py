@@ -6,6 +6,16 @@ from pathlib import Path
 from tenacity import retry, stop_after_attempt, wait_exponential, retry_if_exception_type
 from openai import AsyncOpenAI, APIError, APITimeoutError
 from dotenv import load_dotenv
+import pandas as pd
+
+def safe_int_cast(val, default=0):
+    """Safely cast a value to integer, handling pandas NaN, None, float, and strings."""
+    try:
+        if pd.isna(val) or val is None:
+            return default
+        return int(float(val))
+    except (ValueError, TypeError):
+        return default
 
 # ─── Config ──────────────────────────────────────────────────────────────────
 BASE_DIR = Path(__file__).parent.absolute()
@@ -103,7 +113,7 @@ class ConsensusAgent:
                 "fair_odds":       round(h.get("fair_odds", 10.0), 1),
                 "value_mult":      round(h.get("value_mult", 1.0), 2),
                 "gear":            h.get("gear", ""),
-                "wt_allowance":    int(h.get("weight_allowance", 0)),
+                "wt_allowance":    safe_int_cast(h.get("weight_allowance", 0)),
                 "location":        h.get("training_location", "HK"),
             })
 

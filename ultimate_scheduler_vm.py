@@ -623,11 +623,18 @@ async def run_live_war_room(venue):
                 if str(r_no) in state["audited_races"]:
                     continue
 
-                # Simple HKT countdown (e.g. j_time = "13:00")
+                # HKT Date-aware time calculations (gracefully handles midnight crossings)
                 try:
-                    j_dt = datetime.strptime(j_time.strip().replace(" ",""), "%H:%M")
-                    now_dt = datetime.strptime(hkt_now, "%H:%M")
-                    diff_min = (j_dt - now_dt).total_seconds() / 60
+                    from datetime import timedelta
+                    today_str = now.strftime("%Y-%m-%d")
+                    j_dt_naive = datetime.strptime(f"{today_str} {j_time.strip().replace(' ','')}", "%Y-%m-%d %H:%M")
+                    j_dt = HKT.localize(j_dt_naive)
+                    
+                    # If scheduled jump time crosses midnight (e.g., race is 00:15 but now is 23:55)
+                    if j_dt < now and (now - j_dt).total_seconds() > 43200: # 12 hours
+                        j_dt += timedelta(days=1)
+                        
+                    diff_min = (j_dt - now).total_seconds() / 60
 
                     # 0. LIVE ODDS INGESTION (Every 3 mins if within T-25)
                     # We use a state check to prevent hammering the browser

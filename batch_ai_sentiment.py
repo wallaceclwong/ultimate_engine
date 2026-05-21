@@ -9,8 +9,8 @@ from dotenv import load_dotenv
 load_dotenv()
 client = AsyncOpenAI(api_key=os.getenv('DEEPSEEK_API_KEY'), base_url='https://api.deepseek.com')
 
-BASE_DIR = Path('/root/ultimate_engine')
-DATA_DIR = Path('/root/data')
+BASE_DIR = Path(__file__).parent.absolute()
+DATA_DIR = BASE_DIR / 'data'
 RESULTS_DIR = DATA_DIR / 'results'
 CACHE_PATH = DATA_DIR / 'ai_sentiment_cache.parquet'
 

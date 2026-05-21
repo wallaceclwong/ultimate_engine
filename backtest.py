@@ -117,15 +117,35 @@ def get_ensemble_probs(df_test, X):
         df_pred["cat_norm"] * 0.40
     )
 
-    # Calibrated rank-to-probability mapping (from Stage 17 Performance audit)
-    # Ensemble average win accuracy is 32.9% on the validation set.
-    RANK_PROBS = {1: 0.329, 2: 0.18, 3: 0.12, 4: 0.08, 5: 0.04, 6: 0.02}
+    # ─── Standardized Probability Calibration (Softmax + Market Blend) ───
+    # Matches live prediction logic in predict_today.py exactly
+    TEMPERATURE = 0.55
+    MARKET_BLEND = 0.30
 
-    def assign_rank_prob(group):
-        ranks = group.rank(ascending=False, method="first").astype(int)
-        return ranks.map(RANK_PROBS).fillna(0.01)
+    # Ensure implied_prob_norm is calculated properly
+    if "implied_prob_norm" not in df_pred.columns:
+        if "market_implied_prob" in df_pred.columns:
+            df_pred["implied_prob_norm"] = df_pred.groupby("race_id")["market_implied_prob"].transform(lambda x: x / (x.sum() + 1e-9))
+        elif "win_odds" in df_pred.columns:
+            df_pred["market_implied_prob"] = df_pred["win_odds"].apply(lambda odds: 1.0 / odds if odds > 0 else 0.05)
+            df_pred["implied_prob_norm"] = df_pred.groupby("race_id")["market_implied_prob"].transform(lambda x: x / (x.sum() + 1e-9))
+        else:
+            df_pred["implied_prob_norm"] = 1.0 / len(df_pred) # neutral fallback
 
-    df_pred["pred_prob"] = df_pred.groupby("race_id")["ensemble_score"].transform(assign_rank_prob)
+    # Vectorized group Softmax calculation
+    max_scores = df_pred.groupby("race_id")["ensemble_score"].transform("max")
+    df_pred["exp_score"] = np.exp((df_pred["ensemble_score"] - max_scores) / TEMPERATURE)
+    sum_exp_scores = df_pred.groupby("race_id")["exp_score"].transform("sum")
+    df_pred["model_prob"] = df_pred["exp_score"] / (sum_exp_scores + 1e-9)
+
+    # Vectorized Bayesian Market Blend
+    blended = (1 - MARKET_BLEND) * df_pred["model_prob"] + MARKET_BLEND * df_pred["implied_prob_norm"]
+    df_pred["blended_prob"] = blended
+    sum_blended = df_pred.groupby("race_id")["blended_prob"].transform("sum")
+    df_pred["pred_prob"] = df_pred["blended_prob"] / (sum_blended + 1e-9)
+
+    # Drop temp columns
+    df_pred.drop(columns=["exp_score", "model_prob", "blended_prob"], inplace=True, errors="ignore")
 
     return df_pred
 
