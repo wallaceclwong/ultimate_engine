@@ -6,8 +6,7 @@ from pathlib import Path
 def generate_report():
     base_dir = Path(__file__).resolve().parent.parent
     results_dir = base_dir / "data/results"
-    # Current active brain path
-    artifact_path = Path(r"C:\Users\ASUS\.gemini\antigravity\brain\507cc95c-e002-4b14-9a57-11e186b21f50\backfill_progress.md")
+    artifact_path = base_dir / "data" / "backfill_progress.md"
     
     # Static counts for complete legacy project (2018-2026)
     # Approx 88 meetings per year * 9 years = 792 + some 2026 meetings

@@ -53,35 +53,8 @@ def clean_old_files(base_dir, days=30, dry_run=False):
 
 def clean_agent_artifacts(dry_run=False):
     print("\n[5/6] Checking AI Agent Artifacts...")
-    user_profile = os.environ.get("USERPROFILE")
-    if not user_profile:
-        print("  Error: Could not find USERPROFILE environment variable.")
-        return 0
-    
-    brain_dir = Path(user_profile) / ".gemini" / "antigravity" / "brain"
-    if not brain_dir.exists():
-        print(f"  Note: Artifact directory not found at {brain_dir}")
-        return 0
-
-    reclaimed_bytes = 0
-    print(f"  Scanning: {brain_dir}...")
-    media_extensions = [".webp", ".png", ".mp4", ".mov"]
-    
-    try:
-        for session_dir in brain_dir.iterdir():
-            if session_dir.is_dir():
-                for p in session_dir.rglob("*"):
-                    if p.is_file() and p.suffix.lower() in media_extensions:
-                        size = p.stat().st_size
-                        print(f"    Removing agent media: {session_dir.name}/{p.name} ({size / 1024 / 1024:.1f} MB)")
-                        reclaimed_bytes += size
-                        if not dry_run:
-                            try: p.unlink()
-                            except OSError: pass
-    except Exception as e:
-        print(f"  Warning: Could not fully scan agent directory: {e}")
-
-    return reclaimed_bytes
+    print("  Note: No legacy AI artifact directory to scan.")
+    return 0
 
 def deep_clean(target_path, dry_run=False, include_agent=False, retention_days=None):
     base_dir = Path(target_path).resolve()

@@ -192,7 +192,7 @@ class BettingEvaluator:
                     "official_result": f"WIN {official_win}" if official_win else "--",
                     "ai_top_pick": rec_bet,
                     "ai_roi": round(ai_roi, 1),
-                    "model": pred_data.get("model_name") or pred_data.get("gemini_model", "shadow"),
+                    "model": pred_data.get("model_name", "unknown"),
                 })
             except Exception as e:
                 print(f"Error evaluating shadow {pred_file.name}: {e}")

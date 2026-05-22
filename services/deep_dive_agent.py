@@ -1,6 +1,5 @@
 """
-DeepDiveAgent — migrated to DeepSeek-R1.
-Google Gemini/Vertex AI removed.
+DeepDiveAgent — powered by DeepSeek-R1.
 """
 import os
 import sys
