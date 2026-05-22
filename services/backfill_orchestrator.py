@@ -29,7 +29,7 @@ class BackfillOrchestrator:
         self.fixtures_2019 = self.base_dir / "data/fixtures_2019.json"
         self.fixtures_2018 = self.base_dir / "data/fixtures_2018.json"
         self.progress_file = self.base_dir / "data/backfill_status.json"
-        self.brain_progress = Path(r"C:\Users\ASUS\.gemini\antigravity\brain\507cc95c-e002-4b14-9a57-11e186b21f50\backfill_progress.md")
+        self.brain_progress = self.base_dir / "data" / "backfill_progress.md"
         self.results_dir = self.base_dir / "data/results"
         self.analytical_dir = self.base_dir / "data/analytical"
         

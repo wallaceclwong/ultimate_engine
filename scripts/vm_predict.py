@@ -1,7 +1,7 @@
 """
 VM Prediction Runner (No HKJC Scraping)
 ========================================
-Runs on the Vultr VM. Only calls Gemini AI + Google APIs.
+Runs on the Vultr VM. Only calls DeepSeek AI.
 Expects racecard files to already be present (synced from PC).
 
 Usage:
@@ -29,7 +29,7 @@ async def run_predictions(date_str: str, venue: str):
     except Exception as e:
         print(f"[WARN] Weather intel failed: {e}")
 
-    # 2. AI Predictions (Gemini only)
+    # 2. AI Predictions (DeepSeek)
     print(f"\n--- AI Predictions for {date_str} ({venue}) ---")
     pe = PredictionEngine()
     for r in range(1, 12):

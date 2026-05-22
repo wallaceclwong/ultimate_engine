@@ -109,7 +109,7 @@ def sync_to_vm(date_str):
     return True
 
 def trigger_vm_predictions(date_str, venue):
-    """Step 3: Trigger AI predictions on VM (Gemini, no HKJC scraping)."""
+    """Step 3: Trigger AI predictions on VM (DeepSeek, no HKJC scraping)."""
     print(f"\n{'='*60}")
     print(f"STEP 3: Triggering AI predictions on VM ({date_str} {venue})")
     print(f"{'='*60}")
