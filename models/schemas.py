@@ -59,7 +59,7 @@ class OddsSnapshot(BaseModel):
 
 class Prediction(BaseModel):
     race_id: str
-    gemini_model: str
+    model_name: str
     confidence_score: float = Field(ge=0.0, le=1.0)
     is_best_bet: bool = False
     recommended_bet: str = "WIN"

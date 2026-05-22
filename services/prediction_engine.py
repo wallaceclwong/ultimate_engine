@@ -423,7 +423,7 @@ class PredictionEngine:
             # Create Prediction object
             prediction = Prediction(
                 race_id=f"{date_str}_{venue}_R{race_no}",
-                gemini_model=self.model_id,  # stores DeepSeek model name
+                model_name=self.model_id,
                 **prediction_dict
             )
 
@@ -470,7 +470,7 @@ class PredictionEngine:
             # Create Prediction object
             prediction = Prediction(
                 race_id=f"{date_str}_{venue}_R{race_no}",
-                gemini_model=self.model_id,
+                model_name=self.model_id,
                 **prediction_dict
             )
             

@@ -294,7 +294,7 @@ def predict_race(date_str, venue, race_num):
 
     prediction_json = {
         "race_id": race_id,
-        "gemini_model": "ensemble_lgb_xgb_cat",
+        "model_name": "ensemble_lgb_xgb_cat",
         "confidence_score": round(capped_edge, 4),   # value edge capped at 0.80
         "is_best_bet": is_best_bet,
         "wet_track": is_wet_track,
