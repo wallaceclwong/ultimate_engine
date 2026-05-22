@@ -35,10 +35,6 @@ class Config:
     DEEPSEEK_MODEL     = os.getenv("DEEPSEEK_MODEL", "deepseek-chat")
     DEEPSEEK_MODEL_R1  = os.getenv("DEEPSEEK_MODEL_R1", "deepseek-reasoner")
 
-    # Mapping legacy aliases to DeepSeek
-    GEMINI_MODEL       = DEEPSEEK_MODEL   
-    USE_VERTEX_AI      = False            # GCP AI DISABLED
-
     # ── GCP Infrastructure (Low-Cost Mirroring Only) ─────────────────────────
     # We maintain Firestore/GCS for durable off-site backup.
     GCP_LOCATION         = os.getenv("GCP_REGION", "asia-east1")

@@ -11,7 +11,6 @@ from services.racecard_ingest import RacecardIngest
 from services.odds_ingest import OddsIngest
 from services.prediction_engine import PredictionEngine
 from services.betslip_service import BetslipService
-from services.context_caching_service import ContextCachingService
 from config.settings import Config
 
 class LiveBettingOrchestrator:
@@ -52,17 +51,6 @@ class LiveBettingOrchestrator:
         ok = sum(1 for r in results if r is True)
         print(f"[LIVE] Racecard ingestion complete: {ok}/{self.num_races} OK")
 
-        # Create Context Cache for the whole meeting if using Vertex AI
-        if Config.USE_VERTEX_AI:
-            try:
-                caching_svc = ContextCachingService()
-                cache_id = caching_svc.create_meeting_cache(self.iso_date, self.venue)
-                if cache_id:
-                    self.prediction_engine.cache_id = cache_id
-                    print(f"[LIVE] Context Cache active for meeting: {cache_id}")
-            except Exception as e:
-                print(f"[LIVE] Context Caching failed (falling back to standard): {e}")
-        
     async def _ingest_racecard(self, race_no: int) -> bool:
         """Ingest a single racecard."""
         try:

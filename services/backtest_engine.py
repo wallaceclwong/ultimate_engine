@@ -95,7 +95,7 @@ class BacktestEngine:
                 else:
                     print(f"  R{race_no}: Generating Prediction...")
                     await self.prediction_engine.generate_prediction(date_str, venue, race_no)
-                    # Add a 3-second buffer to respect Vertex AI quotas during heavy backtesting
+                    # Add a 3-second buffer for rate limiting during heavy backtesting
                     await asyncio.sleep(3)
             
             # Evaluate the meeting performance
