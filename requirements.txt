@@ -29,8 +29,6 @@ frozenlist==1.8.0
 fsspec==2026.3.0
 google-api-core==2.30.0
 google-auth==2.49.1
-# google-cloud-aiplatform removed (Moving to DeepSeek)
-# google-cloud-bigquery removed (Moving to Local Parquet)
 
 google-cloud-core==2.5.0
 google-cloud-firestore==2.25.0
