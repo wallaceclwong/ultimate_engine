@@ -224,19 +224,24 @@ def predict_race(date_str, venue, race_num):
     blended_probs = (1 - MARKET_BLEND) * model_probs + MARKET_BLEND * market_probs
     blended_probs = blended_probs / blended_probs.sum()  # renormalize
     
+    df_race["model_prob_pure"] = model_probs   # pre-blend: pure model signal
     df_race["pred_prob"] = blended_probs
     
     df_race["fair_odds"] = 1.0 / df_race["pred_prob"]
     df_race["ev"] = df_race["pred_prob"] * df_race["win_odds"]
     df_race["value_mult"] = df_race["win_odds"] / df_race["fair_odds"]
 
-    # ── Value Edge: how much the model disagrees with the market ──
-    # edge > 0  → model thinks horse is undervalued (potential bet)
-    # edge < 0  → model thinks horse is overvalued (skip)
-    # Formula: (model_prob - market_prob) / market_prob
+    # ── Pure Model EV: model's independent view of value ──
+    # Uses pre-blend probability so market isn't double-counted.
+    # pred_prob sums to 1.00 but market_implied_prob sums to ~1.17 (overround)
+    # → comparing them directly creates permanent negative bias.
+    # Instead: pure_ev = model_prob_pure * win_odds — if >1.0, model sees +EV.
+    df_race["pure_ev"] = df_race["model_prob_pure"] * df_race["win_odds"]
+
+    # value_edge kept for display/logging (blended view vs normalized market)
     df_race["value_edge"] = (
-        df_race["pred_prob"] - df_race["market_implied_prob"]
-    ) / df_race["market_implied_prob"].clip(lower=0.01)
+        df_race["pred_prob"] - df_race["implied_prob_norm"]
+    ) / df_race["implied_prob_norm"].clip(lower=0.01)
     
     # Stage 7: Feature Capture for Post-Race Learning
     processed_dir = DATA_DIR / "processed"
@@ -265,29 +270,32 @@ def predict_race(date_str, venue, race_num):
     is_wet_track = any(w in track_condition_raw for w in WET_KEYWORDS)
 
     # ── Bet Signal ───────────────────────────────────────────────────────────
-    # Value window approach: find the best model pick in the 4-15 odds range
-    # where genuine value tends to hide. But only fire if the model sees
-    # positive edge (undervalued by market) with enough conviction.
+    # Uses pure_ev (pre-blend model probability × odds) to check genuine edge.
+    # Avoids the systematic negative bias of comparing normalized pred_prob
+    # against non-normalized 1/odds (which always inflates market probability).
+    #
+    # Criteria:
+    #   pure_ev > 1.05  → model independently sees 5%+ edge before market blend
+    #   win_odds 4-15   → value window (not short-priced favourites)
+    #   rank <= 4       → model must rank this horse as a top contender
     value_horses = df_race[
         (df_race["win_odds"] >= 4.0)
         & (df_race["win_odds"] <= 15.0)
-        & (df_race["pred_prob"] > 0.08)
-        & (df_race["value_edge"] > 0.15)       # model must see 15%+ edge
+        & (df_race["pure_ev"] > 1.05)
+        & (df_race["rank"] <= 4)
     ]
 
     is_best_bet = False
     top_pick = df_race.sort_values("rank").iloc[0]  # global rank-1 for display
 
     if not is_wet_track and not value_horses.empty:
-        bet_pick = value_horses.sort_values("ensemble_score", ascending=False).iloc[0]
-        # Extra check: bet pick must be in model's top-4 by probability
-        if int(bet_pick["rank"]) <= 4:
-            is_best_bet = True
-            top_pick = bet_pick  # use the value pick as the featured horse
+        bet_pick = value_horses.sort_values("pure_ev", ascending=False).iloc[0]
+        is_best_bet = True
+        top_pick = bet_pick
 
     recommended_bet = f"WIN {_safe_horse_no(top_pick['horse_no'])}"
-    top_pick_edge = float(top_pick["value_edge"])
-    capped_edge = min(top_pick_edge, 0.80)
+    top_pick_edge = float(top_pick.get("pure_ev", 1.0)) - 1.0  # EV-1 as edge %
+    capped_edge = min(max(top_pick_edge, 0.0), 0.80)
 
     sorted_probs = sorted(probabilities.values(), reverse=True)
     prob_gap = (sorted_probs[0] - sorted_probs[1]) if len(sorted_probs) >= 2 else 0
